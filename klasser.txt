@@ -1,8 +1,8 @@
  Klasser:
-Hero (implements class & race)
-NPC (superclass), Spider(t.ex) (subclass)
-Class (Interface)
-Race (Interface)
+Hero
+NPC (superclass), Spider (subclass)
+Class (Interface?), Mage (subclass interface)
+Race (Interface?), Elf (subclass interface)
 Combat
 Spell (superclass), Freeze (subclass)
 Quest (superclass), Bring me a beer! (subclass)
