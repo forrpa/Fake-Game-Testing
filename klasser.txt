@@ -7,3 +7,9 @@ Combat
 Spell (superclass), Freeze (subclass)
 Quest (superclass), Bring me a beer! (subclass)
 Equipment (superclass), Plate (Interface), Chest (medelklass?), Chestplate of Strength (subclass, implements Plate)
+
+Inventory, tex money, collectibles, quest items...?
+Edible (superclass), Ale(subclass), Apple(subclass) mm
+Potion (superclass), Healing Potion (subclass)
+Kanske utanför uppgiften: Mounts och battle pets
+
