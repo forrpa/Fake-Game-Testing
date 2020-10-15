@@ -11,6 +11,6 @@ public class BreastplateOfTestingTest {
     @Test
     void attributeTest(){
         BreastplateOfTesting bpt = new BreastplateOfTesting();
-        assertArrayEquals([0,2,5,3],bpt.getAttributes());
+        assertArrayEquals(new int[]{0, 2, 5, 3},bpt.getAttributes());
     }
 }
