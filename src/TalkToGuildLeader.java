@@ -5,13 +5,38 @@ public class TalkToGuildLeader extends Quest {
     }
 
     @Override
-    public void calculateReward(Player player, String playerClass, String race) {
-        switch (playerClass){
-            case "Healer":
-                player.setManaPoint(50);
-            case "Tank":
+    public void calculateReward(Player player) {
+        player.setExperiencePoint(100);
+        rewardBasedOnClass(player);
+        rewardBasedOnRace(player);
+    }
 
+    public void rewardBasedOnClass(Player player){
+        switch (player.getPlayerClass()){
+            case "Healer":
+                player.setHealthPoint(50);
+            case "Tank":
+                player.setManaPoint(25);
+                player.setHealthPoint(25);
             case "Damage":
+                player.setManaPoint(50);
+        }
+    }
+
+    public void rewardBasedOnRace(Player player){
+        switch (player.getRace()){
+            case "Human":
+                if (player.getPlayerClass() == "Tank"){
+                    player.getInventory().add("Rare Steel Boots");
+                } else {
+                    player.getInventory().add("Common Steel Boots");
+                }
+            case "Orc":
+                if (player.getPlayerClass() == "Damage"){
+                    player.getInventory().add("Rare Leather Gauntlets");
+                } else {
+                    player.getInventory().add("Common Leather Gauntlets");
+                }
         }
     }
 }

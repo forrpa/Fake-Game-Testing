@@ -2,7 +2,6 @@ public abstract class Quest {
 
     private String name;
     private String description;
-    private String type;
     private String state;
     private boolean mandatory;
     private String startRequirement;
@@ -26,5 +25,7 @@ public abstract class Quest {
         return mandatory;
     }
 
-    public abstract void calculateReward(Player player, String playerClass, String race);
+    public abstract void calculateReward(Player player);
+
+
 }
