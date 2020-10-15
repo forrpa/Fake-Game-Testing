@@ -1,3 +1,4 @@
 public class BreastplateOfTesting{
-    public String getName(){return "Breastplate of Testing";}
+    private String name = "Breastplate of Testing)";
+    public String getName(){return this.name;}
 }
