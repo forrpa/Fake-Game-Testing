@@ -7,11 +7,18 @@ public class Player {
 
     //private PlayerClass playerClass;
     //private Race race; //Beror på om vi vill göra klasserna Class och Race, jag kör med String sålänge
-
     private String playerClass;
     private String race;
 
     private ArrayList<String> inventory = new ArrayList<>(); //Bör vara hash här eller något ist för String
+
+    public Player (String playerClass, String race, int manaPoint, int healthPoint, int experiencePoint){
+        this.playerClass = playerClass;
+        this.race = race;
+        this.manaPoint = manaPoint;
+        this.healthPoint = healthPoint;
+        this.experiencePoint = experiencePoint;
+    }
 
     public int getManaPoint() {
         return manaPoint;

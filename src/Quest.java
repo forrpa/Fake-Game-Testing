@@ -2,7 +2,6 @@ public abstract class Quest {
 
     private String name;
     private String description;
-    private String type;
     private String state;
     private boolean mandatory;
     private String startRequirement;
@@ -27,4 +26,6 @@ public abstract class Quest {
     }
 
     public abstract void calculateReward(Player player);
+
+
 }
