@@ -7,6 +7,11 @@ public class TalkToGuildLeader extends Quest {
     @Override
     public void calculateReward(Player player) {
         player.setExperiencePoint(100);
+        rewardBasedOnClass(player);
+        rewardBasedOnRace(player);
+    }
+
+    public void rewardBasedOnClass(Player player){
         switch (player.getPlayerClass()){
             case "Healer":
                 player.setHealthPoint(50);
@@ -16,7 +21,9 @@ public class TalkToGuildLeader extends Quest {
             case "Damage":
                 player.setManaPoint(50);
         }
+    }
 
+    public void rewardBasedOnRace(Player player){
         switch (player.getRace()){
             case "Human":
                 if (player.getPlayerClass() == "Tank"){
