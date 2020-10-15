@@ -1,4 +1,3 @@
-
-public class BreastplateOfTesting {
-
+public class BreastplateOfTesting{
+    
 }
