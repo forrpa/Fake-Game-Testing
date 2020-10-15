@@ -1,8 +1,8 @@
-package se.su.dsv.projektarbete;
+package test.java.se.su.dsv.projektarbete;
 
-import static org.junit.Assert.assertTrue;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Unit test for simple App.
