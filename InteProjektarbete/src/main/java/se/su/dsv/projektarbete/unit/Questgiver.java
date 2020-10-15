@@ -1,5 +1,7 @@
 package main.java.se.su.dsv.projektarbete.unit;
 
+import java.util.ArrayList;
+
 public class Questgiver {
     private String name;
 
@@ -8,5 +10,6 @@ public class Questgiver {
     }
     public String getName(){
         return name;
+
     }
 }
