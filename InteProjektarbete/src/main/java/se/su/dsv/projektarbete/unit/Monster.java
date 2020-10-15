@@ -1,17 +1,19 @@
 package main.java.se.su.dsv.projektarbete.unit;
 
-public class Monster {
+public abstract class Monster {
     private String name;
     private boolean isGrounded;
 
     public Monster(String name){
         setName(name);
-        if(name.equals("Bat")){ //NEED TO SUBCLASS
-            isGrounded = false;
-        }else{
-            isGrounded = true;
-        }
+        this.isGrounded = true;
     }
+
+    public Monster(String name, boolean isGrounded){
+        setName(name);
+        this.isGrounded = isGrounded;
+    }
+
 
     public String getName() {
         return name;

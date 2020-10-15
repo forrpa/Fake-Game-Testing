@@ -8,27 +8,25 @@ import static org.junit.jupiter.api.Assertions.*;
 class UnitTest {
 
     @Test
-    void monsterNameBatSetByConstructor(){
-        Monster bat = new Monster("Bat");
-        assertEquals("Bat", bat.getName());
+    void batNameBatSetByConstructor(){
+        Monster bat = new Bat("Jabba the Bat");
+        assertEquals("Jabba the Bat", bat.getName());
     }
     @Test
-    void monsterNameSetTo556ByConstructorThrowsIllegalFormatException(){
-        assertThrows(IllegalStateException.class, () -> {
-            new Monster("556");
-        });
+    void batNameSetTo556ByConstructorThrowsIllegalFormatException(){
+        assertThrows(IllegalStateException.class, () -> new Bat("556"));
     }
     @Test
     void batMonsterAttackWolfSuccessful(){
-        Monster bat = new Monster("Bat");
-        Monster wolf = new Monster("Wolf");
-        assertEquals(true, bat.Attack(wolf));
+        Monster bat = new Bat();
+        Monster wolf = new Wolf();
+        assertTrue(bat.Attack(wolf));
     }
     @Test
     void wolfMonsterAttackBatUnsuccessful(){
-        Monster bat = new Monster("Bat");
-        Monster wolf = new Monster("Wolf");
-        assertEquals(false, wolf.Attack(bat));
+        Monster bat = new Bat();
+        Monster wolf = new Wolf();
+        assertFalse(wolf.Attack(bat));
     }
 
 
