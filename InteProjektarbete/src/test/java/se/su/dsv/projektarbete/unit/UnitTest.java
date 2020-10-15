@@ -18,6 +18,18 @@ class UnitTest {
             new Monster("556");
         });
     }
+    @Test
+    void batMonsterAttackWolfSuccessful(){
+        Monster bat = new Monster("Bat");
+        Monster wolf = new Monster("Wolf");
+        assertEquals(true, bat.Attack(wolf));
+    }
+    @Test
+    void wolfMonsterAttackBatUnsuccessful(){
+        Monster bat = new Monster("Bat");
+        Monster wolf = new Monster("Wolf");
+        assertEquals(false, wolf.Attack(bat));
+    }
 
 
 

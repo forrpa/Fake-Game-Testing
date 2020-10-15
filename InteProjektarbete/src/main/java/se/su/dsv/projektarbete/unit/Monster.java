@@ -17,4 +17,8 @@ public class Monster {
         }
         this.name = name;
     }
+
+    public boolean Attack(Monster enemy){
+        return true;
+    }
 }
