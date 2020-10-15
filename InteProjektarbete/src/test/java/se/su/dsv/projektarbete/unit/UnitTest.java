@@ -5,12 +5,20 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MonsterTest {
+class UnitTest {
 
     @Test
     void monsterNameBatSetByConstructor(){
         Monster bat = new Monster("Bat");
         assertEquals("Bat", bat.getName());
     }
+    @Test
+    void monsterNameSetTo556ByConstructorThrowsIllegalFormatException(){
+        assertThrows(IllegalStateException.class, () -> {
+            new Monster("556");
+        });
+    }
+
+
 
 }
