@@ -30,4 +30,9 @@ public class BreastplateOfTestingTest {
     	BreastplateOfTesting bpt = new BreastplateOfTesting();
     	assertTrue(bpt.getDescription().equals("An excellent breastplate for testing things with!"));
     }
+    @Test
+    void breastplateHasCorrectArmorValue() {
+    	BreastplateOfTesting bpt = new BreastplateOfTesting();
+    	assertEquals(150, bpt.getArmor());
+    }
 }
