@@ -28,6 +28,13 @@ class UnitTest {
         Monster wolf = new Wolf();
         assertFalse(wolf.Attack(bat));
     }
+    @Test
+    void batMonsterAttackWolfFor2HealthWolfHas6HealthRemaining(){
+        Monster bat = new Bat();
+        Monster wolf = new Wolf();
+        assertTrue(bat.Attack(wolf));
+        assertEquals(6,wolf.getHealth());
+    }
 
 
 

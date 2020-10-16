@@ -4,4 +4,5 @@ public class Wolf extends Monster {
     public Wolf(){
         super("Wolf", true);
     }
+
 }
