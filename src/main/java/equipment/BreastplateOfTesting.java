@@ -11,4 +11,7 @@ public class BreastplateOfTesting{
     public int[] getAttributes() {
     	return new int[]{this.strength, this.agility, this.intelligence, this.stamina};
     }
+    public boolean isChest() {
+    	return true;
+    }
 }
