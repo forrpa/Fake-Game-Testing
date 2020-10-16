@@ -5,25 +5,24 @@ public class Spell {
     private final String description;
     private final String name;
     private int manaCost = 50;
-    private  int requiredMagicLevel =5;
-    private int cooldownDuration =10;
+    private int requiredMagicLevel = 5;
+    private int cooldownDuration = 10;
 
 
-    public  Spell(String name, String description, int manaCost, int requiredMagicLevel, int cooldownDuration) {
+    public Spell(String name, String description, int manaCost, int requiredMagicLevel, int cooldownDuration) {
         this.name = name;
         this.description = description;
-        this.manaCost = manaCost;
-        this.requiredMagicLevel = requiredMagicLevel;
-        this.cooldownDuration = cooldownDuration;
+        setManaCost (manaCost);
+        setRequiredMagicLevel (requiredMagicLevel);
+        setCooldownDuration (cooldownDuration);
     }
 
-    public Spell (){
+    public Spell() {
 
         // might randomize names and descriptions.
         name = "Unnamed spell";
-        description ="Your ninny brain can not comprehend what this spell does.";
+        description = "Your ninny brain can not comprehend what this spell does.";
     }
-
 
 
     public String getName() {
@@ -31,11 +30,9 @@ public class Spell {
     }
 
 
-
     public String getDescription() {
         return description;
     }
-
 
 
     public int getManaCost() {
@@ -43,11 +40,9 @@ public class Spell {
     }
 
 
-
     public int getRequiredMagicLevel() {
         return requiredMagicLevel;
     }
-
 
 
     public int getCooldownDuration() {
@@ -68,7 +63,7 @@ public class Spell {
     }
 
     // Checks that numbers are
-    private int positiveNrCheck(int nr){
+    private int positiveNrCheck(int nr) {
         if (nr >= 0) {
             return nr;
         } else {
