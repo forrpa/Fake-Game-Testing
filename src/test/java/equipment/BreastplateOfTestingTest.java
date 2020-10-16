@@ -28,6 +28,6 @@ public class BreastplateOfTestingTest {
     @Test
     void hasCorrectDescription() {
     	BreastplateOfTesting bpt = new BreastplateOfTesting();
-    	assertTrue(getDescription.equals("An excellent breastplate for testing things with!"));
+    	assertTrue(bpt.getDescription().equals("An excellent breastplate for testing things with!"));
     }
 }
