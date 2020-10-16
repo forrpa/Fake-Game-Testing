@@ -9,12 +9,12 @@ class UnitTest {
 
     @Test
     void batNameBatSetByConstructor(){
-        Monster bat = new Bat("Jabba the Bat");
+        Monster bat = new Bat("Jabba the Bat", 5, 2);
         assertEquals("Jabba the Bat", bat.getName());
     }
     @Test
     void batNameSetTo556ByConstructorThrowsIllegalFormatException(){
-        assertThrows(IllegalStateException.class, () -> new Bat("556"));
+        assertThrows(IllegalStateException.class, () -> new Bat("556", 5, 2));
     }
     @Test
     void batMonsterAttackWolfSuccessful(){
@@ -34,6 +34,21 @@ class UnitTest {
         Monster wolf = new Wolf();
         assertTrue(bat.Attack(wolf));
         assertEquals(6,wolf.getHealth());
+    }
+    @Test
+    void wolfMonsterAttackOtherWolfFor3HealthOtherWolfHas5HealthRemaining(){
+        Monster wolf = new Wolf();
+        Monster otherWolf = new Wolf();
+        assertTrue(wolf.Attack(otherWolf));
+        assertEquals(5, otherWolf.getHealth());
+    }
+    void wolfMonsterAttackOtherWolfFor3ThriceOtherWolfHas0HealthRemaining(){
+        Monster wolf = new Wolf();
+        Monster otherWolf = new Wolf();
+        for (int i = 0;i < 3; i++){
+            assertTrue(wolf.Attack(otherWolf));
+        }
+        assertEquals(0, otherWolf.getHealth());
     }
 
 
