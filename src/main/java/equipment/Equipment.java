@@ -41,4 +41,7 @@ public class Equipment{
     public void damageDurability(int amount) {
     	this.durability = this.durability - amount;
     }
+    public void repair() {
+    	this.durability = this.MAX_DURABILITY;
+    }
 }
