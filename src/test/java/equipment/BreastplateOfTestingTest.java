@@ -1,3 +1,5 @@
+package equipment;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,5 +14,20 @@ public class BreastplateOfTestingTest {
     void attributeTest(){
         BreastplateOfTesting bpt = new BreastplateOfTesting();
         assertArrayEquals(new int[]{0, 2, 5, 3},bpt.getAttributes());
+    }
+    @Test
+    void isChestTest() {
+    	BreastplateOfTesting bpt = new BreastplateOfTesting();
+    	assertTrue(bpt instanceof Chest);
+    }
+    @Test
+    void isClassAnEquipment() {
+    	BreastplateOfTesting bpt = new BreastplateOfTesting();
+    	assertTrue(bpt instanceof Equipment);
+    }
+    @Test
+    void hasCorrectDescription() {
+    	BreastplateOfTesting bpt = new BreastplateOfTesting();
+    	assertTrue(bpt.getDescription().equals("An excellent breastplate for testing things with!"));
     }
 }
