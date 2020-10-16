@@ -8,6 +8,7 @@ public class Player {
 
 
 
+
     //private PlayerClass playerClass;
     //private Race race; //Beror på om vi vill göra klasserna Class och Race, jag kör med String sålänge
     private String playerClass;
@@ -22,9 +23,7 @@ public class Player {
         this.experiencePoint = experiencePoint;
     }
 
-    public int getManaPoint() {
-        return manaPoint;
-    }
+
 
     public int getHealthPoint() {
         return healthPoint;
@@ -46,9 +45,6 @@ public class Player {
         return inventory;
     }
 
-    public void setManaPoint(int manaPoint) {
-        this.manaPoint = manaPoint;
-    }
 
     public void setHealthPoint(int healthPoint) {
         this.healthPoint = healthPoint;

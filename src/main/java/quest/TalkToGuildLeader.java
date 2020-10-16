@@ -58,10 +58,10 @@ public class TalkToGuildLeader extends Quest {
             case "Healer":
                 player.setHealthPoint(50);
             case "Tank":
-                player.setManaPoint(25);
+        //        player.setManaPoint(25);
                 player.setHealthPoint(25);
             case "Damage":
-                player.setManaPoint(50);
+            //    player.setManaPoint(50);
         }
     }
 
