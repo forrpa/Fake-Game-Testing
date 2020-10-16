@@ -15,4 +15,9 @@ public class BreastplateOfTestingTest {
         BreastplateOfTesting bpt = new BreastplateOfTesting();
         assertArrayEquals(new int[]{0, 2, 5, 3},bpt.getAttributes());
     }
+    @Test
+    void isChestTest() {
+    	BreastplateOfTesting bpt = new BreastplateOfTesting();
+    	assertTrue(bpt.isChest());
+    }
 }
