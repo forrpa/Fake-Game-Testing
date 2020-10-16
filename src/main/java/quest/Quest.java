@@ -6,14 +6,15 @@ public abstract class Quest {
 
     private String name;
     private String description;
-    private String state;
+    protected String state;
     private boolean mandatory;
-    private String startRequirement;
-    private String endRequirement;
+    //Quest log
 
-    public Quest(String name, String description, boolean mandatory){
+
+    public Quest(String name, String description, String state, boolean mandatory){
         this.name = name;
         this.description = description;
+        this.state = state;
         this.mandatory = mandatory;
     }
 
@@ -25,11 +26,21 @@ public abstract class Quest {
         return description;
     }
 
+    public String getState(){
+        return state;
+    }
+
     public boolean isMandatory() {
         return mandatory;
     }
 
-    public abstract void calculateReward(Player player);
+    public abstract boolean startRequirementsFulfilled(Player player);
+
+    public abstract void startQuest(Player player);
+
+    public abstract boolean endRequirementsFulfilled(Player player);
+
+    public abstract void questCompleted(Player player);
 
 
 }

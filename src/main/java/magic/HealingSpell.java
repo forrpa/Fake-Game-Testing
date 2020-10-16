@@ -3,4 +3,7 @@ package magic;
 
 
 public class HealingSpell {
+
+
+
 }
