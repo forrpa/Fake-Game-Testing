@@ -1,19 +1,20 @@
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+package edible;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
 class EdibleTest {
 	
-	final static Edible ITEM = new Edible("Name", "Description", 0, 0, 0);
+	final static Edible ITEM = new Edible("Magic Healing Mushroom", "Small increases in magic capability and substantial health boost", 2, 6, 0);
 
 	@Test
 	void constructorSetsAttributes() {
 		assertEquals("Name", ITEM.getName());
 		assertEquals("Description", ITEM.getDescription());
-		assertEquals(0, ITEM.getManaPoint());
-		assertEquals(0, ITEM.getManaPoint());
-		assertEquals(0, ITEM.getManaPoint());
+		assertEquals(2, ITEM.getManaPoint());
+		assertEquals(6, ITEM.getHealthPoint());
+		assertEquals(0, ITEM.getExperiencePoint());
 	}
 	
 	@Test
