@@ -8,4 +8,9 @@ public class BreastplateOfTestingTest {
         BreastplateOfTesting bpt = new BreastplateOfTesting();
         assertTrue(bpt.getName().equals("Breastplate of Testing"));
     }
+    @Test
+    void attributeTest(){
+        BreastplateOfTesting bpt = new BreastplateOfTesting();
+        assertArrayEquals(new int[]{0, 2, 5, 3},bpt.getAttributes());
+    }
 }
