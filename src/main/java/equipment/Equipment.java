@@ -7,14 +7,20 @@ public class Equipment{
     private int intelligence;
     private int stamina;
     private String description;
+    private int armor;
+    private final int MAX_DURABILITY;
+    private int durability;
     
-	public Equipment(String name, String desc, int str, int agi, int intell, int sta) {
+	public Equipment(String name, String desc, int armor, int dur, int str, int agi, int intell, int sta) {
 		this.name = name;
 		this.strength = str;
 		this.agility = agi;
 		this.intelligence = intell;
 		this.stamina = sta;
 		this.description = desc;
+		this.armor = armor;
+		this.MAX_DURABILITY = dur;
+		this.durability = dur;
 	}
     public String getName(){return this.name;}
     public int[] getAttributes() {
@@ -22,5 +28,20 @@ public class Equipment{
     }
     public String getDescription() {
     	return this.description;
+    }
+    public int getArmor() {
+    	return this.armor;
+    }
+    public int getMaxDurability() {
+    	return this.MAX_DURABILITY;
+    }
+    public int getDurability() {
+		return this.durability;
+    }
+    public void damageDurability(int amount) {
+    	this.durability = this.durability - amount;
+    }
+    public void repair() {
+    	this.durability = this.MAX_DURABILITY;
     }
 }
