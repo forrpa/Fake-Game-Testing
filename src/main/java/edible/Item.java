@@ -1,3 +1,5 @@
+package edible;
+
 abstract class Item {
 
 	private String name;
