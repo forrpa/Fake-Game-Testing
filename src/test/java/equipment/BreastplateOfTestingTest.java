@@ -43,7 +43,7 @@ public class BreastplateOfTestingTest {
     @Test
     void damagedDurCheck() {
     	BreastplateOfTesting bpt = new BreastplateOfTesting();
-    	bpt.damageDurability();
+    	bpt.damageDurability(13);
     	assertEquals(87, bpt.getDurability());
     }
 }

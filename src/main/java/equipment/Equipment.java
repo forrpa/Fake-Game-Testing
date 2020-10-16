@@ -38,7 +38,7 @@ public class Equipment{
     public int getDurability() {
 		return this.durability;
     }
-    public void damageDurability() {
-    	this.durability = this.durability - 13;
+    public void damageDurability(int amount) {
+    	this.durability = this.durability - amount;
     }
 }
