@@ -10,8 +10,8 @@ class EdibleTest {
 
 	@Test
 	void constructorSetsAttributes() {
-		assertEquals("Name", ITEM.getName());
-		assertEquals("Description", ITEM.getDescription());
+		assertEquals("Magic Healing Mushroom", ITEM.getName());
+		assertEquals("Small increases in magic capability and substantial health boost", ITEM.getDescription());
 		assertEquals(2, ITEM.getManaPoint());
 		assertEquals(6, ITEM.getHealthPoint());
 		assertEquals(0, ITEM.getExperiencePoint());
@@ -20,7 +20,7 @@ class EdibleTest {
 	@Test
 	void checkPointValueOutOfRangeTrhowsIAE() {
 		assertThrows(IllegalArgumentException.class, () -> {
-	//		new Edible("", "", -11, 0, 0);
+			new Edible("", "", -11, 0, 0);
 		});
 		assertThrows(IllegalArgumentException.class, () -> {
 			new Edible("", "", 0, 11, 0);
@@ -32,7 +32,7 @@ class EdibleTest {
 	
 	@Test
 	void checkToString() {
-		assertEquals("\"Name: Description\", Mana: 0, Health: 0, Experience: 0", ITEM.toString());
+		assertEquals("\"Magic Healing Mushroom: Small increases in magic capability and substantial health boost\", Mana: 2, Health: 6, Experience: 0", ITEM.toString());
 	}
 
 }
