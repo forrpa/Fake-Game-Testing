@@ -6,32 +6,32 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class BreastplateOfTestingTest {
     @Test
-    void nameTest(){
+    void testToMakeSureBreastplateHasCorrectName(){
         BreastplateOfTesting bpt = new BreastplateOfTesting();
         assertTrue(bpt.getName().equals("Breastplate of Testing"));
     }
     @Test
-    void attributeTest(){
+    void testToMakeSureBreastplateHasCorrectAttributValues(){
         BreastplateOfTesting bpt = new BreastplateOfTesting();
         assertArrayEquals(new int[]{0, 2, 5, 3},bpt.getAttributes());
     }
     @Test
-    void isChestTest() {
+    void testToMakeSureBreastplateIsSubclassOfChest() {
     	BreastplateOfTesting bpt = new BreastplateOfTesting();
     	assertTrue(bpt instanceof Chest);
     }
     @Test
-    void isClassAnEquipment() {
+    void testToMakeSureBreastplateIsSubclassOfEquipment() {
     	BreastplateOfTesting bpt = new BreastplateOfTesting();
     	assertTrue(bpt instanceof Equipment);
     }
     @Test
-    void hasCorrectDescription() {
+    void testToMakeSureBreastplateHasCorrectDescription() {
     	BreastplateOfTesting bpt = new BreastplateOfTesting();
     	assertTrue(bpt.getDescription().equals("An excellent breastplate for testing things with!"));
     }
     @Test
-    void breastplateHasCorrectArmorValue() {
+    void testToMakeSureBreastplateHasCorrectArmorValue() {
     	BreastplateOfTesting bpt = new BreastplateOfTesting();
     	assertEquals(150, bpt.getArmor());
     }
