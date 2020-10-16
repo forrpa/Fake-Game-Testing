@@ -46,4 +46,11 @@ public class BreastplateOfTestingTest {
     	bpt.damageDurability(13);
     	assertEquals(87, bpt.getDurability());
     }
+    @Test
+    void testRepair() {
+    	BreastplateOfTesting bpt = new BreastplateOfTesting();
+    	bpt.damageDurability(13);
+    	bpt.repair();
+    	assertEquals(100, bpt.getDurability());
+    }
 }
