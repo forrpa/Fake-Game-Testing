@@ -36,12 +36,12 @@ public class BreastplateOfTestingTest {
     	assertEquals(150, bpt.getArmor());
     }
     @Test
-    void checkForMaxDurabilityOfBreastplate() {
+    void testForCorrectMaxDurabilityOfBreastplate() {
     	BreastplateOfTesting bpt = new BreastplateOfTesting();
     	assertEquals(100, bpt.getMaxDurability());
     }
     @Test
-    void damagedDurCheck() {
+    void testForCorrectDurabilityValueOfDamagedBreastplate() {
     	BreastplateOfTesting bpt = new BreastplateOfTesting();
     	bpt.damageDurability(13);
     	assertEquals(87, bpt.getDurability());
