@@ -1,6 +1,9 @@
+package java.se.su.dsv.projektarbete;
+
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
+import java.quest.TalkToGuildLeader;
 import java.se.su.dsv.projektarbete.Player;
 
 class QuestTest {

@@ -1,4 +1,8 @@
+package java.quest;
+
+import java.quest.Quest;
 import java.se.su.dsv.projektarbete.Player;
+
 
 public class TalkToGuildLeader extends Quest {
 
