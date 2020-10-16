@@ -51,6 +51,18 @@ class UnitTest {
         }
         assertEquals(0, otherWolf.getHealth());
     }
+    @Test
+    void wolfMonsterAttackOtherWolfWith0HealthFails(){
+        Monster wolf = new Wolf();
+        Monster otherWolf = new Wolf("Wolf", 0, 0);
+        assertFalse(wolf.Attack(otherWolf));
+    }
+    @Test
+    void wolfWith0HealthAttacksOtherWolfFails(){
+        Monster wolf = new Wolf("Wolf", 0, 4);
+        Monster otherWolf = new Wolf();
+        assertFalse(wolf.Attack(otherWolf));
+    }
 
 
 
