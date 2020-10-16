@@ -1,4 +1,4 @@
-package java.se.su.dsv.projektarbete;
+package player;
 
 import java.util.ArrayList;
 
