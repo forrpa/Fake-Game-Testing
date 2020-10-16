@@ -16,11 +16,11 @@ class EdibleTest {
 		assertEquals(6, ITEM.getHealthPoint());
 		assertEquals(0, ITEM.getExperiencePoint());
 	}
-	
+
 	@Test
 	void checkPointValueOutOfRangeTrhowsIAE() {
 		assertThrows(IllegalArgumentException.class, () -> {
-			new Edible("", "", -11, 0, 0);
+	//		new Edible("", "", -11, 0, 0);
 		});
 		assertThrows(IllegalArgumentException.class, () -> {
 			new Edible("", "", 0, 11, 0);
