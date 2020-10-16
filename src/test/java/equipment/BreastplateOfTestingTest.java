@@ -20,4 +20,9 @@ public class BreastplateOfTestingTest {
     	BreastplateOfTesting bpt = new BreastplateOfTesting();
     	assertTrue(bpt instanceof Chest);
     }
+    @Test
+    void isClassAnEquipment() {
+    	BreastplateOfTesting bpt = new BreastplateOfTesting();
+    	assertTrue(bpt.isEquipment());
+    }
 }
