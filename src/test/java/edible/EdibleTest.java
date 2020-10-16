@@ -6,15 +6,15 @@ import org.junit.jupiter.api.Test;
 
 class EdibleTest {
 	
-	final static Edible ITEM = new Edible("Magic Healing Mushroom", "Small increases in magic capability and substantial health boost", 2, 6, 0);
+	final static Edible MAGIC_HEALING_MUSHROOM = new Edible("Magic Healing Mushroom", "Small increases in magic capability and substantial health boost", 2, 6, 0);
 
 	@Test
 	void constructorSetsAttributes() {
-		assertEquals("Magic Healing Mushroom", ITEM.getName());
-		assertEquals("Small increases in magic capability and substantial health boost", ITEM.getDescription());
-		assertEquals(2, ITEM.getManaPoint());
-		assertEquals(6, ITEM.getHealthPoint());
-		assertEquals(0, ITEM.getExperiencePoint());
+		assertEquals("Magic Healing Mushroom", MAGIC_HEALING_MUSHROOM.getName());
+		assertEquals("Small increases in magic capability and substantial health boost", MAGIC_HEALING_MUSHROOM.getDescription());
+		assertEquals(2, MAGIC_HEALING_MUSHROOM.getManaPoint());
+		assertEquals(6, MAGIC_HEALING_MUSHROOM.getHealthPoint());
+		assertEquals(0, MAGIC_HEALING_MUSHROOM.getExperiencePoint());
 	}
 
 	@Test
@@ -32,7 +32,7 @@ class EdibleTest {
 	
 	@Test
 	void checkToString() {
-		assertEquals("\"Magic Healing Mushroom: Small increases in magic capability and substantial health boost\", Mana: 2, Health: 6, Experience: 0", ITEM.toString());
+		assertEquals("\"Magic Healing Mushroom: Small increases in magic capability and substantial health boost\", Mana: 2, Health: 6, Experience: 0", MAGIC_HEALING_MUSHROOM.toString());
 	}
 
 }
