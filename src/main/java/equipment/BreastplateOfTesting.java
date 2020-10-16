@@ -13,4 +13,7 @@ public class BreastplateOfTesting extends Chest{
     public int[] getAttributes() {
     	return new int[]{this.strength, this.agility, this.intelligence, this.stamina};
     }
+    public boolean isEquipment() {
+    	return true;
+    }
 }
