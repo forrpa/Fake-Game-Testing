@@ -1,3 +1,5 @@
+package edible;
+
 public class Edible extends Item {
 
 	private final int manaPoint;
