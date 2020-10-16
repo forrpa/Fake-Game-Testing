@@ -18,6 +18,6 @@ public class BreastplateOfTestingTest {
     @Test
     void isChestTest() {
     	BreastplateOfTesting bpt = new BreastplateOfTesting();
-    	assertTrue(bpt.getType().equals("chest"));
+    	assertTrue(bpt instanceof Chest);
     }
 }
