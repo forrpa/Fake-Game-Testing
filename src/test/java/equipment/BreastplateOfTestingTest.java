@@ -35,4 +35,9 @@ public class BreastplateOfTestingTest {
     	BreastplateOfTesting bpt = new BreastplateOfTesting();
     	assertEquals(150, bpt.getArmor());
     }
+    @Test
+    void checkForMaxDurabilityOfBreastplate() {
+    	BreastplateOfTesting bpt = new BreastplateOfTesting();
+    	assertEquals(100, getDurability());
+    }
 }
