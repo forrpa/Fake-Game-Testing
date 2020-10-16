@@ -56,15 +56,25 @@ public class Spell {
 
 
     public void setManaCost(int manaCost) {
-        this.manaCost = manaCost;
+        this.manaCost = positiveNrCheck (manaCost);
     }
 
     public void setRequiredMagicLevel(int requiredMagicLevel) {
-        this.requiredMagicLevel = requiredMagicLevel;
+        this.requiredMagicLevel = positiveNrCheck (requiredMagicLevel);
     }
 
     public void setCooldownDuration(int cooldownDuration) {
-        this.cooldownDuration = cooldownDuration;
+        this.cooldownDuration = positiveNrCheck (cooldownDuration);
+    }
+
+    // Checks that numbers are
+    private int positiveNrCheck(int nr){
+        if (nr >= 0) {
+            return nr;
+        } else {
+            throw new IllegalArgumentException ("Error: negative natural numbers are not allowed");
+        }
+
     }
 }
 
