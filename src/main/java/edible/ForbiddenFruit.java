@@ -1,6 +1,6 @@
 package edible;
 
-import inte_projektarbete.quest.Quest;
+import quest.Quest;
 
 public class ForbiddenFruit extends Edible {
 	
