@@ -1,3 +1,5 @@
+package java.se.su.dsv.projektarbete;
+
 import java.util.ArrayList;
 
 public class Player {

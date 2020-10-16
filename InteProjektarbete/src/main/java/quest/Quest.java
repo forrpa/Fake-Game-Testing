@@ -1,3 +1,5 @@
+import java.se.su.dsv.projektarbete.Player;
+
 public abstract class Quest {
 
     private String name;

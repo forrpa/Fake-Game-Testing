@@ -1,3 +1,5 @@
+import java.se.su.dsv.projektarbete.Player;
+
 public class TalkToGuildLeader extends Quest {
 
     public TalkToGuildLeader(String name, String description, boolean mandatory){
