@@ -1,6 +1,6 @@
-package java.quest;
+package quest;
 
-import java.se.su.dsv.projektarbete.Player;
+import player.Player;
 
 public abstract class Quest {
 
