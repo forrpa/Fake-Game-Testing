@@ -23,6 +23,6 @@ public class BreastplateOfTestingTest {
     @Test
     void isClassAnEquipment() {
     	BreastplateOfTesting bpt = new BreastplateOfTesting();
-    	assertTrue(bpt.isEquipment());
+    	assertTrue(bpt instanceof Equipment);
     }
 }
