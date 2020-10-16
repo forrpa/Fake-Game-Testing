@@ -3,9 +3,10 @@ package player;
 import java.util.ArrayList;
 
 public class Player {
-    private int manaPoint;
     private int healthPoint;
     private int experiencePoint;
+
+
 
     //private PlayerClass playerClass;
     //private Race race; //Beror på om vi vill göra klasserna Class och Race, jag kör med String sålänge
@@ -14,10 +15,9 @@ public class Player {
 
     private ArrayList<String> inventory = new ArrayList<>(); //Bör vara hash här eller något ist för String
 
-    public Player (String playerClass, String race, int manaPoint, int healthPoint, int experiencePoint){
+    public Player (String playerClass, String race, int healthPoint, int experiencePoint){
         this.playerClass = playerClass;
         this.race = race;
-        this.manaPoint = manaPoint;
         this.healthPoint = healthPoint;
         this.experiencePoint = experiencePoint;
     }
@@ -47,14 +47,17 @@ public class Player {
     }
 
     public void setManaPoint(int manaPoint) {
-        this.manaPoint += manaPoint;
+        this.manaPoint = manaPoint;
     }
 
     public void setHealthPoint(int healthPoint) {
-        this.healthPoint += healthPoint;
+        this.healthPoint = healthPoint;
     }
 
     public void setExperiencePoint(int experiencePoint) {
-        this.experiencePoint += experiencePoint;
+        this.experiencePoint = experiencePoint;
     }
+
+
+    // methods added by Christoffer
 }
