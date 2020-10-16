@@ -1,14 +1,15 @@
-package christoffersKod;
+// @author Christoffer Öhman
+package magic;
 
 public class Spell {
-    private String description;
-    private String name;
+    private final String description;
+    private final String name;
     private int manaCost;
-    private int requiredMagicLevel;
+    private final int requiredMagicLevel;
     private int cooldownDuration;
 
 
-    public Spell(String name, String description, int manaCost, int requiredMagicLevel, int cooldownDuration) {
+    public  Spell(String name, String description, int manaCost, int requiredMagicLevel, int cooldownDuration) {
         this.name = name;
         this.description = description;
         this.manaCost = manaCost;
