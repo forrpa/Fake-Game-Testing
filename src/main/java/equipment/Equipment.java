@@ -30,7 +30,7 @@ public class Equipment{
     public int getArmor() {
     	return this.armor;
     }
-    public int getDurability() {
+    public int getMaxDurability() {
     	return this.MAX_DURABILITY;
     }
 }
