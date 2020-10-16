@@ -40,4 +40,9 @@ public class BreastplateOfTestingTest {
     	BreastplateOfTesting bpt = new BreastplateOfTesting();
     	assertEquals(100, bpt.getDurability());
     }
+    @Test
+    void damagedDurCheck() {
+    	BreastplateOfTesting bpt = new BreastplateOfTesting();
+    	assertEquals(87, bpt.getDurability());
+    }
 }
