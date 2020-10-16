@@ -57,14 +57,14 @@ public abstract class Monster {
     }
 
     public boolean Attack(Monster enemy){
-        if(isGrounded() && !enemy.isGrounded() || enemy.isDead()){
+        if(isGrounded() && !enemy.isGrounded() || enemy.isDead() || isDead()){
             return false;
         }
-        enemy.Attack(getAttackPower());
+        enemy.takeDamage(getAttackPower());
         return true;
     }
 
-    private void Attack(int damage){
+    private void takeDamage(int damage){
         int tempHealth = getHealth() - damage;
         if(tempHealth < 0){
             setHealth(0);
