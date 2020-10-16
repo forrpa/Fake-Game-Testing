@@ -4,9 +4,9 @@ package magic;
 public class Spell {
     private final String description;
     private final String name;
-    private int manaCost;
-    private final int requiredMagicLevel;
-    private int cooldownDuration;
+    private int manaCost = 50;
+    private  int requiredMagicLevel =5;
+    private int cooldownDuration =10;
 
 
     public  Spell(String name, String description, int manaCost, int requiredMagicLevel, int cooldownDuration) {
@@ -16,6 +16,14 @@ public class Spell {
         this.requiredMagicLevel = requiredMagicLevel;
         this.cooldownDuration = cooldownDuration;
     }
+
+    public Spell (){
+
+        // might randomize names and descriptions.
+        name = "Unnamed spell";
+        description ="Your ninny brain can not comprehend what this spell does.";
+    }
+
 
 
     public String getName() {
@@ -47,5 +55,17 @@ public class Spell {
     }
 
 
+    public void setManaCost(int manaCost) {
+        this.manaCost = manaCost;
+    }
+
+    public void setRequiredMagicLevel(int requiredMagicLevel) {
+        this.requiredMagicLevel = requiredMagicLevel;
+    }
+
+    public void setCooldownDuration(int cooldownDuration) {
+        this.cooldownDuration = cooldownDuration;
+    }
 }
+
 

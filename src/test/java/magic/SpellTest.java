@@ -2,6 +2,7 @@
 package magic;
 
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -10,6 +11,8 @@ class SpellTest {
     private final String name = "Heal";
     private final String description = "Adds 50 health points. Costs: 5 mana.  Requires Magic level 5.";
     private final int standardValue = 1;
+    private final int negativeNr = -1;
+
 
 
     @Test
@@ -24,11 +27,33 @@ class SpellTest {
 
 
         // check for negative nr. and 0
-        // check for maximum name and description char.
+        // check for maximum name and description char.?
+        // check exceptions.
+
     }
 
 
+    @Test
+    void setNegativeManaCost() {
+        Spell spell = new Spell();
+        Assertions.assertThrows (IllegalArgumentException.class, () -> spell.setManaCost (-1) );
 
+    }
+
+    @Test
+    void setNegativeRequiredMagicLevel() {
+        Spell spell = new Spell();
+        Assertions.assertThrows (IllegalArgumentException.class, () -> spell.setRequiredMagicLevel (-1) );
+
+
+    }
+
+    @Test
+    void setNegativeCooldownDuration() {
+        Spell spell = new Spell();
+        Assertions.assertThrows (IllegalArgumentException.class, () -> spell.setCooldownDuration (-1) );
+
+    }
 }
 
 
