@@ -25,4 +25,9 @@ public class BreastplateOfTestingTest {
     	BreastplateOfTesting bpt = new BreastplateOfTesting();
     	assertTrue(bpt instanceof Equipment);
     }
+    @Test
+    void hasCorrectDescription() {
+    	BreastplateOfTesting bpt = new BreastplateOfTesting();
+    	assertTrue(getDescription.equals("An excellent breastplate for testing things with!"));
+    }
 }
