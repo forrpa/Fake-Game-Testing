@@ -42,6 +42,7 @@ class UnitTest {
         assertTrue(wolf.Attack(otherWolf));
         assertEquals(5, otherWolf.getHealth());
     }
+    @Test
     void wolfMonsterAttackOtherWolfFor3ThriceOtherWolfHas0HealthRemaining(){
         Monster wolf = new Wolf();
         Monster otherWolf = new Wolf();
