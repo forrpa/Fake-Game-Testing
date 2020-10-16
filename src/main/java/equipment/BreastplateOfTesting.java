@@ -1,12 +1,9 @@
 package equipment;
 
 public class BreastplateOfTesting extends Chest{
-	private String description = "An excellent breastplate for testing things with!";
 	
     public BreastplateOfTesting() {
-		super("Breastplate of Testing", 0, 2, 5, 3);
+		super("Breastplate of Testing", "An excellent breastplate for testing things with!", 0, 2, 5, 3);
 	}
-    public String getDescription() {
-    	return this.description;
-    }
+    
 }
