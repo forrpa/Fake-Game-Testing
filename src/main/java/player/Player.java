@@ -3,13 +3,15 @@ package player;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import equipment.ArmorType;
+import equipment.*;
+import weapon.*;
 
 public class Player {
     private int healthPoint;
     private int experiencePoint; 
     private Map<ArmorType, Boolean> allowedArmorTypes = new HashMap<ArmorType, Boolean>();
-
+    private Map<String, Equipment> gear = new HashMap<String, Equipment>();
+    
     //private PlayerClass playerClass;
     //private Race race; //Beror på om vi vill göra klasserna Class och Race, jag kör med String sålänge
     private String playerClass;
@@ -70,7 +72,12 @@ public class Player {
     		this.allowedArmorTypes.put(ArmorType.PLATE, true);
     		break;
     	}
-    	//this.allowedArmorTypes.put("cloth", value)
+    }
+    public void equipWeapon(Weapon weapon) {
+    	//Work in progress
+    }
+    public void equipArmor(Equipment armor) {
+    	
     }
 
     // methods added by Christoffer
