@@ -1,4 +1,4 @@
-package main.java.se.su.dsv.projektarbete.unit;
+package unit;
 
 public class Wolf extends Monster {
     public Wolf(){
