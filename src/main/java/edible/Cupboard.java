@@ -35,20 +35,31 @@ public class Cupboard {
 		return inventory;
 	}
 
-	public void store(Edible edible) {
+	public void store(Item item) {
+		// if item instance of Edible or Recipie false throw IAE
 		// must start: instance of item type(subclass) checking, wrong type for certain subclass of Storage throws IAE
-		getInventory().addItem(edible);
+		getInventory().addItem(item);
 	}
 
-	public void consume(Item item) {
+	public void use(Item item) {
 		getInventory().getOutItem(item);
+		if(item instanceof Recipie) {
+			Recipie recipie = (Recipie) item;
+			recipie.cook();
+			return;
+		}
 		Edible edible = (Edible) item;
 		//getPlayer().setManaPoint(edible.getManaPoint());
 		getPlayer().setHealthPoint(edible.getHealthPoint());
 		getPlayer().setExperiencePoint(edible.getExperiencePoint());
+		if(edible instanceof ForbiddenFruit) {
+			ForbiddenFruit fruit = (ForbiddenFruit) edible;
+			fruit.getQuest().startQuest(player);
+		}
 	}
 	
-	public Item giveAway(Player player) {
+	public Item trade(Edible edible, Player player) {
+		// if player is player throw NPE
 		Item item = null;
 		return item;
 	}

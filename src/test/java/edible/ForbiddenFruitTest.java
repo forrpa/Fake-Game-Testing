@@ -20,14 +20,14 @@ class ForbiddenFruitTest {
 	}
 
 	@Test
-	void constructorSetsNeutralPointsValue() {
-		assertEquals(0, RED_APPLE.getManaPoint());
-		assertEquals(0, RED_APPLE.getHealthPoint());
-		assertEquals(0, RED_APPLE.getExperiencePoint());
+	void constructorSetsFullPointValue() {
+		assertEquals(10, RED_APPLE.getManaPoint());
+		assertEquals(10, RED_APPLE.getHealthPoint());
+		assertEquals(10, RED_APPLE.getExperiencePoint());
 	}
 	
 	@Test
 	void toStringFormatsAttributesCorrect() {
-		assertEquals("\"Red Apple: Eating apple starts quest Talk to Guild leader\", Quest: Talk to Guild leader", RED_APPLE.toString());
+		assertEquals("\"Red Apple: Eating apple starts quest Talk to Guild leader\", Mana: 10, Health: 10, Experience: 10, Quest: Talk to Guild leader", RED_APPLE.toString());
 	}
 }
