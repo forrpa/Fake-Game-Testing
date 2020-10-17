@@ -56,8 +56,7 @@ public class Cupboard {
 	}
 	
 	private void cook(Recipie recipie) {
-		//Potion potion = recipie.cook(player.getManaPoint(), player.getExperiencePoint());
-		Potion potion = recipie.cook(player.getExperiencePoint());
+		Potion potion = recipie.cook(player.getManaPoint(), player.getExperiencePoint());
 		store(potion);
 		store(recipie);
 	}
@@ -67,11 +66,7 @@ public class Cupboard {
 		getInventory().getOutItem(item);
 		if(item instanceof Recipie) {
 			Recipie recipie = (Recipie) item;
-			//Potion potion = recipie.cook(player.getManaPoint(), player.getExperiencePoint());
-			Potion potion = recipie.cook(player.getExperiencePoint());
-			store(potion);
-			store(recipie);
-			return;
+			cook(recipie);
 		}
 		Edible edible = (Edible) item;
 		consume(edible);

@@ -17,8 +17,7 @@ public class Recipie extends Item {
 		this.experiencePointToCook = experiencePointToCook;
 	}
 	
-	//public Potion cook(int manaPoint, int experiencePoint) {
-	public Potion cook(int experiencePoint) {
+	public Potion cook(int manaPoint, int experiencePoint) {
 		// check Players mana and exp points if insufficient throw ISE
 		return potion;
 	}
@@ -28,7 +27,7 @@ public class Recipie extends Item {
 	}
 	
 	public Ingredient[] getIngredients() {
-		return ingredients;
+		return ingredients.clone();
 	}
 
 	public int getManaPointToCook() {

@@ -7,6 +7,7 @@ import equipment.*;
 import weapon.*;
 
 public class Player {
+	private int manaPoint;
     private int healthPoint;
     private int experiencePoint; 
     private Map<ArmorType, Boolean> allowedArmorTypes = new HashMap<ArmorType, Boolean>();
@@ -27,7 +28,9 @@ public class Player {
         setArmorTypeHashMap();
     }
 
-
+	public int getManaPoint() {
+		return manaPoint;
+	}
 
     public int getHealthPoint() {
         return healthPoint;
@@ -49,6 +52,9 @@ public class Player {
         return inventory;
     }
 
+	public void setManaPoint(int manaPoint) {
+		this.manaPoint = manaPoint;
+	}
 
     public void setHealthPoint(int healthPoint) {
         this.healthPoint = healthPoint;
