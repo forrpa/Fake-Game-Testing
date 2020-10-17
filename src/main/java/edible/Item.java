@@ -25,7 +25,29 @@ abstract class Item {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+    @Override
+    public final boolean equals(Object obj) {
+        if (obj instanceof Item) {
+            Item item = (Item) obj;
+            return name == item.name && description == item.description;
+        } else {
+            return false;
+        }
+    }
+    
+    @Override
+    public int hashCode() {
+        int result = 17;
+        final int prime = 31;
+        result = prime * result + name.hashCode();
+        result = prime * result + description.hashCode();
+        return result;
+    }
 	
-	public abstract String toString();
+    @Override
+	public String toString() {
+    	return String.format("\"%s: %s\"", getName(), getDescription());
+	}
 }
 

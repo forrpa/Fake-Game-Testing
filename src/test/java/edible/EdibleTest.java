@@ -1,21 +1,22 @@
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+package edible;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
 class EdibleTest {
 	
-	final static Edible ITEM = new Edible("Name", "Description", 0, 0, 0);
+	final static Edible MAGIC_HEALING_MUSHROOM = new Edible("Magic Healing Mushroom", "Small increases in magic capability and substantial health boost", 2, 6, 0);
 
 	@Test
 	void constructorSetsAttributes() {
-		assertEquals("Name", ITEM.getName());
-		assertEquals("Description", ITEM.getDescription());
-		assertEquals(0, ITEM.getManaPoint());
-		assertEquals(0, ITEM.getManaPoint());
-		assertEquals(0, ITEM.getManaPoint());
+		assertEquals("Magic Healing Mushroom", MAGIC_HEALING_MUSHROOM.getName());
+		assertEquals("Small increases in magic capability and substantial health boost", MAGIC_HEALING_MUSHROOM.getDescription());
+		assertEquals(2, MAGIC_HEALING_MUSHROOM.getManaPoint());
+		assertEquals(6, MAGIC_HEALING_MUSHROOM.getHealthPoint());
+		assertEquals(0, MAGIC_HEALING_MUSHROOM.getExperiencePoint());
 	}
-	
+
 	@Test
 	void checkPointValueOutOfRangeTrhowsIAE() {
 		assertThrows(IllegalArgumentException.class, () -> {
@@ -31,7 +32,7 @@ class EdibleTest {
 	
 	@Test
 	void checkToString() {
-		assertEquals("\"Name: Description\", Mana: 0, Health: 0, Experience: 0", ITEM.toString());
+		assertEquals("\"Magic Healing Mushroom: Small increases in magic capability and substantial health boost\", Mana: 2, Health: 6, Experience: 0", MAGIC_HEALING_MUSHROOM.toString());
 	}
 
 }
