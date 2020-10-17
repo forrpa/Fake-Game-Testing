@@ -1,21 +1,32 @@
-package main.java.se.su.dsv.projektarbete.unit;
+package unit;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Monster {
     private String name;
     private boolean isGrounded;
     private int health;
     private int attackPower;
+    private ArrayList<Item> itemsOnMonster;
 
     public Monster(String name, int health, int attackPower){
-        setName(name);
-        setHealth(health);
-        setAttackPower(attackPower);
-        this.isGrounded = true;
+        this(name, health, attackPower, true);
+    }
+    public Monster(String name, int health, int attackPower, ArrayList<Item> items){
+        this(name, health, attackPower, true, items);
     }
 
     public Monster(String name, int health, int attackPower, boolean isGrounded){
-        this(name, health, attackPower);
+        setName(name);
+        setHealth(health);
+        setAttackPower(attackPower);
         this.isGrounded = isGrounded;
+    }
+
+    public Monster(String name, int health, int attackPower, boolean isGrounded, ArrayList<Item> items){
+        this(name, health, attackPower, isGrounded);
+        itemsOnMonster = items;
     }
 
     public String getName() {
@@ -24,7 +35,7 @@ public abstract class Monster {
 
     private void setName(String name){
         if(name.matches(".*\\d.*")){
-            throw new IllegalStateException("No numbers allowed in name");
+            throw new IllegalArgumentException(("No numbers allowed in name"));
         }
         this.name = name;
     }
@@ -40,12 +51,9 @@ public abstract class Monster {
         this.health = health;
     }
 
-    private boolean isDead(){
-        if(health == 0){
-            return true;
-        }else{
-            return false;
-        }
+    public boolean isDead(){
+        return (health == 0);
+
     }
 
     private int getAttackPower() {
@@ -56,12 +64,17 @@ public abstract class Monster {
         this.attackPower = attackPower;
     }
 
-    public boolean Attack(Monster enemy){
-        if(isGrounded() && !enemy.isGrounded() || enemy.isDead() || isDead()){
+    public boolean attack(Monster enemy){
+        if(isDead()){
+            throw new IllegalStateException("The attacking unit is dead");
+        }else if(enemy.isDead()){
+            throw new IllegalStateException("The unit receiving damage is already dead");
+        }else if(isGrounded() && !enemy.isGrounded()){
             return false;
+        }else {
+            enemy.takeDamage(getAttackPower());
+            return true;
         }
-        enemy.takeDamage(getAttackPower());
-        return true;
     }
 
     private void takeDamage(int damage){
@@ -73,4 +86,25 @@ public abstract class Monster {
         }
     }
 
+    private boolean isLootable() {
+        if (!isDead()) {
+            throw new IllegalStateException("Monster can't be looted unless dead");
+        } else if (itemsOnMonster == null || itemsOnMonster.isEmpty()) {
+            throw new IllegalStateException("No items on monster");
+        }else{
+            return true;
+        }
+    }
+
+    public List<Item> getLooted(){
+        if(isLootable()){
+            ArrayList<Item> lootedItems = new ArrayList<>();
+            lootedItems.addAll(itemsOnMonster);
+            itemsOnMonster.clear();
+            return lootedItems;
+
+        }else{
+            return null;
+        }
+    }
 }
