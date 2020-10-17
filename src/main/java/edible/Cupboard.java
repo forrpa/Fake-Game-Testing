@@ -35,13 +35,13 @@ public class Cupboard {
 		return inventory;
 	}
 
-	public void store(Item item) {
+	public void store(Edible edible) {
 		// must start: instance of item type(subclass) checking, wrong type for certain subclass of Storage throws IAE
-		getInventory().addItem(item);
+		getInventory().addItem(edible);
 	}
 
 	public void consume(Item item) {
-		getInventory().removeItem(item);
+		getInventory().getOutItem(item);
 		Edible edible = (Edible) item;
 		//getPlayer().setManaPoint(edible.getManaPoint());
 		getPlayer().setHealthPoint(edible.getHealthPoint());

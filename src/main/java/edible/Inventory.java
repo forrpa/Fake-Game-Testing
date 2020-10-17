@@ -12,10 +12,12 @@ public class Inventory {
 		inventory.put(item, count);
 	}
 	
-	public void removeItem(Item item) {
+	// subclasses need to think of casting item returned
+	public Item getOutItem(Item item) {
 		// if item not exists throw IAE
 		int count = inventory.get(item);
 		inventory.put(item, count - 1);
+		return item;
 	}
 
 }

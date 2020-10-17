@@ -31,22 +31,22 @@ class InventoryTest {
 	}
 	
 	@Test
-	void removeLastItemOfTypeRemovesKey() {
+	void getOutItemLastOfTypeRemovesKey() {
 		fail("Not yet implemented");
 	}
 	
 	@RepeatedTest(10)
-	void removeItemNotLastOfTypeDecreasesCountByOne() {
+	void getOutItemNotLastOfTypeDecreasesCountByOne() {
 		fail("Not yet implemented");
 	}
 	
 	@Test
-	void removeItemNotExisitingThrowsIAE() {
+	void getOutItemNotExisitingThrowsIAE() {
 		fail("Not yet implemented");
 	}
 	
 	@Test
-	void removeItemInvetoryEmptyThrowsISE() {
+	void getOutItemInvetoryEmptyThrowsISE() {
 		fail("Not yet implemented");
 	}
 	
