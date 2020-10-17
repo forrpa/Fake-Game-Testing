@@ -1,6 +1,6 @@
 
 package weapon;
 
- enum OneOrTwoHanded {
+ enum WeaponSize {
 	 ONEHANDED, TWOHANDED;
 }
