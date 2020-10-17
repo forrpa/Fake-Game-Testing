@@ -86,7 +86,25 @@ public abstract class Monster {
         }
     }
 
+    private boolean isLootable() {
+        if (!isDead()) {
+            throw new IllegalStateException("Monster can't be looted unless dead");
+        } else if (itemsOnMonster == null || itemsOnMonster.isEmpty()) {
+            throw new IllegalStateException("No items on monster");
+        }else{
+            return true;
+        }
+    }
+
     public List<Item> getLooted(){
-        throw new IllegalStateException("Monster can't be looted unless dead");
+        if(isLootable()){
+            ArrayList<Item> lootedItems = new ArrayList<>();
+            lootedItems.addAll(itemsOnMonster);
+            itemsOnMonster.clear();
+            return lootedItems;
+
+        }else{
+            return null;
+        }
     }
 }
