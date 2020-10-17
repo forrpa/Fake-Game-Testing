@@ -22,5 +22,10 @@ public abstract class Weapon {
 		this.durability = dur;
 		this.damageRange = dmg;
 	}
-
+	public String getName() {return this.name;}
+	public String getDescription() {return this.description;}
+	public int getMaxDurability() {return this.MAX_DURABILITY;}
+	public int getDurability() {return this.durability;}
+	public int[] getAttributes() {return new int[] {this.strength, this.agility, this.intelligence, this.stamina};}
+	public int[] getDamageRange() {return this.damageRange;}
 }
