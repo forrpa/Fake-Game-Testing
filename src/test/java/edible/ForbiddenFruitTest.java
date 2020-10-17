@@ -11,19 +11,16 @@ class ForbiddenFruitTest {
 
 	final static Quest QUEST = new TalkToGuildLeader("Talk to Guild leader", "Talk", "in progress", true, true);
 	final static ForbiddenFruit RED_APPLE = new ForbiddenFruit("Red Apple", "Eating apple starts quest Talk to Guild leader", QUEST);
+	final static int FULL_POINT_VALUE = 10;
 	
 	@Test
 	void constructorSetsAttributes() {
 		assertEquals("Red Apple", RED_APPLE.getName());
 		assertEquals("Eating apple starts quest Talk to Guild leader", RED_APPLE.getDescription());
 		assertEquals(QUEST, RED_APPLE.getQuest());
-	}
-
-	@Test
-	void constructorSetsFullPointValue() {
-		assertEquals(10, RED_APPLE.getManaPoint());
-		assertEquals(10, RED_APPLE.getHealthPoint());
-		assertEquals(10, RED_APPLE.getExperiencePoint());
+		assertEquals(FULL_POINT_VALUE, RED_APPLE.getManaPoint());
+		assertEquals(FULL_POINT_VALUE, RED_APPLE.getHealthPoint());
+		assertEquals(FULL_POINT_VALUE, RED_APPLE.getExperiencePoint());
 	}
 	
 	@Test

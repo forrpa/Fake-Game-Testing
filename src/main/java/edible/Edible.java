@@ -12,11 +12,6 @@ public class Edible extends Item {
 		this.healthPoint = checkPointValueRange(healthPoint);
 		this.experiencePoint = checkPointValueRange(experiencePoint);
 	}
-	
-	@Override
-	public String toString() {
-		return String.format("\"%s: %s\", Mana: %d, Health: %d, Experience: %d", getName(), getDescription(), getManaPoint(), getHealthPoint(), getExperiencePoint());
-	}
 
 	public int getManaPoint() {
 		return manaPoint;
@@ -34,4 +29,10 @@ public class Edible extends Item {
 		if(pointValue < -10 || 10 < pointValue) throw new IllegalArgumentException("Value must be in range -10 to 10");
 		return pointValue;
 	}
+	
+	@Override
+	public String toString() {
+		return String.format("\"%s: %s\", Mana: %d, Health: %d, Experience: %d", getName(), getDescription(), getManaPoint(), getHealthPoint(), getExperiencePoint());
+	}
+
 }

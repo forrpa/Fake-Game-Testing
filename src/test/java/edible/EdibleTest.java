@@ -31,7 +31,17 @@ class EdibleTest {
 	}
 	
 	@Test
-	void checkToString() {
+	void equalsMatchesNameAndDescription() {
+		
+	}
+	
+	@Test
+	void hashCodeHashesNameAndDescription() {
+		
+	}
+	
+	@Test
+	void toStringFormatsAttributesCorrect() {
 		assertEquals("\"Magic Healing Mushroom: Small increases in magic capability and substantial health boost\", Mana: 2, Health: 6, Experience: 0", MAGIC_HEALING_MUSHROOM.toString());
 	}
 

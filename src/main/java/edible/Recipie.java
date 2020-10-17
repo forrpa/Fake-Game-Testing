@@ -10,7 +10,6 @@ public class Recipie extends Item {
 
 	public Recipie(String name, String description, Potion potion, Ingredient[] ingredients, int manaPointToCook, int experiencePointToCook) {
 		super(name, description);
-		//if(!potion.isCookable()) throw new IllegalArgumentException("Potion not meant to be cookable in this version!");
 		this.potion = potion;
 		this.ingredients = ingredients;
 		this.manaPointToCook = manaPointToCook;
@@ -18,7 +17,8 @@ public class Recipie extends Item {
 	}
 	
 	public Potion cook(int manaPoint, int experiencePoint) {
-		// check Players mana and exp points if insufficient throw ISE
+		if(manaPoint < manaPointToCook || experiencePoint < experiencePointToCook) 
+			throw new IllegalStateException("Player doesn't have enough mana and/or experience to cook this potion yet.");
 		return potion;
 	}
 
