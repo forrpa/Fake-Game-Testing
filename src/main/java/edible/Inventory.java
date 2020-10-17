@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class Inventory {
 
-	private HashMap<Item, Integer> inventory = new HashMap<>();
+	private final HashMap<Item, Integer> inventory = new HashMap<>();
 
 	public void addItem(Item item) {
 		int count = 1;
@@ -13,7 +13,7 @@ public class Inventory {
 	}
 	
 	public void removeItem(Item item) {
-		// if item not exists throw ISE
+		// if item not exists throw IAE
 		int count = inventory.get(item);
 		inventory.put(item, count - 1);
 	}

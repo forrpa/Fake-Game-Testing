@@ -27,7 +27,7 @@ class ForbiddenFruitTest {
 	}
 	
 	@Test
-	void checkToString() {
+	void toStringFormatsAttributesCorrect() {
 		assertEquals("\"Red Apple: Eating apple starts quest Talk to Guild leader\", Quest: Talk to Guild leader", RED_APPLE.toString());
 	}
 }
