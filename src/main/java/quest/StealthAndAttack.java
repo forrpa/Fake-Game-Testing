@@ -10,6 +10,10 @@ public class StealthAndAttack extends Quest {
 
     public StealthAndAttack(String name, String description, String state, boolean mandatory, boolean discovered, boolean attacked, boolean talkedToQuestMaker){
         super("Stealt and Attack", "You have to follow your enemy without being seen and then attack him", "pending", true);
+        this.state = state;
+        this.discovered = discovered;
+        this.attacked = attacked;
+        this.talkedToQuestMaker = talkedToQuestMaker;
     }
 
     public boolean isDiscovered(){
