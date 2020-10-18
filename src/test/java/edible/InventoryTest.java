@@ -10,6 +10,7 @@ import quest.TalkToGuildLeader;
 
 class InventoryTest {
 	
+	static int FLY_AGARIC_COUNT = 0;
 	final static Item FLY_AGARIC = new Edible("Fly Agaric", "Poisonous mushroom with magic powers", 4, -3, 0);
 	final static Item LUCKY_CHERRY = new ForbiddenFruit("Lucky Cherry", "Eating cherry starts quest Talk to Guild leader", new TalkToGuildLeader("Talk to Guild leader", "Talk", "in progress", true, true));	
 	final static Item FIRE_ROOT = new Ingredient("Fire Root", "Increases power of potions");	
@@ -18,9 +19,11 @@ class InventoryTest {
 	
 	final static Inventory INVENTORY = new Inventory();
 	
-	@Test
+	@RepeatedTest(10)
 	void addItemofSameTypeIncreasesCountByOne() {
-		fail("Not yet implemented");
+		INVENTORY.addItem(FLY_AGARIC);
+		FLY_AGARIC_COUNT++;
+		assertEquals(FLY_AGARIC_COUNT,INVENTORY.getCount(FLY_AGARIC));
 	}
 	
 	@Test

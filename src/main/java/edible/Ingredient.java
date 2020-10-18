@@ -8,4 +8,9 @@ public class Ingredient extends Item {
 		super(name, description);
 	}
 
+	@Override
+	public String toString() {
+		return String.format("\"%s: %s\"", getName(), getDescription());
+	}
+
 }
