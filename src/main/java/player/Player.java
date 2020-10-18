@@ -11,6 +11,8 @@ public class Player {
 	private int manaPoint;
     private int healthPoint;
     private int experiencePoint; 
+    private int level = 1;
+    private int nextLevelCap = 100;
     private Map<ArmorType, Boolean> allowedArmorTypes = new HashMap<ArmorType, Boolean>();
     private Map<String, Equipment> gear = new HashMap<String, Equipment>();
     private Map<Item, Boolean> inventory2 = new HashMap<Item, Boolean>();
@@ -64,7 +66,17 @@ public class Player {
 
     public void setExperiencePoint(int experiencePoint) {
         this.experiencePoint = experiencePoint;
+        if(this.experiencePoint > this.nextLevelCap) {
+        	increaseLevel();
+        	this.experiencePoint = this.experiencePoint-this.nextLevelCap;
+        	this.nextLevelCap = this.nextLevelCap + (this.nextLevelCap/2);
+        }
     }
+    public void increaseLevel() {
+    	this.level++;
+    }
+    
+    
     private void setArmorTypeHashMap() {
     	switch(this.playerClass) {
     	case "Mage":
