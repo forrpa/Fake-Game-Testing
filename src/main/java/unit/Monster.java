@@ -72,12 +72,13 @@ public abstract class Monster {
         }else if(isGrounded() && !enemy.isGrounded()){
             return false;
         }else {
-            enemy.takeDamage(getAttackPower());
+            enemy.takeDamage(new Attack(getAttackPower()));
             return true;
         }
     }
 
-    private void takeDamage(int damage){
+    private void takeDamage(Attack attack){
+        int damage = attack.getAttackPower();
         int tempHealth = getHealth() - damage;
         if(tempHealth < 0){
             setHealth(0);
