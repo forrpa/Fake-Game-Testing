@@ -1,20 +1,21 @@
 package edible;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
 class EdibleTest {
 	
-	final static Edible MAGIC_HEALING_MUSHROOM = new Edible("Magic Healing Mushroom", "Small increases in magic capability and substantial health boost", 2, 6, 0);
+	final static Edible ONE_UP_CEREAL = new Edible("1-Up Cereal", "1-Up", 0, 10, 0);
 
 	@Test
 	void constructorSetsAttributes() {
-		assertEquals("Magic Healing Mushroom", MAGIC_HEALING_MUSHROOM.getName());
-		assertEquals("Small increases in magic capability and substantial health boost", MAGIC_HEALING_MUSHROOM.getDescription());
-		assertEquals(2, MAGIC_HEALING_MUSHROOM.getManaPoint());
-		assertEquals(6, MAGIC_HEALING_MUSHROOM.getHealthPoint());
-		assertEquals(0, MAGIC_HEALING_MUSHROOM.getExperiencePoint());
+		assertEquals("1-Up Cereal", ONE_UP_CEREAL.getName());
+		assertEquals("1-Up", ONE_UP_CEREAL.getDescription());
+		assertEquals(0, ONE_UP_CEREAL.getManaPoint());
+		assertEquals(10, ONE_UP_CEREAL.getHealthPoint());
+		assertEquals(0, ONE_UP_CEREAL.getExperiencePoint());
 	}
 
 	@Test
@@ -31,18 +32,8 @@ class EdibleTest {
 	}
 	
 	@Test
-	void equalsMatchesNameAndDescription() {
-		
-	}
-	
-	@Test
-	void hashCodeHashesNameAndDescription() {
-		
-	}
-	
-	@Test
 	void toStringFormatsAttributesCorrect() {
-		assertEquals("\"Magic Healing Mushroom: Small increases in magic capability and substantial health boost\", Mana: 2, Health: 6, Experience: 0", MAGIC_HEALING_MUSHROOM.toString());
+		assertEquals("\"1-Up Cereal: 1-Up\", Mana: 0, Health: 10, Experience: 0", ONE_UP_CEREAL.toString());
 	}
 
 }

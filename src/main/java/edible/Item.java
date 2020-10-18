@@ -45,9 +45,6 @@ public abstract class Item {
         return result;
     }
 	
-    @Override
-	public String toString() {
-    	return String.format("\"%s: %s\"", getName(), getDescription());
-	}
+    public abstract String toString();
 }
 

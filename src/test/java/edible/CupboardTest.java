@@ -25,7 +25,7 @@ class CupboardTest {
 	final static Recipie GREEN_VENOM_RECIPIE = new Recipie("Green Venom Recipie", 
 			"Recipie for potion sabbotaging health on entering bloodstream", GREEN_VENOM, GREEN_VENOM_INGREDIENTS, 50, 20);
 	
-	final static Edible SUPER_SMOOTHIE = new Edible("Super-Fruits Smoothie", "1-Up", 0, 10, 0);
+	final static Edible ONE_UP_CEREAL = new Edible("1-Up Cereal", "1-Up", 0, 10, 0);
 	final static Edible FORTUNE_COOKIE = new Edible("Fortune Cookie", "Hides a wisdom", 0, 0, 1);
 	
 	@Test
