@@ -82,8 +82,19 @@ public class Player {
     public void equipWeapon(Weapon weapon) {
     	//Work in progress
     }
-    public void equipArmor(Equipment armor) {
-    	
+    public void equipArmor(Equipment armor) throws Exception {
+    	if(this.allowedArmorTypes.get(armor.getArmorType())) {
+    		if(armor instanceof Chest) {
+    			if(this.gear.get("chest")==null) {
+    				this.gear.put("chest", armor);
+    			}else {
+    				Equipment replacedPiece = this.gear.replace("chest", armor);
+    				//replacedPiece will be handled later
+    			}
+    		}
+    	}else {
+    		throw new Exception();
+    	}
     }
 
     // methods added by Christoffer
