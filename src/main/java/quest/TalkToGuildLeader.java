@@ -1,9 +1,6 @@
 package quest;
 import player.Player;
 
-
-//Tillstånd: pending (default), unlocked (startReq = true), in progress(efter startat quest), completed(efter avslutat quest)
-
 public class TalkToGuildLeader extends Quest {
 
     private boolean talkedToGuildLeader = false;
@@ -21,7 +18,7 @@ public class TalkToGuildLeader extends Quest {
 
     @Override
     public boolean startRequirementsFulfilled(Player player) {
-        if (player.getExperiencePoint() >= 1000){// && player.getInventory().contains("Guild Map")){
+        if (player.getExperiencePoint() >= 1000){
             state = "unlocked";
             return true;
         } else {
@@ -38,7 +35,7 @@ public class TalkToGuildLeader extends Quest {
 
     @Override
     public boolean endRequirementsFulfilled(Player player) {
-        if (talkedToGuildLeader){ // && player.getInventory().contains("Guild Map")){
+        if (talkedToGuildLeader){
             state = "completed";
             return true;
         } else {
@@ -54,7 +51,7 @@ public class TalkToGuildLeader extends Quest {
             player.setExperiencePoint(100);
             rewardBasedOnClass(player);
             rewardBasedOnRace(player);
-            player.getInventory().add("Guild Map"); //Till nästa quest
+            player.getInventory().add("Guild Map"); //Till nästa quest, är ett krav i nästa quest
         } else {
             System.out.println("You have not fulfilled quest requirements.");
         }
