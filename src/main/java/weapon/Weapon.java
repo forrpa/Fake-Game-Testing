@@ -9,8 +9,9 @@ public abstract class Weapon extends Item{
     private final int MAX_DURABILITY;
     private int durability;
     private int[] damageRange;
+    private int requiredLevel;
 	
-	public Weapon(String name, String desc, int[] dmg, int dur, int str, int agi, int intell, int sta) {
+	public Weapon(String name, String desc, int recLevel, int[] dmg, int dur, int str, int agi, int intell, int sta) {
 		super(name,desc);
 		this.strength = str;
 		this.agility = agi;
@@ -19,6 +20,7 @@ public abstract class Weapon extends Item{
 		this.MAX_DURABILITY = dur;
 		this.durability = dur;
 		this.damageRange = dmg;
+		this.requiredLevel = recLevel;
 	}
 	public int getMaxDurability() {return this.MAX_DURABILITY;}
 	public int getDurability() {return this.durability;}
