@@ -1,15 +1,18 @@
 package edible;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import player.Player;
 import quest.TalkToGuildLeader;
 
 class CupboardTest {
 
-	final static Player PLAYER = 
-	final static Cupboard CUPBOARD = new Cupboard(); 
+	final static Player PLAYER = new Player("playerClassString", "raceString", 5, 10, 0);
+	final static Cupboard CUPBOARD = new Cupboard(PLAYER); 
 	final static Edible FLY_AGARIC = new Edible("Fly Agaric", "Poisonous mushroom with magic powers", 4, -3, 0);
 	final static ForbiddenFruit LUCKY_CHERRY = new ForbiddenFruit("Lucky Cherry", "Eating cherry starts quest Talk to Guild leader", new TalkToGuildLeader("Talk to Guild leader", "Talk", "in progress", true, true));
 	
@@ -30,10 +33,65 @@ class CupboardTest {
 	final static Edible ONE_UP_CEREAL = new Edible("1-Up Cereal", "1-Up", 0, 10, 0);
 	final static Edible FORTUNE_COOKIE = new Edible("Fortune Cookie", "Hides a wisdom", 0, 0, 1);
 	
+	@BeforeAll
+	static void addItemToAllInventoryObjectsInCupboard() {
+		// TO-DO
+	}
+	
 	@Test
 	void constructorSetsAttribute() {
+		// implement equals method for the superclass to player/character/NPC and whatever they are called, or to all
+		assertEquals(PLAYER, CUPBOARD.getPlayer());
+	}
+	
+	@Test
+	void storeAllocatesItemInCorrectInventory() {
 		fail("Not yet implemented");
 	}
 	
+	@Test
+	void storeSameTypeRecipieTwiceThrowsISE() {
+		fail("Not yet implemented");
+	}
+	
+	@Test
+	void storeSameTypeForbiddenFruitTwiceThrowsISE() {
+		fail("Not yet implemented");
+	}
+	
+	@Test
+	void consumeAddsEdiblePointsToPlayerPoints() {
+		fail("Not yet implemented");
+	}
+	
+	@Test
+	void consumePoisonedForbiddenFruitAddsPotionPointsToPlayerPoints() {
+		fail("Not yet implemented");
+	}
+	
+	@Test
+	void consumeForbiddenFruitChangesQuestStatusToInProgress() {
+		fail("Not yet implemented");
+	}
+	
+	@Test
+	void poisonStoresPoisonedFruitandUsesUpPotion() {
+		fail("Not yet implemented");
+	}
+	
+	@Test
+	void cookRestoresRecipieAndStoresNewPotion() {
+		fail("Not yet implemented");
+	}
+	
+	@Test
+	void cookIngredientsFromRecipieNotInCupboardThrowsNPE() {
+		fail("Not yet implemented");
+	}
+	
+	@Test
+	void toStringFormatsAttributesCorrect() {
+		fail("Not yet implemented");
+	}
 
 }
