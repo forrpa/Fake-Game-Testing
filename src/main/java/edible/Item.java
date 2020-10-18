@@ -25,6 +25,8 @@ public abstract class Item {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	public abstract int getRequiredLevel();
 
     @Override
     public final boolean equals(Object obj) {

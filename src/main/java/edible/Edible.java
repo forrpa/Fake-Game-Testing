@@ -4,13 +4,14 @@ public class Edible extends Item {
 
 	private final int manaPoint;
 	private final int healthPoint;
-	private final int experiencePoint;
+	private final int requiredLevel;
 	
-	public Edible(String name, String description, int manaPoint, int healthPoint, int experiencePoint) {
+	public Edible(String name, String description, int manaPoint, int healthPoint,  int recLevel) {
 		super(name, description);
 		this.manaPoint = checkPointValueRange(manaPoint);
 		this.healthPoint = checkPointValueRange(healthPoint);
-		this.experiencePoint = checkPointValueRange(experiencePoint);
+		this.requiredLevel = checkPointValueRange(recLevel); //metoden känns inte rimlig vare sig för experience eller level. /Christian
+		//this.requiredLevel = recLevel;
 	}
 
 	public int getManaPoint() {
@@ -21,9 +22,6 @@ public class Edible extends Item {
 		return healthPoint;
 	}
 
-	public int getExperiencePoint() {
-		return experiencePoint;
-	}
 	
 	private int checkPointValueRange(int pointValue) {
 		if(pointValue < -10 || 10 < pointValue) throw new IllegalArgumentException("Value must be in range -10 to 10");
@@ -32,7 +30,12 @@ public class Edible extends Item {
 	
 	@Override
 	public String toString() {
-		return String.format("\"%s: %s\", Mana: %d, Health: %d, Experience: %d", getName(), getDescription(), getManaPoint(), getHealthPoint(), getExperiencePoint());
+		return String.format("\"%s: %s\", Mana: %d, Health: %d, Experience: %d", getName(), getDescription(), getManaPoint(), getHealthPoint(), getRequiredLevel());
+	}
+
+	@Override
+	public int getRequiredLevel() {
+		return this.requiredLevel;
 	}
 
 }
