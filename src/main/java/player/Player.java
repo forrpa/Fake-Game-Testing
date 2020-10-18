@@ -97,7 +97,8 @@ public class Player {
     	//Work in progress
     }
     public void equipArmor(Equipment armor) throws Exception {
-    	if(this.inventory2.get(armor)) {}else {throw new Exception();}
+    	if(this.inventory2.get(armor)==false) {throw new Exception();}
+    	if(this.level < armor.getRequiredLevel()) {throw new Exception();}
     	if(this.allowedArmorTypes.get(armor.getArmorType())) {
     		if(armor instanceof Chest) {
     			if(this.gear.get("chest")==null) {
