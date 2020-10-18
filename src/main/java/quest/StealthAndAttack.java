@@ -29,15 +29,34 @@ public class StealthAndAttack extends Quest {
     }
 
     public boolean startRequirementsFulfilled(Player player){
-        return true;
+        if (player.getExperiencePoint() >= 1500){ //&& player.getInventory().contains("Guild Map")
+            state = "unlocked";
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void startQuest(Player player){
+        if (startRequirementsFulfilled(player)){
+            state = "in progress";
+        }
+    }
 
+    public boolean endRequirementsForExchangingInfo(){
+        return talkedToQuestMaker && !attacked; //och pratade med fienden
+    }
+
+    public boolean endRequirementsForAttackingOnTime(){
+        return talkedToQuestMaker && attacked; //TID???
+    }
+
+    public boolean endRequirementsForNotAttackingOnTime(){
+        return true;
     }
 
     public boolean endRequirementsFulfilled(Player player){
-        return true;
+        return endRequirementsForExchangingInfo() || endRequirementsForAttackingOnTime() || endRequirementsForNotAttackingOnTime();
     }
 
     public void questCompleted(Player player){
