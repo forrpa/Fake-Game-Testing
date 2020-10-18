@@ -33,7 +33,8 @@ class EdibleTest {
 	
 	@Test
 	void toStringFormatsAttributesCorrect() {
-		assertEquals("\"1-Up Cereal: 1-Up\", Mana: 0, Health: 10, Experience: 0", ONE_UP_CEREAL.toString());
+		assertEquals("\"1-Up Cereal: 1-Up\","
+				+ " Mana: 0, Health: 10, Experience: 0", ONE_UP_CEREAL.toString());
 	}
 
 }

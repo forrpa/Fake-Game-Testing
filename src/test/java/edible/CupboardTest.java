@@ -8,6 +8,8 @@ import quest.TalkToGuildLeader;
 
 class CupboardTest {
 
+	final static Player PLAYER = 
+	final static Cupboard CUPBOARD = new Cupboard(); 
 	final static Edible FLY_AGARIC = new Edible("Fly Agaric", "Poisonous mushroom with magic powers", 4, -3, 0);
 	final static ForbiddenFruit LUCKY_CHERRY = new ForbiddenFruit("Lucky Cherry", "Eating cherry starts quest Talk to Guild leader", new TalkToGuildLeader("Talk to Guild leader", "Talk", "in progress", true, true));
 	
@@ -29,7 +31,7 @@ class CupboardTest {
 	final static Edible FORTUNE_COOKIE = new Edible("Fortune Cookie", "Hides a wisdom", 0, 0, 1);
 	
 	@Test
-	void test() {
+	void constructorSetsAttribute() {
 		fail("Not yet implemented");
 	}
 	
