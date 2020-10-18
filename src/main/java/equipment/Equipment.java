@@ -1,6 +1,6 @@
 package equipment;
 
-public class Equipment{
+public abstract class Equipment{
 	private String name;
 	private int strength;
     private int agility;
@@ -44,4 +44,6 @@ public class Equipment{
     public void repair() {
     	this.durability = this.MAX_DURABILITY;
     }
+    public abstract ArmorType getArmorType();
+
 }
