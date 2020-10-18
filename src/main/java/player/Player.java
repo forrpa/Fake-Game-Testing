@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import equipment.*;
 import weapon.*;
+import edible.Item;
 
 public class Player {
 	private int manaPoint;
@@ -12,6 +13,7 @@ public class Player {
     private int experiencePoint; 
     private Map<ArmorType, Boolean> allowedArmorTypes = new HashMap<ArmorType, Boolean>();
     private Map<String, Equipment> gear = new HashMap<String, Equipment>();
+    private Map<Item, Boolean> inventory2 = new HashMap<Item, Boolean>();
     
     //private PlayerClass playerClass;
     //private Race race; //Beror på om vi vill göra klasserna Class och Race, jag kör med String sålänge
@@ -83,6 +85,7 @@ public class Player {
     	//Work in progress
     }
     public void equipArmor(Equipment armor) throws Exception {
+    	if(this.inventory2.get(armor)) {}else {return;}
     	if(this.allowedArmorTypes.get(armor.getArmorType())) {
     		if(armor instanceof Chest) {
     			if(this.gear.get("chest")==null) {

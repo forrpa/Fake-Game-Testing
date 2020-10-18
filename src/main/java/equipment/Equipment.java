@@ -39,5 +39,6 @@ public abstract class Equipment extends Item{
     	this.durability = this.MAX_DURABILITY;
     }
     public abstract ArmorType getArmorType();
+    public abstract String getSlot();
 
 }
