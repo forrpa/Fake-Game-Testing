@@ -85,15 +85,16 @@ public class Player {
     	//Work in progress
     }
     public void equipArmor(Equipment armor) throws Exception {
-    	if(this.inventory2.get(armor)) {}else {return;}
+    	if(this.inventory2.get(armor)) {}else {throw new Exception();}
     	if(this.allowedArmorTypes.get(armor.getArmorType())) {
     		if(armor instanceof Chest) {
     			if(this.gear.get("chest")==null) {
     				this.gear.put("chest", armor);
     			}else {
     				Equipment replacedPiece = this.gear.replace("chest", armor);
-    				//replacedPiece will be handled later
+        			this.inventory2.put(replacedPiece, true);
     			}
+    			this.inventory2.remove(armor);
     		}
     	}else {
     		throw new Exception();
