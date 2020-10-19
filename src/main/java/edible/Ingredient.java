@@ -10,8 +10,13 @@ public class Ingredient extends Item {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public int getRequiredLevel() {
 		return this.REQUIRED_LEVEL;
+=======
+	public String toString() {
+		return String.format("\"%s: %s\"", getName(), getDescription());
+>>>>>>> branch 'master' of ssh://chne0432@git.dsv.su.se/git/emha7928/inte_projektarbete.git
 	}
 
 }

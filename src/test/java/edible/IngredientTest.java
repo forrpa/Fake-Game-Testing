@@ -14,4 +14,8 @@ class IngredientTest {
 		assertEquals("Rare poisonous ingredient", CLAW_OF_HIPOGRIFF.getDescription());
 	}
 
+	@Test
+	void toStringFormatsAttributesCorrect() {
+		assertEquals("\"Claw of Hipogriff: Rare poisonous ingredient\"",  CLAW_OF_HIPOGRIFF.toString());
+	}
 }

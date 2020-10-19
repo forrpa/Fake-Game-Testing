@@ -2,6 +2,8 @@ package edible;
 
 import java.util.HashMap;
 
+import quest.TalkToGuildLeader;
+
 
 public class Inventory {
 
@@ -14,10 +16,21 @@ public class Inventory {
 	}
 	
 	public Item getOutItem(Item item) {
-		if(!inventory.containsKey(item)) throw new NullPointerException("Item not in inventory.");
+		if(inventory.isEmpty()) throw new NullPointerException("Inventory is empty.");
+		isInInventory(item);
 		int count = inventory.get(item);
 		inventory.put(item, count - 1);
 		return item;
+	}
+	
+	public boolean isInInventory(Item item) {
+		if(!inventory.containsKey(item)) throw new NullPointerException("Item not in inventory.");
+		return true;
+	}
+	
+	public int getCount(Item item) {
+		isInInventory(item);
+		return inventory.get(item);
 	}
 	
 	@Override

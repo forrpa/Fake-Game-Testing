@@ -2,6 +2,12 @@ package edible;
 
 public class Edible extends Item {
 
+	public static void main(String[] args) {
+		final Edible MAGIC_HEALING_MUSHROOM = new Edible("Magic Healing Mushroom", 
+				"Small increases in magic capability and substantial health boost", 2, 6, 0);
+		System.out.println(MAGIC_HEALING_MUSHROOM.hashCode());
+	}
+	
 	private final int manaPoint;
 	private final int healthPoint;
 	private final int requiredLevel;

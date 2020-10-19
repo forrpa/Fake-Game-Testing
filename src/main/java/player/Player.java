@@ -24,11 +24,12 @@ public class Player {
 
     private ArrayList<String> inventory = new ArrayList<>(); //Bör vara hash här eller något ist för String
 
-    public Player (String playerClass, String race, int healthPoint, int experiencePoint){
+    public Player(String playerClass, String race, int manaPoint, int healthPoint, int experiencePoint){
         this.playerClass = playerClass;
         this.race = race;
-        this.healthPoint = healthPoint;
-        this.experiencePoint = experiencePoint;
+        setManaPoint(manaPoint);
+        setHealthPoint(healthPoint);
+        setExperiencePoint(experiencePoint);
         setArmorTypeHashMap();
     }
 
