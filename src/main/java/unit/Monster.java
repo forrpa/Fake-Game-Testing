@@ -11,15 +11,13 @@ public abstract class Monster extends NPC implements Combatant {
     private AttackType resistance;
     private AttackType weakness;
 
-    public Monster(String name, int health, int attackPower){
-        this(name, health, attackPower, true);
+    public Monster(String name, int health, int attackPower, AttackType resistance, AttackType weakness){
+        this(name, health, attackPower, true, resistance, weakness);
     }
-
-    public Monster(String name, int health, int attackPower, ArrayList<Item> items){
-        this(name, health, attackPower, true, items);
+    public Monster(String name, int health, int attackPower, ArrayList<Item> items, AttackType resistance, AttackType weakness){
+        this(name, health, attackPower, true, items, resistance, weakness);
     }
-
-    public Monster(String name, int health, int attackPower, boolean isGrounded){
+    public Monster(String name, int health, int attackPower, boolean isGrounded, AttackType resistance, AttackType weakness){
         setName(name);
         setHealth(health);
         if(attackPower < 0){
@@ -29,12 +27,10 @@ public abstract class Monster extends NPC implements Combatant {
         }
         this.isGrounded = isGrounded;
     }
-
-    public Monster(String name, int health, int attackPower, boolean isGrounded, ArrayList<Item> items){
-        this(name, health, attackPower, isGrounded);
+    public Monster(String name, int health, int attackPower, boolean isGrounded, ArrayList<Item> items, AttackType resistance, AttackType weakness){
+        this(name, health, attackPower, isGrounded, resistance, weakness);
         itemsOnNPC = items;
     }
-
 
     public boolean isGrounded(){
         return isGrounded;
