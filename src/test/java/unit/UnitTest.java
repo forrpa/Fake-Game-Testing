@@ -156,4 +156,5 @@ class UnitTest {
         assertThrows(IllegalStateException.class, () -> bat.getLooted());
     }
 
+
 }
