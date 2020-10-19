@@ -8,15 +8,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UnitTest {
 
-    final static int STANDARD_BAT_HEALTH = 5;
-    final static int STANDARD_BAT_ATTACKPOWER = 2;
-    final static int STANDARD_WOLF_HEALTH = 8;
-    final static int STANDARD_WOLF_ATTACKPOWER = 3;
+    private final static int STANDARD_BAT_HEALTH = 5;
+    private final static int STANDARD_BAT_ATTACKPOWER = 2;
+    private final static int STANDARD_WOLF_HEALTH = 8;
+    private final static int STANDARD_WOLF_ATTACKPOWER = 3;
 
     @Test
     void batNameAndHealthSetByConstructor(){
         //Set-up
-        Monster bat = new Bat("Jabba the Bat", STANDARD_BAT_HEALTH, STANDARD_BAT_ATTACKPOWER);
+        Monster bat = new Bat("Jabba the Bat", STANDARD_BAT_HEALTH, STANDARD_BAT_ATTACKPOWER, null, null);
 
         //Assert that name and health is set correct;
         assertEquals("Jabba the Bat", bat.getName());
@@ -25,7 +25,7 @@ class UnitTest {
     @Test
     void batNameSetTo556ByConstructorThrowsIllegalArgumentException(){
         //Constructor throws error for numbers in name
-        assertThrows(IllegalArgumentException.class, () -> new Bat("556", STANDARD_BAT_HEALTH, STANDARD_BAT_ATTACKPOWER));
+        assertThrows(IllegalArgumentException.class, () -> new Bat("556", STANDARD_BAT_HEALTH, STANDARD_BAT_ATTACKPOWER, null, null));
     }
     @Test
     void batMonsterAttackWolfSuccessful(){
@@ -77,7 +77,7 @@ class UnitTest {
     void wolfMonsterAttackOtherWolfWith0HealthThrowsIllegalStateException(){
         //Set-up
         Monster wolf = new Wolf();
-        Monster otherWolf = new Wolf("Wolf", 0, 0);
+        Monster otherWolf = new Wolf("Wolf", 0, 0, null, null);
 
         //Asserts that wolf cant attack another monster that has 0 health
         assertThrows(IllegalStateException.class, () -> wolf.attack((otherWolf)));
@@ -85,7 +85,7 @@ class UnitTest {
     @Test
     void wolfWith0HealthAttacksOtherWolfThrowsIllegalStateException(){
         //Set-up
-        Monster wolf = new Wolf("Wolf", 0, 4);
+        Monster wolf = new Wolf("Wolf", 0, 4,null, null);
         Monster otherWolf = new Wolf();
 
         //Asserts that a dead monster cant attack
@@ -110,7 +110,7 @@ class UnitTest {
         batItems.add(potion);
         batItems.add(sword);
         ArrayList<Item> lootedItems = new ArrayList<>();
-        Monster bat = new Bat("Bat", 0, 0, batItems);
+        Monster bat = new Bat("Bat", 0, 0, batItems, null, null);
 
         //Asserts that inventory is empty and bat is dead
         assertTrue(lootedItems.isEmpty());

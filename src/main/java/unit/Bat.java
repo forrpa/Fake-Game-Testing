@@ -3,19 +3,19 @@ package unit;
 import java.util.ArrayList;
 
 public class Bat extends Monster {
-    final static int STANDARD_BAT_HEALTH = 5;
-    final static int STANDARD_BAT_ATTACKPOWER = 2;
+    private final static int STANDARD_BAT_HEALTH = 5;
+    private final static int STANDARD_BAT_ATTACKPOWER = 2;
 
     public Bat(){
-        this("Bat", STANDARD_BAT_HEALTH, STANDARD_BAT_ATTACKPOWER);
+        this("Bat", STANDARD_BAT_HEALTH, STANDARD_BAT_ATTACKPOWER, null, null);
     }
     public Bat(ArrayList<Item> items){
-        this("Bat", STANDARD_BAT_HEALTH, STANDARD_BAT_ATTACKPOWER, items);
+        this("Bat", STANDARD_BAT_HEALTH, STANDARD_BAT_ATTACKPOWER, items, null, null);
     }
-    public Bat(String name, int health, int attackPower){
-        super(name, health, attackPower, false);
+    public Bat(String name, int health, int attackPower, AttackType resistance, AttackType weakness){
+        super(name, health, attackPower, false, resistance, weakness);
     }
-    public Bat(String name, int health, int attackPower, ArrayList<Item> items){
-        super(name, health, attackPower, false, items);
+    public Bat(String name, int health, int attackPower, ArrayList<Item> items, AttackType resistance, AttackType weakness){
+        super(name, health, attackPower, false, items, resistance, weakness);
     }
 }
