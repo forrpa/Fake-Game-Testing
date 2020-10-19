@@ -43,5 +43,8 @@ public abstract class Equipment extends Item{
     public int getRequiredLevel() {return this.requiredLevel;}
     public abstract ArmorType getArmorType();
     public abstract String getSlot();
+    public String toString() {
+    	return "";
+    }
 
 }
