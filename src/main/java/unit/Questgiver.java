@@ -26,6 +26,10 @@ public class Questgiver extends NPC {
     }
 
     public List getAllQuests(){
-        return quests;
+        ArrayList<String> allQuests = new ArrayList<>();
+        for(Quest quest : quests){
+            allQuests.add(quest.getName());
+        }
+        return allQuests;
     }
 }

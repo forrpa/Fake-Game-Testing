@@ -9,7 +9,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class QuestgiverTest {
 
     @Test
-    void TwoAvailableQuestTakenFromQuestgiver() {
+    void constructorSetsAttributes(){
+        Questgiver questgiver = new Questgiver("Guild Leader", new Quest("Test Quest"));
+        assertEquals("Guild Leader", questgiver.getName());
+        assertEquals("Test Quest", questgiver.getAllQuests().get(0));
+    }
+
+    @Test
+    void twoAvailableQuestTakenFromQuestgiver() {
         Player player = new Player();
         ArrayList <Quest> questsForQuestgiver = new ArrayList<>();
         questsForQuestgiver.add(new Quest("Quest 1"));
