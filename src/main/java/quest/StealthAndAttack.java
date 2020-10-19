@@ -1,19 +1,22 @@
 package quest;
 
 import player.Player;
+import unit.Monster;
 
 public class StealthAndAttack extends Quest {
 
     private boolean discovered;
     private boolean attacked;
+    private boolean talkedToEnemy;
     private boolean talkedToQuestMaker;
     private int seconds = 120;
 
-    public StealthAndAttack(String name, String description, String state, boolean mandatory, boolean discovered, boolean attacked, boolean talkedToQuestMaker){
+    public StealthAndAttack(String name, String description, String state, boolean mandatory, boolean discovered, boolean attacked, boolean talkedToEnemy, boolean talkedToQuestMaker){
         super("Stealth and Attack", "You have to follow your enemy without being seen and then attack him", "pending", true);
         this.state = state;
         this.discovered = discovered;
         this.attacked = attacked;
+        this.talkedToEnemy = talkedToEnemy;
         this.talkedToQuestMaker = talkedToQuestMaker;
     }
 
@@ -23,6 +26,10 @@ public class StealthAndAttack extends Quest {
 
     public boolean isAttacked() {
         return attacked;
+    }
+
+    public boolean hasTalkedToEnemy(){
+        return talkedToEnemy;
     }
 
     public boolean hasTalkedToQuestMaker(){
@@ -63,6 +70,47 @@ public class StealthAndAttack extends Quest {
         } else {
             description = "You succeeded not being seen, now you have to decide if you want to kill your enemy or negotiate with him.";
             return true;
+        }
+    }
+
+    //Dela upp
+    public boolean attack(Player player, Monster enemy){
+        if (stealth(player)){
+            attacked = true;
+            while(seconds > 0){
+                description = "Attack before the enemy escapes!";
+                seconds--;
+                if (enemy.getHealth() == 0){
+                    break;
+                } else if (seconds == 0){
+                    description = "Your enemy escaped. Go talk to the Guild Leader.";
+                    return true;
+                } else if (player.getHealthPoint() == 0){
+                    resetQuest(player);
+                    return false;
+                }
+            }
+            description = "You succeeded killing your enemy on time. Go talk to the Guild Leader for your reward!";
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean exchangeInfo(Player player){
+        if (stealth(player)){
+            talkedToEnemy = true;
+            description = "You decided to talk yo your enemy instead of killing him. This will have consequences.";
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void talkToQuestMaker(Player player, Monster enemy){
+        if (exchangeInfo(player) || attack(player, enemy) && player.getInventory().contains("Guild Map")){
+            //NPC.talkTo();
+            talkedToQuestMaker = true;
         }
     }
 

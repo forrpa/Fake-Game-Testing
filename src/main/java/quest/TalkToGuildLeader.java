@@ -33,6 +33,10 @@ public class TalkToGuildLeader extends Quest {
         }
     }
 
+    public void talkToGuildLeader(){
+        talkedToGuildLeader = true;
+    }
+
     @Override
     public boolean endRequirementsFulfilled(Player player) {
         if (talkedToGuildLeader){

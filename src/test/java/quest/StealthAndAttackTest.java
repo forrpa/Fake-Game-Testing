@@ -16,7 +16,7 @@ class StealthAndAttackTest {
 
     @Test
     void testConstructor(){
-        StealthAndAttack quest = new StealthAndAttack(questName, questDescription, "pending", true, false, false, false);
+        StealthAndAttack quest = new StealthAndAttack(questName, questDescription, "pending", true, false, false, false, false);
         assertEquals("Stealt and Attack", quest.getName());
         assertEquals("You have to follow your enemy without being seen and then attack him", quest.getDescription());
         assertEquals("pending", quest.getState());
@@ -39,7 +39,7 @@ class StealthAndAttackTest {
     @Test
     void canPlayerStartStealthAndAttackQuest() {
         Player player = new Player("Tank", "Human", 100, 200, 100);
-        StealthAndAttack quest = new StealthAndAttack(questName, questDescription, "unlocked", true, false, false, false);
+        StealthAndAttack quest = new StealthAndAttack(questName, questDescription, "unlocked", true, false, false, false, false);
         assertEquals("unlocked", quest.getState());
         assertTrue(quest.startRequirementsFulfilled(player));
     }
@@ -47,14 +47,14 @@ class StealthAndAttackTest {
     //Testa om man lyckas med stealth
     @Test
     void stealthSucceeded(){
-        StealthAndAttack quest = new StealthAndAttack(questName, questDescription, "in progress", true, false, false, false);
+        StealthAndAttack quest = new StealthAndAttack(questName, questDescription, "in progress", true, false, false, false, false);
         assertFalse(quest.isDiscovered());
     }
 
     //Testa om man inte lyckas med stealth (blir upptäckt)
     @Test
     void stealthNotSucceeded(){
-        StealthAndAttack quest = new StealthAndAttack(questName, questDescription, "in progress", true, true, false, false);
+        StealthAndAttack quest = new StealthAndAttack(questName, questDescription, "in progress", true, true, false, false, false);
         assertTrue(quest.isDiscovered());
     }
 
@@ -77,7 +77,7 @@ class StealthAndAttackTest {
     @Test
     void canPlayerCompleteStealthAndAttackQuest() {
         Player player = new Player("Healer", "Orc", 200, 200, 200);
-        StealthAndAttack quest = new StealthAndAttack(questName, questDescription, "completed", true, false, true, true);
+        StealthAndAttack quest = new StealthAndAttack(questName, questDescription, "completed", true, false, true, false, true);
         assertEquals("completed", quest.getState());
         assertTrue(quest.endRequirementsFulfilled(player));
     }
