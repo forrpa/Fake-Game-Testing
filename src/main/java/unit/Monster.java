@@ -26,6 +26,8 @@ public abstract class Monster extends NPC implements Combatant {
             this.attackPower = attackPower;
         }
         this.isGrounded = isGrounded;
+        this.resistance = resistance;
+        this.weakness = weakness;
     }
     public Monster(String name, int health, int attackPower, boolean isGrounded, ArrayList<Item> items, AttackType resistance, AttackType weakness){
         this(name, health, attackPower, isGrounded, resistance, weakness);
@@ -70,7 +72,7 @@ public abstract class Monster extends NPC implements Combatant {
     }
 
     public void takeDamage(Attack attack){
-        int damage = attack.getAttackPower();
+        int damage = attack.getAttackPower(resistance, weakness);
         int tempHealth = getHealth() - damage;
         if(tempHealth < 0){
             setHealth(0);

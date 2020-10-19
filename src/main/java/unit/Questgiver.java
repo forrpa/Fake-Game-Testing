@@ -13,7 +13,6 @@ public class Questgiver extends NPC {
         setName(name);
         quests.addAll(quest);
     }
-
     public List getAvailableQuests(Player player){
         ArrayList<Quest> attainableQuests = new ArrayList<>();
         for(Quest quest : quests){

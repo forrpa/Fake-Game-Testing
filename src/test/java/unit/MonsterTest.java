@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class UnitTest {
+class MonsterTest {
 
     private final static int STANDARD_BAT_HEALTH = 5;
     private final static int STANDARD_BAT_ATTACKPOWER = 2;
@@ -155,6 +155,4 @@ class UnitTest {
         //Get error when trying to loot again due to no items left
         assertThrows(IllegalStateException.class, () -> bat.getLooted());
     }
-
-
 }
