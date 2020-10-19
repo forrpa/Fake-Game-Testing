@@ -21,4 +21,11 @@ public class Quest {
     public int hashCode() {
         return Objects.hash(name);
     }
+
+    public boolean startRequirementsFullfilled(Player player){
+        return true;
+    }
+    public String getName(){
+        return name;
+    }
 }
