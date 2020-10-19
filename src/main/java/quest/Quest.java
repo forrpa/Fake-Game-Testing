@@ -5,7 +5,7 @@ import player.Player;
 public abstract class Quest {
 
     private String name;
-    private String description;
+    protected String description;
     protected String state;
     private boolean mandatory;
     //Quest log

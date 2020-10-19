@@ -26,27 +26,37 @@ class StealthAndAttackTest {
         assertFalse(quest.hasTalkedToQuestMaker());
     }
 
-    //Testa förkrav
-    //Ha 1500 experience och Guild Map från förra questet
+    //Testa förkrav, Ha 1500 experience och Guild Map från förra questet, klarat questet TalkToGuildLeader
     @Test
     void playerMeetsStartRequirementsForStealthAndAttackQuest(){
-        Player player = new Player("Tank", "Human", 100, 1500);
+        Player player = new Player("Tank", "Human", 100, 200, 1500);
         assertEquals(1500, player.getExperiencePoint());
         //assertTrue(player.getInventory().contains("Guild Map"));
+        //assertTrue(player.getQuestLog().contains(TalkToGuildLeader);
     }
 
     //Testa om det går att starta questet
     @Test
-    void canPlayerStartTalkToGuildLeaderQuest() {
-        Player player = new Player("Tank", "Human", 100, 100);
+    void canPlayerStartStealthAndAttackQuest() {
+        Player player = new Player("Tank", "Human", 100, 200, 100);
         StealthAndAttack quest = new StealthAndAttack(questName, questDescription, "unlocked", true, false, false, false);
         assertEquals("unlocked", quest.getState());
         assertTrue(quest.startRequirementsFulfilled(player));
     }
 
     //Testa om man lyckas med stealth
+    @Test
+    void stealthSucceeded(){
+        StealthAndAttack quest = new StealthAndAttack(questName, questDescription, "in progress", true, false, false, false);
+        assertFalse(quest.isDiscovered());
+    }
 
     //Testa om man inte lyckas med stealth (blir upptäckt)
+    @Test
+    void stealthNotSucceeded(){
+        StealthAndAttack quest = new StealthAndAttack(questName, questDescription, "in progress", true, true, false, false);
+        assertTrue(quest.isDiscovered());
+    }
 
     //Testa krav för att starta tjuvlyssning
 
@@ -65,8 +75,8 @@ class StealthAndAttackTest {
 
     //Kan man avsluta questet
     @Test
-    void canPlayerCompleteTalkToGuildLeaderQuest() {
-        Player player = new Player("Healer", "Orc", 200, 200);
+    void canPlayerCompleteStealthAndAttackQuest() {
+        Player player = new Player("Healer", "Orc", 200, 200, 200);
         StealthAndAttack quest = new StealthAndAttack(questName, questDescription, "completed", true, false, true, true);
         assertEquals("completed", quest.getState());
         assertTrue(quest.endRequirementsFulfilled(player));
