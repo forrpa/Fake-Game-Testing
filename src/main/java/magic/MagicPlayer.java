@@ -8,7 +8,7 @@ import java.util.Map;
 
 // would be good if all units including player inherit from same "entity" or "unit"class.
 public class MagicPlayer extends Player {
-    final private Map<String, Spell> spellBook = new HashMap<> ();
+    final protected   Map<String, Spell> spellBook = new HashMap<> ();
     final private Map<String, Spell> learntSpells = new HashMap<> ();
     private int mana = 1;
     private int MaxMana = 5;
@@ -18,20 +18,20 @@ public class MagicPlayer extends Player {
     // override levelup mechanics  from super?
     private int manaRegenSpeed = 1;
     private int magicLevel = 1;
-    private int maximumLearntSpells = 1;
+    private int maximumLearnableSpells = 1;
 
     // TODO: 2020-10-19 remove manaPoint from player class when done testing this class.
-    public MagicPlayer(String playerClass, String race, int manaPoint, int healthPoint, int experiencePoint, int mana) {
-        super (playerClass, race, manaPoint, healthPoint, experiencePoint);
-        this.mana = mana;
+    public MagicPlayer(String playerClass, String race,int healthPoint, int experiencePoint) {
+
+        super (playerClass, race, 0, healthPoint, experiencePoint); // set ManaPoint to 0, will remove from const later.
     }
 
-    public int getMaximumLearntSpells() {
-        return maximumLearntSpells;
+    public int getMaximumLearnableSpells() {
+        return maximumLearnableSpells;
     }
 
-    public void setMaximumLearntSpells(int maximumLearntSpells) {
-        this.maximumLearntSpells = maximumLearntSpells;
+    public void setMaximumLearnableSpells(int maximumLearnableSpells) {
+        this.maximumLearnableSpells = maximumLearnableSpells;
     }
 
     public void addSpell(Spell spell) {

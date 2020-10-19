@@ -15,7 +15,7 @@ class SpellTest {
 
 
     @Test
-    public void constructorTest() {
+    public void constructorParamTest() {
 
         Spell spell = new Spell (name, description, standardValue, standardValue, standardValue);
         assertEquals (name, spell.getName ());
@@ -33,26 +33,25 @@ class SpellTest {
 
 
     @Test
-    void setNegativeManaCost() {
+    void setManaCostTest() {
         Spell spell = new Spell ();
         Assertions.assertThrows (IllegalArgumentException.class, () -> spell.setManaCost (-1));
 
     }
 
     @Test
-    void setNegativeRequiredMagicLevel() {
+    void setRequiredMagicLevelTest() {
         Spell spell = new Spell ();
         Assertions.assertThrows (IllegalArgumentException.class, () -> spell.setRequiredMagicLevel (-1));
-
-
     }
 
     @Test
-    void setNegativeCooldownDuration() {
+    void setCooldownDurationTest() {
         Spell spell = new Spell ();
         Assertions.assertThrows (IllegalArgumentException.class, () -> spell.setCooldownDuration (-1));
-
     }
+
 }
+
 
 

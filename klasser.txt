@@ -13,3 +13,9 @@ Edible (superclass), Ale(subclass), Apple(subclass) mm
 Potion (superclass), Healing Potion (subclass)
 Kanske utanför uppgiften: Mounts och battle pets
 
+
+
+
+
+
+
