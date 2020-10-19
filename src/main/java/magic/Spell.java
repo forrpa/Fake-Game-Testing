@@ -23,6 +23,7 @@ public class Spell {
         name = "Unnamed spell";
         description = "Your ninny brain can not comprehend what this spell does.";
     }
+    // TODO: 2020-10-16 add isCastable and coolDown Method.
 
 
     public String getName() {
@@ -62,14 +63,13 @@ public class Spell {
         this.cooldownDuration = positiveNrCheck (cooldownDuration);
     }
 
-    // Checks that numbers are
+    // Check that numbers are >=0
     private int positiveNrCheck(int nr) {
         if (nr >= 0) {
             return nr;
         } else {
-            throw new IllegalArgumentException ("Error: negative natural numbers are not allowed");
+            throw new IllegalArgumentException ("Error: negative numbers are not allowed here");
         }
-
     }
 }
 

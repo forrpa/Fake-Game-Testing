@@ -17,5 +17,7 @@ public class HealSpell extends Spell {
         int HP = player.getHealthPoint () + healthPointsToHeal;
         player.setHealthPoint (HP);
 
+        // todo implement castSpell interface in spell?  or move spellcasting to own Class/handler.
+
     }
 }

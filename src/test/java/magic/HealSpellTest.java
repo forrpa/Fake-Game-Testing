@@ -13,19 +13,19 @@ class HealSpellTest {
 
 
     @Test
-    void castSpell() {
+    void castSpellTest() {
         int manaCost = standardValue;
         int requiredMagicLevel = standardValue;
         int cooldownDuration = standardValue;
         int healthPoints = 5;
         int experiencePoints = standardValue;
         int healthPointsToHeal = 50;
-
-        HealSpell spell = new HealSpell (name,description,manaCost,requiredMagicLevel,cooldownDuration,healthPointsToHeal );
+        int manaPoint = 5;
+        HealSpell spell = new HealSpell (name, description, manaCost, requiredMagicLevel, cooldownDuration, healthPointsToHeal);
 
 
         // create player with 5 health
-        Player player = new Player ("playerclass","race",healthPoints,experiencePoints);
+        Player player = new Player ("playerclass", "race", manaPoint, healthPoints, experiencePoints);
 
         // assert that health = 5
         assertEquals(healthPoints,player.getHealthPoint ());
