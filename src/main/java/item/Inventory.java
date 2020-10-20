@@ -1,7 +1,6 @@
 package item;
 
 import java.util.HashMap;
-import item.Item;
 
 public class Inventory {
 
