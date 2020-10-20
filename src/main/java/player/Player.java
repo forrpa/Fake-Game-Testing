@@ -13,6 +13,7 @@ public class Player {
     private int level = 1;
     private int nextLevelCap = 100;
     private Map<ArmorType, Boolean> allowedArmorTypes = new HashMap<ArmorType, Boolean>();
+    //private Map<Weapon>
     private Map<String, Equipment> gear = new HashMap<String, Equipment>();
     private Inventory playerInventory = new Inventory();
     private Cupboard cupboard;
@@ -84,6 +85,9 @@ public class Player {
     		this.allowedArmorTypes.put(ArmorType.SHIELD, true);
     		break;
     	}
+    }
+    private void setWeaponTypeHashMap() {
+    	
     }
     public void equipWeapon(Weapon weapon) {
     	//Work in progress
