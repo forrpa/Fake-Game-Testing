@@ -30,7 +30,7 @@ public class MagicPlayer extends Player {
     }
 
     public void setMaximumLearnableSpells(int maximumLearnableSpells) {
-        this.maximumLearnableSpells = maximumLearnableSpells;
+        this.maximumLearnableSpells = positiveNrCheck (maximumLearnableSpells);
     }
 
     public void addSpell(Spell spell) {
@@ -38,8 +38,8 @@ public class MagicPlayer extends Player {
         spellBook.put (spell.getName (), spell);
     }
 
-    public void removeSpell(Spell spell) {
-        spellBook.remove (spell.getName ());
+    public void removeSpell(String name) {
+        spellBook.remove (name);
     }
 
     public Spell getSpell(String name) {
@@ -93,7 +93,7 @@ public class MagicPlayer extends Player {
     }
 
     public void setMagicLevel(int magicLevel) {
-        this.magicLevel = magicLevel;
+        this.magicLevel = positiveNrCheck (magicLevel);
     }
 
     public int getMaxManaPoint() {
@@ -102,6 +102,15 @@ public class MagicPlayer extends Player {
 
     public void setMaxManaPoint(int maxManaPoint) {
         this.MaxManaPoint = maxManaPoint;
+    }
+
+    // Check that numbers are >=0
+    private int positiveNrCheck(int nr) {
+        if (nr >= 0) {
+            return nr;
+        } else {
+            throw new IllegalArgumentException ("Error: negative numbers are not allowed here");
+        }
     }
     // increaseMagicLevel // required level to learn and use spells and to wield magic equipment.
     //IncreaseMaxLearntSpells // different classes can learn different spells and memorize different amount of spells.
