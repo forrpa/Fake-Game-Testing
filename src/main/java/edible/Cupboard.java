@@ -3,6 +3,7 @@ package edible;
 import item.Inventory;
 import item.Item;
 import player.Player;
+import magic.MagicPlayer;
 
 public class Cupboard {
 	
@@ -28,7 +29,7 @@ public class Cupboard {
 	private void utilStoreMaxOneItem(Inventory inventory, Item item) {
 		try {
 			inventory.getOutItem(item);
-			throw new IllegalStateException("One of this item is already stored in the Cupboard! Limit of one at a time.");
+			throw new IllegalStateException("One of this Item is already stored in the Cupboard! Limit of one at a time for this type.");
 		} catch(NullPointerException e) {
 			inventory.addItem(item);
 		}
@@ -59,9 +60,12 @@ public class Cupboard {
 	}
 	
 	private void utilConsumeSetPlayerPoints(Edible edible) {
-		getPlayer().setManaPoint(player.getManaPoint() + edible.getManaPoint());
-		getPlayer().setHealthPoint(player.getHealthPoint() + edible.getHealthPoint());
-		getPlayer().setExperiencePoint(player.getExperiencePoint() + edible.getRequiredLevel());
+		player.setHealthPoint(player.getHealthPoint() + edible.getHealthPoint());
+		player.setExperiencePoint(player.getExperiencePoint() + edible.getRequiredLevel());
+		if(player instanceof MagicPlayer) {
+			MagicPlayer magicPlayer = (MagicPlayer) player;
+			magicPlayer.setManaPoint(magicPlayer.getManaPoint() + edible.getManaPoint());
+		}
 	}
 	
 	public void consume(Edible edible) {
@@ -92,11 +96,16 @@ public class Cupboard {
 	}
 	
 	public void cook(Recipie recipie) {
-		Ingredient[] requiredIngredients = recipie.getIngredients();
-		for(Ingredient i : requiredIngredients) ingredients.getOutItem(i);
-		Potion potion = recipie.cook(player.getManaPoint(), player.getExperiencePoint());
-		store(potion);
-		store(recipie);
+		if(player instanceof MagicPlayer) {
+			MagicPlayer magicPlayer = (MagicPlayer) player;
+			Ingredient[] requiredIngredients = recipie.getIngredients();
+			for(Ingredient i : requiredIngredients) ingredients.getOutItem(i);
+			Potion potion = recipie.cook(magicPlayer.getManaPoint(), magicPlayer.getExperiencePoint());
+			store(potion);
+			store(recipie);
+		} else {
+			throw new IllegalStateException("Only Magic Players can cook from Recipies.");
+		}
 	}
 	
 //	TradeOffer Class needed to implement getOutItem and place in tradeOffer object to close deal

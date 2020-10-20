@@ -5,17 +5,19 @@ public abstract class Item {
 	private final String name;
 	private final String description;
 	private final int requiredLevel;
-	private final int defaultRequiredLevel = 0;
+	private final int zeroDefaultRequiredLevel = 0;
 	
 	public Item(String name, String description) {
 		this.name = name;
 		this.description = description;
-		this.requiredLevel = this.defaultRequiredLevel;
+		this.requiredLevel = zeroDefaultRequiredLevel;
 	}
 	
 	public Item(String name, String description, int requiredLevel) {
 		this.name = name;
 		this.description = description;
+		if(requiredLevel < zeroDefaultRequiredLevel) 
+			throw new IllegalArgumentException("Minimum Required Level is 0.");
 		this.requiredLevel = requiredLevel;
 	}
 
@@ -30,6 +32,12 @@ public abstract class Item {
 	public int getRequiredLevel() {
 		return requiredLevel;
 	}
+	
+//	public void setRequiredLevel(int requiredLevel) {
+//		if(requiredLevel < levelOneDefaultRequiredLevel) 
+//			throw new IllegalArgumentException("Minimum Required Level is 1.");
+//		this.requiredLevel = requiredLevel;
+//	}
 	
 	@Override
     public final boolean equals(Object obj) {
