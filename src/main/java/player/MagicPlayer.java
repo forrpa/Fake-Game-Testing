@@ -22,7 +22,7 @@ public class MagicPlayer extends Player {
     // TODO: 2020-10-19 remove manaPoint from player class when done testing this class.
     public MagicPlayer(String playerClass, String race,int healthPoint, int experiencePoint) {
 
-        super (playerClass, race, 0, healthPoint, experiencePoint); // set ManaPoint to 0, will remove from const later.
+        super (playerClass, race, healthPoint, experiencePoint);
     }
 
     public int getMaximumLearnableSpells() {
