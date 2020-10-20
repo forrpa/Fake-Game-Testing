@@ -33,12 +33,6 @@ public abstract class Item {
 		return requiredLevel;
 	}
 	
-//	public void setRequiredLevel(int requiredLevel) {
-//		if(requiredLevel < levelOneDefaultRequiredLevel) 
-//			throw new IllegalArgumentException("Minimum Required Level is 1.");
-//		this.requiredLevel = requiredLevel;
-//	}
-	
 	@Override
     public final boolean equals(Object obj) {
         if (obj instanceof Item) {

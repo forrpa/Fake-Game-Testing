@@ -1,4 +1,4 @@
-package edible;
+package item;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import edible.Edible;
 import equipment.BucklerOfUselessness;
 import equipment.Shield;
 import item.Item;
