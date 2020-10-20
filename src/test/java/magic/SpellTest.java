@@ -25,11 +25,33 @@ class SpellTest {
         assertEquals (standardValue, spell.getCooldownDuration ());
 
 
-        // check for negative numbers
+        // check for negative numbers in constructor.
+
+
         // check for maximum name and description char.?
+
         // check exceptions.
 
     }
+    public void tempName() {
+
+        Spell spell = new Spell (name, description, standardValue, standardValue, standardValue);
+        assertEquals (name, spell.getName ());
+        assertEquals (description, spell.getDescription ());
+        assertEquals (standardValue, spell.getManaCost ());
+        assertEquals (standardValue, spell.getRequiredMagicLevel ());
+        assertEquals (standardValue, spell.getCooldownDuration ());
+
+
+        // check for negative numbers in constructor.
+
+
+        // check for maximum name and description char.?
+
+        // check exceptions.
+
+    }
+
 
 
     @Test

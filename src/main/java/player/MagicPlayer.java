@@ -1,6 +1,6 @@
 //@author Christoffer Öhman
-package magic;
-
+package player;
+import magic.Spell;
 import player.Player;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,8 +9,8 @@ import java.util.Map;
 public class MagicPlayer extends Player {
     final protected   Map<String, Spell> spellBook = new HashMap<> ();
     final private Map<String, Spell> learntSpells = new HashMap<> ();
-    private int mana = 1;
-    private int MaxMana = 5;
+    private int manaPoint = 1;
+    private int MaxManaPoint = 5;
 
     // create magicLevel = MagicExp /10000 and NN,?
 
@@ -49,7 +49,6 @@ public class MagicPlayer extends Player {
 
     public void learnSpell() {
         // fix
-
     }
 
     public void castSpell() {
@@ -64,25 +63,21 @@ public class MagicPlayer extends Player {
         //remove mana
         // add Magic exp
     }
-
     // what happens when leveling up     .
     private void levelUp() {
         // max mana level
-
     }
 
     // what happens when leveling down.
     private void levelDown() {
-
-
     }
 
-    public int getMana() {
-        return mana;
+    public int getManaPoint() {
+        return manaPoint;
     }
 
-    public void setMana(int mana) {
-        this.mana = mana;
+    public void setManaPoint(int manaPoint) {
+        this.manaPoint = manaPoint;
     }
 
     public int getManaRegenSpeed() {
@@ -101,15 +96,13 @@ public class MagicPlayer extends Player {
         this.magicLevel = magicLevel;
     }
 
-    public int getMaxMana() {
-        return MaxMana;
+    public int getMaxManaPoint() {
+        return MaxManaPoint;
     }
 
-    public void setMaxMana(int maxMana) {
-        this.MaxMana = maxMana;
+    public void setMaxManaPoint(int maxManaPoint) {
+        this.MaxManaPoint = maxManaPoint;
     }
     // increaseMagicLevel // required level to learn and use spells and to wield magic equipment.
     //IncreaseMaxLearntSpells // different classes can learn different spells and memorize different amount of spells.
-
-
 }
