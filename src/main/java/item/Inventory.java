@@ -1,7 +1,6 @@
 package item;
 
 import java.util.HashMap;
-import item.Item;
 
 public class Inventory {
 
@@ -52,12 +51,4 @@ public class Inventory {
 			inventory.put(item, count - 1);
 		}
 	}
-
-	public Item getItem(Item item){
-		if(inventory.isEmpty()) throw new NullPointerException("Inventory is empty.");
-		isInInventory(item);
-		//inventory.keySet().contains()
-		return item;
-	}
-
 }
