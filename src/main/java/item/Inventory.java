@@ -53,4 +53,11 @@ public class Inventory {
 		}
 	}
 
+	public Item getItem(Item item){
+		if(inventory.isEmpty()) throw new NullPointerException("Inventory is empty.");
+		isInInventory(item);
+		//inventory.keySet().contains()
+		return item;
+	}
+
 }

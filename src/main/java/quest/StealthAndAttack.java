@@ -1,5 +1,7 @@
 package quest;
 
+import item.Inventory;
+import item.Item;
 import player.Player;
 import unit.Monster;
 
@@ -10,6 +12,8 @@ public class StealthAndAttack extends Quest {
     private boolean talkedToEnemy;
     private String talkedTo;
     private int seconds = 120;
+    private QuestItem questItem;
+    //Player player
 
     public StealthAndAttack(String name, String description, String state, boolean mandatory, boolean discovered, boolean attacked, boolean talkedToEnemy, String talkedTo){
         super("Stealth and Attack", "You have to follow your enemy without being seen and then attack him", "pending", true);
@@ -19,6 +23,11 @@ public class StealthAndAttack extends Quest {
         this.talkedToEnemy = talkedToEnemy;
         this.talkedTo = talkedTo;
     }
+
+    /*public QuestItem getQuestItem(Inventory inventory, QuestItem questItem){
+        //inventory.
+        //hämta nyckel-värde i inventory
+    }*/
 
     public boolean isDiscovered(){
         return discovered;
@@ -109,7 +118,7 @@ public class StealthAndAttack extends Quest {
             enemy.negotiate();
             talkedToEnemy = true;
             description = "You decided to talk yo your enemy instead of killing him. This will have consequences.";
-            player.getInventory().remove("Guild Map");
+            player.removeFromInventory(questItem); //Funkar ej
             return true;
         } else {
             return false;
@@ -117,7 +126,7 @@ public class StealthAndAttack extends Quest {
     }
 
     public void talkToQuestGiver(Player player, Enemy enemy, QuestGiver questGiver){
-        if (attack(player, enemy) && player.getInventory().contains("Guild Map")){
+        if (attack(player, enemy) && player.isInInventory(questItem)){ //Funkar ej just nu
             questGiver.talkToPlayer();
             talkedTo = "questgiver"; //Ska vara till QuestGiver
         }
@@ -162,7 +171,7 @@ public class StealthAndAttack extends Quest {
     }
 
     public void rewardWhenTalkingToEnemy(Player player){
-        player.getInventory().add("Money"); //Typ 10000 pengar
+        //player.addToInventory("Money");
         player.setExperiencePoint(1000);
         //Sämre relation med guild, -1000
     }
@@ -172,6 +181,7 @@ public class StealthAndAttack extends Quest {
         if (endRequirementsFulfilled(player)){
             state = "done";
             description= "You completed the quest!";
+            player.setHealthPoint(200); //Sätt max
             rewardWhenAttackingOnTime(player);
             rewardWhenNotAttackingOnTime(player);
             rewardWhenTalkingToEnemy(player);

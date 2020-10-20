@@ -1,10 +1,13 @@
 package quest;
+import edible.Ingredient;
+import edible.Potion;
+import edible.Recipie;
 import player.Player;
+import weapon.WidowsWail;
 
 public class TalkToGuildLeader extends Quest {
 
     private boolean talkedToGuildLeader = false;
-    //private String chosenBranch;
 
     public TalkToGuildLeader(String name, String description, String state, boolean mandatory, boolean talkedToGuildLeader){
         super("Talk to Guild Leader", "You have to talk to the guild leader west of town.", "pending", true);
@@ -52,24 +55,30 @@ public class TalkToGuildLeader extends Quest {
     public void questCompleted(Player player) {
         if (endRequirementsFulfilled(player)){
             state = "done";
-            player.setExperiencePoint(100);
+            player.setExperiencePoint(500);
             rewardBasedOnClass(player);
             rewardBasedOnRace(player);
-            player.getInventory().add("Guild Map"); //Till nästa quest, är ett krav i nästa quest
+            QuestItem guildMap = new QuestItem("Guild Map", "Map to find the Guild");
+            player.addToInventory(guildMap);
         } else {
             System.out.println("You have not fulfilled quest requirements.");
         }
     }
 
     public void rewardBasedOnClass(Player player){
+        //Skapa 3 klasser....
+        Potion healingPotion = new Potion("Healing Potion", "Potion that heals", 200, 100, 0);
+        Ingredient crystalChard = new Ingredient("Crystal Chard", "For making potions");
+        Recipie healingPotionRecipe = new Recipie("Healing Potion Recipe", "Recipe for healing potion", healingPotion, new Ingredient[]{crystalChard}, 200, 1000);
+
         switch (player.getPlayerClass()){
             case "Healer":
-                player.setHealthPoint(500); //Increase max points
-            case "Tank":
-                //player.setManaPoint(250);
-                player.setHealthPoint(250);
+                player.addToInventory(healingPotion);
+                //player.getCupboard().store(healingPotion); //Ska man lägga till i båda?
             case "Damage":
-                //player.setManaPoint(500);
+                player.addToInventory(crystalChard);
+            case "Tank":
+                player.addToInventory(healingPotionRecipe);
         }
     }
 
@@ -77,15 +86,15 @@ public class TalkToGuildLeader extends Quest {
         switch (player.getRace()){
             case "Human":
                 if (player.getPlayerClass() == "Tank"){
-                    player.getInventory().add("Rare Steel Boots");
+                    player.addToInventory(new RareBreastplate());
                 } else {
-                    player.getInventory().add("Common Steel Boots");
+                    player.addToInventory(new CommonBreastPlate());
                 }
             case "Orc":
                 if (player.getPlayerClass() == "Damage"){
-                    player.getInventory().add("Rare Leather Gauntlets");
+                    player.addToInventory(new WidowsWail());
                 } else {
-                    player.getInventory().add("Common Leather Gauntlets");
+                    player.addToInventory(new CommonSword());
                 }
         }
     }

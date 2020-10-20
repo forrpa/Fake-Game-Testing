@@ -154,7 +154,7 @@ class StealthAndAttackTest {
     void correctRewardsForNegotiatingWithEnemy(){
         Player player = new Player("Tank", "Human", 100, 1000);
         assertEquals(1000, player.getExperiencePoint());
-        assertTrue(player.getInventory().contains("money")); //Ökning av pengar
+        //assertTrue(player.isInInventory("money"));//Ökning av pengar
         //Minus på guildrelation
     }
 
