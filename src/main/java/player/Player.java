@@ -14,7 +14,7 @@ public class Player {
     private int nextLevelCap = 100;
     private Map<ArmorType, Boolean> allowedArmorTypes = new HashMap<ArmorType, Boolean>();
     private Map<String, Boolean> allowedWeaponTypes = new HashMap<String,Boolean>();
-    private Map<String, Equipment> gear = new HashMap<String, Equipment>();
+    private Map<String, Gear> gear = new HashMap<String, Gear>();
     private Inventory playerInventory = new Inventory();
     private Cupboard cupboard;
     
@@ -99,8 +99,10 @@ public class Player {
     		break;
     	}
     }
-    public void equipWeapon(Weapon weapon) {
-    	//Work in progress
+    public void equipWeapon(Weapon weapon) throws Exception {
+    	playerInventory.isInInventory(weapon);
+    	isPlayerLeveledHighlyEnoughToEquip(weapon);
+    	checkIfWeaponToBeEquippedIsAllowedType(weapon);
     }
     private boolean isPlayerLeveledHighlyEnoughToEquip(Item item) throws Exception {
     	if(this.level < item.getRequiredLevel()) {throw new Exception();}else {return true;}
@@ -109,7 +111,23 @@ public class Player {
     	if(!this.gear.containsKey(armor.getSlot())) {
 			this.gear.put(armor.getSlot(), armor);
 		}else {
-			Equipment replacedPiece = this.gear.replace(armor.getSlot(), armor);
+			Gear replacedPiece = (Gear) this.gear.replace(armor.getSlot(), armor);
+			this.playerInventory.addItem(replacedPiece);
+		}
+    }
+    private void handleShieldsInWeaponSwap() {
+    	if(gear.get("shield")==null) {return;}else {
+    		Gear shield = gear.get("shield");
+    		playerInventory.addItem(shield);
+    		gear.remove("shield");
+    	}
+    }
+    private void equippingWeapon(Weapon weapon) {
+    	if(weapon.getSize() == WeaponSize.TwoHanded) {handleShieldsInWeaponSwap();}
+    	if(!this.gear.containsKey("weapon")) {
+			this.gear.put("weapon", weapon);
+		}else {
+			Gear replacedPiece = this.gear.replace("weapon", weapon);
 			this.playerInventory.addItem(replacedPiece);
 		}
     }
@@ -121,7 +139,15 @@ public class Player {
     		throw new Exception("Armor type not allowed.");
     	}
     }
-    public void equipArmor(Equipment armor) throws Exception {
+    private void checkIfWeaponToBeEquippedIsAllowedType(Weapon weapon) throws Exception {
+    	if(this.allowedWeaponTypes.get(weapon.getType())) {
+    		equippingWeapon(weapon);
+    		this.playerInventory.getOutItem(weapon);
+    	}else {
+    		throw new Exception("Weapon type not allowed.");
+    	}
+    }
+    public void equipArmor(Equipment armor) throws Exception{
     	playerInventory.isInInventory(armor);
     	isPlayerLeveledHighlyEnoughToEquip(armor);
     	checkIfArmorToBeEquippedIsAllowedType(armor);

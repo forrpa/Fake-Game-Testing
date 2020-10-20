@@ -1,7 +1,8 @@
 package weapon;
 
 public class TwoHandedSword extends Weapon{
-
+	private WeaponSize TwoHanded;
+	
 	public TwoHandedSword(String name, String desc, int recLevel, int[] dmg, int dur, int str, int agi, int intell, int sta) {
 		super(name, desc, recLevel, dmg, dur, str, agi, intell, sta);
 	}
@@ -9,6 +10,10 @@ public class TwoHandedSword extends Weapon{
 	@Override
 	public String getType() {
 		return "TwoHandedSword";
+	}
+	@Override
+	public WeaponSize getSize() {
+		return this.TwoHanded;
 	}
 	
 }
