@@ -6,12 +6,14 @@ import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import magic.MagicPlayer;
 import player.Player;
 import quest.TalkToGuildLeader;
 
 class CupboardTest {
 
-	final static Player PLAYER = new Player("playerClassString", "raceString", 5, 10, 0);
+	final static Player PLAYER = new Player("playerClassString", "raceString", 5, 10);
+	final static Player MAGIC_PLAYER = new MagicPlayer("playerClassString", "raceString", 5, 10);
 	final static Cupboard CUPBOARD = new Cupboard(PLAYER); 
 	final static Edible FLY_AGARIC = new Edible("Fly Agaric", "Poisonous mushroom with magic powers", 4, -3, 0);
 	final static ForbiddenFruit LUCKY_CHERRY = new ForbiddenFruit("Lucky Cherry", "Eating cherry starts quest Talk to Guild leader", new TalkToGuildLeader("Talk to Guild leader", "Talk", "in progress", true, true));
@@ -87,6 +89,11 @@ class CupboardTest {
 	@Test
 	void cookIngredientsFromRecipieNotInCupboardThrowsNPE() {
 		fail("Not yet implemented");
+	}
+	
+	@Test
+	void cookNotMagicPlayerThrowsISE() {
+		
 	}
 	
 	@Test

@@ -1,7 +1,7 @@
 package weapon;
-import item.Item;
+import equipment.Gear;
 
-public abstract class Weapon extends Item{
+public abstract class Weapon extends Gear{
 	private int strength;
     private int agility;
     private int intelligence;
@@ -24,7 +24,10 @@ public abstract class Weapon extends Item{
 	public int getDurability() {return this.durability;}
 	public int[] getAttributes() {return new int[] {this.strength, this.agility, this.intelligence, this.stamina};}
 	public int[] getDamageRange() {return this.damageRange;}
+	@Override
 	public String toString() {
 		return "";
 	}
+	public abstract String getType();
+	public abstract WeaponSize getSize();
 }

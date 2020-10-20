@@ -1,7 +1,6 @@
 package item;
 
 import java.util.HashMap;
-import item.Item;
 
 public class Inventory {
 
@@ -41,4 +40,15 @@ public class Inventory {
 		return dict.substring(0,dict.length()-1);
 	}
 
+	//Jennifer
+	public void removeItem(Item item){
+		if(inventory.isEmpty()) throw new NullPointerException("Inventory is empty.");
+		isInInventory(item);
+		int count = inventory.get(item);
+		if (count == 1) {
+			inventory.remove(item);
+		} else {
+			inventory.put(item, count - 1);
+		}
+	}
 }

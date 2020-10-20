@@ -1,5 +1,7 @@
 package quest;
 
+import item.Inventory;
+import item.Item;
 import player.Player;
 import unit.Monster;
 
@@ -7,9 +9,12 @@ public class StealthAndAttack extends Quest {
 
     private boolean discovered;
     private boolean attacked;
-    private boolean talkedToEnemy;
+    private boolean talkedToEnemy; //Överflödig
     private String talkedTo;
-    private int seconds = 120;
+    private int timer = 120;
+    private int secondsLeft;
+    private final GuildMap guildMap = new GuildMap();
+    //Player player
 
     public StealthAndAttack(String name, String description, String state, boolean mandatory, boolean discovered, boolean attacked, boolean talkedToEnemy, String talkedTo){
         super("Stealth and Attack", "You have to follow your enemy without being seen and then attack him", "pending", true);
@@ -36,13 +41,17 @@ public class StealthAndAttack extends Quest {
         return talkedTo;
     }
 
-    public int getSeconds() {
-        return seconds;
+    public int getTimer() {
+        return timer;
+    }
+
+    public void setTimer(int timer){
+        this.timer = timer;
     }
 
     @Override
     public boolean startRequirementsFulfilled(Player player){
-        if (player.getExperiencePoint() >= 1500){ //&& player.getInventory().contains("Guild Map") && player.questlog().contains("TalkToGuildLeader")
+        if (player.getExperiencePoint() >= 1500 && player.isInInventory(guildMap)){ //&& player.questlog().contains("TalkToGuildLeader")
             state = "unlocked";
             return true;
         } else {
@@ -61,7 +70,7 @@ public class StealthAndAttack extends Quest {
     }
 
     public void resetQuest(Player player){
-        player.setHealthPoint(100); //Ska vara max
+        player.fillHealthBar();
         attacked = false;
         discovered = false;
         startQuest(player);
@@ -74,7 +83,7 @@ public class StealthAndAttack extends Quest {
             return false;
         } else {
             discovered = false;
-            description = "You succeeded not being seen, now you have to decide if you want to kill your enemy or negotiate with him.";
+            description = "You succeeded not being seen, now you have to decide if you want to kill your enemy or negotiate with it.";
             return true;
         }
     }
@@ -85,11 +94,11 @@ public class StealthAndAttack extends Quest {
             attacked = true;
             description = "Attack before the enemy escapes!";
             //enemy.attack();
-            while(seconds > 0){
-                seconds--;
+            while(timer > 0){
+                timer--;
                 if (enemy.getHealth() == 0){
                     break;
-                } else if (seconds == 0){
+                } else if (timer == 0){
                     description = "Your enemy escaped. Go talk to the Guild Leader.";
                     return true;
                 } else if (player.getHealthPoint() == 0){
@@ -108,8 +117,8 @@ public class StealthAndAttack extends Quest {
         if (stealth(player, enemy)){
             enemy.negotiate();
             talkedToEnemy = true;
-            description = "You decided to talk yo your enemy instead of killing him. This will have consequences.";
-            player.getInventory().remove("Guild Map");
+            description = "You decided to talk yo your enemy instead of killing him. Now you cant reach the Guild so you have to talk to Townsman.";
+            player.removeFromInventory(guildMap);
             return true;
         } else {
             return false;
@@ -117,7 +126,7 @@ public class StealthAndAttack extends Quest {
     }
 
     public void talkToQuestGiver(Player player, Enemy enemy, QuestGiver questGiver){
-        if (attack(player, enemy) && player.getInventory().contains("Guild Map")){
+        if (attack(player, enemy) && player.isInInventory(guildMap)){
             questGiver.talkToPlayer();
             talkedTo = "questgiver"; //Ska vara till QuestGiver
         }
@@ -129,21 +138,21 @@ public class StealthAndAttack extends Quest {
         }
     }
 
-    public boolean endRequirementsForExchangingInfo(){
+    public boolean endRequirementsForNegotiatingWithEnemy(){
         return talkedTo == "townsman" && !attacked && talkedToEnemy;
     }
 
     public boolean endRequirementsForAttackingOnTime(){
-        return talkedTo == "questgiver" && attacked && seconds > 0 && !talkedToEnemy;
+        return talkedTo == "questgiver" && attacked && timer > 0 && !talkedToEnemy;
     }
 
     public boolean endRequirementsForNotAttackingOnTime(){
-        return talkedTo == "questgiver" && attacked && seconds == 0 && !talkedToEnemy;
+        return talkedTo == "questgiver" && attacked && timer == 0 && !talkedToEnemy;
     }
 
     @Override
     public boolean endRequirementsFulfilled(Player player){
-        if (endRequirementsForExchangingInfo() || endRequirementsForAttackingOnTime() || endRequirementsForNotAttackingOnTime()){
+        if (endRequirementsForNegotiatingWithEnemy() || endRequirementsForAttackingOnTime() || endRequirementsForNotAttackingOnTime()){
             state = "completed";
             return true;
         } else {
@@ -162,8 +171,9 @@ public class StealthAndAttack extends Quest {
     }
 
     public void rewardWhenTalkingToEnemy(Player player){
-        player.getInventory().add("Money"); //Typ 10000 pengar
+        //player.addToInventory("Money");
         player.setExperiencePoint(1000);
+        player.increaseMaxHealthPoint(100);
         //Sämre relation med guild, -1000
     }
 
@@ -172,6 +182,7 @@ public class StealthAndAttack extends Quest {
         if (endRequirementsFulfilled(player)){
             state = "done";
             description= "You completed the quest!";
+            player.fillHealthBar();
             rewardWhenAttackingOnTime(player);
             rewardWhenNotAttackingOnTime(player);
             rewardWhenTalkingToEnemy(player);

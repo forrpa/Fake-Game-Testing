@@ -1,10 +1,15 @@
 package quest;
+import edible.Ingredient;
+import edible.Potion;
+import edible.Recipie;
 import player.Player;
+import weapon.WidowsWail;
 
 public class TalkToGuildLeader extends Quest {
 
+    //göra states till enum
+
     private boolean talkedToGuildLeader = false;
-    //private String chosenBranch;
 
     public TalkToGuildLeader(String name, String description, String state, boolean mandatory, boolean talkedToGuildLeader){
         super("Talk to Guild Leader", "You have to talk to the guild leader west of town.", "pending", true);
@@ -47,29 +52,30 @@ public class TalkToGuildLeader extends Quest {
         }
     }
 
-
     @Override
     public void questCompleted(Player player) {
         if (endRequirementsFulfilled(player)){
             state = "done";
-            player.setExperiencePoint(100);
+            player.setExperiencePoint(500);
             rewardBasedOnClass(player);
             rewardBasedOnRace(player);
-            player.getInventory().add("Guild Map"); //Till nästa quest, är ett krav i nästa quest
+            GuildMap guildMap = new GuildMap();
+            player.addToInventory(guildMap);
         } else {
             System.out.println("You have not fulfilled quest requirements.");
         }
     }
 
     public void rewardBasedOnClass(Player player){
+
         switch (player.getPlayerClass()){
             case "Healer":
-                player.setHealthPoint(500); //Increase max points
-            case "Tank":
-                player.setManaPoint(250);
-                player.setHealthPoint(250);
+                player.addToInventory(new HealingPotion());
+                //player.getCupboard().store(healingPotion); //Ska man lägga till i båda?
             case "Damage":
-                player.setManaPoint(500);
+                player.addToInventory(new CrystalChard());
+            case "Tank":
+                player.addToInventory(new HealingPotionRecipe());
         }
     }
 
@@ -77,15 +83,15 @@ public class TalkToGuildLeader extends Quest {
         switch (player.getRace()){
             case "Human":
                 if (player.getPlayerClass() == "Tank"){
-                    player.getInventory().add("Rare Steel Boots");
+                    player.addToInventory(new RareBreastplate());
                 } else {
-                    player.getInventory().add("Common Steel Boots");
+                    player.addToInventory(new CommonBreastPlate());
                 }
             case "Orc":
                 if (player.getPlayerClass() == "Damage"){
-                    player.getInventory().add("Rare Leather Gauntlets");
+                    player.addToInventory(new WidowsWail());
                 } else {
-                    player.getInventory().add("Common Leather Gauntlets");
+                    player.addToInventory(new CommonSword());
                 }
         }
     }
