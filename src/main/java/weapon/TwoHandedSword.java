@@ -6,4 +6,9 @@ public class TwoHandedSword extends Weapon{
 		super(name, desc, recLevel, dmg, dur, str, agi, intell, sta);
 	}
 
+	@Override
+	public String getType() {
+		return "TwoHandedSword";
+	}
+	
 }

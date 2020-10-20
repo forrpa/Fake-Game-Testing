@@ -27,4 +27,5 @@ public abstract class Weapon extends Item{
 	public String toString() {
 		return "";
 	}
+	public abstract String getType();
 }
