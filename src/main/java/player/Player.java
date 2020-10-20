@@ -87,12 +87,10 @@ public class Player {
     public void equipWeapon(Weapon weapon) {
     	//Work in progress
     }
-    private boolean isPlayerLeveledHighlyEnoughToEquip(Item item) {
-    	if(this.level < item.getRequiredLevel()) {return false;}else {return true;}
+    private boolean isPlayerLeveledHighlyEnoughToEquip(Item item) throws Exception {
+    	if(this.level < item.getRequiredLevel()) {throw new Exception();}else {return true;}
     }
-    public void equipArmor(Equipment armor) throws Exception {
-    	playerInventory.isInInventory(armor);
-    	if(this.level < armor.getRequiredLevel()) {throw new Exception();}
+    private void checkIfArmorToBeEquippedIsAllowedType(Equipment armor) throws Exception {
     	if(this.allowedArmorTypes.get(armor.getArmorType())) {
     		if(armor instanceof Chest) {
     			if(!this.gear.containsKey("chest")) {
@@ -106,6 +104,11 @@ public class Player {
     	}else {
     		throw new Exception("Armor type not allowed.");
     	}
+    }
+    public void equipArmor(Equipment armor) throws Exception {
+    	playerInventory.isInInventory(armor);
+    	isPlayerLeveledHighlyEnoughToEquip(armor);
+    	checkIfArmorToBeEquippedIsAllowedType(armor);
     }
 
 	public Cupboard getCupboard() {
