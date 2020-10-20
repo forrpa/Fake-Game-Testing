@@ -9,9 +9,10 @@ public class StealthAndAttack extends Quest {
 
     private boolean discovered;
     private boolean attacked;
-    private boolean talkedToEnemy;
+    private boolean talkedToEnemy; //Överflödig
     private String talkedTo;
-    private int seconds = 120;
+    private int timer = 120;
+    private int secondsLeft;
     private final GuildMap guildMap = new GuildMap();
     //Player player
 
@@ -40,8 +41,12 @@ public class StealthAndAttack extends Quest {
         return talkedTo;
     }
 
-    public int getSeconds() {
-        return seconds;
+    public int getTimer() {
+        return timer;
+    }
+
+    public void setTimer(int timer){
+        this.timer = timer;
     }
 
     @Override
@@ -78,7 +83,7 @@ public class StealthAndAttack extends Quest {
             return false;
         } else {
             discovered = false;
-            description = "You succeeded not being seen, now you have to decide if you want to kill your enemy or negotiate with him.";
+            description = "You succeeded not being seen, now you have to decide if you want to kill your enemy or negotiate with it.";
             return true;
         }
     }
@@ -89,11 +94,11 @@ public class StealthAndAttack extends Quest {
             attacked = true;
             description = "Attack before the enemy escapes!";
             //enemy.attack();
-            while(seconds > 0){
-                seconds--;
+            while(timer > 0){
+                timer--;
                 if (enemy.getHealth() == 0){
                     break;
-                } else if (seconds == 0){
+                } else if (timer == 0){
                     description = "Your enemy escaped. Go talk to the Guild Leader.";
                     return true;
                 } else if (player.getHealthPoint() == 0){
@@ -112,7 +117,7 @@ public class StealthAndAttack extends Quest {
         if (stealth(player, enemy)){
             enemy.negotiate();
             talkedToEnemy = true;
-            description = "You decided to talk yo your enemy instead of killing him. This will have consequences.";
+            description = "You decided to talk yo your enemy instead of killing him. Now you cant reach the Guild so you have to talk to Townsman.";
             player.removeFromInventory(guildMap);
             return true;
         } else {
@@ -133,21 +138,21 @@ public class StealthAndAttack extends Quest {
         }
     }
 
-    public boolean endRequirementsForExchangingInfo(){
+    public boolean endRequirementsForNegotiatingWithEnemy(){
         return talkedTo == "townsman" && !attacked && talkedToEnemy;
     }
 
     public boolean endRequirementsForAttackingOnTime(){
-        return talkedTo == "questgiver" && attacked && seconds > 0 && !talkedToEnemy;
+        return talkedTo == "questgiver" && attacked && timer > 0 && !talkedToEnemy;
     }
 
     public boolean endRequirementsForNotAttackingOnTime(){
-        return talkedTo == "questgiver" && attacked && seconds == 0 && !talkedToEnemy;
+        return talkedTo == "questgiver" && attacked && timer == 0 && !talkedToEnemy;
     }
 
     @Override
     public boolean endRequirementsFulfilled(Player player){
-        if (endRequirementsForExchangingInfo() || endRequirementsForAttackingOnTime() || endRequirementsForNotAttackingOnTime()){
+        if (endRequirementsForNegotiatingWithEnemy() || endRequirementsForAttackingOnTime() || endRequirementsForNotAttackingOnTime()){
             state = "completed";
             return true;
         } else {
