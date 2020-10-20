@@ -12,7 +12,7 @@ public class StealthAndAttack extends Quest {
     private boolean talkedToEnemy;
     private String talkedTo;
     private int seconds = 120;
-    private QuestItem questItem;
+    private final GuildMap guildMap = new GuildMap();
     //Player player
 
     public StealthAndAttack(String name, String description, String state, boolean mandatory, boolean discovered, boolean attacked, boolean talkedToEnemy, String talkedTo){
@@ -23,11 +23,6 @@ public class StealthAndAttack extends Quest {
         this.talkedToEnemy = talkedToEnemy;
         this.talkedTo = talkedTo;
     }
-
-    /*public QuestItem getQuestItem(Inventory inventory, QuestItem questItem){
-        //inventory.
-        //hämta nyckel-värde i inventory
-    }*/
 
     public boolean isDiscovered(){
         return discovered;
@@ -51,7 +46,7 @@ public class StealthAndAttack extends Quest {
 
     @Override
     public boolean startRequirementsFulfilled(Player player){
-        if (player.getExperiencePoint() >= 1500){ //&& player.getInventory().contains("Guild Map") && player.questlog().contains("TalkToGuildLeader")
+        if (player.getExperiencePoint() >= 1500 && player.isInInventory(guildMap)){ //&& player.questlog().contains("TalkToGuildLeader")
             state = "unlocked";
             return true;
         } else {
@@ -70,7 +65,7 @@ public class StealthAndAttack extends Quest {
     }
 
     public void resetQuest(Player player){
-        player.setHealthPoint(100); //Ska vara max
+        player.fillHealthBar();
         attacked = false;
         discovered = false;
         startQuest(player);
@@ -118,7 +113,7 @@ public class StealthAndAttack extends Quest {
             enemy.negotiate();
             talkedToEnemy = true;
             description = "You decided to talk yo your enemy instead of killing him. This will have consequences.";
-            player.removeFromInventory(questItem); //Funkar ej
+            player.removeFromInventory(guildMap);
             return true;
         } else {
             return false;
@@ -126,7 +121,7 @@ public class StealthAndAttack extends Quest {
     }
 
     public void talkToQuestGiver(Player player, Enemy enemy, QuestGiver questGiver){
-        if (attack(player, enemy) && player.isInInventory(questItem)){ //Funkar ej just nu
+        if (attack(player, enemy) && player.isInInventory(guildMap)){
             questGiver.talkToPlayer();
             talkedTo = "questgiver"; //Ska vara till QuestGiver
         }
@@ -173,6 +168,7 @@ public class StealthAndAttack extends Quest {
     public void rewardWhenTalkingToEnemy(Player player){
         //player.addToInventory("Money");
         player.setExperiencePoint(1000);
+        player.increaseMaxHealthPoint(100);
         //Sämre relation med guild, -1000
     }
 
@@ -181,7 +177,7 @@ public class StealthAndAttack extends Quest {
         if (endRequirementsFulfilled(player)){
             state = "done";
             description= "You completed the quest!";
-            player.setHealthPoint(200); //Sätt max
+            player.fillHealthBar();
             rewardWhenAttackingOnTime(player);
             rewardWhenNotAttackingOnTime(player);
             rewardWhenTalkingToEnemy(player);

@@ -9,6 +9,7 @@ import item.*;
 
 public class Player {
     private int healthPoint;
+    private int maxHealthPoint = 200;
     private int experiencePoint; 
     private int level = 1;
     private int nextLevelCap = 100;
@@ -32,11 +33,22 @@ public class Player {
         setWeaponTypeHashMap();
     }
 
-
+    //Ny Player-konstruktor så jag inte förstör allas tester med en ny variabel
+    public Player(String playerClass, String race, int healthPoint, int maxHealthPoint, int experiencePoint){
+        this.playerClass = playerClass;
+        this.race = race;
+        setHealthPoint(healthPoint);
+        this.maxHealthPoint = maxHealthPoint;
+        setExperiencePoint(experiencePoint);
+        setArmorTypeHashMap();
+        setWeaponTypeHashMap();
+    }
 
     public int getHealthPoint() {
         return healthPoint;
     }
+
+    public int getMaxHealthPoint() {return maxHealthPoint;}
 
     public int getExperiencePoint() {
         return experiencePoint;
@@ -49,7 +61,6 @@ public class Player {
     public String getRace() {
         return race;
     }
-
 
     public void setHealthPoint(int healthPoint) {
         this.healthPoint = healthPoint;
@@ -67,7 +78,14 @@ public class Player {
     	this.level++;
     	this.nextLevelCap = this.nextLevelCap*2;
     }
-    
+
+    public void fillHealthBar(){
+        healthPoint = maxHealthPoint;
+    }
+
+    public void increaseMaxHealthPoint(int healthPoint){
+        this.maxHealthPoint += healthPoint;
+    }
     
     private void setArmorTypeHashMap() {
     	switch(this.playerClass) {
