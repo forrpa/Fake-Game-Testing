@@ -1,6 +1,7 @@
 package item;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -10,7 +11,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import edible.Edible;
 import equipment.BucklerOfUselessness;
 import equipment.Shield;
-import item.Item;
 
 class ItemTest {
 
@@ -26,6 +26,15 @@ class ItemTest {
 		assertEquals("Royal Steel Shield", ROYAL_STEEL_SHIELD.getName());
 		assertEquals("Strong shield made of steel from The Metal Kingdom's steel", ROYAL_STEEL_SHIELD.getDescription());
 		assertEquals(2, ROYAL_STEEL_SHIELD.getRequiredLevel());
+	}
+	
+	@Test
+	void constructorAsSuperLevelNegativeValueTrhowsIAE() {
+		assertThrows(IllegalArgumentException.class, () -> {
+			Shield rSS = (Shield) ROYAL_STEEL_SHIELD;
+			new Shield(rSS.getName(), rSS.getDescription(), -1, rSS.getArmor(), rSS.getDurability(), 
+					rSS.getAttributes()[0], rSS.getAttributes()[1], rSS.getAttributes()[2], rSS.getAttributes()[3]);
+		});
 	}
 	
 	@Test
