@@ -30,8 +30,8 @@ class ItemTest {
 	
 	@Test
 	void constructorAsSuperLevelNegativeValueTrhowsIAE() {
+		Shield rSS = (Shield) ROYAL_STEEL_SHIELD;
 		assertThrows(IllegalArgumentException.class, () -> {
-			Shield rSS = (Shield) ROYAL_STEEL_SHIELD;
 			new Shield(rSS.getName(), rSS.getDescription(), -1, rSS.getArmor(), rSS.getDurability(), 
 					rSS.getAttributes()[0], rSS.getAttributes()[1], rSS.getAttributes()[2], rSS.getAttributes()[3]);
 		});
