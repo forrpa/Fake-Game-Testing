@@ -6,7 +6,7 @@ import java.util.Map;
 import equipment.*;
 import weapon.*;
 import edible.Cupboard;
-import item.Item;
+import item.*;
 
 public class Player {
 	private int manaPoint;
@@ -16,7 +16,7 @@ public class Player {
     private int nextLevelCap = 100;
     private Map<ArmorType, Boolean> allowedArmorTypes = new HashMap<ArmorType, Boolean>();
     private Map<String, Equipment> gear = new HashMap<String, Equipment>();
-    private Map<Item, Boolean> inventory2 = new HashMap<Item, Boolean>();
+    private Inventory playerInventory = new Inventory();
     private Cupboard cupboard;
     
     //private PlayerClass playerClass;
@@ -70,13 +70,14 @@ public class Player {
     public void setExperiencePoint(int experiencePoint) {
         this.experiencePoint = experiencePoint;
         if(this.experiencePoint > this.nextLevelCap) {
-        	increaseLevel();
-        	this.experiencePoint = this.experiencePoint-this.nextLevelCap;
-        	this.nextLevelCap = this.nextLevelCap + (this.nextLevelCap/2);
+        	do{
+        		increaseLevel();
+        	}while(this.experiencePoint > this.nextLevelCap);
         }
     }
     public void increaseLevel() {
     	this.level++;
+    	this.nextLevelCap = this.nextLevelCap*2;
     }
     
     
@@ -99,27 +100,24 @@ public class Player {
     public void equipWeapon(Weapon weapon) {
     	//Work in progress
     }
-    private boolean isItemInInventory(Item item) {
-    	if(this.inventory2.get(item)) {return true;}else {return false;}
-    }
     private boolean isPlayerLeveledHighlyEnoughToEquip(Item item) {
     	if(this.level < item.getRequiredLevel()) {return false;}else {return true;}
     }
     public void equipArmor(Equipment armor) throws Exception {
-    	if(!isItemInInventory(armor)) {throw new Exception();}
+    	playerInventory.isInInventory(armor);
     	if(this.level < armor.getRequiredLevel()) {throw new Exception();}
     	if(this.allowedArmorTypes.get(armor.getArmorType())) {
     		if(armor instanceof Chest) {
-    			if(this.gear.get("chest")==null) {
+    			if(!this.gear.containsKey("chest")) {
     				this.gear.put("chest", armor);
     			}else {
     				Equipment replacedPiece = this.gear.replace("chest", armor);
-        			this.inventory2.put(replacedPiece, true);
+        			this.playerInventory.addItem(replacedPiece);
     			}
-    			this.inventory2.remove(armor);
+    			this.playerInventory.getOutItem(armor);
     		}
     	}else {
-    		throw new Exception();
+    		throw new Exception("Armor type not allowed.");
     	}
     }
 
