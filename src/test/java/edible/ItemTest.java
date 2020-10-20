@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import item.Item;
+
 class ItemTest {
 
 	final static Item MAGIC_HEALING_MUSHROOM = new Edible("Magic Healing Mushroom", 
