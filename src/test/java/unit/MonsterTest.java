@@ -50,7 +50,7 @@ class MonsterTest {
         assertFalse(wolf.attack(bat));
     }
     @Test
-    void wolfMonsterAttackOtherWolfFor3HealthOtherWolfHas5HealthRemaining(){
+    void wolfMonsterAttackOtherWolfForStandardWolfDamageOtherWolfHas5HealthRemaining(){
         //Set-up
         Monster wolf = new Wolf();
         Monster otherWolf = new Wolf();
@@ -61,7 +61,7 @@ class MonsterTest {
         assertFalse(otherWolf.isDead());
     }
     @Test
-    void wolfMonsterAttackOtherWolfFor3ThriceOtherWolfHas0HealthRemaining(){
+    void wolfMonsterAttackOtherWolfForStandardWolfDamageThriceOtherWolfHas0HealthRemaining(){
         //Set-up
         Monster wolf = new Wolf();
         Monster otherWolf = new Wolf();
