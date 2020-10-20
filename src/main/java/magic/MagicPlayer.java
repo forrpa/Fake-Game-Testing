@@ -93,7 +93,12 @@ public class MagicPlayer extends Player {
     }
 
     public void setMagicLevel(int magicLevel) {
-        this.magicLevel = positiveNrCheck (magicLevel);
+        int maximumLevel = 10;
+        if (magicLevel <=10 ){
+            this.magicLevel= positiveNrCheck (magicLevel);
+        }else{
+            throw new IllegalArgumentException ("Error: negative numbers are not allowed here");
+        }
     }
 
     public int getMaxManaPoint() {
