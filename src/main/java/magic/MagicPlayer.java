@@ -1,5 +1,5 @@
 //@author Christoffer Öhman
-package player;
+package magic;
 import magic.Spell;
 import player.Player;
 import java.util.HashMap;

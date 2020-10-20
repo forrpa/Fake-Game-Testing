@@ -1,7 +1,6 @@
 package magic;
 
 import org.junit.jupiter.api.Test;
-import player.MagicPlayer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
