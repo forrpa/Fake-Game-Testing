@@ -13,7 +13,7 @@ public class Player {
     private int level = 1;
     private int nextLevelCap = 100;
     private Map<ArmorType, Boolean> allowedArmorTypes = new HashMap<ArmorType, Boolean>();
-    //private Map<Weapon>
+    private Map<String, Boolean> allowedWeaponTypes = new HashMap<String,Boolean>();
     private Map<String, Equipment> gear = new HashMap<String, Equipment>();
     private Inventory playerInventory = new Inventory();
     private Cupboard cupboard;
@@ -29,6 +29,7 @@ public class Player {
         setHealthPoint(healthPoint);
         setExperiencePoint(experiencePoint);
         setArmorTypeHashMap();
+        setWeaponTypeHashMap();
     }
 
 
@@ -87,7 +88,16 @@ public class Player {
     	}
     }
     private void setWeaponTypeHashMap() {
-    	
+    	switch(this.playerClass) {
+    	case "Mage":
+    		this.allowedWeaponTypes.put("OneHandedSword", true);
+    		this.allowedWeaponTypes.put("TwoHandedSword", false);
+    		break;
+    	case "Warrior":
+    		this.allowedWeaponTypes.put("OneHandedSword", true);
+    		this.allowedWeaponTypes.put("TwoHandedSword", true);
+    		break;
+    	}
     }
     public void equipWeapon(Weapon weapon) {
     	//Work in progress
