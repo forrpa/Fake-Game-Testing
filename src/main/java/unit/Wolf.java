@@ -1,6 +1,7 @@
 package unit;
 
 import java.util.ArrayList;
+import item.*;
 
 public class Wolf extends Monster{
     private final static int STANDARD_WOLF_HEALTH = 8;

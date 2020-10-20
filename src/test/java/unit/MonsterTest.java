@@ -2,7 +2,9 @@ package unit;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import item.*;
+import edible.*;
+import weapon.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,6 +14,7 @@ class MonsterTest {
     private final static int STANDARD_BAT_ATTACKPOWER = 2;
     private final static int STANDARD_WOLF_HEALTH = 8;
     private final static int STANDARD_WOLF_ATTACKPOWER = 3;
+
 
     @Test
     void batNameAndHealthSetByConstructor(){
@@ -94,7 +97,9 @@ class MonsterTest {
     @Test
     void batHasItemPotionNotLootableBecauseBatIsAliveIllegalStateException(){
         //Set-up
-        ArrayList<Item> batItems = new ArrayList<>(Arrays.asList(new Item("Potion")));
+        Item item = new Ingredient("Bat wing", "A wing from a bat.");
+        ArrayList<Item> batItems = new ArrayList<>();
+        batItems.add(item);
         Monster bat = new Bat(batItems);
 
         //Asserts that a living monster can't get looted
@@ -104,8 +109,8 @@ class MonsterTest {
     @Test
     void batHasItemsPotionAndSwordLootedSuccessfully(){
         //Set-up
-        Item potion = new Item("Potion");
-        Item sword = new Item("Sword");
+        Item potion = new Potion("Potion", "A test potion", 0, 5, 0);
+        Item sword = new WidowsWail();
         ArrayList<Item> batItems = new ArrayList<>();
         batItems.add(potion);
         batItems.add(sword);
@@ -124,8 +129,8 @@ class MonsterTest {
     @Test
     void batGetsKilledAndHasItemsPotionAndSwordLootedSuccessfullyAndLootedAgainUnsuccessfullyIllegalStateException(){
         //Set-up
-        Item potion = new Item("Potion");
-        Item sword = new Item("Sword");
+        Item potion = new Ingredient("Bat wing", "A wing from a bat.");
+        Item sword = new WidowsWail();
         ArrayList<Item> batItems = new ArrayList<>();
         batItems.add(potion);
         batItems.add(sword);

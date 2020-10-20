@@ -3,34 +3,38 @@ package unit;
 import java.util.ArrayList;
 import java.util.List;
 
+import item.*;
+
 public abstract class Monster extends NPC implements Combatant {
     private boolean isGrounded;
     private int health;
+    private int maxHealth;
     private int attackPower;
     private ArrayList<Item> itemsOnNPC;
     private AttackType resistance;
     private AttackType weakness;
 
-    public Monster(String name, int health, int attackPower, AttackType resistance, AttackType weakness){
-        this(name, health, attackPower, true, resistance, weakness);
+    public Monster(String name, int maxHealth, int attackPower, AttackType resistance, AttackType weakness){
+        this(name, maxHealth, attackPower, true, resistance, weakness);
     }
-    public Monster(String name, int health, int attackPower, ArrayList<Item> items, AttackType resistance, AttackType weakness){
-        this(name, health, attackPower, true, items, resistance, weakness);
+    public Monster(String name, int maxHealth, int attackPower, ArrayList<Item> items, AttackType resistance, AttackType weakness){
+        this(name, maxHealth, attackPower, true, items, resistance, weakness);
     }
-    public Monster(String name, int health, int attackPower, boolean isGrounded, AttackType resistance, AttackType weakness){
-        setName(name);
-        setHealth(health);
+    public Monster(String name, int maxHealth, int attackPower, boolean isGrounded, AttackType resistance, AttackType weakness){
+        super(name);
+        setHealth(maxHealth);
         if(attackPower < 0){
             this.attackPower = 0;
         }else {
             this.attackPower = attackPower;
         }
+        this.maxHealth = maxHealth;
         this.isGrounded = isGrounded;
         this.resistance = resistance;
         this.weakness = weakness;
     }
-    public Monster(String name, int health, int attackPower, boolean isGrounded, ArrayList<Item> items, AttackType resistance, AttackType weakness){
-        this(name, health, attackPower, isGrounded, resistance, weakness);
+    public Monster(String name, int maxHealth, int attackPower, boolean isGrounded, ArrayList<Item> items, AttackType resistance, AttackType weakness){
+        this(name, maxHealth, attackPower, isGrounded, resistance, weakness);
         itemsOnNPC = items;
     }
 
