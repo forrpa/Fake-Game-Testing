@@ -37,6 +37,11 @@ class MagicPlayerTest {
     void setNegativeMagicLevel() {
         MagicPlayer mp = new MagicPlayer("playerClass","race",50,1);
         Assertions.assertThrows (IllegalArgumentException.class, () -> mp.setMagicLevel (negativeNr));
+
+        // test for value higher than max magicLevel
+        int oneMoreTHanMax = 11;
+        Assertions.assertThrows (IllegalArgumentException.class, () -> mp.setMagicLevel (oneMoreTHanMax));
+
     }
 
 
