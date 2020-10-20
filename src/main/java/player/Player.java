@@ -140,4 +140,8 @@ public class Player {
     public boolean isInInventory(Item item) {
         return playerInventory.isInInventory(item);
     }
+
+    public int getInventoryCount(Item item){
+        return playerInventory.getCount(item);
+    }
 }

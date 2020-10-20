@@ -7,6 +7,8 @@ import weapon.WidowsWail;
 
 public class TalkToGuildLeader extends Quest {
 
+    //göra states till enum
+
     private boolean talkedToGuildLeader = false;
 
     public TalkToGuildLeader(String name, String description, String state, boolean mandatory, boolean talkedToGuildLeader){
@@ -50,7 +52,6 @@ public class TalkToGuildLeader extends Quest {
         }
     }
 
-
     @Override
     public void questCompleted(Player player) {
         if (endRequirementsFulfilled(player)){
@@ -58,7 +59,7 @@ public class TalkToGuildLeader extends Quest {
             player.setExperiencePoint(500);
             rewardBasedOnClass(player);
             rewardBasedOnRace(player);
-            QuestItem guildMap = new QuestItem("Guild Map", "Map to find the Guild");
+            GuildMap guildMap = new GuildMap();
             player.addToInventory(guildMap);
         } else {
             System.out.println("You have not fulfilled quest requirements.");
@@ -66,19 +67,15 @@ public class TalkToGuildLeader extends Quest {
     }
 
     public void rewardBasedOnClass(Player player){
-        //Skapa 3 klasser....
-        Potion healingPotion = new Potion("Healing Potion", "Potion that heals", 200, 100, 0);
-        Ingredient crystalChard = new Ingredient("Crystal Chard", "For making potions");
-        Recipie healingPotionRecipe = new Recipie("Healing Potion Recipe", "Recipe for healing potion", healingPotion, new Ingredient[]{crystalChard}, 200, 1000);
 
         switch (player.getPlayerClass()){
             case "Healer":
-                player.addToInventory(healingPotion);
+                player.addToInventory(new HealingPotion());
                 //player.getCupboard().store(healingPotion); //Ska man lägga till i båda?
             case "Damage":
-                player.addToInventory(crystalChard);
+                player.addToInventory(new CrystalChard());
             case "Tank":
-                player.addToInventory(healingPotionRecipe);
+                player.addToInventory(new HealingPotionRecipe());
         }
     }
 
