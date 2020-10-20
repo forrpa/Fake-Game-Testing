@@ -9,7 +9,6 @@ import edible.Cupboard;
 import item.Item;
 
 public class Player {
-	private int manaPoint;
     private int healthPoint;
     private int experiencePoint; 
     private int level = 1;
@@ -35,9 +34,7 @@ public class Player {
         setArmorTypeHashMap();
     }
 
-	public int getManaPoint() {
-		return manaPoint;
-	}
+
 
     public int getHealthPoint() {
         return healthPoint;
@@ -59,9 +56,6 @@ public class Player {
         return inventory;
     }
 
-	public void setManaPoint(int manaPoint) {
-		this.manaPoint = manaPoint;
-	}
 
     public void setHealthPoint(int healthPoint) {
         this.healthPoint = healthPoint;
