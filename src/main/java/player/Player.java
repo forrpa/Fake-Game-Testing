@@ -1,6 +1,5 @@
 package player;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import equipment.*;
@@ -90,15 +89,18 @@ public class Player {
     private boolean isPlayerLeveledHighlyEnoughToEquip(Item item) throws Exception {
     	if(this.level < item.getRequiredLevel()) {throw new Exception();}else {return true;}
     }
+    private void equippingArmor(Equipment armor) {
+    	if(!this.gear.containsKey("chest")) {
+			this.gear.put("chest", armor);
+		}else {
+			Equipment replacedPiece = this.gear.replace("chest", armor);
+			this.playerInventory.addItem(replacedPiece);
+		}
+    }
     private void checkIfArmorToBeEquippedIsAllowedType(Equipment armor) throws Exception {
     	if(this.allowedArmorTypes.get(armor.getArmorType())) {
     		if(armor instanceof Chest) {
-    			if(!this.gear.containsKey("chest")) {
-    				this.gear.put("chest", armor);
-    			}else {
-    				Equipment replacedPiece = this.gear.replace("chest", armor);
-        			this.playerInventory.addItem(replacedPiece);
-    			}
+    			equippingArmor(armor);
     			this.playerInventory.getOutItem(armor);
     		}
     	}else {
