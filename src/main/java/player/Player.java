@@ -90,19 +90,17 @@ public class Player {
     	if(this.level < item.getRequiredLevel()) {throw new Exception();}else {return true;}
     }
     private void equippingArmor(Equipment armor) {
-    	if(!this.gear.containsKey("chest")) {
-			this.gear.put("chest", armor);
+    	if(!this.gear.containsKey(armor.getSlot())) {
+			this.gear.put(armor.getSlot(), armor);
 		}else {
-			Equipment replacedPiece = this.gear.replace("chest", armor);
+			Equipment replacedPiece = this.gear.replace(armor.getSlot(), armor);
 			this.playerInventory.addItem(replacedPiece);
 		}
     }
     private void checkIfArmorToBeEquippedIsAllowedType(Equipment armor) throws Exception {
     	if(this.allowedArmorTypes.get(armor.getArmorType())) {
-    		if(armor instanceof Chest) {
-    			equippingArmor(armor);
-    			this.playerInventory.getOutItem(armor);
-    		}
+    		equippingArmor(armor);
+    		this.playerInventory.getOutItem(armor);
     	}else {
     		throw new Exception("Armor type not allowed.");
     	}
