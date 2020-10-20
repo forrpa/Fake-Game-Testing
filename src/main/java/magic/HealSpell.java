@@ -19,5 +19,6 @@ public class HealSpell extends Spell {
 
         // todo implement castSpell interface in spell?  or move spellcasting to own Class/handler.
 
+
     }
 }

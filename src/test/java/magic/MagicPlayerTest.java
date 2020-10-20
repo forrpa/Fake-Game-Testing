@@ -1,13 +1,14 @@
 package magic;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 class MagicPlayerTest {
     private final int negativeNr =-1;
-    private final int positiveNr =-1;
+    private final int positiveNr =1;
+    private final int maxIntvalue = Integer.MAX_VALUE;
 
 
 
@@ -18,7 +19,6 @@ class MagicPlayerTest {
         //  // standard maximum is one;
         assertEquals(positiveNr,mp.getMaximumLearnableSpells ());
 
-
     }
 
     @Test
@@ -27,8 +27,15 @@ class MagicPlayerTest {
 
         mp.setMaximumLearnableSpells (15);
         assertEquals (15,mp.getMaximumLearnableSpells ());
-
     }
+
+    @Test
+    void setNegativeMaxMagicLevel() {
+        MagicPlayer mp = new MagicPlayer("playerClass","race",50,1);
+
+        Assertions.assertThrows (IllegalArgumentException.class, () -> mp.setMagicLevel (negativeNr));
+    }
+
 
     @Test
     void addAndRemoveSpell() {

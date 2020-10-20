@@ -8,6 +8,7 @@ public class Spell {
     private int requiredMagicLevel = 5;
     private int cooldownDuration = 10;
 
+    // TODO: 2020-10-20 implement "damage interface"
 
     public Spell(String name, String description, int manaCost, int requiredMagicLevel, int cooldownDuration) {
         this.name = name;
