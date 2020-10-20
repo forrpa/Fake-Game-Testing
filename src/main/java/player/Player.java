@@ -74,12 +74,14 @@ public class Player {
     		this.allowedArmorTypes.put(ArmorType.LEATHER, false);
     		this.allowedArmorTypes.put(ArmorType.MAIL, false);
     		this.allowedArmorTypes.put(ArmorType.PLATE, false);
+    		this.allowedArmorTypes.put(ArmorType.SHIELD, false);
     		break;
     	case "Warrior":
     		this.allowedArmorTypes.put(ArmorType.CLOTH, true);
     		this.allowedArmorTypes.put(ArmorType.LEATHER, true);
     		this.allowedArmorTypes.put(ArmorType.MAIL, true);
     		this.allowedArmorTypes.put(ArmorType.PLATE, true);
+    		this.allowedArmorTypes.put(ArmorType.SHIELD, true);
     		break;
     	}
     }
