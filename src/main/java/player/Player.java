@@ -125,11 +125,19 @@ public class Player {
 
 
     //Jennifer
-    public void addToInventory(Item item){
+    public void addToInventory(Item item) {
         playerInventory.addItem(item);
     }
 
-    public void removeFromInventory(Item item){
+    public void removeFromInventory(Item item) {
         playerInventory.removeItem(item);
+    }
+
+    public boolean isInInventory(Item item) {
+        return playerInventory.isInInventory(item);
+    }
+
+    public int getInventoryCount(Item item){
+        return playerInventory.getCount(item);
     }
 }
