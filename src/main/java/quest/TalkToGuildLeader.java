@@ -66,10 +66,10 @@ public class TalkToGuildLeader extends Quest {
             case "Healer":
                 player.setHealthPoint(500); //Increase max points
             case "Tank":
-                player.setManaPoint(250);
+                //player.setManaPoint(250);
                 player.setHealthPoint(250);
             case "Damage":
-                player.setManaPoint(500);
+                //player.setManaPoint(500);
         }
     }
 

@@ -23,8 +23,6 @@ public class Player {
     private String playerClass;
     private String race;
 
-    private ArrayList<String> inventory = new ArrayList<>(); //Bör vara hash här eller något ist för String
-
     public Player(String playerClass, String race, int healthPoint, int experiencePoint){
         this.playerClass = playerClass;
         this.race = race;
@@ -49,10 +47,6 @@ public class Player {
 
     public String getRace() {
         return race;
-    }
-
-    public ArrayList<String> getInventory() {
-        return inventory;
     }
 
 
@@ -123,4 +117,14 @@ public class Player {
 	}
 
     // methods added by Christoffer
+
+
+    //Jennifer
+    public void addToInventory(Item item){
+        playerInventory.addItem(item);
+    }
+
+    public void removeFromInventory(Item item){
+        playerInventory.removeItem(item);
+    }
 }

@@ -29,7 +29,7 @@ class StealthAndAttackTest {
     //Testa förkrav, Ha 1500 experience och Guild Map från förra questet, klarat questet TalkToGuildLeader
     @Test
     void playerMeetsStartRequirementsForStealthAndAttackQuest(){
-        Player player = new Player("Tank", "Human", 100, 200, 1500);
+        Player player = new Player("Tank", "Human", 100, 1500);
         assertEquals(1500, player.getExperiencePoint());
         //assertTrue(player.getInventory().contains("Guild Map"));
         //assertTrue(player.getQuestLog().contains(TalkToGuildLeader);
@@ -38,7 +38,7 @@ class StealthAndAttackTest {
     //Testa om det går att starta questet
     @Test
     void canPlayerStartStealthAndAttackQuest() {
-        Player player = new Player("Tank", "Human", 100, 200, 1500);
+        Player player = new Player("Tank", "Human", 100, 1500);
         StealthAndAttack quest = new StealthAndAttack(questName, questDescription, "unlocked", true, false, false, false, "");
         assertEquals("unlocked", quest.getState());
         assertTrue(quest.startRequirementsFulfilled(player));
@@ -61,7 +61,7 @@ class StealthAndAttackTest {
     //Testa krav för att starta attack eller förhandla med fienden
     @Test
     void canPlayerStartAttack(){
-        Player player = new Player("Tank", "Human", 100, 200, 1500);
+        Player player = new Player("Tank", "Human", 100, 1500);
         Enemy enemy = new Enemy();
         StealthAndAttack quest = new StealthAndAttack(questName, questDescription, "in progress", true, false, false, false, "");
         assertTrue(quest.stealth(player, enemy));
@@ -72,7 +72,7 @@ class StealthAndAttackTest {
     @Test
     void playerDiesInBattle() {
         StealthAndAttack quest = new StealthAndAttack(questName, questDescription, "in progress", true, false, true, false, "");
-        Player player = new Player("Tank", "Human", 100, 0, 1500);
+        Player player = new Player("Tank", "Human", 100, 1500);
         Enemy enemy = new Enemy();
         assertEquals(0, player.getHealthPoint());
         assertFalse(quest.attack(player, enemy));
@@ -128,7 +128,7 @@ class StealthAndAttackTest {
     //Kan man avsluta questet
     @Test
     void canPlayerCompleteStealthAndAttackQuest() {
-        Player player = new Player("Healer", "Orc", 200, 200, 200);
+        Player player = new Player("Healer", "Orc", 200, 1500);
         StealthAndAttack quest = new StealthAndAttack(questName, questDescription, "completed", true, false, true, false, "questgiver");
         assertEquals("completed", quest.getState());
         assertTrue(quest.endRequirementsFulfilled(player));
@@ -138,21 +138,21 @@ class StealthAndAttackTest {
     //Ökad relation med guild, XP
     @Test
     void correctRewardsForAttackingOnTime(){
-        Player player = new Player("Tank", "Human", 100, 200, 2000);
+        Player player = new Player("Tank", "Human", 100, 2000);
         assertEquals(2000, player.getExperiencePoint()); //Kolla ökningen
         //Relation med guild
     }
     //Eller liten ökad relation med guild, mindre XP
     @Test
     void correctRewardsForNotAttackingOnTime(){
-        Player player = new Player("Tank", "Human", 100, 200, 1000);
+        Player player = new Player("Tank", "Human", 100, 1000);
         assertEquals(1000, player.getExperiencePoint());
         //Guildrelation
     }
     //Eller minskad relation med guild, pengar
     @Test
     void correctRewardsForNegotiatingWithEnemy(){
-        Player player = new Player("Tank", "Human", 100, 200, 1000);
+        Player player = new Player("Tank", "Human", 100, 1000);
         assertEquals(1000, player.getExperiencePoint());
         assertTrue(player.getInventory().contains("money")); //Ökning av pengar
         //Minus på guildrelation
