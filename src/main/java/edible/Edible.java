@@ -1,12 +1,8 @@
 package edible;
 
-public class Edible extends Item {
+import item.Item;
 
-	public static void main(String[] args) {
-		final Edible MAGIC_HEALING_MUSHROOM = new Edible("Magic Healing Mushroom", 
-				"Small increases in magic capability and substantial health boost", 2, 6, 0);
-		System.out.println(MAGIC_HEALING_MUSHROOM.hashCode());
-	}
+public class Edible extends Item {
 	
 	private final int manaPoint;
 	private final int healthPoint;
@@ -38,7 +34,7 @@ public class Edible extends Item {
 	
 	@Override
 	public String toString() {
-		return String.format("\"%s: %s\", Mana: %d, Health: %d, Experience: %d", getName(), getDescription(), getManaPoint(), getHealthPoint(), getExperiencePoint());
+		return String.format("\"%s: %s\", Mana: %d, Health: %d, Experience: %d", getName(), getDescription(), getManaPoint(), getHealthPoint(), getRequiredLevel());
 	}
 
 }

@@ -14,6 +14,11 @@ public class ForbiddenFruit extends Edible {
 		setPoison(null);
 	}
 
+	@Override
+	public String toString() {
+		return String.format("\"%s: %s\", Mana: %d, Health: %d, Experience: %d, Quest: %s", getName(), getDescription(), getManaPoint(), getHealthPoint(), getRequiredLevel(), getQuest().getName());
+	}
+
 	public Quest getQuest() {
 		return quest;
 	}
@@ -26,11 +31,6 @@ public class ForbiddenFruit extends Edible {
 		this.poison = poisoned;
 	}
 	
-	@Override
-	public String toString() {
-		return String.format("\"%s: %s\", Mana: %d, Health: %d, Experience: %d, Quest: %s", 
-				getName(), getDescription(), getManaPoint(), getHealthPoint(), getExperiencePoint(), 
-				getQuest().getName());
-	}
+	
 	
 }

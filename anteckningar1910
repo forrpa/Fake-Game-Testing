@@ -1,0 +1,44 @@
+Möte inför statusredovisning två
+
+datum:2020-10-19
+
+medverkande:
+Jennifer
+Christoffer
+Adam
+Christian
+
+Anteckningar från mötet:
+
+Adam tog upp frågan om vi inte borde vänta med intergrationstestning och bara testa isolerat nu.
+VI väljer att ta upp frågan imorgon.
+
+Vi diskuterarde om vi skulle granska vår egen eller någon annan grupps kod. vi kom fram till att om möjligt granska någons annas kod.
+
+vi beslutade att fråga om när vi bör börja med granskningen.
+
+
+
+VI bestämmer att mötas upp  10:30 en halvtimme innan redovisning imorgon.
+
+
+
+Hur mycket TDD ska vi göra?
+
+datum: 2020-10-19
+
+//Jennifer
+Behöver integrera med andra klasser för att testfall och metoder ska funka, eller skriva nya klasser. Några testfall har gjorts med TDD.
+
+//Christoffer
+//todo
+
+
+//Adam
+Skapade Monster-klassen med hjälp av TDD, ca 9 tester, har gjort lite mer efteråt som att utveckla attack-klassen
+Har gjort en enkel Questgiver som ska kunna ge quests
+
+
+//Christian
+Har 9 testfall som alla testar samma träd av klasser, alla gjorde med TDD. Inga andra gjorda än.
+

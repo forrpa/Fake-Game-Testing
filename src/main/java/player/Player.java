@@ -5,7 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 import equipment.*;
 import weapon.*;
-import edible.Item;
+import edible.Cupboard;
+import item.Item;
 
 public class Player {
 	private int manaPoint;
@@ -16,6 +17,7 @@ public class Player {
     private Map<ArmorType, Boolean> allowedArmorTypes = new HashMap<ArmorType, Boolean>();
     private Map<String, Equipment> gear = new HashMap<String, Equipment>();
     private Map<Item, Boolean> inventory2 = new HashMap<Item, Boolean>();
+    private Cupboard cupboard;
     
     //private PlayerClass playerClass;
     //private Race race; //Beror på om vi vill göra klasserna Class och Race, jag kör med String sålänge
@@ -97,8 +99,14 @@ public class Player {
     public void equipWeapon(Weapon weapon) {
     	//Work in progress
     }
+    private boolean isItemInInventory(Item item) {
+    	if(this.inventory2.get(item)) {return true;}else {return false;}
+    }
+    private boolean isPlayerLeveledHighlyEnoughToEquip(Item item) {
+    	if(this.level < item.getRequiredLevel()) {return false;}else {return true;}
+    }
     public void equipArmor(Equipment armor) throws Exception {
-    	if(this.inventory2.get(armor)==false) {throw new Exception();}
+    	if(!isItemInInventory(armor)) {throw new Exception();}
     	if(this.level < armor.getRequiredLevel()) {throw new Exception();}
     	if(this.allowedArmorTypes.get(armor.getArmorType())) {
     		if(armor instanceof Chest) {
@@ -114,6 +122,14 @@ public class Player {
     		throw new Exception();
     	}
     }
+
+	public Cupboard getCupboard() {
+		return cupboard;
+	}
+
+	public void setCupboard(Cupboard cupboard) {
+		this.cupboard = cupboard;
+	}
 
     // methods added by Christoffer
 }

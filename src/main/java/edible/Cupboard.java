@@ -1,5 +1,7 @@
 package edible;
 
+import item.Inventory;
+import item.Item;
 import player.Player;
 
 public class Cupboard {
@@ -59,7 +61,7 @@ public class Cupboard {
 	private void utilConsumeSetPlayerPoints(Edible edible) {
 		getPlayer().setManaPoint(player.getManaPoint() + edible.getManaPoint());
 		getPlayer().setHealthPoint(player.getHealthPoint() + edible.getHealthPoint());
-		getPlayer().setExperiencePoint(player.getExperiencePoint() + edible.getExperiencePoint());
+		getPlayer().setExperiencePoint(player.getExperiencePoint() + edible.getRequiredLevel());
 	}
 	
 	public void consume(Edible edible) {

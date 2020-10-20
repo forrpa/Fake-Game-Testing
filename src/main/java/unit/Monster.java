@@ -3,44 +3,38 @@ package unit;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Monster {
-    private String name;
+public abstract class Monster extends NPC implements Combatant {
     private boolean isGrounded;
     private int health;
     private int attackPower;
-    private ArrayList<Item> itemsOnMonster;
+    private ArrayList<Item> itemsOnNPC;
+    private AttackType resistance;
+    private AttackType weakness;
 
-    public Monster(String name, int health, int attackPower){
-        this(name, health, attackPower, true);
+    public Monster(String name, int health, int attackPower, AttackType resistance, AttackType weakness){
+        this(name, health, attackPower, true, resistance, weakness);
     }
-    public Monster(String name, int health, int attackPower, ArrayList<Item> items){
-        this(name, health, attackPower, true, items);
+    public Monster(String name, int health, int attackPower, ArrayList<Item> items, AttackType resistance, AttackType weakness){
+        this(name, health, attackPower, true, items, resistance, weakness);
     }
-
-    public Monster(String name, int health, int attackPower, boolean isGrounded){
+    public Monster(String name, int health, int attackPower, boolean isGrounded, AttackType resistance, AttackType weakness){
         setName(name);
         setHealth(health);
-        setAttackPower(attackPower);
-        this.isGrounded = isGrounded;
-    }
-
-    public Monster(String name, int health, int attackPower, boolean isGrounded, ArrayList<Item> items){
-        this(name, health, attackPower, isGrounded);
-        itemsOnMonster = items;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    private void setName(String name){
-        if(name.matches(".*\\d.*")){
-            throw new IllegalArgumentException(("No numbers allowed in name"));
+        if(attackPower < 0){
+            this.attackPower = 0;
+        }else {
+            this.attackPower = attackPower;
         }
-        this.name = name;
+        this.isGrounded = isGrounded;
+        this.resistance = resistance;
+        this.weakness = weakness;
+    }
+    public Monster(String name, int health, int attackPower, boolean isGrounded, ArrayList<Item> items, AttackType resistance, AttackType weakness){
+        this(name, health, attackPower, isGrounded, resistance, weakness);
+        itemsOnNPC = items;
     }
 
-    private boolean isGrounded(){
+    public boolean isGrounded(){
         return isGrounded;
     }
 
@@ -48,7 +42,11 @@ public abstract class Monster {
         return health;
     }
     private void setHealth(int health){
-        this.health = health;
+        if(health < 0){
+            this.health = 0;
+        }else {
+            this.health = health;
+        }
     }
 
     public boolean isDead(){
@@ -60,11 +58,7 @@ public abstract class Monster {
         return attackPower;
     }
 
-    private void setAttackPower(int attackPower) {
-        this.attackPower = attackPower;
-    }
-
-    public boolean attack(Monster enemy){
+    public boolean attack(Combatant enemy){
         if(isDead()){
             throw new IllegalStateException("The attacking unit is dead");
         }else if(enemy.isDead()){
@@ -77,8 +71,8 @@ public abstract class Monster {
         }
     }
 
-    private void takeDamage(Attack attack){
-        int damage = attack.getAttackPower();
+    public void takeDamage(Attack attack){
+        int damage = attack.getAttackPower(resistance, weakness);
         int tempHealth = getHealth() - damage;
         if(tempHealth < 0){
             setHealth(0);
@@ -90,7 +84,7 @@ public abstract class Monster {
     private boolean isLootable() {
         if (!isDead()) {
             throw new IllegalStateException("Monster can't be looted unless dead");
-        } else if (itemsOnMonster == null || itemsOnMonster.isEmpty()) {
+        } else if (itemsOnNPC == null || itemsOnNPC.isEmpty()) {
             throw new IllegalStateException("No items on monster");
         }else{
             return true;
@@ -100,8 +94,8 @@ public abstract class Monster {
     public List<Item> getLooted(){
         if(isLootable()){
             ArrayList<Item> lootedItems = new ArrayList<>();
-            lootedItems.addAll(itemsOnMonster);
-            itemsOnMonster.clear();
+            lootedItems.addAll(itemsOnNPC);
+            itemsOnNPC.clear();
             return lootedItems;
 
         }else{

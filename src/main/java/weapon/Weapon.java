@@ -27,4 +27,7 @@ public abstract class Weapon extends Item{
 	public int[] getAttributes() {return new int[] {this.strength, this.agility, this.intelligence, this.stamina};}
 	public int[] getDamageRange() {return this.damageRange;}
 	public int getRequiredLevel() {return this.requiredLevel;}
+	public String toString() {
+		return "";
+	}
 }
