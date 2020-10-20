@@ -1,5 +1,6 @@
 package edible;
 
+import item.Item;
 
 public class Recipie extends Item {
 	

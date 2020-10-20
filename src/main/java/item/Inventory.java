@@ -1,9 +1,7 @@
-package edible;
+package item;
 
 import java.util.HashMap;
-
-import quest.TalkToGuildLeader;
-
+import item.Item;
 
 public class Inventory {
 

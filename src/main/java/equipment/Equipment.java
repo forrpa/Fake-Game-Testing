@@ -1,5 +1,5 @@
 package equipment;
-import edible.Item;
+import item.Item;
 
 public abstract class Equipment extends Item{
 	private int strength;

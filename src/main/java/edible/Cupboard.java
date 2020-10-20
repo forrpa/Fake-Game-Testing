@@ -1,5 +1,7 @@
 package edible;
 
+import item.Inventory;
+import item.Item;
 import player.Player;
 
 public class Cupboard {

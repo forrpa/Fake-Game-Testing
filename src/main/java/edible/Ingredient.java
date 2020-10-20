@@ -1,5 +1,7 @@
 package edible;
 
+import item.Item;
+
 public class Ingredient extends Item {
 
 	// found on special Quest?

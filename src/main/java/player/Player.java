@@ -5,7 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 import equipment.*;
 import weapon.*;
-import edible.Item;
+import edible.Cupboard;
+import item.Item;
 
 public class Player {
 	private int manaPoint;
@@ -16,6 +17,7 @@ public class Player {
     private Map<ArmorType, Boolean> allowedArmorTypes = new HashMap<ArmorType, Boolean>();
     private Map<String, Equipment> gear = new HashMap<String, Equipment>();
     private Map<Item, Boolean> inventory2 = new HashMap<Item, Boolean>();
+    private Cupboard cupboard;
     
     //private PlayerClass playerClass;
     //private Race race; //Beror på om vi vill göra klasserna Class och Race, jag kör med String sålänge
@@ -120,6 +122,14 @@ public class Player {
     		throw new Exception();
     	}
     }
+
+	public Cupboard getCupboard() {
+		return cupboard;
+	}
+
+	public void setCupboard(Cupboard cupboard) {
+		this.cupboard = cupboard;
+	}
 
     // methods added by Christoffer
 }
