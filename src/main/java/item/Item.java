@@ -10,7 +10,7 @@ public abstract class Item {
 	public Item(String name, String description) {
 		this.name = name;
 		this.description = description;
-		this.requiredLevel = defaultRequiredLevel;
+		this.requiredLevel = this.defaultRequiredLevel;
 	}
 	
 	public Item(String name, String description, int requiredLevel) {

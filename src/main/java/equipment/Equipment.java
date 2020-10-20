@@ -9,10 +9,9 @@ public abstract class Equipment extends Item {
     private int armor;
     private final int MAX_DURABILITY;
     private int durability;
-    private int requiredLevel;
     
 	public Equipment(String name, String desc, int recLevel, int armor, int dur, int str, int agi, int intell, int sta) {
-		super(name, desc);
+		super(name, desc, recLevel);
 		this.strength = str;
 		this.agility = agi;
 		this.intelligence = intell;
@@ -20,7 +19,6 @@ public abstract class Equipment extends Item {
 		this.armor = armor;
 		this.MAX_DURABILITY = dur;
 		this.durability = dur;
-		this.requiredLevel = recLevel;
 	}
     public int[] getAttributes() {
     	return new int[]{this.strength, this.agility, this.intelligence, this.stamina};
@@ -40,7 +38,6 @@ public abstract class Equipment extends Item {
     public void repair() {
     	this.durability = this.MAX_DURABILITY;
     }
-    public int getRequiredLevel() {return this.requiredLevel;}
     public abstract ArmorType getArmorType();
     public abstract String getSlot();
     public String toString() {
