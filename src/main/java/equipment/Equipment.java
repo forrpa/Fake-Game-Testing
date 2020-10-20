@@ -1,7 +1,7 @@
 package equipment;
 import item.Item;
 
-public abstract class Equipment extends Item{
+public abstract class Equipment extends Item {
 	private int strength;
     private int agility;
     private int intelligence;
