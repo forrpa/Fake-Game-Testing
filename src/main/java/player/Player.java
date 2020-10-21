@@ -50,6 +50,10 @@ public class Player extends Unit{
         setArmorTypeHashMap();
         setWeaponTypeHashMap();
     }
+    private void updateAttributes() {
+    	updateHealthBasedOnStamina();
+    	updateDamageBasedOnStrength();
+    }
     private void updateHealthBasedOnStamina() {
     	if(this.stamina==this.usedStamina) {return;}else {
     		int stamDiff = this.stamina-this.usedStamina;
@@ -170,6 +174,7 @@ public class Player extends Unit{
     	playerInventory.isInInventory(weapon);
     	isPlayerLeveledHighlyEnoughToEquip(weapon);
     	checkIfWeaponToBeEquippedIsAllowedType(weapon);
+    	updateAttributes();
     }
     private boolean isPlayerLeveledHighlyEnoughToEquip(Item item) throws Exception {
     	if(this.level < item.getRequiredLevel()) {throw new Exception();}else {return true;}
@@ -223,6 +228,7 @@ public class Player extends Unit{
     	playerInventory.isInInventory(armor);
     	isPlayerLeveledHighlyEnoughToEquip(armor);
     	checkIfArmorToBeEquippedIsAllowedType(armor);
+    	updateAttributes();
     }
 
 	public Cupboard getCupboard() {
