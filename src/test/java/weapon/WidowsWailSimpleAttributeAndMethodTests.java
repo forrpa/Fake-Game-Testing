@@ -26,8 +26,7 @@ class WidowsWailSimpleAttributeAndMethodTests {
     }
     @Test
     void testToMakeSureWidowsWailHasCorrectDamageRange() {
-    	assertTrue(((Weapon) WIDOWS_WAIL).getDamageRange()[0] < ((Weapon) WIDOWS_WAIL).getDamageRange()[1]);
-    	assertArrayEquals(new int[] {78,99},((Weapon) WIDOWS_WAIL).getDamageRange());
+    	assertEquals(87,((Weapon) WIDOWS_WAIL).getDamage());
     }
     @Test
     void testToMakeSureWidowsWailIsSubclassOfOneHandedSword() {
@@ -75,7 +74,7 @@ class WidowsWailSimpleAttributeAndMethodTests {
     }
     @Test
     void testForCorrectValueFromToStringMethodInWidowsWail() {
-    	assertTrue(WIDOWS_WAIL.toString().equals("Widow's Wail"+"\n"+"A valyrian steel blade that once belonged to a little shit called Joffrey Baratheon."+"\n"+"OneHandedSword"+"\n"+"Damage: 78-99"+"\n"+"Strength: "+17+"\n"+"Agility: "+14+"\n"+"Intelligence: "+0+"\n"+"Stamina: "+10+"\n"+"Required Level: "+20+"\n"+"Durability: "+102+"/"+102));
+    	assertTrue(WIDOWS_WAIL.toString().equals("Widow's Wail"+"\n"+"A valyrian steel blade that once belonged to a little shit called Joffrey Baratheon."+"\n"+"OneHandedSword"+"\n"+"Damage: 87"+"\n"+"Strength: "+17+"\n"+"Agility: "+14+"\n"+"Intelligence: "+0+"\n"+"Stamina: "+10+"\n"+"Required Level: "+20+"\n"+"Durability: "+102+"/"+102));
     }
     @Test
     void testForCorrectValueOfWidowsWailsRequiredLevel() {
