@@ -14,7 +14,7 @@ public class Inventory {
 	
 	public Item getOutItem(Item item) {
 		if(inventory.isEmpty()) throw new NullPointerException("Inventory is empty.");
-		if(!isInInventory(item)) throw new NullPointerException("Item not in inventory.");
+		if(!isInInventory(item)) throw new NullPointerException("Item not in Inventory.");
 		int count = inventory.get(item);
 		if (count == 1) inventory.remove(item);
 		else inventory.put(item, count - 1);
@@ -27,7 +27,7 @@ public class Inventory {
 	}
 	
 	public int getCount(Item item) {
-		if(!isInInventory(item)) throw new NullPointerException("Item not in inventory.");
+		if(!isInInventory(item)) throw new NullPointerException("Item not in Inventory.");
 		return inventory.get(item);
 	}
 	
