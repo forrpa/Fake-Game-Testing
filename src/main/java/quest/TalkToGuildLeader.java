@@ -2,7 +2,10 @@ package quest;
 import edible.Ingredient;
 import edible.Potion;
 import edible.Recipie;
+import equipment.BreastplateOfTesting;
+import equipment.BucklerOfUselessness;
 import player.Player;
+import weapon.Heartsbane;
 import weapon.WidowsWail;
 
 public class TalkToGuildLeader extends Quest {
@@ -10,11 +13,11 @@ public class TalkToGuildLeader extends Quest {
     //göra states till enum
 
     private boolean talkedToGuildLeader = false;
+    Player player = new Player("Tank", "Human", 200,200, 1000);
 
-    public TalkToGuildLeader(String name, String description, String state, boolean mandatory, boolean talkedToGuildLeader){
+    public TalkToGuildLeader(boolean talkedToGuildLeader){
         super("Talk to Guild Leader", "You have to talk to the guild leader west of town.", "pending", true);
         this.talkedToGuildLeader = talkedToGuildLeader;
-        this.state = state;
     }
 
     public boolean hasTalkedToGuildLeader(){
@@ -56,7 +59,7 @@ public class TalkToGuildLeader extends Quest {
     public void questCompleted(Player player) {
         if (endRequirementsFulfilled(player)){
             state = "done";
-            player.setExperiencePoint(500);
+            player.increaseExperiencePoint(500);
             rewardBasedOnClass(player);
             rewardBasedOnRace(player);
             GuildMap guildMap = new GuildMap();
@@ -67,11 +70,9 @@ public class TalkToGuildLeader extends Quest {
     }
 
     public void rewardBasedOnClass(Player player){
-
         switch (player.getPlayerClass()){
             case "Healer":
                 player.addToInventory(new HealingPotion());
-                //player.getCupboard().store(healingPotion); //Ska man lägga till i båda?
             case "Damage":
                 player.addToInventory(new CrystalChard());
             case "Tank":
@@ -83,15 +84,15 @@ public class TalkToGuildLeader extends Quest {
         switch (player.getRace()){
             case "Human":
                 if (player.getPlayerClass() == "Tank"){
-                    player.addToInventory(new RareBreastplate());
+                    player.addToInventory(new BreastplateOfTesting());
                 } else {
-                    player.addToInventory(new CommonBreastPlate());
+                    player.addToInventory(new BucklerOfUselessness());
                 }
             case "Orc":
                 if (player.getPlayerClass() == "Damage"){
                     player.addToInventory(new WidowsWail());
                 } else {
-                    player.addToInventory(new CommonSword());
+                    player.addToInventory(new Heartsbane());
                 }
         }
     }

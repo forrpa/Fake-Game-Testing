@@ -3,24 +3,27 @@ package player;
 import java.util.HashMap;
 import java.util.Map;
 import equipment.*;
+import unit.Attack;
+import unit.Combatant;
 import weapon.*;
 import edible.Cupboard;
 import item.*;
+import unit.Unit;
 
-public class Player {
+public class Player extends Unit{
 	
     //private PlayerClass playerClass;
     //private Race race; //Beror på om vi vill göra klasserna Class och Race, jag kör med String sålänge
     private final String playerClass;
     private final String race;
-    private int healthPoint;
-    private int maxHealthPoint = 200;
-    private int experiencePoint; 
+    private int experiencePoint;
     private int level = 1;
     private int nextLevelCap = 100;
     private int armor;
     private int strength = 2;
-    private int stamina;
+    private int usedStrength;
+    private int stamina =2;
+    private int usedStamina = 0;
     private int intelligence = 2;
     private int agility = 2;
     private Map<ArmorType, Boolean> allowedArmorTypes = new HashMap<ArmorType, Boolean>();
@@ -30,9 +33,9 @@ public class Player {
     private final Cupboard cupboard = new Cupboard(this);
 
     public Player(String playerClass, String race, int healthPoint, int experiencePoint){
+        super(healthPoint, 1, true);
         this.playerClass = playerClass;
         this.race = race;
-        setHealthPoint(healthPoint);
         setExperiencePoint(experiencePoint);
         setArmorTypeHashMap();
         setWeaponTypeHashMap();
@@ -40,21 +43,43 @@ public class Player {
 
     //Ny Player-konstruktor så jag inte förstör allas tester med en ny variabel
     public Player(String playerClass, String race, int healthPoint, int maxHealthPoint, int experiencePoint){
+        super(healthPoint, 1, true);
         this.playerClass = playerClass;
         this.race = race;
-        setHealthPoint(healthPoint);
-        this.maxHealthPoint = maxHealthPoint;
         setExperiencePoint(experiencePoint);
         setArmorTypeHashMap();
         setWeaponTypeHashMap();
     }
-
-    public int getHealthPoint() {
-        return healthPoint;
+    private void updateHealthBasedOnStamina() {
+    	if(this.stamina==this.usedStamina) {return;}else {
+    		int stamDiff = this.stamina-this.usedStamina;
+    		this.maxHealthPoint = this.maxHealthPoint + stamDiff*10;
+    		this.usedStamina = this.stamina;
+    	}
     }
-
-    public int getMaxHealthPoint() {return maxHealthPoint;}
-
+    private void updateDamageBasedOnStrength() {
+    	if(this.strength==this.usedStrength) {return;}else {
+    		int strDiff = this.strength-this.usedStrength;
+    		this.attackPower = this.attackPower + strDiff*5;
+    		this.usedStrength = this.strength;
+    	}
+    }
+    private void removeAttributesFromOldGear(Gear piece) {
+    	//Work in progress
+    }
+    private void addAttributesFromNewGear(Gear piece) {
+    	if(piece instanceof Equipment) {
+    		this.armor = this.armor + ((Equipment) piece).getArmor();
+    	}else if(piece instanceof Weapon){
+    		this.attackPower = this.attackPower + ((Weapon) piece).getDamage();
+    	}
+    	//Work in progress
+    }
+    public int getArmor() {return this.armor;}
+    public int getStrength() {return this.strength;}
+    public int getAgility() {return this.agility;}
+    public int getIntelligence() {return this.intelligence;}
+    public int getStamina() {return this.stamina;}
     public int getExperiencePoint() {
         return experiencePoint;
     }
@@ -65,10 +90,6 @@ public class Player {
 
     public String getRace() {
         return race;
-    }
-
-    public void setHealthPoint(int healthPoint) {
-        this.healthPoint = healthPoint;
     }
 
     public void setExperiencePoint(int experiencePoint) {
@@ -83,9 +104,21 @@ public class Player {
     	this.level++;
     	this.nextLevelCap = this.nextLevelCap*2;
     }
-
+    public int getNextLevelCap() {return this.nextLevelCap;}
     public void fillHealthBar(){
-        healthPoint = maxHealthPoint;
+        setHealthPoint(getMaxHealthPoint());
+    }
+
+    public void setHealthPoint(int healthPoint){
+        if(healthPoint <= 0){
+            super.setHealthPoint(0);
+        }else {
+            super.setHealthPoint(healthPoint);
+        }
+    }
+
+    public void increaseExperiencePoint(int experiencePoint){
+        this.experiencePoint += experiencePoint;
     }
 
     public void increaseMaxHealthPoint(int healthPoint){
@@ -135,13 +168,16 @@ public class Player {
 			this.gear.put(armor.getSlot(), armor);
 		}else {
 			Gear replacedPiece = (Gear) this.gear.replace(armor.getSlot(), armor);
+			removeAttributesFromOldGear(replacedPiece);
 			this.playerInventory.addItem(replacedPiece);
 		}
+		addAttributesFromNewGear(armor);
     }
     private void handleShieldsInWeaponSwap() {
     	if(gear.get("shield")==null) {return;}else {
     		Gear shield = gear.get("shield");
     		playerInventory.addItem(shield);
+			removeAttributesFromOldGear(shield);
     		gear.remove("shield");
     	}
     }
@@ -151,8 +187,10 @@ public class Player {
 			this.gear.put("weapon", weapon);
 		}else {
 			Gear replacedPiece = this.gear.replace("weapon", weapon);
+			removeAttributesFromOldGear(replacedPiece);
 			this.playerInventory.addItem(replacedPiece);
 		}
+		addAttributesFromNewGear(weapon);
     }
     private void checkIfArmorToBeEquippedIsAllowedType(Equipment armor) throws Exception {
     	if(this.allowedArmorTypes.get(armor.getArmorType())) {
@@ -199,7 +237,16 @@ public class Player {
     public int getInventoryCount(Item item) {
         return playerInventory.getCount(item);
     }
-    
+
+    @Override
+    public boolean attack(Combatant enemy) {
+        return false;
+    }
+
+    public void takeDamage(Attack attack){
+
+    }
+
     @Override
     public boolean equals(Object obj) {
     	if(obj instanceof Player) {

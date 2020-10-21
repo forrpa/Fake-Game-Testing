@@ -3,9 +3,12 @@ package quest;
 import static org.junit.jupiter.api.Assertions.*;
 
 import edible.Potion;
+import equipment.BreastplateOfTesting;
+import equipment.BucklerOfUselessness;
 import org.junit.jupiter.api.Test;
 
 import player.Player;
+import weapon.Heartsbane;
 import weapon.WidowsWail;
 
 class TalkToGuildLeaderTest {
@@ -15,10 +18,12 @@ class TalkToGuildLeaderTest {
 
     Player player;
     Player standardPlayer = new Player("Tank", "Human", 100, 1000);
+    TalkToGuildLeader quest = new TalkToGuildLeader(false);
+    TalkToGuildLeader completedQuest;
+
 
     @Test
     void constructorTest() {
-        TalkToGuildLeader quest = new TalkToGuildLeader(questName, questDescription, defaultState, true, false);
         assertEquals(questName, quest.getName());
         assertEquals(questDescription, quest.getDescription());
         assertEquals(defaultState, quest.getState());
@@ -28,117 +33,97 @@ class TalkToGuildLeaderTest {
 
     @Test
     void playerMeetsStartRequirementsForTalkToGuildLeaderQuest() {
-        assertEquals(1000, standardPlayer.getExperiencePoint());
-    }
-
-    @Test
-    void playerDoesNotMeetStartRequirementsForTalkToGuildLeaderQuest(){
-        player = new Player("Tank", "Human", 100, 999);
-        assertEquals(999, player.getExperiencePoint());
-    }
-
-    @Test
-    void canPlayerStartTalkToGuildLeaderQuest() {
-        TalkToGuildLeader quest = new TalkToGuildLeader(questName, questDescription, "unlocked", true, false);
+        quest.startRequirementsFulfilled(standardPlayer);
         assertEquals("unlocked", quest.getState());
-        assertTrue(quest.startRequirementsFulfilled(standardPlayer));
     }
 
     @Test
-    void playerMeetsEndRequirementsForTalkToGuildLeaderQuest() {
-        TalkToGuildLeader quest = new TalkToGuildLeader(questName, questDescription, "in progress", true, true);
+    void playerDoesNotMeetStartRequirementsForTalkToGuildLeaderQuest() {
+        player = new Player("Tank", "Human", 200, 200, 999);
+        assertFalse(quest.startRequirementsFulfilled(player));
+    }
+
+    @Test
+    void playerStartsTalkToGuildLeaderQuestSuccessfully(){
+        quest.startQuest(standardPlayer);
+        assertEquals("in progress", quest.getState());
+    }
+
+    @Test
+    void playerTalkToGuildLeaderSuccessfully(){
+        quest.talkToGuildLeader();
         assertTrue(quest.hasTalkedToGuildLeader());
     }
 
     @Test
+    void playerMeetsEndRequirementsForTalkToGuildLeaderQuest() {
+        completedQuest = new TalkToGuildLeader(true);
+        completedQuest.endRequirementsFulfilled(standardPlayer);
+        assertEquals("completed", completedQuest.getState());
+    }
+
+    @Test
     void canPlayerCompleteTalkToGuildLeaderQuest() {
-        TalkToGuildLeader quest = new TalkToGuildLeader(questName, questDescription, "completed", true, true);
-        assertEquals("completed", quest.getState());
-        assertTrue(quest.endRequirementsFulfilled(standardPlayer));
+        GuildMap guildMap = new GuildMap();
+        completedQuest = new TalkToGuildLeader(true);
+        completedQuest.questCompleted(standardPlayer);
+        assertEquals("done", completedQuest.getState());
+        assertEquals(1500, standardPlayer.getExperiencePoint());
+        assertEquals(1, standardPlayer.getInventoryCount(guildMap));
     }
 
     @Test
     void healerGetsCorrectReward() {
         player = new Player("Healer", "Orc", 200, 1500);
         HealingPotion healingPotion = new HealingPotion();
-        player.addToInventory(healingPotion);
-        GuildMap guildMap = new GuildMap();
-        player.addToInventory(guildMap);
+        quest.rewardBasedOnClass(player);
         assertEquals(1, player.getInventoryCount(healingPotion));
-        assertEquals(1, player.getInventoryCount(guildMap));
-        assertEquals(1500, player.getExperiencePoint());
     }
 
     @Test
     void damageGetsCorrectReward() {
         player = new Player("Damage", "Human", 200, 1500);
         CrystalChard crystalChard = new CrystalChard();
-        player.addToInventory(crystalChard);
-        GuildMap guildMap = new GuildMap();
-        player.addToInventory(guildMap);
-        assertEquals(1, player.getInventoryCount(guildMap));
+        quest.rewardBasedOnClass(player);
         assertEquals(1, player.getInventoryCount(crystalChard));
-        assertEquals(1500, player.getExperiencePoint());
     }
 
     @Test
     void tankGetsCorrectReward() {
-        player = new Player("Tank", "Orc", 200, 1500);
         HealingPotionRecipe healingPotionRecipe = new HealingPotionRecipe();
-        player.addToInventory(healingPotionRecipe);
-        GuildMap guildMap = new GuildMap();
-        player.addToInventory(guildMap);
-        assertEquals(1, player.getInventoryCount(guildMap));
-        assertEquals(1, player.getInventoryCount(healingPotionRecipe));
-        assertEquals(1500, player.getExperiencePoint());
+        quest.rewardBasedOnClass(standardPlayer);
+        assertEquals(1, standardPlayer.getInventoryCount(healingPotionRecipe));
     }
 
     @Test
     void nonTankHumanGetsCorrectReward() {
         player = new Player("Healer", "Human", 200, 1500);
-        CommonBreastPlate commonBreastPlate = new CommonBreastPlate();
-        player.addToInventory(commonBreastPlate);
-        GuildMap guildMap = new GuildMap();
-        player.addToInventory(guildMap);
-        assertEquals(1, player.getInventoryCount(guildMap));
-        assertEquals(1, player.getInventoryCount(commonBreastPlate));
-        assertEquals(1500, player.getExperiencePoint());
+        BucklerOfUselessness bOU = new BucklerOfUselessness();
+        quest.rewardBasedOnRace(player);
+        assertEquals(1, player.getInventoryCount(bOU));
     }
 
     @Test
     void tankHumanGetsCorrectReward() {
-        player = new Player("Tank", "Human", 200, 1500);
-        RareBreastplate rareBreastplate = new RareBreastplate();
-        player.addToInventory(rareBreastplate);
-        GuildMap guildMap = new GuildMap();
-        player.addToInventory(guildMap);
-        assertEquals(1, player.getInventoryCount(guildMap));
-        assertEquals(1, player.getInventoryCount(rareBreastplate));
-        assertEquals(1500, player.getExperiencePoint());
+        BreastplateOfTesting bOT = new BreastplateOfTesting();
+        quest.rewardBasedOnRace(standardPlayer);
+        assertEquals(1, standardPlayer.getInventoryCount(bOT));
     }
 
     @Test
     void nonDamageOrcGetsCorrectReward() {
         player = new Player("Tank", "Orc", 200, 1500);
-        CommonSword commonSword = new CommonSword();
-        player.addToInventory(commonSword);
-        GuildMap guildMap = new GuildMap();
-        player.addToInventory(guildMap);
-        assertEquals(1, player.getInventoryCount(guildMap));
-        assertEquals(1, player.getInventoryCount(commonSword));
-        assertEquals(1500, player.getExperiencePoint());
+        Heartsbane heartsbane = new Heartsbane();
+        quest.rewardBasedOnRace(player);
+        assertEquals(1, player.getInventoryCount(heartsbane));
     }
 
     @Test
     void damageOrcGetsCorrectReward() {
         player = new Player("Damage", "Orc", 200, 1500);
         WidowsWail widowsWail = new WidowsWail();
-        player.addToInventory(widowsWail);
-        GuildMap guildMap = new GuildMap();
-        player.addToInventory(guildMap);
-        assertEquals(1, player.getInventoryCount(guildMap));
+        quest.rewardBasedOnRace(player);
         assertEquals(1, player.getInventoryCount(widowsWail));
-        assertEquals(1500, player.getExperiencePoint());
     }
 
 }

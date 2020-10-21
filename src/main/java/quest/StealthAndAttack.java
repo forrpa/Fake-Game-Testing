@@ -7,17 +7,19 @@ import unit.Monster;
 
 public class StealthAndAttack extends Quest {
 
+    //Belöning magic
+    //Ändra belöning från mina klasser till Christians
+
     private boolean discovered;
     private boolean attacked;
     private boolean talkedToEnemy; //Överflödig
     private String talkedTo;
     private int timer = 120;
     private final GuildMap guildMap = new GuildMap();
+    private Player player = new Player("Tank", "Human", 200,200, 1500);
 
-    public StealthAndAttack(String name, String description, String state, boolean mandatory, boolean discovered, boolean attacked, boolean talkedToEnemy, String talkedTo){
+    public StealthAndAttack(boolean discovered, boolean attacked, boolean talkedToEnemy, String talkedTo){
         super("Stealth and Attack", "You have to follow your enemy without being seen and then attack him", "pending", true);
-        this.description = description;
-        this.state = state;
         this.discovered = discovered;
         this.attacked = attacked;
         this.talkedToEnemy = talkedToEnemy;
@@ -38,14 +40,6 @@ public class StealthAndAttack extends Quest {
 
     public String getTalkedTo() {
         return talkedTo;
-    }
-
-    public int getTimer() {
-        return timer;
-    }
-
-    public void setTimer(int timer){
-        this.timer = timer;
     }
 
     @Override
@@ -88,9 +82,9 @@ public class StealthAndAttack extends Quest {
     }
 
     //TEST
-    public boolean testAttack(Player player, Enemy enemy){
+    public boolean attack(Player player, Enemy enemy){
         if (stealth(player, enemy)) {
-            Attack attack = new Attack(120, player, enemy);
+            Attack attack = new Attack(timer, player, enemy);
             attack.attackEnemy(enemy);
             attacked = true;
             description = "Attack before the enemy escapes!";
@@ -99,7 +93,6 @@ public class StealthAndAttack extends Quest {
                 if (enemy.getHealth() == 0) {
                     break;
                 } else if (attack.getTimer() == 0) {
-                    //attackState = ""
                     description = "Your enemy escaped. Go talk to the Guild Leader.";
                     return true;
                 } else if (player.getHealthPoint() == 0) {
@@ -108,13 +101,14 @@ public class StealthAndAttack extends Quest {
                 }
             }
             description = "You succeeded killing your enemy on time. Go talk to the Guild Leader for your reward!";
-            return true;
+            return true; //Returnerar alltid true?? testa
         } else {
             return false;
         }
     }
 
     //Dela upp metod, klass
+    /*
     public boolean attack(Player player, Enemy enemy){
         if (stealth(player, enemy)){
             attacked = true;
@@ -139,7 +133,7 @@ public class StealthAndAttack extends Quest {
         } else {
             return false;
         }
-    }
+    }*/
 
     public boolean negotiateWithEnemy(Player player, Enemy enemy){
         if (stealth(player, enemy)){
@@ -188,19 +182,29 @@ public class StealthAndAttack extends Quest {
         }
     }
 
+    public void getReward(Player player){
+        if (endRequirementsForNegotiatingWithEnemy()){
+            rewardWhenNegotiatingWithEnemy(player);
+        } else if (endRequirementsForNotAttackingOnTime()){
+            rewardWhenNotAttackingOnTime(player);
+        } else{
+            rewardWhenAttackingOnTime(player);
+        }
+    }
+
     public void rewardWhenAttackingOnTime(Player player){
         //Relation med guild +1000
-        player.setExperiencePoint(2000);
+        player.increaseExperiencePoint(1000);
     }
 
     public void rewardWhenNotAttackingOnTime(Player player){
         //Relation med guild +300
-        player.setExperiencePoint(1000);
+        player.increaseExperiencePoint(300);
     }
 
-    public void rewardWhenTalkingToEnemy(Player player){
+    public void rewardWhenNegotiatingWithEnemy(Player player){
         //player.addToInventory("Money");
-        player.setExperiencePoint(1000);
+        player.increaseExperiencePoint(500);
         player.increaseMaxHealthPoint(100);
         //Sämre relation med guild, -1000
     }
@@ -210,10 +214,8 @@ public class StealthAndAttack extends Quest {
         if (endRequirementsFulfilled(player)){
             state = "done";
             description= "You completed the quest!";
+            getReward(player);
             player.fillHealthBar();
-            rewardWhenAttackingOnTime(player);
-            rewardWhenNotAttackingOnTime(player);
-            rewardWhenTalkingToEnemy(player);
         }
     }
 
