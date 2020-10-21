@@ -6,13 +6,8 @@ import java.util.List;
 import item.*;
 
 public abstract class Monster extends NPC implements Combatant {
-    private boolean isGrounded;
-    private int health;
-    private int maxHealth;
     private int attackPower;
     private ArrayList<Item> itemsOnNPC;
-    private AttackType resistance;
-    private AttackType weakness;
 
     public Monster(String name, int maxHealth, int attackPower, AttackType resistance, AttackType weakness){
         this(name, maxHealth, attackPower, true, resistance, weakness);
@@ -21,41 +16,17 @@ public abstract class Monster extends NPC implements Combatant {
         this(name, maxHealth, attackPower, true, items, resistance, weakness);
     }
     public Monster(String name, int maxHealth, int attackPower, boolean isGrounded, AttackType resistance, AttackType weakness){
-        super(name);
-        setHealth(maxHealth);
+        super(name, maxHealth, isGrounded, resistance, weakness);
         if(attackPower < 0){
             this.attackPower = 0;
         }else {
             this.attackPower = attackPower;
         }
-        this.maxHealth = maxHealth;
-        this.isGrounded = isGrounded;
-        this.resistance = resistance;
-        this.weakness = weakness;
+
     }
     public Monster(String name, int maxHealth, int attackPower, boolean isGrounded, ArrayList<Item> items, AttackType resistance, AttackType weakness){
         this(name, maxHealth, attackPower, isGrounded, resistance, weakness);
         itemsOnNPC = items;
-    }
-
-    public boolean isGrounded(){
-        return isGrounded;
-    }
-
-    public int getHealth() {
-        return health;
-    }
-    private void setHealth(int health){
-        if(health < 0){
-            this.health = 0;
-        }else {
-            this.health = health;
-        }
-    }
-
-    public boolean isDead(){
-        return (health == 0);
-
     }
 
     private int getAttackPower() {
@@ -63,9 +34,9 @@ public abstract class Monster extends NPC implements Combatant {
     }
 
     public boolean attack(Combatant enemy){
-        if(isDead()){
+        if(!isAlive()){
             throw new IllegalStateException("The attacking unit is dead");
-        }else if(enemy.isDead()){
+        }else if(!enemy.isAlive()){
             throw new IllegalStateException("The unit receiving damage is already dead");
         }else if(isGrounded() && !enemy.isGrounded()){
             return false;
@@ -76,17 +47,17 @@ public abstract class Monster extends NPC implements Combatant {
     }
 
     public void takeDamage(Attack attack){
-        int damage = attack.getAttackPower(resistance, weakness);
-        int tempHealth = getHealth() - damage;
+        int damage = attack.getAttackPower(getResistance(), getWeakness());
+        int tempHealth = getHealthPoint() - damage;
         if(tempHealth < 0){
-            setHealth(0);
+            setHealthPoint(0);
         }else {
-            setHealth(tempHealth);
+            setHealthPoint(tempHealth);
         }
     }
 
     private boolean isLootable() {
-        if (!isDead()) {
+        if (isAlive()) {
             throw new IllegalStateException("Monster can't be looted unless dead");
         } else if (itemsOnNPC == null || itemsOnNPC.isEmpty()) {
             throw new IllegalStateException("No items on monster");
@@ -105,5 +76,10 @@ public abstract class Monster extends NPC implements Combatant {
         }else{
             return null;
         }
+    }
+
+    @Override
+    public String toString(){
+        return String.format("Name: %s, Max Health: %i, Current Health: %i, Attack Power: %i, Resistance: %s, Weakness %s.", getName(), getMaxHealth(), getHealthPoint(), getAttackPower(), getResistance(), getWeakness());
     }
 }

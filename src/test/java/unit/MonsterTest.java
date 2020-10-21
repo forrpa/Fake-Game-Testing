@@ -23,7 +23,7 @@ class MonsterTest {
 
         //Assert that name and health is set correct;
         assertEquals("Jabba the Bat", bat.getName());
-        assertEquals(STANDARD_BAT_HEALTH, bat.getHealth());
+        assertEquals(STANDARD_BAT_HEALTH, bat.getHealthPoint());
     }
     @Test
     void batNameSetTo556ByConstructorThrowsIllegalArgumentException(){
@@ -37,11 +37,11 @@ class MonsterTest {
         Monster wolf = new Wolf();
 
         //Assert that wolf has full health
-        assertEquals(STANDARD_WOLF_HEALTH, wolf.getHealth());
+        assertEquals(STANDARD_WOLF_HEALTH, wolf.getHealthPoint());
 
         //Assert that attack is successful and health is deducted
         assertTrue(bat.attack(wolf));
-        assertEquals(STANDARD_WOLF_HEALTH-STANDARD_BAT_ATTACKPOWER, wolf.getHealth());
+        assertEquals(STANDARD_WOLF_HEALTH-STANDARD_BAT_ATTACKPOWER, wolf.getHealthPoint());
     }
     @Test
     void wolfMonsterAttackBatUnsuccessful(){
@@ -60,8 +60,8 @@ class MonsterTest {
 
         //Assert that wolf can attack otherWolf, has right health left and is not dead
         assertTrue(wolf.attack(otherWolf));
-        assertEquals(STANDARD_WOLF_HEALTH-STANDARD_WOLF_ATTACKPOWER, otherWolf.getHealth());
-        assertFalse(otherWolf.isDead());
+        assertEquals(STANDARD_WOLF_HEALTH-STANDARD_WOLF_ATTACKPOWER, otherWolf.getHealthPoint());
+        assertTrue(otherWolf.isAlive());
     }
     @Test
     void wolfMonsterAttackOtherWolfForStandardWolfDamageThriceOtherWolfHas0HealthRemaining(){
@@ -73,8 +73,8 @@ class MonsterTest {
         for (int i = 0;i < 3; i++){
             assertTrue(wolf.attack(otherWolf));
         }
-        assertEquals(0, otherWolf.getHealth());
-        assertTrue(otherWolf.isDead());
+        assertEquals(0, otherWolf.getHealthPoint());
+        assertFalse(otherWolf.isAlive());
     }
     @Test
     void wolfMonsterAttackOtherWolfWith0HealthThrowsIllegalStateException(){
@@ -103,7 +103,7 @@ class MonsterTest {
         Monster bat = new Bat(batItems);
 
         //Asserts that a living monster can't get looted
-        assertFalse(bat.isDead());
+        assertTrue(bat.isAlive());
         assertThrows(IllegalStateException.class, () -> bat.getLooted());
     }
     @Test
@@ -119,7 +119,7 @@ class MonsterTest {
 
         //Asserts that inventory is empty and bat is dead
         assertTrue(lootedItems.isEmpty());
-        assertTrue(bat.isDead());
+        assertFalse(bat.isAlive());
 
         //Asserts that the items gets put in inventory
         lootedItems.addAll(bat.getLooted());
@@ -140,7 +140,7 @@ class MonsterTest {
 
         //Check that *inventory* is empty and bat is alive at start
         assertTrue(lootedItems.isEmpty());
-        assertFalse(bat.isDead());
+        assertTrue(bat.isAlive());
 
         //Kill the bat with the items
         for(int i = 0; i < 3; i++){
@@ -148,7 +148,7 @@ class MonsterTest {
         }
 
         //Ensure bat is dead
-        assertTrue(bat.isDead());
+        assertFalse(bat.isAlive());
 
         //Loot the items
         lootedItems.addAll(bat.getLooted());
@@ -157,7 +157,7 @@ class MonsterTest {
         assertTrue(lootedItems.contains(potion)&& lootedItems.contains(sword));
         assertEquals(2, lootedItems.size());
 
-        //Get error when trying to loot again due to no items left
+        //Get IllegalStateException when trying to loot again due to no items left
         assertThrows(IllegalStateException.class, () -> bat.getLooted());
     }
 }
