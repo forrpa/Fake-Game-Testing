@@ -23,6 +23,16 @@ class ForbiddenFruitTest {
 		assertEquals(fullPointValue, RED_APPLE.getExperiencePoint());
 	}
 	
+//	@Test
+//	void consumePoisonedOverridesGetManaHealthAndExperiencePoint() {
+//		fail("Not yet implemented");
+//	}
+	
+//	@Test
+//	void consumeSetsPotionToNull() {
+//		fail("Not yet implemented");
+//	}
+	
 	@Test
 	void toStringFormatsAttributesCorrect() {
 		assertEquals("\"Red Apple: Eating apple starts quest Talk to Guild Leader\", "

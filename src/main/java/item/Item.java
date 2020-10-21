@@ -44,7 +44,7 @@ public abstract class Item {
     }
     
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         int result = 17;
         final int prime = 31;
         result = prime * result + name.hashCode();

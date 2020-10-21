@@ -31,6 +31,22 @@ public class ForbiddenFruit extends Edible {
 		this.poison = poisoned;
 	}
 	
+	// only one of each type of forbidden fruit can be stored at a time, so no need to overrides equals with poison
+	
+	@Override
+	public int[] consume(int playerManaPoint, int playerHealthPoint, int playerExperiencePoint) {
+		int manaPoint = FULL_POINT_BOOST;
+		int healthPoint = FULL_POINT_BOOST;
+		int experiencePoint = FULL_POINT_BOOST;
+		if(poison != null) {
+			manaPoint = poison.getManaPoint();
+			healthPoint = poison.getHealthPoint();
+			experiencePoint = poison.getExperiencePoint();
+			setPoison(null);
+		}
+		int[] points = {playerManaPoint + manaPoint, playerHealthPoint + healthPoint, playerExperiencePoint + experiencePoint};
+		return points.clone();
+	}
 	
 	
 }
