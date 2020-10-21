@@ -3,6 +3,8 @@ package quest;
 import static org.junit.jupiter.api.Assertions.*;
 
 import edible.Potion;
+import equipment.BreastplateOfTesting;
+import equipment.BucklerOfUselessness;
 import org.junit.jupiter.api.Test;
 
 import player.Player;
@@ -96,16 +98,16 @@ class TalkToGuildLeaderTest {
     @Test
     void nonTankHumanGetsCorrectReward() {
         player = new Player("Healer", "Human", 200, 1500);
-        CommonBreastPlate commonBreastPlate = new CommonBreastPlate();
+        BucklerOfUselessness bOU = new BucklerOfUselessness();
         quest.rewardBasedOnRace(player);
-        assertEquals(1, player.getInventoryCount(commonBreastPlate));
+        assertEquals(1, player.getInventoryCount(bOU));
     }
 
     @Test
     void tankHumanGetsCorrectReward() {
-        RareBreastplate rareBreastplate = new RareBreastplate();
+        BreastplateOfTesting bOT = new BreastplateOfTesting();
         quest.rewardBasedOnRace(standardPlayer);
-        assertEquals(1, standardPlayer.getInventoryCount(rareBreastplate));
+        assertEquals(1, standardPlayer.getInventoryCount(bOT));
     }
 
     @Test

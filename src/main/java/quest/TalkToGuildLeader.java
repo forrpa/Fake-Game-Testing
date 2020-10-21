@@ -2,6 +2,8 @@ package quest;
 import edible.Ingredient;
 import edible.Potion;
 import edible.Recipie;
+import equipment.BreastplateOfTesting;
+import equipment.BucklerOfUselessness;
 import player.Player;
 import weapon.Heartsbane;
 import weapon.WidowsWail;
@@ -71,7 +73,6 @@ public class TalkToGuildLeader extends Quest {
         switch (player.getPlayerClass()){
             case "Healer":
                 player.addToInventory(new HealingPotion());
-                //player.getCupboard().store(healingPotion); //Ska man lägga till i båda?
             case "Damage":
                 player.addToInventory(new CrystalChard());
             case "Tank":
@@ -83,9 +84,9 @@ public class TalkToGuildLeader extends Quest {
         switch (player.getRace()){
             case "Human":
                 if (player.getPlayerClass() == "Tank"){
-                    player.addToInventory(new RareBreastplate());
+                    player.addToInventory(new BreastplateOfTesting());
                 } else {
-                    player.addToInventory(new CommonBreastPlate());
+                    player.addToInventory(new BucklerOfUselessness());
                 }
             case "Orc":
                 if (player.getPlayerClass() == "Damage"){

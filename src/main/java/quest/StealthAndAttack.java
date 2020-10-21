@@ -182,19 +182,29 @@ public class StealthAndAttack extends Quest {
         }
     }
 
+    public void getReward(Player player){
+        if (endRequirementsForNegotiatingWithEnemy()){
+            rewardWhenNegotiatingWithEnemy(player);
+        } else if (endRequirementsForNotAttackingOnTime()){
+            rewardWhenNotAttackingOnTime(player);
+        } else{
+            rewardWhenAttackingOnTime(player);
+        }
+    }
+
     public void rewardWhenAttackingOnTime(Player player){
         //Relation med guild +1000
-        player.setExperiencePoint(2000);
+        player.increaseExperiencePoint(1000);
     }
 
     public void rewardWhenNotAttackingOnTime(Player player){
         //Relation med guild +300
-        player.setExperiencePoint(1000);
+        player.increaseExperiencePoint(300);
     }
 
-    public void rewardWhenTalkingToEnemy(Player player){
+    public void rewardWhenNegotiatingWithEnemy(Player player){
         //player.addToInventory("Money");
-        player.setExperiencePoint(1000);
+        player.increaseExperiencePoint(500);
         player.increaseMaxHealthPoint(100);
         //Sämre relation med guild, -1000
     }
@@ -204,10 +214,8 @@ public class StealthAndAttack extends Quest {
         if (endRequirementsFulfilled(player)){
             state = "done";
             description= "You completed the quest!";
+            getReward(player);
             player.fillHealthBar();
-            rewardWhenAttackingOnTime(player);
-            rewardWhenNotAttackingOnTime(player);
-            rewardWhenTalkingToEnemy(player);
         }
     }
 
