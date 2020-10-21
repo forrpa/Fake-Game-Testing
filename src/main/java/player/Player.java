@@ -65,7 +65,7 @@ public class Player extends Unit{
     	}
     }
     private void removeAttributesFromOldGear(Gear piece) {
-    	
+    	//Work in progress
     }
     private void addAttributesFromNewGear(Gear piece) {
     	if(piece instanceof Equipment) {
@@ -73,7 +73,7 @@ public class Player extends Unit{
     	}else if(piece instanceof Weapon){
     		this.attackPower = this.attackPower + ((Weapon) piece).getDamage();
     	}
-    	
+    	//Work in progress
     }
     public int getArmor() {return this.armor;}
     public int getStrength() {return this.strength;}
