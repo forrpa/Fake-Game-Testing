@@ -5,8 +5,7 @@ import java.util.List;
 
 import item.*;
 
-public abstract class Monster extends NPC implements Combatant {
-    private int attackPower;
+public abstract class Monster extends NPC {
     private ArrayList<Item> itemsOnNPC;
 
     public Monster(String name, int maxHealth, int attackPower, AttackType resistance, AttackType weakness){
@@ -16,45 +15,13 @@ public abstract class Monster extends NPC implements Combatant {
         this(name, maxHealth, attackPower, true, items, resistance, weakness);
     }
     public Monster(String name, int maxHealth, int attackPower, boolean isGrounded, AttackType resistance, AttackType weakness){
-        super(name, maxHealth, isGrounded, resistance, weakness);
+        super(name, maxHealth, attackPower, isGrounded, resistance, weakness);
         itemsOnNPC = new ArrayList<>();
-        if(attackPower < 0){
-            this.attackPower = 0;
-        }else {
-            this.attackPower = attackPower;
-        }
 
     }
     public Monster(String name, int maxHealth, int attackPower, boolean isGrounded, ArrayList<Item> items, AttackType resistance, AttackType weakness){
         this(name, maxHealth, attackPower, isGrounded, resistance, weakness);
         itemsOnNPC.addAll(items);
-    }
-
-    private int getAttackPower() {
-        return attackPower;
-    }
-
-    public boolean attack(Combatant enemy){
-        if(!isAlive()){
-            throw new IllegalStateException("The attacking unit is dead");
-        }else if(!enemy.isAlive()){
-            throw new IllegalStateException("The unit receiving damage is already dead");
-        }else if(isGrounded() && !enemy.isGrounded()){
-            return false;
-        }else {
-            enemy.takeDamage(new Attack(getAttackPower()));
-            return true;
-        }
-    }
-
-    public void takeDamage(Attack attack){
-        int damage = attack.getAttackPower(getResistance(), getWeakness());
-        int tempHealth = getHealthPoint() - damage;
-        if(tempHealth < 0){
-            setHealthPoint(0);
-        }else {
-            setHealthPoint(tempHealth);
-        }
     }
 
     private boolean isLootable() {
