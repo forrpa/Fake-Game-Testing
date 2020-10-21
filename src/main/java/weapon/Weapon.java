@@ -11,7 +11,7 @@ public abstract class Weapon extends Gear{
     private int[] damageRange;
 	
 	public Weapon(String name, String desc, int recLevel, int[] dmg, int dur, int str, int agi, int intell, int sta) {
-		super(name, desc, recLevel);
+		super(name, desc, recLevel, dur);
 		this.strength = str;
 		this.agility = agi;
 		this.intelligence = intell;
@@ -26,7 +26,7 @@ public abstract class Weapon extends Gear{
 	public int[] getDamageRange() {return this.damageRange;}
 	@Override
 	public String toString() {
-		return "";
+		return this.getName()+"\n"+this.getDescription()+"\n"+this.getType()+"\n"+"Damage: "+this.damageRange[0]+"-"+this.damageRange[1]+"\n"+"Strength: "+this.strength+"\n"+"Agility: "+this.agility+"\n"+"Intelligence: "+this.intelligence+"\n"+"Stamina: "+this.stamina+"\n"+"Required Level: "+this.getRequiredLevel()+"\n"+"Durability: "+this.durability+"/"+this.MAX_DURABILITY;
 	}
 	public abstract String getType();
 	public abstract WeaponSize getSize();
