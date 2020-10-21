@@ -41,16 +41,4 @@ public class Inventory {
 		return dict.substring(0,dict.length()-1);
 	}
 
-	//Jennifer
-	// Emilia: bakade ihop metoderna för att undvika reptition, bra tänkt
-//	public void removeItem(Item item){
-//		if(inventory.isEmpty()) throw new NullPointerException("Inventory is empty.");
-//		isInInventory(item);
-//		int count = inventory.get(item);
-//		if (count == 1) {
-//			inventory.remove(item);
-//		} else {
-//			inventory.put(item, count - 1);
-//		}
-//	}
 }
