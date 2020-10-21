@@ -22,5 +22,10 @@ class AttackTest {
         Attack attack = new Attack(STANDARD_WOLF_ATTACKPOWER, AttackType.ICE);
         assertEquals(6, attack.getAttackPower(null, AttackType.ICE));
     }
+    @Test
+    void attackWithNegativeThreePowerReturnsZero(){
+        Attack attack = new Attack(-3);
+        assertEquals(0, attack.getAttackPower(null, null));
+    }
 
 }
