@@ -21,7 +21,9 @@ public class Player extends Unit{
     private int nextLevelCap = 100;
     private int armor;
     private int strength = 2;
-    private int stamina;
+    private int usedStrength;
+    private int stamina =2;
+    private int usedStamina = 0;
     private int intelligence = 2;
     private int agility = 2;
     private Map<ArmorType, Boolean> allowedArmorTypes = new HashMap<ArmorType, Boolean>();
@@ -48,7 +50,13 @@ public class Player extends Unit{
         setArmorTypeHashMap();
         setWeaponTypeHashMap();
     }
-
+    private void updateHealthBasedOnStamina() {
+    	if(this.stamina==this.usedStamina) {return;}else {
+    		int stamDiff = this.stamina-this.usedStamina;
+    		this.maxHealthPoint = this.maxHealthPoint + stamDiff*10;
+    		this.usedStamina = this.stamina;
+    	}
+    }
     public int getExperiencePoint() {
         return experiencePoint;
     }
