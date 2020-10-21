@@ -7,7 +7,6 @@ public abstract class Equipment extends Gear {
     private int stamina;
     private int armor;
     
-    
 	public Equipment(String name, String desc, int recLevel, int armor, int dur, int str, int agi, int intell, int sta) {
 		super(name, desc, recLevel, dur);
 		this.strength = str;

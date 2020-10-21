@@ -2,55 +2,67 @@ package equipment;
 
 import org.junit.jupiter.api.Test;
 
+import item.Item;
+
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeEach;
+
 public class BreastplateOfTestingTest {
+	final static Gear BREASTPLATE_OF_TESTING = new BreastplateOfTesting();
+	@BeforeEach
+	void repairBreastplate() {
+		BREASTPLATE_OF_TESTING.repair();
+	}
     @Test
     void testToMakeSureBreastplateHasCorrectName(){
-        BreastplateOfTesting bpt = new BreastplateOfTesting();
-        assertTrue(bpt.getName().equals("Breastplate of Testing"));
+        assertTrue(BREASTPLATE_OF_TESTING.getName().equals("Breastplate of Testing"));
     }
     @Test
     void testToMakeSureBreastplateHasCorrectAttributValues(){
-        BreastplateOfTesting bpt = new BreastplateOfTesting();
-        assertArrayEquals(new int[]{0, 2, 5, 3},bpt.getAttributes());
+        assertArrayEquals(new int[]{0, 2, 5, 3},((Equipment) BREASTPLATE_OF_TESTING).getAttributes());
     }
     @Test
     void testToMakeSureBreastplateIsSubclassOfChest() {
-    	BreastplateOfTesting bpt = new BreastplateOfTesting();
-    	assertTrue(bpt instanceof Chest);
+    	assertTrue(BREASTPLATE_OF_TESTING instanceof Chest);
     }
     @Test
     void testToMakeSureBreastplateIsSubclassOfEquipment() {
-    	BreastplateOfTesting bpt = new BreastplateOfTesting();
-    	assertTrue(bpt instanceof Equipment);
+    	assertTrue(BREASTPLATE_OF_TESTING instanceof Equipment);
+    }
+    @Test
+    void testToMakeSureBreastplateIsSubclassOfGear() {
+    	assertTrue(BREASTPLATE_OF_TESTING instanceof Gear);
+    }
+    @Test
+    void testToMakeSureBreastplateIsSubclassOfItem() {
+    	assertTrue(BREASTPLATE_OF_TESTING instanceof Item);
     }
     @Test
     void testToMakeSureBreastplateHasCorrectDescription() {
-    	BreastplateOfTesting bpt = new BreastplateOfTesting();
-    	assertTrue(bpt.getDescription().equals("An excellent breastplate for testing things with!"));
+    	assertTrue(BREASTPLATE_OF_TESTING.getDescription().equals("An excellent breastplate for testing things with!"));
     }
     @Test
     void testToMakeSureBreastplateHasCorrectArmorValue() {
-    	BreastplateOfTesting bpt = new BreastplateOfTesting();
-    	assertEquals(150, bpt.getArmor());
+    	assertEquals(150, ((Equipment) BREASTPLATE_OF_TESTING).getArmor());
     }
     @Test
     void testForCorrectMaxDurabilityOfBreastplate() {
-    	BreastplateOfTesting bpt = new BreastplateOfTesting();
-    	assertEquals(100, bpt.getMaxDurability());
+    	assertEquals(100, BREASTPLATE_OF_TESTING.getMaxDurability());
     }
     @Test
     void testForCorrectDurabilityValueOfDamagedBreastplate() {
-    	BreastplateOfTesting bpt = new BreastplateOfTesting();
-    	bpt.damageDurability(13);
-    	assertEquals(87, bpt.getDurability());
+    	BREASTPLATE_OF_TESTING.damageDurability(13);
+    	assertEquals(87, BREASTPLATE_OF_TESTING.getDurability());
     }
     @Test
     void testRepair() {
-    	BreastplateOfTesting bpt = new BreastplateOfTesting();
-    	bpt.damageDurability(13);
-    	bpt.repair();
-    	assertEquals(100, bpt.getDurability());
+    	BREASTPLATE_OF_TESTING.damageDurability(13);
+    	BREASTPLATE_OF_TESTING.repair();
+    	assertEquals(100, BREASTPLATE_OF_TESTING.getDurability());
+    }
+    @Test
+    void testArmorTypeOfBreastplate() {
+    	assertEquals(ArmorType.PLATE, ((BreastplateOfTesting) BREASTPLATE_OF_TESTING).getArmorType());
     }
 }
