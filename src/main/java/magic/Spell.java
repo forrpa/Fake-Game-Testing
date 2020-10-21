@@ -1,13 +1,17 @@
 // @author Christoffer Öhman
 package magic;
 
-public class Spell {
+import player.Player;
+import unit.Combatant;
+
+class Spell {
     private final String description;
     private final String name;
     private int manaCost = 50;
     private int requiredMagicLevel = 5;
     private int cooldownDuration = 10;
 
+    // TODO: 2020-10-20 implement "damage interface"
 
     public Spell(String name, String description, int manaCost, int requiredMagicLevel, int cooldownDuration) {
         this.name = name;
@@ -70,6 +74,14 @@ public class Spell {
         } else {
             throw new IllegalArgumentException ("Error: negative numbers are not allowed here");
         }
+    }
+
+    public boolean castSpell(Player target) {
+        return false;
+    }
+
+    public boolean castSpell(Combatant target) {
+        return false;
     }
 }
 

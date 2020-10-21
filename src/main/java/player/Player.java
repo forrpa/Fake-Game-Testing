@@ -18,6 +18,11 @@ public class Player {
     private int experiencePoint; 
     private int level = 1;
     private int nextLevelCap = 100;
+    private int armor;
+    private int strength = 2;
+    private int stamina;
+    private int intelligence = 2;
+    private int agility = 2;
     private Map<ArmorType, Boolean> allowedArmorTypes = new HashMap<ArmorType, Boolean>();
     private Map<String, Boolean> allowedWeaponTypes = new HashMap<String,Boolean>();
     private Map<String, Gear> gear = new HashMap<String, Gear>();

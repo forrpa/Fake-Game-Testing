@@ -9,7 +9,11 @@ public class Attack {
         this(attackPower,AttackType.PHYSICAL);
     }
     public Attack(int attackPower, AttackType attackType){
-        this.attackPower = attackPower;
+        if(attackPower <= 0){
+            this.attackPower = 0;
+        }else{
+            this.attackPower = attackPower;
+        }
         this.attackType = attackType;
     }
 
@@ -21,5 +25,12 @@ public class Attack {
         }else {
             return attackPower;
         }
+    }
+    private int getAttackPower(){
+        return getAttackPower(null, null);
+    }
+
+    public String toString(){
+        return String.format("Base damage: %d.",getAttackPower());
     }
 }

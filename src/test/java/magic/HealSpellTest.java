@@ -25,7 +25,7 @@ class HealSpellTest {
 
 
         // create player with 5 health
-        Player player = new Player ("playerclass", "race", manaPoint, healthPoints, experiencePoints);
+        Player player = new Player ("playerclass", "race", healthPoints, experiencePoints);
 
         // assert that health = 5
         assertEquals(healthPoints,player.getHealthPoint ());

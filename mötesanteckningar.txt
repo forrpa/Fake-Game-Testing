@@ -1,0 +1,13 @@
+Anteckningar för 14:00 mötena
+datum:2020-10-21
+medverkande:
+Jennifer
+Christoffer
+Adam
+Christian
+
+Fråga till Henrik: Testa alla underklasser trots att testerna blir likadana?
+Fråga til Hendrik: Hur definerar vi 100 procent coverage.
+
+
+
