@@ -64,6 +64,14 @@ public class Player extends Unit{
     		this.usedStrength = this.strength;
     	}
     }
+    private void removeAttributesFromOldGear(Gear piece) {
+    	
+    }
+    private void addAttributesFromNewGear(Gear piece) {
+    	if(piece instanceof Equipment) {
+    		int armor = ((Equipment) piece).getArmor();
+    	}
+    }
     public int getArmor() {return this.armor;}
     public int getStrength() {return this.strength;}
     public int getAgility() {return this.agility;}
@@ -157,13 +165,16 @@ public class Player extends Unit{
 			this.gear.put(armor.getSlot(), armor);
 		}else {
 			Gear replacedPiece = (Gear) this.gear.replace(armor.getSlot(), armor);
+			removeAttributesFromOldGear(replacedPiece);
 			this.playerInventory.addItem(replacedPiece);
 		}
+		addAttributesFromNewGear(armor);
     }
     private void handleShieldsInWeaponSwap() {
     	if(gear.get("shield")==null) {return;}else {
     		Gear shield = gear.get("shield");
     		playerInventory.addItem(shield);
+			removeAttributesFromOldGear(shield);
     		gear.remove("shield");
     	}
     }
@@ -173,8 +184,10 @@ public class Player extends Unit{
 			this.gear.put("weapon", weapon);
 		}else {
 			Gear replacedPiece = this.gear.replace("weapon", weapon);
+			removeAttributesFromOldGear(replacedPiece);
 			this.playerInventory.addItem(replacedPiece);
 		}
+		addAttributesFromNewGear(weapon);
     }
     private void checkIfArmorToBeEquippedIsAllowedType(Equipment armor) throws Exception {
     	if(this.allowedArmorTypes.get(armor.getArmorType())) {
