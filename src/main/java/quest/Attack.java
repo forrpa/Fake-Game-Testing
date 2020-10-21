@@ -21,7 +21,11 @@ public class Attack {
     }
 
     public void decreaseTimerByOne(){
-        this.timer --;
+        if (timer == 0){
+            return;
+        } else {
+            this.timer --;
+        }
     }
 
     public Player getPlayer() {

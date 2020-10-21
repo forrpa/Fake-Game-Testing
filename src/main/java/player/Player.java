@@ -15,7 +15,7 @@ public class Player {
     private final String race;
     private int healthPoint;
     private int maxHealthPoint = 200;
-    private int experiencePoint; 
+    private int experiencePoint;
     private int level = 1;
     private int nextLevelCap = 100;
     private int armor;
@@ -86,6 +86,10 @@ public class Player {
 
     public void fillHealthBar(){
         healthPoint = maxHealthPoint;
+    }
+
+    public void increaseExperiencePoint(int experiencePoint){
+        this.experiencePoint += experiencePoint;
     }
 
     public void increaseMaxHealthPoint(int healthPoint){
