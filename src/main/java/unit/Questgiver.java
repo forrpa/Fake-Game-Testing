@@ -5,7 +5,7 @@ import java.util.List;
 import quest.*;
 import player.*;
 
-public class Questgiver extends NPC {
+public class Questgiver extends Villager {
     private ArrayList<Quest> quests = new ArrayList<>();
     public Questgiver(String name, Quest quest){
         this(name);
@@ -16,7 +16,7 @@ public class Questgiver extends NPC {
         quests.addAll(quest);
     }
     private Questgiver(String name){
-        super(name, 100, true, null, null);
+        super(name, 100,1, true, null, null);
     }
     public List getAvailableQuests(Player player){
         ArrayList<Quest> attainableQuests = new ArrayList<>();
@@ -38,7 +38,6 @@ public class Questgiver extends NPC {
             }
             allQuestNames = sb.deleteCharAt(sb.length() - 2).toString().trim();
         }
-
         return allQuestNames;
     }
     @Override

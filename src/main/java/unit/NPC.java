@@ -1,10 +1,10 @@
 package unit;
 
-public class NPC extends Unit {
+public abstract class NPC extends Unit {
     private String name;
 
-    public NPC (String name, int maxHealth, boolean isGrounded, AttackType resistance, AttackType weakness){
-        super(maxHealth, isGrounded, resistance, weakness);
+    public NPC (String name, int maxHealth, int attackPower, boolean isGrounded, AttackType resistance, AttackType weakness){
+        super(maxHealth, attackPower, isGrounded, resistance, weakness);
         if(name.matches(".*\\d.*")){
             throw new IllegalArgumentException(("No numbers allowed in name"));
         }else {
@@ -13,5 +13,28 @@ public class NPC extends Unit {
     }
     public String getName() {
         return name;
+    }
+
+    public boolean attack(Combatant enemy){
+        if(!isAlive()){
+            throw new IllegalStateException("The attacking unit is dead");
+        }else if(!enemy.isAlive()){
+            throw new IllegalStateException("The unit receiving damage is already dead");
+        }else if(isGrounded() && !enemy.isGrounded()){
+            return false;
+        }else {
+            enemy.takeDamage(new Attack(getAttackPower()));
+            return true;
+        }
+    }
+
+    public void takeDamage(Attack attack){
+        int damage = attack.getAttackPower(getResistance(), getWeakness());
+        int tempHealth = getHealthPoint() - damage;
+        if(tempHealth < 0){
+            setHealthPoint(0);
+        }else {
+            setHealthPoint(tempHealth);
+        }
     }
 }

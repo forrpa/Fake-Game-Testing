@@ -26,4 +26,11 @@ public class Attack {
             return attackPower;
         }
     }
+    private int getAttackPower(){
+        return getAttackPower(null, null);
+    }
+
+    public String toString(){
+        return String.format("Base damage: %d.",getAttackPower());
+    }
 }
