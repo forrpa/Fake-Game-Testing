@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 
-public class BreastplateOfTestingTest {
+public class BreastplateOfTestingSimpleAttributeAndMethodTests {
 	final static Gear BREASTPLATE_OF_TESTING = new BreastplateOfTesting();
 	@BeforeEach
 	void repairBreastplate() {
@@ -64,5 +64,23 @@ public class BreastplateOfTestingTest {
     @Test
     void testArmorTypeOfBreastplate() {
     	assertEquals(ArmorType.PLATE, ((BreastplateOfTesting) BREASTPLATE_OF_TESTING).getArmorType());
+    }
+    @Test
+    void testForCorrectSlotValueFromBreastplate() {
+    	assertTrue(((Chest) BREASTPLATE_OF_TESTING).getSlot().equals("chest"));
+    }
+    @Test
+    void testForCorrectValueFromToStringMethodInBreastplate() {
+    	assertTrue(BREASTPLATE_OF_TESTING.toString().equals("Breastplate of Testing"+"\n"+"An excellent breastplate for testing things with!"+"\n"+"PLATE"+" "+"chest"+"\n"+"Armor: "+150+"\n"+"Strength: "+0+"\n"+"Agility: "+2+"\n"+"Intelligence: "+5+"\n"+"Stamina: "+3+"\n"+"Required Level: "+7+"\n"+"Durability: "+100+"/"+100));
+    }
+    @Test
+    void testForCorrectValueOfBreastplatesRequiredLevel() {
+    	assertEquals(7, BREASTPLATE_OF_TESTING.getRequiredLevel());
+    }
+    @Test
+    void testIfTwoBreastplatesAreConsideredTheSame() {
+    	BreastplateOfTesting bpt = new BreastplateOfTesting();
+    	assertEquals(bpt, BREASTPLATE_OF_TESTING);
+    	assertTrue(bpt.equals(BREASTPLATE_OF_TESTING));
     }
 }

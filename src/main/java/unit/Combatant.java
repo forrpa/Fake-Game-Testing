@@ -3,6 +3,7 @@ package unit;
 public interface Combatant {
     boolean attack(Combatant enemy);
     void takeDamage(Attack attack);
-    boolean isDead();
+    int getAttackPower();
+    boolean isAlive();
     boolean isGrounded();
 }

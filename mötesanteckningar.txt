@@ -1,0 +1,9 @@
+Anteckningar för 14:00 mötena
+datum:2020-10-21
+medverkande:
+Fråga till Henrik: Testa alla underklasser trots att testerna blir likadana?
+Jennifer
+Christoffer
+Adam
+Christian
+
