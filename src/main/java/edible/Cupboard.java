@@ -7,6 +7,17 @@ import magic.MagicPlayer;
 
 public class Cupboard {
 	
+	public static void main(String[] args) {
+		MagicPlayer MAGIC_PLAYER = new MagicPlayer("Vamp Witch", "Very badass witch from Rumania", 500, 100);
+		Cupboard CUPBOARD = new Cupboard(MAGIC_PLAYER); 
+		MAGIC_PLAYER.setCupboard(CUPBOARD);
+		CUPBOARD.store(new Edible("Fortune Cookie", "Hides a wisdom", 0, 0, 1));
+		System.out.println(CUPBOARD);
+		CUPBOARD.consume(new Edible("Fortune Cookie", "Hides a wisdom", 0, 0, 1));
+		System.out.println(CUPBOARD);
+		
+	}
+	
 	private Player player;
 	private final Inventory edibles = new Inventory();
 	private final Inventory forbiddenFruits = new Inventory();
@@ -104,7 +115,7 @@ public class Cupboard {
 			store(potion);
 			store(recipie);
 		} else {
-			throw new IllegalStateException("Only Magic Players can cook from Recipies.");
+			throw new IllegalCallerException("Only Magic Players can cook from Recipies.");
 		}
 	}
 	
@@ -115,7 +126,7 @@ public class Cupboard {
 
 	@Override
 	public String toString() {
-		return getPlayer().toString() + "\nEDIBLES:\n" + edibles.toString() + "\nFORBIDDEN FRUITS:\n" + forbiddenFruits.toString() + "\nPOTIONS:\n" + potions.toString() + "\nINGREDIENTS:\n" + ingredients.toString() + "\nRECIPIES:\n" + recipies.toString();
+		return getPlayer().getPlayerClass() + ", " + player.getRace() + "\nEDIBLES:\n" + edibles.toString() + "\nFORBIDDEN FRUITS:\n" + forbiddenFruits.toString() + "\nPOTIONS:\n" + potions.toString() + "\nINGREDIENTS:\n" + ingredients.toString() + "\nRECIPIES:\n" + recipies.toString();
 
 	}
 }

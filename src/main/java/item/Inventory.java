@@ -14,19 +14,20 @@ public class Inventory {
 	
 	public Item getOutItem(Item item) {
 		if(inventory.isEmpty()) throw new NullPointerException("Inventory is empty.");
-		isInInventory(item);
+		if(!isInInventory(item)) throw new NullPointerException("Item not in inventory.");
 		int count = inventory.get(item);
-		inventory.put(item, count - 1);
+		if (count == 1) inventory.remove(item);
+		else inventory.put(item, count - 1);
 		return item;
 	}
 	
 	public boolean isInInventory(Item item) {
-		if(!inventory.containsKey(item)) throw new NullPointerException("Item not in inventory.");
-		return true;
+		if(inventory.containsKey(item)) return true;
+		else return false;
 	}
 	
 	public int getCount(Item item) {
-		isInInventory(item);
+		if(!isInInventory(item)) throw new NullPointerException("Item not in inventory.");
 		return inventory.get(item);
 	}
 	
@@ -41,14 +42,15 @@ public class Inventory {
 	}
 
 	//Jennifer
-	public void removeItem(Item item){
-		if(inventory.isEmpty()) throw new NullPointerException("Inventory is empty.");
-		isInInventory(item);
-		int count = inventory.get(item);
-		if (count == 1) {
-			inventory.remove(item);
-		} else {
-			inventory.put(item, count - 1);
-		}
-	}
+	// Emilia: bakade ihop metoderna för att undvika reptition, bra tänkt
+//	public void removeItem(Item item){
+//		if(inventory.isEmpty()) throw new NullPointerException("Inventory is empty.");
+//		isInInventory(item);
+//		int count = inventory.get(item);
+//		if (count == 1) {
+//			inventory.remove(item);
+//		} else {
+//			inventory.put(item, count - 1);
+//		}
+//	}
 }

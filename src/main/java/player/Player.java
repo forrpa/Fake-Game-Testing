@@ -8,6 +8,11 @@ import edible.Cupboard;
 import item.*;
 
 public class Player {
+	
+    //private PlayerClass playerClass;
+    //private Race race; //Beror på om vi vill göra klasserna Class och Race, jag kör med String sålänge
+    private final String playerClass;
+    private final String race;
     private int healthPoint;
     private int maxHealthPoint = 200;
     private int experiencePoint; 
@@ -18,11 +23,6 @@ public class Player {
     private Map<String, Gear> gear = new HashMap<String, Gear>();
     private Inventory playerInventory = new Inventory();
     private Cupboard cupboard;
-    
-    //private PlayerClass playerClass;
-    //private Race race; //Beror på om vi vill göra klasserna Class och Race, jag kör med String sålänge
-    private String playerClass;
-    private String race;
 
     public Player(String playerClass, String race, int healthPoint, int experiencePoint){
         this.playerClass = playerClass;
@@ -188,14 +188,24 @@ public class Player {
     }
 
     public void removeFromInventory(Item item) {
-        playerInventory.removeItem(item);
+        playerInventory.getOutItem(item);
     }
 
     public boolean isInInventory(Item item) {
         return playerInventory.isInInventory(item);
     }
 
-    public int getInventoryCount(Item item){
+    public int getInventoryCount(Item item) {
         return playerInventory.getCount(item);
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+    	if(obj instanceof Player) {
+    		Player player = (Player) obj;
+    		return player.playerClass == playerClass && player.race == race;
+    	} else {
+    		return false;
+    	}
     }
 }

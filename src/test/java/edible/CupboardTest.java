@@ -1,6 +1,7 @@
 package edible;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -12,9 +13,8 @@ import quest.TalkToGuildLeader;
 
 class CupboardTest {
 
-	final static Player PLAYER = new Player("playerClassString", "raceString", 5, 10);
-	final static Player MAGIC_PLAYER = new MagicPlayer("playerClassString", "raceString", 5, 10);
-	final static Cupboard CUPBOARD = new Cupboard(PLAYER); 
+	final static MagicPlayer MAGIC_PLAYER = new MagicPlayer("Vamp Witch", "Very badass witch from Rumania", 500, 100);
+	final static Cupboard CUPBOARD = new Cupboard(MAGIC_PLAYER); 
 	final static Edible FLY_AGARIC = new Edible("Fly Agaric", "Poisonous mushroom with magic powers", 4, -3, 0);
 	final static ForbiddenFruit LUCKY_CHERRY = new ForbiddenFruit("Lucky Cherry", "Eating cherry starts quest Talk to Guild leader", new TalkToGuildLeader("Talk to Guild leader", "Talk", "in progress", true, true));
 	
@@ -32,23 +32,29 @@ class CupboardTest {
 	final static Recipie GREEN_VENOM_RECIPIE = new Recipie("Green Venom Recipie", 
 			"Recipie for potion sabbotaging health on entering bloodstream", GREEN_VENOM, GREEN_VENOM_INGREDIENTS, 50, 20);
 	
-	final static Edible ONE_UP_CEREAL = new Edible("1-Up Cereal", "1-Up", 0, 10, 0);
+	//final static Edible ONE_UP_CEREAL = new Edible("1-Up Cereal", "1-Up", 0, 10, 0);
 	final static Edible FORTUNE_COOKIE = new Edible("Fortune Cookie", "Hides a wisdom", 0, 0, 1);
 	
 	@BeforeAll
+	static void setCupboardAttributeOfMagicPlayer() throws Exception {
+		MAGIC_PLAYER.setCupboard(CUPBOARD);
+	}
+	
+	@BeforeAll
 	static void addItemToAllInventoryObjectsInCupboard() {
-		// TO-DO
+		CUPBOARD.store(FORTUNE_COOKIE);
 	}
 	
 	@Test
-	void constructorSetsAttribute() {
-		// implement equals method for the superclass to player/character/NPC and whatever they are called, or to all
-		assertEquals(PLAYER, CUPBOARD.getPlayer());
+	void constructorSetsAttributePlayer() {
+//		Player player = new MagicPlayer(MAGIC_PLAYER.getPlayerClass(), MAGIC_PLAYER.getRace(), 
+//				MAGIC_PLAYER.getHealthPoint(), MAGIC_PLAYER.getExperiencePoint());
+		assertEquals(MAGIC_PLAYER, CUPBOARD.getPlayer());
 	}
 	
 	@Test
 	void storeAllocatesItemInCorrectInventory() {
-		fail("Not yet implemented");
+		fail("Not yet implemented"); 
 	}
 	
 	@Test
@@ -93,7 +99,9 @@ class CupboardTest {
 	
 	@Test
 	void cookNotMagicPlayerThrowsISE() {
-		
+		Player player = new Player("Gnome", "Good companion appreciated by other players", 20, 0);
+		player.setCupboard(new Cupboard(player));
+		assertThrows(IllegalCallerException.class, () -> player.getCupboard().cook(GREEN_VENOM_RECIPIE));
 	}
 	
 	@Test
