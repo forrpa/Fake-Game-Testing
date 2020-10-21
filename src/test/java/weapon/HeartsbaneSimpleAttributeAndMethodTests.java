@@ -25,8 +25,7 @@ class HeartsbaneSimpleAttributeAndMethodTests {
     }
     @Test
     void testToMakeSureHeartsbaneHasCorrectDamageRange() {
-    	assertTrue(((Weapon) HEARTSBANE).getDamageRange()[0] < ((Weapon) HEARTSBANE).getDamageRange()[1]);
-    	assertArrayEquals(new int[] {160,197},((Weapon) HEARTSBANE).getDamageRange());
+    	assertEquals(189,((Weapon) HEARTSBANE).getDamage());
     }
     @Test
     void testToMakeSureHeartsbaneIsSubclassOfTwoHandedSword() {
@@ -74,7 +73,7 @@ class HeartsbaneSimpleAttributeAndMethodTests {
     }
     @Test
     void testForCorrectValueFromToStringMethodInHeartsbane() {
-    	assertTrue(HEARTSBANE.toString().equals("Heartsbane"+"\n"+"A valyrian steel two-handed greatsword that belongs to a giant twat called Randyll Tarly."+"\n"+"TwoHandedSword"+"\n"+"Damage: 160-197"+"\n"+"Strength: "+46+"\n"+"Agility: "+28+"\n"+"Intelligence: "+0+"\n"+"Stamina: "+18+"\n"+"Required Level: "+35+"\n"+"Durability: "+117+"/"+117));
+    	assertTrue(HEARTSBANE.toString().equals("Heartsbane"+"\n"+"A valyrian steel two-handed greatsword that belongs to a giant twat called Randyll Tarly."+"\n"+"TwoHandedSword"+"\n"+"Damage: 189"+"\n"+"Strength: "+46+"\n"+"Agility: "+28+"\n"+"Intelligence: "+0+"\n"+"Stamina: "+18+"\n"+"Required Level: "+35+"\n"+"Durability: "+117+"/"+117));
     }
     @Test
     void testForCorrectValueOfHeartsbanesRequiredLevel() {
