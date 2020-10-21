@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 
-public class BreastplateOfTestingTest {
+public class BreastplateOfTestingSimpleAttributeAndMethodTests {
 	final static Gear BREASTPLATE_OF_TESTING = new BreastplateOfTesting();
 	@BeforeEach
 	void repairBreastplate() {
