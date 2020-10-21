@@ -9,3 +9,4 @@ Christian
 Fråga till Henrik: Testa alla underklasser trots att testerna blir likadana?
 Fråga til Hendrik: Hur definerar vi 100 procent coverage.
 
+Player kommer att flyttas till paketet unit och implementera  interfac: Combatant
