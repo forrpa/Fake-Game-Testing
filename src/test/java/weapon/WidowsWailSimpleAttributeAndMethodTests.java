@@ -25,6 +25,10 @@ class WidowsWailSimpleAttributeAndMethodTests {
         assertArrayEquals(new int[]{17, 14, 0, 10},( (Weapon) WIDOWS_WAIL).getAttributes());
     }
     @Test
+    void testToMakeSureWidowsWailHasCorrectDamageRange() {
+    	assertArrayEquals(new int[] {78,99},((Weapon) WIDOWS_WAIL).getDamageRange());
+    }
+    @Test
     void testToMakeSureWidowsWailIsSubclassOfOneHandedSword() {
     	assertTrue(WIDOWS_WAIL instanceof OneHandedSword);
     }
