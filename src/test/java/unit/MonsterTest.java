@@ -31,6 +31,19 @@ class MonsterTest {
         assertThrows(IllegalArgumentException.class, () -> new Bat("556", STANDARD_BAT_HEALTH, STANDARD_BAT_ATTACKPOWER, null, null));
     }
     @Test
+    void toStringReturnsCorrectString(){
+        Monster bat = new Bat();
+        assertEquals("Name: Bat, Max Health: 5, Current Health: 5, Attack Power: 2, Resistance: null, Weakness null.", bat.toString());
+    }
+    @Test
+    void toStringReturnsCorrectStringWithItems(){
+        Item item = new Ingredient("Bat wing", "A wing from a bat.");
+        ArrayList<Item> batItems = new ArrayList<>();
+        batItems.add(item);
+        Monster bat = new Bat(batItems);
+        assertEquals("Name: Bat, Max Health: 5, Current Health: 5, Attack Power: 2, Resistance: null, Weakness null, Loot: Bat wing.", bat.toString());
+    }
+    @Test
     void batMonsterAttackWolfSuccessful(){
         //Set-up
         Monster bat = new Bat();

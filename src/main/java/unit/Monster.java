@@ -17,6 +17,7 @@ public abstract class Monster extends NPC implements Combatant {
     }
     public Monster(String name, int maxHealth, int attackPower, boolean isGrounded, AttackType resistance, AttackType weakness){
         super(name, maxHealth, isGrounded, resistance, weakness);
+        itemsOnNPC = new ArrayList<>();
         if(attackPower < 0){
             this.attackPower = 0;
         }else {
@@ -26,7 +27,7 @@ public abstract class Monster extends NPC implements Combatant {
     }
     public Monster(String name, int maxHealth, int attackPower, boolean isGrounded, ArrayList<Item> items, AttackType resistance, AttackType weakness){
         this(name, maxHealth, attackPower, isGrounded, resistance, weakness);
-        itemsOnNPC = items;
+        itemsOnNPC.addAll(items);
     }
 
     private int getAttackPower() {
@@ -78,8 +79,27 @@ public abstract class Monster extends NPC implements Combatant {
         }
     }
 
+    public String getAllAvailableLoot(){
+        String allItems = "";
+        if(itemsOnNPC.size() > 0){
+            StringBuilder sb = new StringBuilder();
+            for(Item item : itemsOnNPC){
+                sb.append(item.getName()).append(", ");
+            }
+            allItems = sb.deleteCharAt(sb.length() - 2).toString().trim();
+        }
+        return allItems;
+    }
+
     @Override
     public String toString(){
-        return String.format("Name: %s, Max Health: %i, Current Health: %i, Attack Power: %i, Resistance: %s, Weakness %s.", getName(), getMaxHealth(), getHealthPoint(), getAttackPower(), getResistance(), getWeakness());
+        String toStringString = String.format("Name: %s, Max Health: %d, Current Health: %d, Attack Power: %d, Resistance: %s, Weakness %s.", getName(), getMaxHealth(), getHealthPoint(), getAttackPower(), getResistance(), getWeakness());
+        if(!getAllAvailableLoot().isEmpty()){
+            StringBuilder sb = new StringBuilder();
+            sb.append(toStringString).deleteCharAt(toStringString.length()-1);
+            sb.append(String.format(", Loot: %s.", getAllAvailableLoot()));
+            toStringString = sb.toString();
+        }
+        return toStringString;
     }
 }

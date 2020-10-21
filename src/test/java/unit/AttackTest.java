@@ -13,6 +13,12 @@ class AttackTest {
         assertEquals(STANDARD_WOLF_ATTACKPOWER, attack.getAttackPower(null, null));
     }
     @Test
+    void toStringReturnsCorrectString(){
+        Attack attack = new Attack(STANDARD_WOLF_ATTACKPOWER);
+        assertEquals("Base damage: 3.", attack.toString());
+    }
+
+    @Test
     void attackWithThreePowerReturnsOneDamageIfResistant(){
         Attack attack = new Attack(STANDARD_WOLF_ATTACKPOWER, AttackType.FIRE);
         assertEquals(1, attack.getAttackPower(AttackType.FIRE, null));

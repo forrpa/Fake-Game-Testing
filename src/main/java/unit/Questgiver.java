@@ -38,7 +38,6 @@ public class Questgiver extends NPC {
             }
             allQuestNames = sb.deleteCharAt(sb.length() - 2).toString().trim();
         }
-
         return allQuestNames;
     }
     @Override
