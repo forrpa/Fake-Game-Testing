@@ -49,6 +49,7 @@ public class Player extends Unit{
         setExperiencePoint(experiencePoint);
         setArmorTypeHashMap();
         setWeaponTypeHashMap();
+        updateAttributes();
     }
     private void updateAttributes() {
     	updateHealthBasedOnStamina();
