@@ -22,7 +22,7 @@ public class Player {
     private Map<String, Boolean> allowedWeaponTypes = new HashMap<String,Boolean>();
     private Map<String, Gear> gear = new HashMap<String, Gear>();
     private Inventory playerInventory = new Inventory();
-    private Cupboard cupboard;
+    private final Cupboard cupboard = new Cupboard(this);
 
     public Player(String playerClass, String race, int healthPoint, int experiencePoint){
         this.playerClass = playerClass;
@@ -173,10 +173,6 @@ public class Player {
 
 	public Cupboard getCupboard() {
 		return cupboard;
-	}
-
-	public void setCupboard(Cupboard cupboard) {
-		this.cupboard = cupboard;
 	}
 
     // methods added by Christoffer
