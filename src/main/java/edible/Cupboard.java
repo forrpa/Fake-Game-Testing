@@ -2,30 +2,11 @@ package edible;
 
 import item.Inventory;
 import item.Item;
-import player.Player;
-import quest.TalkToGuildLeader;
 import magic.MagicPlayer;
+import player.Player;
+import quest.Quest;
 
 public class Cupboard {
-	
-//	public static void main(String[] args) {
-//		final TalkToGuildLeader QUEST = new TalkToGuildLeader("Talk to Guild leader", "Talk", "in progress", true, true);
-//		final ForbiddenFruit LUCKY_CHERRY = new ForbiddenFruit("Lucky Cherry", "Eating cherry starts quest Talk to Guild leader", QUEST);
-//		MagicPlayer MAGIC_PLAYER = new MagicPlayer("Vamp Witch", "Very badass witch from Rumania", 500, 100);
-//		Cupboard CUPBOARD = new Cupboard(MAGIC_PLAYER); 
-//		//CUPBOARD.store(new Edible("Fortune Cookie", "Hides a wisdom", 0, 0, 1));
-//		//System.out.println(CUPBOARD);
-//		//CUPBOARD.consume(new Edible("Fortune Cookie", "Hides a wisdom", 0, 0, 1));
-//		CUPBOARD.store(LUCKY_CHERRY);
-//		System.out.println("\n" +CUPBOARD);
-//		CUPBOARD.store(LUCKY_CHERRY);
-//		System.out.println("\n" +CUPBOARD);
-//
-//		System.out.println(CUPBOARD.getCount(LUCKY_CHERRY));
-//		
-//		System.out.println(CUPBOARD);
-//		
-//	}
 	
 	private Player player;
 	private final Inventory edibles = new Inventory();
@@ -54,7 +35,6 @@ public class Cupboard {
 	private Inventory classifyCupboardItem(Item item) {
 		if(item instanceof Ingredient) return ingredients;
 		if(item instanceof Recipie) return recipies;
-		// forbidden fruit and potion inherit from Edible so order of classification starting subclasses important!
 		if(item instanceof ForbiddenFruit) return forbiddenFruits;
 		if(item instanceof Potion) return potions;
 		if(item instanceof Edible) return edibles;
@@ -101,9 +81,7 @@ public class Cupboard {
 		}
 	}
 	
-	public void consume(Edible edible) {
-		// owner of cupboard gets effected by consume already since attribute of this class used for method
-		// steal will change owner of cupboard not personal cupboard of player
+	public Quest consume(Edible edible) {
 		Inventory inventory = getInventoryOfClassififedItem(edible);
 		inventory.getOutItem(edible);
 		int manaPoint = 0;
@@ -111,16 +89,18 @@ public class Cupboard {
 			MagicPlayer magicPlayer = (MagicPlayer) player;
 			manaPoint = magicPlayer.getManaPoint();
 		}
-		// forbiddenFruit overrides consume taking into account poison
 		int[] points = edible.consume(manaPoint, player.getHealthPoint(), player.getExperiencePoint());
 		utilConsumeSetPlayerPoint(points[0], points[1], points[2]);
 		if(edible instanceof ForbiddenFruit) {
 			ForbiddenFruit fruit = (ForbiddenFruit) edible;
-			fruit.getQuest().startQuest(player);
+			return fruit.getQuestUnlocked();
 		}
+		return null;
 	}
 	
-	public void poison(Potion potion, ForbiddenFruit fruit) {
+	public void poison(ForbiddenFruit fruit, Potion potion) {
+		if(!isInInventory(fruit)) throw new NullPointerException("Forbidden Fruit to poison not in Cupboard.");
+		if(!isInInventory(potion)) throw new NullPointerException("Potion to poison with not in Cupboard.");
 		potions.getOutItem(potion);
 		forbiddenFruits.getOutItem(fruit);
 		fruit.setPoison(potion);
@@ -150,11 +130,6 @@ public class Cupboard {
 			throw new IllegalCallerException("Only Magic Players can cook from Recipies.");
 		}
 	}
-	
-//	TradeOffer Class needed to implement getOutItem and place in tradeOffer object to close deal
-//		
-	
-	// steal cupboard and empty cupboard take param other player
 
 	@Override
 	public String toString() {

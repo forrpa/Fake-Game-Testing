@@ -3,7 +3,6 @@ package item;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.RepeatedTest;
@@ -20,8 +19,8 @@ class InventoryTest {
 	final static Inventory INVENTORY = new Inventory();
 	final static Edible FLY_AGARIC = new Edible("Fly Agaric", "Poisonous mushroom with magic powers", 4, -3, 0);
 	final static Ingredient FIRE_ROOT = new Ingredient("Fire Root", "Increases power of potions");
-	final static ForbiddenFruit LUCKY_CHERRY = new ForbiddenFruit("Lucky Cherry", "Eating cherry starts quest Talk to Guild leader", 
-			new TalkToGuildLeader("Talk to Guild leader", "Talk", "in progress", true, true));
+	final static ForbiddenFruit LUCKY_CHERRY = new ForbiddenFruit("Lucky Cherry", 
+			"Eating cherry starts quest Talk to Guild leader", new TalkToGuildLeader(true));
 	final static int TEN_BEFOREALL_COUNT_FLY_AGARIC = 10;
 	static int COUNT_FLY_AGARIC = 0;
 	
@@ -63,7 +62,6 @@ class InventoryTest {
 	@Test
 	void getOutItemInvetoryEmptyThrowsNPE() {
 		assertThrows(NullPointerException.class, () -> new Inventory().getOutItem(FLY_AGARIC));
-			// way to check message of null pointer exception?
 	}
 	
 	@Test
@@ -80,8 +78,4 @@ class InventoryTest {
 		assertEquals("{Heartbreak Potion: 1 }\n{Fire Root: 1 }\n{Lucky Cherry: 1 }\n{Power Potion: 1 }\n{Fly Agaric: 10 }", INVENTORY.toString());
 	}
 	
-	@Test
-	void toStringFastEnough() {
-//		fail("Not yet implemented");
-	}
 }

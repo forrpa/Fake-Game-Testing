@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 public class Inventory {
 
-	// private final name?
 	private final HashMap<Item, Integer> inventory = new HashMap<>();
 
 	public void addItem(Item item) {
