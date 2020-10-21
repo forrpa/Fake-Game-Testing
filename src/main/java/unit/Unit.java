@@ -4,7 +4,7 @@ public abstract class Unit implements Combatant {
     private boolean isGrounded;
     private int healthPoint;
     protected int maxHealthPoint;
-    private int attackPower;
+    protected int attackPower; //ändrade från priv till prot, hoppas det är okej. //Christian
 
 
     public Unit(int maxHealth, int attackPower, boolean isGrounded){

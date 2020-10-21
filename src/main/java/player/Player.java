@@ -57,6 +57,18 @@ public class Player extends Unit{
     		this.usedStamina = this.stamina;
     	}
     }
+    private void updateDamageBasedOnStrength() {
+    	if(this.strength==this.usedStrength) {return;}else {
+    		int strDiff = this.strength-this.usedStrength;
+    		this.attackPower = this.attackPower + strDiff*5;
+    		this.usedStrength = this.strength;
+    	}
+    }
+    public int getArmor() {return this.armor;}
+    public int getStrength() {return this.strength;}
+    public int getAgility() {return this.agility;}
+    public int getIntelligence() {return this.intelligence;}
+    public int getStamina() {return this.stamina;}
     public int getExperiencePoint() {
         return experiencePoint;
     }
@@ -81,7 +93,7 @@ public class Player extends Unit{
     	this.level++;
     	this.nextLevelCap = this.nextLevelCap*2;
     }
-
+    public int getNextLevelCap() {return this.nextLevelCap;}
     public void fillHealthBar(){
         setHealthPoint(getMaxHealthPoint());
     }
