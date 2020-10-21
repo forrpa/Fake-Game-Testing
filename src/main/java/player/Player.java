@@ -69,8 +69,11 @@ public class Player extends Unit{
     }
     private void addAttributesFromNewGear(Gear piece) {
     	if(piece instanceof Equipment) {
-    		int armor = ((Equipment) piece).getArmor();
+    		this.armor = this.armor + ((Equipment) piece).getArmor();
+    	}else if(piece instanceof Weapon){
+    		this.attackPower = this.attackPower + ((Weapon) piece).getDamage();
     	}
+    	
     }
     public int getArmor() {return this.armor;}
     public int getStrength() {return this.strength;}
