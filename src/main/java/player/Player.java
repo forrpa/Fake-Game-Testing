@@ -65,16 +65,15 @@ public class Player extends Unit{
     	}
     }
     private void removeAttributesFromOldGear(Gear piece) {
-    	/*if(piece instanceof Equipment) {
-    		this.armor = this.armor + ((Equipment) piece).getArmor();
+    	if(piece instanceof Equipment) {
+    		this.armor = this.armor - ((Equipment) piece).getArmor();
     	}else if(piece instanceof Weapon){
-    		this.attackPower = this.attackPower + ((Weapon) piece).getDamage();
+    		this.attackPower = this.attackPower - ((Weapon) piece).getDamage();
     	}
-    	this.strength += piece.getAttributes()[0];
-    	this.agility += piece.getAttributes()[1];
-    	this.intelligence += piece.getAttributes()[2];
-    	this.stamina += piece.getAttributes()[3];*/
-    	//Work in progress
+    	this.strength -= piece.getAttributes()[0];
+    	this.agility -= piece.getAttributes()[1];
+    	this.intelligence -= piece.getAttributes()[2];
+    	this.stamina -= piece.getAttributes()[3];
     }
     private void addAttributesFromNewGear(Gear piece) {
     	if(piece instanceof Equipment) {
