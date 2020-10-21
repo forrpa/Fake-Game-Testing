@@ -43,8 +43,8 @@ public class Recipie extends Item {
 	public String toString() {
 		String ingredientList = "[";
 		for(Ingredient e : ingredients) ingredientList += e.getName() + ", ";
-		ingredientList = ingredientList.substring(0, ingredientList.length()-1) + "]";
-		return String.format("\"%s: %s\", Ingredients: " + ingredientList + ", Mana To Cook: %d, Experience To Cook: %d", getName(), getDescription(), getManaPointToCook(), getRequiredLevel());
+		ingredientList = ingredientList.substring(0, ingredientList.length()-2) + "]";
+		return String.format("\"%s: %s\", Ingredients: " + ingredientList + ", Mana To Cook: %d, Experience To Cook: %d", getName(), getDescription(), getManaPointToCook(), getExperiencePointToCook());
 	}
 
 }

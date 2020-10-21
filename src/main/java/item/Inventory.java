@@ -27,7 +27,7 @@ public class Inventory {
 	}
 	
 	public int getCount(Item item) {
-		if(!isInInventory(item)) throw new NullPointerException("Item not in Inventory.");
+		if(!isInInventory(item)) throw new NullPointerException("Item \'" + item.getName() + "\' not in Inventory.");
 		return inventory.get(item);
 	}
 	

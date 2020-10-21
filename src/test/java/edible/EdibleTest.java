@@ -2,6 +2,7 @@ package edible;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
@@ -29,6 +30,14 @@ class EdibleTest {
 		assertThrows(IllegalArgumentException.class, () -> {
 			new Edible("", "", 0, 0, Integer.MAX_VALUE);
 		});
+	}
+	
+	@Test
+	void consumeCalculatesNewPlayerPoint() {
+		// equivalence classes build-out test: 0, negative, positive in range....so far only one test per edible to test class checking
+		// then min and max limits should be set in Player class and MagicPlayer class method setXPoint
+		// new test for assertThrow Illegal state "Game over" or "roof reached for X point reached for type of player"
+		fail("Not yet implemented");
 	}
 	
 	@Test

@@ -3,7 +3,6 @@ package item;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.RepeatedTest;
@@ -20,31 +19,32 @@ class InventoryTest {
 	final static Inventory INVENTORY = new Inventory();
 	final static Edible FLY_AGARIC = new Edible("Fly Agaric", "Poisonous mushroom with magic powers", 4, -3, 0);
 	final static Ingredient FIRE_ROOT = new Ingredient("Fire Root", "Increases power of potions");
-	final static ForbiddenFruit LUCKY_CHERRY = new ForbiddenFruit("Lucky Cherry", "Eating cherry starts quest Talk to Guild leader", 
-			new TalkToGuildLeader("Talk to Guild leader", "Talk", "in progress", true, true));
-	static int FLY_AGARIC_COUNT = 0;
+	final static ForbiddenFruit LUCKY_CHERRY = new ForbiddenFruit("Lucky Cherry", 
+			"Eating cherry starts quest Talk to Guild leader", new TalkToGuildLeader(true));
+	final static int TEN_BEFOREALL_COUNT_FLY_AGARIC = 10;
+	static int COUNT_FLY_AGARIC = 0;
 	
 	@BeforeAll
 	static void setFlyAgaricCountTo10() throws Exception {
 		for(int i = 0; i < 10; i++) {
 			INVENTORY.addItem(FLY_AGARIC);
-			FLY_AGARIC_COUNT++;
+			COUNT_FLY_AGARIC++;
 		}
 		INVENTORY.addItem(FIRE_ROOT);
 	}
 	
-	@RepeatedTest(9)
+	@RepeatedTest(TEN_BEFOREALL_COUNT_FLY_AGARIC)
 	void getOutItemNotLastOfTypeDecreasesCountByOne() {
+		assertEquals(COUNT_FLY_AGARIC,INVENTORY.getCount(FLY_AGARIC));
 		INVENTORY.getOutItem(FLY_AGARIC);
-		FLY_AGARIC_COUNT--;
-		assertEquals(FLY_AGARIC_COUNT,INVENTORY.getCount(FLY_AGARIC));
+		COUNT_FLY_AGARIC--;
 	}
 
-	@RepeatedTest(10)
+	@RepeatedTest(TEN_BEFOREALL_COUNT_FLY_AGARIC)
 	void addItemofSameTypeIncreasesCountByOne() {
 		INVENTORY.addItem(FLY_AGARIC);
-		FLY_AGARIC_COUNT++;
-		assertEquals(FLY_AGARIC_COUNT,INVENTORY.getCount(FLY_AGARIC));
+		COUNT_FLY_AGARIC++;
+		assertEquals(COUNT_FLY_AGARIC,INVENTORY.getCount(FLY_AGARIC));
 	}
 	
 	@Test
@@ -62,7 +62,6 @@ class InventoryTest {
 	@Test
 	void getOutItemInvetoryEmptyThrowsNPE() {
 		assertThrows(NullPointerException.class, () -> new Inventory().getOutItem(FLY_AGARIC));
-			// way to check message of null pointer exception?
 	}
 	
 	@Test
@@ -76,11 +75,7 @@ class InventoryTest {
 		INVENTORY.addItem(LUCKY_CHERRY);
 		INVENTORY.addItem(new Potion("Heartbreak Potion", "Weakens magic powers, sabbotages health and gives life experience", -3, -10, 6));
 		INVENTORY.addItem(new Potion("Power Potion", "Boosts mana, health and experience", 5, 5, 5));
-		assertEquals("{Heartbreak Potion: 1 }\n{Fire Root: 1 }\n{Lucky Cherry: 1 }\n{Power Potion: 1 }\n{Fly Agaric: 11 }", INVENTORY.toString());
+		assertEquals("{Heartbreak Potion: 1 }\n{Fire Root: 1 }\n{Lucky Cherry: 1 }\n{Power Potion: 1 }\n{Fly Agaric: 10 }", INVENTORY.toString());
 	}
 	
-	@Test
-	void toStringFastEnough() {
-		fail("Not yet implemented");
-	}
 }

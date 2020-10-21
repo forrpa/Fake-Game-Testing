@@ -2,21 +2,11 @@ package edible;
 
 import item.Inventory;
 import item.Item;
-import player.Player;
 import magic.MagicPlayer;
+import player.Player;
+import quest.Quest;
 
 public class Cupboard {
-	
-//	public static void main(String[] args) {
-//		MagicPlayer MAGIC_PLAYER = new MagicPlayer("Vamp Witch", "Very badass witch from Rumania", 500, 100);
-//		Cupboard CUPBOARD = new Cupboard(MAGIC_PLAYER); 
-////		MAGIC_PLAYER.setCupboard(CUPBOARD);
-//		CUPBOARD.store(new Edible("Fortune Cookie", "Hides a wisdom", 0, 0, 1));
-//		System.out.println(CUPBOARD);
-//		CUPBOARD.consume(new Edible("Fortune Cookie", "Hides a wisdom", 0, 0, 1));
-//		System.out.println(CUPBOARD);
-//		
-//	}
 	
 	private Player player;
 	private final Inventory edibles = new Inventory();
@@ -38,20 +28,16 @@ public class Cupboard {
 	}
 
 	private void utilStoreMaxOneItem(Inventory inventory, Item item) {
-		try {
-			inventory.getOutItem(item);
-			throw new IllegalStateException("One of this Item is already stored in the Cupboard! Limit of one at a time for this type.");
-		} catch(NullPointerException e) {
-			inventory.addItem(item);
-		}
+		if(isInInventory(item)) throw new IllegalStateException("One of this Item is already stored in the Cupboard! Limit of one at a time for this type.");
+		inventory.addItem(item);
 	}
 	
 	private Inventory classifyCupboardItem(Item item) {
-		if(item instanceof Edible) return edibles;
-		if(item instanceof Potion) return potions;
 		if(item instanceof Ingredient) return ingredients;
 		if(item instanceof Recipie) return recipies;
 		if(item instanceof ForbiddenFruit) return forbiddenFruits;
+		if(item instanceof Potion) return potions;
+		if(item instanceof Edible) return edibles;
 		return null;
 	}
 
@@ -86,36 +72,35 @@ public class Cupboard {
 		inventory.addItem(item);
 	}
 	
-	private void utilConsumeSetPlayerPoints(Edible edible) {
-		player.setHealthPoint(player.getHealthPoint() + edible.getHealthPoint());
-		player.setExperiencePoint(player.getExperiencePoint() + edible.getRequiredLevel());
+	private void utilConsumeSetPlayerPoint(int manaPoint, int healthPoint, int experiencePoint) {
+		player.setHealthPoint(healthPoint);
+		player.setExperiencePoint(experiencePoint);
 		if(player instanceof MagicPlayer) {
 			MagicPlayer magicPlayer = (MagicPlayer) player;
-			magicPlayer.setManaPoint(magicPlayer.getManaPoint() + edible.getManaPoint());
+			magicPlayer.setManaPoint(manaPoint);
 		}
 	}
 	
-	public void consume(Edible edible) {
+	public Quest consume(Edible edible) {
+		Inventory inventory = getInventoryOfClassififedItem(edible);
+		inventory.getOutItem(edible);
+		int manaPoint = 0;
+		if(player instanceof MagicPlayer) {
+			MagicPlayer magicPlayer = (MagicPlayer) player;
+			manaPoint = magicPlayer.getManaPoint();
+		}
+		int[] points = edible.consume(manaPoint, player.getHealthPoint(), player.getExperiencePoint());
+		utilConsumeSetPlayerPoint(points[0], points[1], points[2]);
 		if(edible instanceof ForbiddenFruit) {
-			forbiddenFruits.getOutItem(edible);
 			ForbiddenFruit fruit = (ForbiddenFruit) edible;
-			Potion potion = fruit.getPoison();
-			if(potion != null) utilConsumeSetPlayerPoints(potion);
-			else utilConsumeSetPlayerPoints(fruit);
-			fruit.setPoison(null);
-			fruit.getQuest().startQuest(player);
-			return;
+			return fruit.getQuestUnlocked();
 		}
-		if(edible instanceof Potion) {
-			potions.getOutItem(edible);
-			utilConsumeSetPlayerPoints(edible);
-			return;
-		}
-		edibles.getOutItem(edible);
-		utilConsumeSetPlayerPoints(edible);
+		return null;
 	}
 	
-	public void poison(Potion potion, ForbiddenFruit fruit) {
+	public void poison(ForbiddenFruit fruit, Potion potion) {
+		if(!isInInventory(fruit)) throw new NullPointerException("Forbidden Fruit to poison not in Cupboard.");
+		if(!isInInventory(potion)) throw new NullPointerException("Potion to poison with not in Cupboard.");
 		potions.getOutItem(potion);
 		forbiddenFruits.getOutItem(fruit);
 		fruit.setPoison(potion);
@@ -133,8 +118,8 @@ public class Cupboard {
 	public void cook(Recipie recipie) {
 		if(player instanceof MagicPlayer) {
 			MagicPlayer magicPlayer = (MagicPlayer) player;
-			recipies.getOutItem(recipie);
 			if(haveAllIngredients(recipie)) {
+				recipies.getOutItem(recipie);
 				Ingredient[] storedIngredients = recipie.getIngredients();
 				for(Ingredient i : storedIngredients) ingredients.getOutItem(i);
 				Potion potion = recipie.cook(magicPlayer.getManaPoint(), magicPlayer.getExperiencePoint());
@@ -145,11 +130,6 @@ public class Cupboard {
 			throw new IllegalCallerException("Only Magic Players can cook from Recipies.");
 		}
 	}
-	
-//	TradeOffer Class needed to implement getOutItem and place in tradeOffer object to close deal
-//		
-	
-	// steal cupboard and empty cupboard take param other player
 
 	@Override
 	public String toString() {

@@ -32,6 +32,11 @@ public class Edible extends Item {
 		return pointValue;
 	}
 	
+	public int[] consume(int playerManaPoint, int playerHealthPoint, int playerExperiencePoint) {
+		int[] points = {playerManaPoint + manaPoint, playerHealthPoint + healthPoint, playerExperiencePoint + experiencePoint};
+		return points.clone();
+	}
+	
 	@Override
 	public String toString() {
 		return String.format("\"%s: %s\", Mana: %d, Health: %d, Experience: %d", getName(), getDescription(), getManaPoint(), getHealthPoint(), getRequiredLevel());
