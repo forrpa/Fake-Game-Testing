@@ -11,7 +11,7 @@ public abstract class Weapon extends Gear{
     private int[] damageRange;
 	
 	public Weapon(String name, String desc, int recLevel, int[] dmg, int dur, int str, int agi, int intell, int sta) {
-		super(name, desc, recLevel);
+		super(name, desc, recLevel, dur);
 		this.strength = str;
 		this.agility = agi;
 		this.intelligence = intell;
