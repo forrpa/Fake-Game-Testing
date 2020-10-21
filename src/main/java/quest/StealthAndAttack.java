@@ -12,12 +12,11 @@ public class StealthAndAttack extends Quest {
     private boolean talkedToEnemy; //Överflödig
     private String talkedTo;
     private int timer = 120;
-    private int secondsLeft;
     private final GuildMap guildMap = new GuildMap();
-    //Player player
 
     public StealthAndAttack(String name, String description, String state, boolean mandatory, boolean discovered, boolean attacked, boolean talkedToEnemy, String talkedTo){
         super("Stealth and Attack", "You have to follow your enemy without being seen and then attack him", "pending", true);
+        this.description = description;
         this.state = state;
         this.discovered = discovered;
         this.attacked = attacked;
@@ -88,20 +87,22 @@ public class StealthAndAttack extends Quest {
         }
     }
 
-    //Dela upp metod
-    public boolean attack(Player player, Enemy enemy){
-        if (stealth(player, enemy)){
+    //TEST
+    public boolean testAttack(Player player, Enemy enemy){
+        if (stealth(player, enemy)) {
+            Attack attack = new Attack(120, player, enemy);
+            attack.attackEnemy(enemy);
             attacked = true;
             description = "Attack before the enemy escapes!";
-            //enemy.attack();
-            while(timer > 0){
-                timer--;
-                if (enemy.getHealth() == 0){
+            while (attack.getTimer() > 0) {
+                attack.decreaseTimerByOne();
+                if (enemy.getHealth() == 0) {
                     break;
-                } else if (timer == 0){
+                } else if (attack.getTimer() == 0) {
+                    //attackState = ""
                     description = "Your enemy escaped. Go talk to the Guild Leader.";
                     return true;
-                } else if (player.getHealthPoint() == 0){
+                } else if (player.getHealthPoint() == 0) {
                     resetQuest(player);
                     return false;
                 }
@@ -113,11 +114,38 @@ public class StealthAndAttack extends Quest {
         }
     }
 
-    public boolean exchangeInfo(Player player, Enemy enemy){
+    //Dela upp metod, klass
+    public boolean attack(Player player, Enemy enemy){
+        if (stealth(player, enemy)){
+            attacked = true;
+            description = "Attack before the enemy escapes!";
+            //enemy.attack();
+            while(timer > 0){
+                timer--;
+                if (enemy.getHealth() == 0){
+                    break;
+                } else if (timer == 0){
+                    //attackState = ""
+                    description = "Your enemy escaped. Go talk to the Guild Leader.";
+                    return true;
+                } else if (player.getHealthPoint() == 0){
+                    resetQuest(player);
+                    return false;
+                }
+            }
+            //attackedOnTime = true;
+            description = "You succeeded killing your enemy on time. Go talk to the Guild Leader for your reward!";
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean negotiateWithEnemy(Player player, Enemy enemy){
         if (stealth(player, enemy)){
             enemy.negotiate();
             talkedToEnemy = true;
-            description = "You decided to talk yo your enemy instead of killing him. Now you cant reach the Guild so you have to talk to Townsman.";
+            description = "You decided to talk to your enemy instead of killing him. Now you cant reach the Guild so you have to talk to Townsman.";
             player.removeFromInventory(guildMap);
             return true;
         } else {
@@ -133,7 +161,7 @@ public class StealthAndAttack extends Quest {
     }
 
     public void talkToTownsman(Player player, Enemy enemy){
-        if (exchangeInfo(player, enemy)){
+        if (negotiateWithEnemy(player, enemy)){
             talkedTo = "townsman"; //Ska vara till TownsMan
         }
     }

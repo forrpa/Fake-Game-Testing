@@ -15,14 +15,12 @@ class StealthAndAttackTest {
     Player player = new Player("Tank", "Human", 200, 1500);
     GuildMap guildMap = new GuildMap();
     StealthAndAttack quest;
-    Enemy enemy = new Enemy();
-
-    //Behöver veta: Om man blir upptäckt, om HP blir noll, om man pratat med han som gav uppdraget eller den andra personen, om tiden gick ut
-    //Attack eller pengar
+    Enemy enemy = new Enemy(50);
+    Attack attack;
 
     @Test
     void testConstructor(){
-        StealthAndAttack quest = new StealthAndAttack(questName, questDescription, "pending", true, false, false, true, "townsman");
+        quest = new StealthAndAttack(questName, questDescription, "pending", true, false, false, true, "townsman");
         assertEquals("Stealth and Attack", quest.getName());
         assertEquals("You have to follow your enemy without being seen and then attack him", quest.getDescription());
         assertEquals("pending", quest.getState());
@@ -67,7 +65,7 @@ class StealthAndAttackTest {
 
     //Testa krav för att starta attack eller förhandla med fienden
     @Test
-    void canPlayerStartAttack(){
+    void canPlayerStartAttackOrNegotiatingWithEnemy(){
         quest = new StealthAndAttack(questName, questDescription, "in progress", true, false, false, false, "");
         assertTrue(quest.stealth(player, enemy));
     }
@@ -81,17 +79,29 @@ class StealthAndAttackTest {
         //assertFalse(quest.attack(player, enemy));
     }
 
+    //Tiden tar slut i attack
+    @Test
+    void playerRunsOutOfTimeInBattle(){
+        attack = new Attack(0, player, enemy);
+        assertEquals(0, attack.getTimer());
+    }
+
     //Fiende dör i attack
     @Test
     void enemyDiesInBattle(){
-
+        enemy = new Enemy(0);
+        assertEquals(0, enemy.getHealth());
     }
 
-    //Testa tillräcklig tid i attack
-
-    //Testa ej tillräcklig tid i attack
-
     //Testa att förhandla med fienden
+    @Test
+    void playerHasNegotiatedWithEnemy(){
+        quest = new StealthAndAttack(questName, "You decided to talk to your enemy instead of killing him. Now you cant reach the Guild so you have to talk to Townsman.", "in progress", true,false,false,true, "");
+        assertTrue(quest.hasTalkedToEnemy());
+        assertTrue(enemy.negotiate());
+        assertEquals("You decided to talk to your enemy instead of killing him. Now you cant reach the Guild so you have to talk to Townsman.", quest.getDescription());
+        assertFalse(player.isInInventory(guildMap));
+    }
 
 
     //Testa slutkrav
@@ -99,11 +109,11 @@ class StealthAndAttackTest {
     @Test
     void playerMeetsEndRequirementsForAttackingOnTime(){
         quest = new StealthAndAttack(questName, questDescription, "in progress", true, false, true, false, "questgiver");
+        attack = new Attack(1, player, enemy);
 
-        //Fixa så man kan se hur många sekunder som är kvar
         assertEquals("questgiver", quest.getTalkedTo());
         assertTrue(quest.hasAttacked());
-        assertEquals(1, quest.getTimer());
+        assertEquals(1, attack.getTimer());
         assertFalse(quest.hasTalkedToEnemy());
 
     }
@@ -111,9 +121,10 @@ class StealthAndAttackTest {
     @Test
     void playerMeetsEndRequirementsForNotAttackingOnTime(){
         quest = new StealthAndAttack(questName, questDescription, "in progress", true, false, true, false, "questgiver");
+        attack = new Attack(0, player, enemy);
         assertEquals("questgiver", quest.getTalkedTo());
         assertTrue(quest.hasAttacked());
-        assertEquals(0, quest.getTimer());
+        assertEquals(0, attack.getTimer());
         assertFalse(quest.hasTalkedToEnemy());
     }
     //Lyckas med smygande, ej attackera och prata med Townsman
