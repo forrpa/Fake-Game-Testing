@@ -18,6 +18,7 @@ public abstract class Gear extends Item{
 		return this.durability;
     }
     public void damageDurability(int amount) {
+    	if(amount > this.durability) {this.durability = 0;return;}
     	this.durability = this.durability - amount;
     }
     public void repair() {
