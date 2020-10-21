@@ -3,18 +3,19 @@ package player;
 import java.util.HashMap;
 import java.util.Map;
 import equipment.*;
+import unit.Attack;
+import unit.Combatant;
 import weapon.*;
 import edible.Cupboard;
 import item.*;
+import unit.Unit;
 
-public class Player {
+public class Player extends Unit{
 	
     //private PlayerClass playerClass;
     //private Race race; //Beror på om vi vill göra klasserna Class och Race, jag kör med String sålänge
     private final String playerClass;
     private final String race;
-    private int healthPoint;
-    private int maxHealthPoint = 200;
     private int experiencePoint;
     private int level = 1;
     private int nextLevelCap = 100;
@@ -30,9 +31,9 @@ public class Player {
     private final Cupboard cupboard = new Cupboard(this);
 
     public Player(String playerClass, String race, int healthPoint, int experiencePoint){
+        super(healthPoint, 1, true);
         this.playerClass = playerClass;
         this.race = race;
-        setHealthPoint(healthPoint);
         setExperiencePoint(experiencePoint);
         setArmorTypeHashMap();
         setWeaponTypeHashMap();
@@ -40,20 +41,13 @@ public class Player {
 
     //Ny Player-konstruktor så jag inte förstör allas tester med en ny variabel
     public Player(String playerClass, String race, int healthPoint, int maxHealthPoint, int experiencePoint){
+        super(healthPoint, 1, true);
         this.playerClass = playerClass;
         this.race = race;
-        setHealthPoint(healthPoint);
-        this.maxHealthPoint = maxHealthPoint;
         setExperiencePoint(experiencePoint);
         setArmorTypeHashMap();
         setWeaponTypeHashMap();
     }
-
-    public int getHealthPoint() {
-        return healthPoint;
-    }
-
-    public int getMaxHealthPoint() {return maxHealthPoint;}
 
     public int getExperiencePoint() {
         return experiencePoint;
@@ -65,10 +59,6 @@ public class Player {
 
     public String getRace() {
         return race;
-    }
-
-    public void setHealthPoint(int healthPoint) {
-        this.healthPoint = healthPoint;
     }
 
     public void setExperiencePoint(int experiencePoint) {
@@ -85,7 +75,15 @@ public class Player {
     }
 
     public void fillHealthBar(){
-        healthPoint = maxHealthPoint;
+        setHealthPoint(getMaxHealthPoint());
+    }
+
+    public void setHealthPoint(int healthPoint){
+        if(healthPoint <= 0){
+            super.setHealthPoint(0);
+        }else {
+            super.setHealthPoint(healthPoint);
+        }
     }
 
     public void increaseExperiencePoint(int experiencePoint){
@@ -203,7 +201,16 @@ public class Player {
     public int getInventoryCount(Item item) {
         return playerInventory.getCount(item);
     }
-    
+
+    @Override
+    public boolean attack(Combatant enemy) {
+        return false;
+    }
+
+    public void takeDamage(Attack attack){
+
+    }
+
     @Override
     public boolean equals(Object obj) {
     	if(obj instanceof Player) {

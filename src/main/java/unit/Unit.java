@@ -3,18 +3,14 @@ package unit;
 public abstract class Unit implements Combatant {
     private boolean isGrounded;
     private int healthPoint;
-    private int maxHealth;
+    protected int maxHealthPoint;
     private int attackPower;
-    private AttackType resistance;
-    private AttackType weakness;
 
 
-    public Unit(int maxHealth, int attackPower, boolean isGrounded, AttackType resistance, AttackType weakness){
+    public Unit(int maxHealth, int attackPower, boolean isGrounded){
         setHealthPoint(maxHealth);
-        this.maxHealth = maxHealth;
+        this.maxHealthPoint = maxHealth;
         this.isGrounded = isGrounded;
-        this.resistance = resistance;
-        this.weakness = weakness;
         if(attackPower < 0){
             this.attackPower = 0;
         }else {
@@ -39,19 +35,20 @@ public abstract class Unit implements Combatant {
             this.healthPoint = healthPoint;
         }
     }
+
+    public int getMaxHealthPoint() {
+        return maxHealthPoint;
+    }
+
+    protected void setMaxHealthPoint(int healthPoint){
+        maxHealthPoint += healthPoint;
+    }
+
     public boolean isAlive(){
         return (healthPoint > 0);
 
     }
     public int getMaxHealth(){
-        return maxHealth;
-    }
-
-    public AttackType getResistance() {
-        return resistance;
-    }
-
-    public AttackType getWeakness() {
-        return weakness;
+        return maxHealthPoint;
     }
 }

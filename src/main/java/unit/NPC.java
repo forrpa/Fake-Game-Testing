@@ -2,9 +2,13 @@ package unit;
 
 public abstract class NPC extends Unit {
     private String name;
+    private AttackType resistance;
+    private AttackType weakness;
 
     public NPC (String name, int maxHealth, int attackPower, boolean isGrounded, AttackType resistance, AttackType weakness){
-        super(maxHealth, attackPower, isGrounded, resistance, weakness);
+        super(maxHealth, attackPower, isGrounded);
+        this.resistance = resistance;
+        this.weakness = weakness;
         if(name.matches(".*\\d.*")){
             throw new IllegalArgumentException(("No numbers allowed in name"));
         }else {
@@ -36,5 +40,12 @@ public abstract class NPC extends Unit {
         }else {
             setHealthPoint(tempHealth);
         }
+    }
+    public AttackType getResistance() {
+        return resistance;
+    }
+
+    public AttackType getWeakness() {
+        return weakness;
     }
 }
