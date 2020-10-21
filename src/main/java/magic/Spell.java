@@ -1,7 +1,10 @@
 // @author Christoffer Öhman
 package magic;
 
-public class Spell {
+import player.Player;
+import unit.Combatant;
+
+class Spell {
     private final String description;
     private final String name;
     private int manaCost = 50;
@@ -71,6 +74,14 @@ public class Spell {
         } else {
             throw new IllegalArgumentException ("Error: negative numbers are not allowed here");
         }
+    }
+
+    public boolean castSpell(Player target) {
+        return false;
+    }
+
+    public boolean castSpell(Combatant target) {
+        return false;
     }
 }
 

@@ -13,12 +13,15 @@ public class HealSpell extends Spell {
         this.healthPointsToHeal = healthPointsToHeal;
     }
 
-    public void castSpell(Player player) {
-        int HP = player.getHealthPoint () + healthPointsToHeal;
-        player.setHealthPoint (HP);
+    @Override
+    public boolean castSpell(Player target) {
+        int HP = target.getHealthPoint () + healthPointsToHeal;
+        target.setHealthPoint (HP);
 
         // todo implement castSpell interface in spell?  or move spellcasting to own Class/handler.
-
+        return false;
 
     }
+
+
 }

@@ -1,14 +1,15 @@
 //@author Christoffer Öhman
 package magic;
-import magic.Spell;
+
 import player.Player;
+
 import java.util.HashMap;
 import java.util.Map;
 
 // would be good if all units including player inherit from same "entity" or "unit"class.
 public class MagicPlayer extends Player {
-    final protected   Map<String, Spell> spellBook = new HashMap<> ();
-    final private Map<String, Spell> learntSpells = new HashMap<> ();
+    final protected Map<String, Spell> spellBook = new HashMap<> ();
+    final protected Map<String, Spell> learntSpells = new HashMap<> ();
     private int manaPoint = 1;
     private int MaxManaPoint = 5;
 
@@ -20,7 +21,7 @@ public class MagicPlayer extends Player {
     private int maximumLearnableSpells = 1;
 
     // TODO: 2020-10-19 remove manaPoint from player class when done testing this class.
-    public MagicPlayer(String playerClass, String race,int healthPoint, int experiencePoint) {
+    public MagicPlayer(String playerClass, String race, int healthPoint, int experiencePoint) {
 
         super (playerClass, race, healthPoint, experiencePoint);
     }
@@ -38,8 +39,8 @@ public class MagicPlayer extends Player {
         spellBook.put (spell.getName (), spell);
     }
 
-    public void removeSpell(String name) {
-        spellBook.remove (name);
+    public Spell removeSpell(String name) {
+        return spellBook.remove (name);
     }
 
     public Spell getSpell(String name) {
@@ -47,22 +48,26 @@ public class MagicPlayer extends Player {
     }
 
 
-    public void learnSpell() {
-        // fix
+    public void learnSpell(Spell spell) {
+        String name = spell.getName ();
+
+        if (learntSpells.size () >= maximumLearnableSpells) {
+            return;
+        }
+        learntSpells.put (name, spell);
+        addSpell (spell);
     }
 
-    public void castSpell() {
+    public Spell unLearnSpell(String name) {
+        return learntSpells.remove (name);
+    }
+
+
+    public boolean castSpell(Spell spell) {
         // maybe make this an interface, different for every class?
-
-        // check isCastable. /
-        // get manaCost and check if enough.
-
-
-        // check for magicObjects that effect spell.
-        // cast spell
-        //remove mana
-        // add Magic exp
+        return false;
     }
+
     // what happens when leveling up     .
     private void levelUp() {
         // max mana level
@@ -93,10 +98,10 @@ public class MagicPlayer extends Player {
     }
 
     public void setMagicLevel(int magicLevel) {
-        int maximumLevel = 10;
-        if (magicLevel <=10 ){
-            this.magicLevel= positiveNrCheck (magicLevel);
-        }else{
+        final int maximumMagicLevel = 10;
+        if (magicLevel <= maximumMagicLevel) {
+            this.magicLevel = positiveNrCheck (magicLevel);
+        } else {
             throw new IllegalArgumentException ("Error: negative numbers are not allowed here");
         }
     }
