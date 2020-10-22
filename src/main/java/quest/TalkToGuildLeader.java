@@ -1,7 +1,4 @@
 package quest;
-import edible.Ingredient;
-import edible.Potion;
-import edible.Recipie;
 import equipment.BreastplateOfTesting;
 import equipment.BucklerOfUselessness;
 import player.Player;
@@ -10,13 +7,10 @@ import weapon.WidowsWail;
 
 public class TalkToGuildLeader extends Quest {
 
-    //göra states till enum
-
     private boolean talkedToGuildLeader = false;
-    Player player = new Player("Tank", "Human", 200,200, 1000);
 
     public TalkToGuildLeader(){
-        super("Talk to Guild Leader", "You have to talk to the guild leader west of town.", "pending", true);
+        super("Talk to Guild Leader", "You have to talk to the guild leader west of town.", QuestState.PENDING, true);
     }
 
     public boolean hasTalkedToGuildLeader(){
@@ -26,7 +20,7 @@ public class TalkToGuildLeader extends Quest {
     @Override
     public boolean startRequirementsFulfilled(Player player) {
         if (player.getExperiencePoint() >= 1000){
-            state = "unlocked";
+            state = QuestState.UNLOCKED;
             return true;
         } else {
             return false;
@@ -36,7 +30,7 @@ public class TalkToGuildLeader extends Quest {
     @Override
     public void startQuest(Player player) {
         if (startRequirementsFulfilled(player)){
-            state = "in progress";
+            state = QuestState.IN_PROGRESS;
         }
     }
 
@@ -47,7 +41,7 @@ public class TalkToGuildLeader extends Quest {
     @Override
     public boolean endRequirementsFulfilled(Player player) {
         if (talkedToGuildLeader){
-            state = "completed";
+            state = QuestState.COMPLETED;
             return true;
         } else {
             return false;
@@ -57,7 +51,7 @@ public class TalkToGuildLeader extends Quest {
     @Override
     public void questCompleted(Player player) {
         if (endRequirementsFulfilled(player)){
-            state = "done";
+            state = QuestState.DONE;
             player.increaseExperiencePoint(500);
             rewardBasedOnClass(player);
             rewardBasedOnRace(player);

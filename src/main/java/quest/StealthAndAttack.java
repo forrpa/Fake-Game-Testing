@@ -4,6 +4,8 @@ import item.Inventory;
 import item.Item;
 import player.Player;
 import unit.Monster;
+import unit.Questgiver;
+import unit.Wolf;
 
 public class StealthAndAttack extends Quest {
 
@@ -16,18 +18,10 @@ public class StealthAndAttack extends Quest {
     private String talkedTo;
     private int timer = 120;
     private final GuildMap guildMap = new GuildMap();
-    private Player player = new Player("Tank", "Human", 200,200, 1500);
+    private Player player = new Player("Tank", "Human", 200, 1500);
 
     public StealthAndAttack(){
-        super("Stealth and Attack", "You have to follow your enemy without being seen and then attack him", "pending", true);
-    }
-
-    public StealthAndAttack(boolean discovered, boolean attacked, boolean talkedToEnemy, String talkedTo){
-        super("Stealth and Attack", "You have to follow your enemy without being seen and then attack him", "pending", true);
-        this.discovered = discovered;
-        this.attacked = attacked;
-        this.talkedToEnemy = talkedToEnemy;
-        this.talkedTo = talkedTo;
+        super("Stealth and Attack", "You have to follow your enemy without being seen and then attack him", QuestState.PENDING, true);
     }
 
     public boolean isDiscovered(){
@@ -49,7 +43,7 @@ public class StealthAndAttack extends Quest {
     @Override
     public boolean startRequirementsFulfilled(Player player){
         if (player.getExperiencePoint() >= 1500 && player.isInInventory(guildMap)){ //&& player.questlog().contains("TalkToGuildLeader")
-            state = "unlocked";
+            state = QuestState.UNLOCKED;
             return true;
         } else {
             return false;
@@ -59,22 +53,23 @@ public class StealthAndAttack extends Quest {
     @Override
     public void startQuest(Player player){
         if (startRequirementsFulfilled(player)){
-            state = "in progress";
+            state = QuestState.IN_PROGRESS;
             description = "Your first job is to follow the enemy without being seen.";
         } else {
             System.out.println("You cant start this quest yet.");
         }
     }
 
-    public void resetQuest(Player player){
+    public boolean resetQuest(Player player){
         player.fillHealthBar();
         attacked = false;
         discovered = false;
-        startQuest(player);
+        return true;
+        //startQuest(player);
     }
 
-    public boolean stealth(Player player, Enemy enemy){
-        if (enemy.discover(player)){
+    public boolean stealth(Player player, Monster monster){
+        if (player.getHealthPoint() < monster.getHealthPoint()){
             discovered = true;
             resetQuest(player);
             return false;
@@ -86,10 +81,10 @@ public class StealthAndAttack extends Quest {
     }
 
     //TEST
-    public boolean attack(Player player, Enemy enemy){
-        if (stealth(player, enemy)) {
-            Attack attack = new Attack(timer, player, enemy);
-            attack.attackEnemy(enemy);
+    /*public boolean attack(Player player, Monster monster){
+        if (stealth(player, monster)) {
+            //Attack attack = new Attack(timer, player, enemy);
+            player.attack(monster);
             attacked = true;
             description = "Attack before the enemy escapes!";
             while (attack.getTimer() > 0) {
@@ -109,19 +104,28 @@ public class StealthAndAttack extends Quest {
         } else {
             return false;
         }
-    }
+    }*/
 
     //Dela upp metod, klass
-    /*
-    public boolean attack(Player player, Enemy enemy){
-        if (stealth(player, enemy)){
+
+    public boolean attack(Player player, Monster monster){
+        //if (stealth(player, monster)){
             attacked = true;
             description = "Attack before the enemy escapes!";
-            //enemy.attack();
+            if(player.attack(monster)){
+                description = "You succeeded killing your enemy on time. Go talk to the Guild Leader for your reward!";
+                return true;
+            } else {
+                resetQuest(player);
+                return false;
+            }
+            /*attacked = true;
+            description = "Attack before the enemy escapes!";
             while(timer > 0){
                 timer--;
-                if (enemy.getHealth() == 0){
-                    break;
+                if (monster.getHealthPoint() == 0){
+                    description = "You succeeded killing your enemy on time. Go talk to the Guild Leader for your reward!";
+                    return true;
                 } else if (timer == 0){
                     //attackState = ""
                     description = "Your enemy escaped. Go talk to the Guild Leader.";
@@ -129,19 +133,16 @@ public class StealthAndAttack extends Quest {
                 } else if (player.getHealthPoint() == 0){
                     resetQuest(player);
                     return false;
-                }
-            }
-            //attackedOnTime = true;
-            description = "You succeeded killing your enemy on time. Go talk to the Guild Leader for your reward!";
-            return true;
-        } else {
+                }*/
+            //return true;
+        /*} else {
             return false;
-        }
-    }*/
+        }*/
+    }
 
-    public boolean negotiateWithEnemy(Player player, Enemy enemy){
-        if (stealth(player, enemy)){
-            enemy.negotiate();
+    public boolean negotiateWithEnemy(Player player, Monster monster){
+        if (stealth(player, monster)){
+            //enemy.negotiate();
             talkedToEnemy = true;
             description = "You decided to talk to your enemy instead of killing him. Now you cant reach the Guild so you have to talk to Townsman.";
             player.removeFromInventory(guildMap);
@@ -151,9 +152,9 @@ public class StealthAndAttack extends Quest {
         }
     }
 
-    public boolean talkToQuestGiver(Player player, Enemy enemy, QuestGiver questGiver){
-        if (attack(player, enemy) && player.isInInventory(guildMap)){
-            questGiver.talkToPlayer();
+    public boolean talkToQuestGiver(Player player, Wolf monster, Questgiver questGiver){
+        if (attack(player, monster) && player.isInInventory(guildMap)){
+            //questGiver.talkToPlayer(); Fixa metod i Questgiver
             talkedTo = "questgiver"; //Ska vara till QuestGiver
             return true;
         } else {
@@ -161,8 +162,8 @@ public class StealthAndAttack extends Quest {
         }
     }
 
-    public boolean talkToTownsman(Player player, Enemy enemy){
-        if (negotiateWithEnemy(player, enemy)){
+    public boolean talkToTownsman(Player player, Monster monster){
+        if (negotiateWithEnemy(player, monster)){
             talkedTo = "townsman"; //Ska vara till TownsMan
             return true;
         } else {
@@ -175,17 +176,19 @@ public class StealthAndAttack extends Quest {
     }
 
     public boolean endRequirementsForAttackingOnTime(){
-        return talkedTo == "questgiver" && attacked && timer > 0 && !talkedToEnemy;
+        //return talkedTo == "questgiver" && attacked && timer > 0 && !talkedToEnemy;
+        return talkedTo == "questgiver" && attacked && !talkedToEnemy;
     }
 
-    public boolean endRequirementsForNotAttackingOnTime(){
+    /*public boolean endRequirementsForNotAttackingOnTime(){
         return talkedTo == "questgiver" && attacked && timer == 0 && !talkedToEnemy;
-    }
+    }*/
 
     @Override
     public boolean endRequirementsFulfilled(Player player){
-        if (endRequirementsForNegotiatingWithEnemy() || endRequirementsForAttackingOnTime() || endRequirementsForNotAttackingOnTime()){
-            state = "completed";
+        //if (endRequirementsForNegotiatingWithEnemy() || endRequirementsForAttackingOnTime() || endRequirementsForNotAttackingOnTime()){
+            if (endRequirementsForNegotiatingWithEnemy() || endRequirementsForAttackingOnTime()){
+            state = QuestState.COMPLETED;
             return true;
         } else {
             return false;
@@ -195,9 +198,9 @@ public class StealthAndAttack extends Quest {
     public void getReward(Player player){
         if (endRequirementsForNegotiatingWithEnemy()){
             rewardWhenNegotiatingWithEnemy(player);
-        } else if (endRequirementsForNotAttackingOnTime()){
+        } /*else if (endRequirementsForNotAttackingOnTime()){
             rewardWhenNotAttackingOnTime(player);
-        } else{
+        } */else if (endRequirementsForAttackingOnTime()){
             rewardWhenAttackingOnTime(player);
         }
     }
@@ -222,11 +225,23 @@ public class StealthAndAttack extends Quest {
     @Override
     public void questCompleted(Player player){
         if (endRequirementsFulfilled(player)){
-            state = "done";
+            state = QuestState.DONE;
             description= "You completed the quest!";
             getReward(player);
             player.fillHealthBar();
         }
     }
 
+    @Override
+    public String toString() {
+        return "StealthAndAttack{" +
+                "discovered=" + discovered +
+                ", attacked=" + attacked +
+                ", talkedToEnemy=" + talkedToEnemy +
+                ", talkedTo='" + talkedTo + '\'' +
+                ", timer=" + timer +
+                ", guildMap=" + guildMap +
+                ", player=" + player +
+                '}';
+    }
 }
