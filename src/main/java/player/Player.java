@@ -177,7 +177,7 @@ public class Player extends Unit{
     	updateAttributes();
     }
     private boolean isPlayerLeveledHighlyEnoughToEquip(Item item) throws Exception {
-    	if(this.level < item.getRequiredLevel()) {throw new Exception();}else {return true;}
+    	if(this.level < item.getRequiredLevel()) {throw new ArithmeticException("This item requires a higher level to use!");}else {return true;}
     }
     private void equippingArmor(Equipment armor) {
     	if(!this.gear.containsKey(armor.getSlot())) {
@@ -210,18 +210,18 @@ public class Player extends Unit{
     }
     private void checkIfArmorToBeEquippedIsAllowedType(Equipment armor) throws Exception {
     	if(this.allowedArmorTypes.get(armor.getArmorType())) {
-    		equippingArmor(armor);
     		this.playerInventory.getOutItem(armor);
+    		equippingArmor(armor);
     	}else {
-    		throw new Exception("Armor type not allowed.");
+    		throw new IllegalArgumentException("Armor type not allowed.");
     	}
     }
     private void checkIfWeaponToBeEquippedIsAllowedType(Weapon weapon) throws Exception {
     	if(this.allowedWeaponTypes.get(weapon.getType())) {
-    		equippingWeapon(weapon);
     		this.playerInventory.getOutItem(weapon);
+    		equippingWeapon(weapon);
     	}else {
-    		throw new Exception("Weapon type not allowed.");
+    		throw new IllegalArgumentException("Weapon type not allowed.");
     	}
     }
     public void equipArmor(Equipment armor) throws Exception{
