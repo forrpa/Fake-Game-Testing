@@ -53,7 +53,7 @@ public class TalkToGuildLeader extends Quest {
         if (endRequirementsFulfilled(player)){
             state = QuestState.DONE;
             player.increaseExperiencePoint(500);
-            rewardBasedOnClass(player);
+            //rewardBasedOnClass(player);
             rewardBasedOnRace(player);
             GuildMap guildMap = new GuildMap();
             player.addToInventory(guildMap);
@@ -62,7 +62,7 @@ public class TalkToGuildLeader extends Quest {
         }
     }
 
-    public void rewardBasedOnClass(Player player){
+    /*public void rewardBasedOnClass(Player player){
         switch (player.getPlayerClass()){
             case "Healer":
                 player.addToInventory(new HealingPotion());
@@ -71,7 +71,7 @@ public class TalkToGuildLeader extends Quest {
             case "Tank":
                 player.addToInventory(new HealingPotionRecipe());
         }
-    }
+    }*/
 
     public void rewardBasedOnRace(Player player){
         switch (player.getRace()){

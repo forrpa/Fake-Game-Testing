@@ -65,6 +65,7 @@ class TalkToGuildLeaderTest {
         assertEquals(1, standardPlayer.getInventoryCount(guildMap));
     }
 
+    /*
     @Test
     void healerGetsCorrectReward() {
         player = new Player("Healer", "Orc", 200, 1500);
@@ -86,7 +87,7 @@ class TalkToGuildLeaderTest {
         HealingPotionRecipe healingPotionRecipe = new HealingPotionRecipe();
         quest.rewardBasedOnClass(standardPlayer);
         assertEquals(1, standardPlayer.getInventoryCount(healingPotionRecipe));
-    }
+    }*/
 
     @Test
     void nonTankHumanGetsCorrectReward() {

@@ -231,17 +231,4 @@ public class StealthAndAttack extends Quest {
             player.fillHealthBar();
         }
     }
-
-    @Override
-    public String toString() {
-        return "StealthAndAttack{" +
-                "discovered=" + discovered +
-                ", attacked=" + attacked +
-                ", talkedToEnemy=" + talkedToEnemy +
-                ", talkedTo='" + talkedTo + '\'' +
-                ", timer=" + timer +
-                ", guildMap=" + guildMap +
-                ", player=" + player +
-                '}';
-    }
 }
