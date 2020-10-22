@@ -241,11 +241,22 @@ public class Player extends Unit{
 
     @Override
     public boolean attack(Combatant enemy) {
-        return false;
+        if(!isAlive()){
+            throw new IllegalStateException("The player is dead");
+        }else if(!enemy.isAlive()){
+            throw new IllegalStateException("The unit receiving damage is already dead");
+        }else if(isGrounded() && !enemy.isGrounded()){
+            return false;
+        }else {
+            enemy.takeDamage(new Attack(getAttackPower()));
+            return true;
+        }
     }
 
     public void takeDamage(Attack attack){
-
+        int damage = attack.getAttackPower(null, null);
+        int tempHealth = getHealthPoint() - damage;
+        setHealthPoint(tempHealth);
     }
 
     @Override
