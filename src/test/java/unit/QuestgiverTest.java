@@ -15,7 +15,7 @@ class QuestgiverTest {
     @Test
     void constructorSetsAttributes(){
         //Set-up
-        Questgiver questgiver = new Questgiver("Guild Leader", new TalkToGuildLeader(false));
+        Questgiver questgiver = new Questgiver("Guild Leader", new TalkToGuildLeader());
         //Check that attributes are set correctly
         assertEquals("Guild Leader", questgiver.getName());
         assertEquals("Talk to Guild Leader", questgiver.getAllQuestNames());
@@ -23,17 +23,17 @@ class QuestgiverTest {
 
     @Test
     void toStringReturnsCorrectString(){
-        Questgiver questgiver = new Questgiver("Guild Leader", new TalkToGuildLeader(false));
+        Questgiver questgiver = new Questgiver("Guild Leader", new TalkToGuildLeader());
         assertEquals("Name: Guild Leader, Alive: true, Quests available: Talk to Guild Leader.", questgiver.toString());
     }
 
     @Test
     void twoAvailableQuestsTalkToGuildLeaderAndStealthAndAttackTalkToGuildLeaderTakenAndStealthAndAttackLeftAtQuestgiver() {
         //Set-up
-        Player player = new Player("NPC", "Orc", 5, 5,1600);
+        Player player = new Player("NPC", "Orc", 5, 1500);
         ArrayList <Quest> questsForQuestgiver = new ArrayList<>();
-        questsForQuestgiver.add(new TalkToGuildLeader(false));
-        questsForQuestgiver.add(new StealthAndAttack(false, false, false, "false"));
+        questsForQuestgiver.add(new TalkToGuildLeader());
+        questsForQuestgiver.add(new StealthAndAttack());
         Questgiver questgiver = new Questgiver("Guild Leader", questsForQuestgiver);
         ArrayList <Quest> questsTaken = new ArrayList<>();
         //Take all available quests

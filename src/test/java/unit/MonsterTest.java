@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import item.*;
 import edible.*;
+import player.Player;
 import weapon.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,14 +13,16 @@ class MonsterTest {
 
     private final static int STANDARD_BAT_HEALTH = 5;
     private final static int STANDARD_BAT_ATTACKPOWER = 2;
+    private final static int STANDARD_BAT_EXPERIENCEPOINTS = 50;
     private final static int STANDARD_WOLF_HEALTH = 8;
     private final static int STANDARD_WOLF_ATTACKPOWER = 3;
+    private final static int STANDARD_WOLF_EXPERIENCEPOINTS = 100;
 
 
     @Test
     void batNameAndHealthSetByConstructor(){
         //Set-up
-        Monster bat = new Bat("Jabba the Bat", STANDARD_BAT_HEALTH, STANDARD_BAT_ATTACKPOWER, null, null);
+        Monster bat = new Bat("Jabba the Bat", STANDARD_BAT_HEALTH, STANDARD_BAT_ATTACKPOWER, STANDARD_BAT_EXPERIENCEPOINTS, null, null);
 
         //Assert that name and health is set correct;
         assertEquals("Jabba the Bat", bat.getName());
@@ -28,7 +31,7 @@ class MonsterTest {
     @Test
     void batNameSetTo556ByConstructorThrowsIllegalArgumentException(){
         //Constructor throws error for numbers in name
-        assertThrows(IllegalArgumentException.class, () -> new Bat("556", STANDARD_BAT_HEALTH, STANDARD_BAT_ATTACKPOWER, null, null));
+        assertThrows(IllegalArgumentException.class, () -> new Bat("556", STANDARD_BAT_HEALTH, STANDARD_BAT_ATTACKPOWER, STANDARD_BAT_EXPERIENCEPOINTS, null, null));
     }
     @Test
     void toStringReturnsCorrectString(){
@@ -93,7 +96,7 @@ class MonsterTest {
     void wolfMonsterAttackOtherWolfWith0HealthThrowsIllegalStateException(){
         //Set-up
         Monster wolf = new Wolf();
-        Monster otherWolf = new Wolf("Wolf", 0, 0, null, null);
+        Monster otherWolf = new Wolf("Wolf", 0, 0, 0,null, null);
 
         //Asserts that wolf cant attack another monster that has 0 health
         assertThrows(IllegalStateException.class, () -> wolf.attack((otherWolf)));
@@ -101,7 +104,7 @@ class MonsterTest {
     @Test
     void wolfWith0HealthAttacksOtherWolfThrowsIllegalStateException(){
         //Set-up
-        Monster wolf = new Wolf("Wolf", 0, 4,null, null);
+        Monster wolf = new Wolf("Wolf", 0, 4, 0,null, null);
         Monster otherWolf = new Wolf();
 
         //Asserts that a dead monster cant attack
@@ -128,7 +131,7 @@ class MonsterTest {
         batItems.add(potion);
         batItems.add(sword);
         ArrayList<Item> lootedItems = new ArrayList<>();
-        Monster bat = new Bat("Bat", 0, 0, batItems, null, null);
+        Monster bat = new Bat("Bat", 0, 0,0, batItems, null, null);
 
         //Asserts that inventory is empty and bat is dead
         assertTrue(lootedItems.isEmpty());
@@ -172,5 +175,20 @@ class MonsterTest {
 
         //Get IllegalStateException when trying to loot again due to no items left
         assertThrows(IllegalStateException.class, () -> bat.getLooted());
+    }
+    @Test
+    void PlayerAttacksWolfAndGains100ExperiencePoints(){
+        Player player = new Player("Paladin", "Orc", 10, 50);
+        Monster wolf = new Wolf();
+        assertTrue(player.attack(wolf));
+        assertTrue(player.attack(wolf));
+        assertTrue(player.attack(wolf));
+        assertTrue(player.attack(wolf));
+        assertTrue(player.attack(wolf));
+        assertTrue(player.attack(wolf));
+        assertTrue(player.attack(wolf));
+        assertTrue(player.attack(wolf));
+        assertEquals(0, wolf.getHealthPoint());
+        assertEquals(150, player.getExperiencePoint());
     }
 }
