@@ -31,18 +31,8 @@ public class Player extends Unit{
     private Map<String, Gear> gear = new HashMap<String, Gear>();
     private Inventory playerInventory = new Inventory();
     private final Cupboard cupboard = new Cupboard(this);
-
-    public Player(String playerClass, String race, int healthPoint, int experiencePoint){
-        super(healthPoint, 1, true);
-        this.playerClass = playerClass;
-        this.race = race;
-        setExperiencePoint(experiencePoint);
-        setArmorTypeHashMap();
-        setWeaponTypeHashMap();
-    }
-
-    //Ny Player-konstruktor så jag inte förstör allas tester med en ny variabel
-    public Player(String playerClass, String race, int healthPoint, int maxHealthPoint, int experiencePoint){
+    
+    public Player(String playerClass, String race, int maxHealthPoint, int experiencePoint){
         super(maxHealthPoint, 1, true);
         this.playerClass = playerClass;
         this.race = race;
