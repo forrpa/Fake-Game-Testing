@@ -17,10 +17,11 @@ public class MagicPlayer extends Player {
 
     // override levelup mechanics  from super?
     private int manaRegenSpeed = 1;
-    private int magicLevel = 1;
+    private int magicLevel = 1; // remove 
     private int maximumLearnableSpells = 1;
 
-    // TODO: 2020-10-19 remove manaPoint from player class when done testing this class.
+    // TODO: 2020-10-21 Ta bort MagicLevel och byt ut det till level. mindre komplext.
+
     public MagicPlayer(String playerClass, String race, int healthPoint, int experiencePoint) {
 
         super (playerClass, race, healthPoint, experiencePoint);

@@ -9,7 +9,7 @@ class Spell {
     private final String name;
     private int manaCost = 50;
     private int requiredMagicLevel = 5;
-    private int cooldownDuration = 10;
+    private int cooldownDuration = 0;
 
     // TODO: 2020-10-20 implement "damage interface"
 
@@ -80,9 +80,10 @@ class Spell {
         return false;
     }
 
-    public boolean castSpell(Combatant target) {
+    public boolean castSpell(Combatant target, int mana) {
         return false;
     }
+
 }
 
 
