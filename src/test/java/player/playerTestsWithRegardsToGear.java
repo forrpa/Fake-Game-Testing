@@ -22,12 +22,14 @@ class playerTestsWithRegardsToGear {
 		Gear roim = new RobesOfImmenseMagic();
 		magePlayer.addToInventory(roim);
 		for(int i=0;i<value;i++) {magePlayer.increaseLevel();}
+		int intellBeforeRobe = magePlayer.getIntelligence();
 		try {
 			magePlayer.equipArmor((Equipment) roim);
 		} catch (Exception e) {
 			fail();
 		}
 		assertTrue(magePlayer.getGearFromGear("chest").equals(roim));
+		assertTrue(magePlayer.getIntelligence()==(intellBeforeRobe+100));
 	}
 	@ParameterizedTest
 	@ValueSource(ints = {0, 5, 24, 37, 40, 48})
@@ -38,6 +40,7 @@ class playerTestsWithRegardsToGear {
 		assertThrows(ArithmeticException.class, () -> {
 			magePlayer.equipArmor((Equipment) roim);;
 		});
+		assertTrue(magePlayer.getGearFromGear("chest")==null);
 	}
 	@Test
 	void testToMakeSureMageCannotWearPlate() {
@@ -47,6 +50,7 @@ class playerTestsWithRegardsToGear {
 		assertThrows(IllegalArgumentException.class, () -> {
 			magePlayer.equipArmor((Equipment) bpt);;
 		});
+		assertTrue(magePlayer.getGearFromGear("chest")==null);
 	}
 	@Test
 	void testToMakeSureMageCannotWearShield() {
@@ -56,13 +60,17 @@ class playerTestsWithRegardsToGear {
 		assertThrows(IllegalArgumentException.class, () -> {
 			magePlayer.equipArmor((Equipment) bou);;
 		});
+		assertTrue(magePlayer.getGearFromGear("shield")==null);
 	}
 	@Test
 	void testIfInventoryControlForEquippingGearWorks() {
 		Gear roim = new RobesOfImmenseMagic();
 		for(int i=0;i<66;i++) {magePlayer.increaseLevel();}
+		int intell1 = magePlayer.getIntelligence();
 		assertThrows(NullPointerException.class, () -> {
 			magePlayer.equipArmor((Equipment) roim);
 		});
+		assertTrue(magePlayer.getIntelligence()==intell1);
+		assertTrue(magePlayer.getGearFromGear("chest")==null);
 	}
 }
