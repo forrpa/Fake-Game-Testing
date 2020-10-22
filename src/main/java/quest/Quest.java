@@ -6,12 +6,12 @@ public abstract class Quest {
 
     private String name;
     protected String description;
-    protected String state;
+    protected Enum state;
     private boolean mandatory;
     //Quest log - available quests, completed quests osv
 
 
-    public Quest(String name, String description, String state, boolean mandatory){
+    public Quest(String name, String description, Enum state, boolean mandatory){
         this.name = name;
         this.description = description;
         this.state = state;
@@ -26,7 +26,7 @@ public abstract class Quest {
         return description;
     }
 
-    public String getState(){
+    public Enum getState(){
         return state;
     }
 

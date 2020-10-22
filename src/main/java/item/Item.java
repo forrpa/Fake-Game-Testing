@@ -2,8 +2,8 @@ package item;
 
 public abstract class Item {
 
-	private final String name;
-	private final String description;
+	protected final String name;
+	protected final String description;
 	private final int requiredLevel;
 	private final int zeroDefaultRequiredLevel = 0;
 	
