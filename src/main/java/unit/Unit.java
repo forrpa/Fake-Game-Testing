@@ -1,7 +1,7 @@
 package unit;
 
 public abstract class Unit implements Combatant {
-    private boolean isGrounded;
+    protected boolean isGrounded;
     protected int healthPoint;
     protected int maxHealthPoint;
     protected int attackPower; //ändrade från priv till prot, hoppas det är okej. //Christian

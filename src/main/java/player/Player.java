@@ -5,6 +5,7 @@ import java.util.Map;
 import equipment.*;
 import unit.Attack;
 import unit.Combatant;
+import unit.NPC;
 import weapon.*;
 import edible.Cupboard;
 import item.*;
@@ -260,6 +261,10 @@ public class Player extends Unit{
             return false;
         }else {
             enemy.takeDamage(new Attack(getAttackPower()));
+            if(!enemy.isAlive() && enemy instanceof NPC){
+                NPC npcenemy = (NPC)enemy;
+                increaseExperiencePoint(npcenemy.getExperiencePoints());
+            }
             return true;
         }
     }

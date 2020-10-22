@@ -8,19 +8,19 @@ import item.*;
 public abstract class Monster extends NPC {
     private ArrayList<Item> itemsOnNPC;
 
-    public Monster(String name, int maxHealth, int attackPower, AttackType resistance, AttackType weakness){
-        this(name, maxHealth, attackPower, true, resistance, weakness);
+    public Monster(String name, int maxHealth, int attackPower,int experiencePoints, AttackType resistance, AttackType weakness){
+        this(name, maxHealth, attackPower, experiencePoints, true, resistance, weakness);
     }
-    public Monster(String name, int maxHealth, int attackPower, ArrayList<Item> items, AttackType resistance, AttackType weakness){
-        this(name, maxHealth, attackPower, true, items, resistance, weakness);
+    public Monster(String name, int maxHealth, int attackPower, int experiencePoints, ArrayList<Item> items, AttackType resistance, AttackType weakness){
+        this(name, maxHealth, attackPower, experiencePoints, true, items, resistance, weakness);
     }
-    public Monster(String name, int maxHealth, int attackPower, boolean isGrounded, AttackType resistance, AttackType weakness){
-        super(name, maxHealth, attackPower, isGrounded, resistance, weakness);
+    public Monster(String name, int maxHealth, int attackPower, int experiencePoints, boolean isGrounded, AttackType resistance, AttackType weakness){
+        super(name, maxHealth, attackPower, experiencePoints, isGrounded, resistance, weakness);
         itemsOnNPC = new ArrayList<>();
 
     }
-    public Monster(String name, int maxHealth, int attackPower, boolean isGrounded, ArrayList<Item> items, AttackType resistance, AttackType weakness){
-        this(name, maxHealth, attackPower, isGrounded, resistance, weakness);
+    public Monster(String name, int maxHealth, int attackPower, int experiencePoints, boolean isGrounded, ArrayList<Item> items, AttackType resistance, AttackType weakness){
+        this(name, maxHealth, attackPower, experiencePoints, isGrounded, resistance, weakness);
         itemsOnNPC.addAll(items);
     }
 
