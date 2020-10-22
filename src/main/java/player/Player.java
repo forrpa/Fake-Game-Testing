@@ -42,6 +42,10 @@ public class Player extends Unit{
         setWeaponTypeHashMap();
         updateAttributes();
     }
+    public Gear getGearFromGear(String slot) {
+    	Gear gearPiece = this.gear.get(slot);
+    	return gearPiece;
+    }
     private void updateAttributes() {
     	updateHealthBasedOnStamina();
     	updateDamageBasedOnStrength();
