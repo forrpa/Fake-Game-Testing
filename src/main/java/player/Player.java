@@ -108,6 +108,17 @@ public class Player extends Unit{
     }
     public void increaseLevel() {
     	this.level++;
+    	/*if(this.playerClass == "Mage") {
+    		this.strength += 1;
+    		this.agility += 1;
+    		this.intelligence += 2;
+    		this.stamina += 1;
+    	}else if(this.playerClass == "Warrior") {
+    		this.strength += 2;
+    		this.agility += 1;
+    		this.intelligence += 1;
+    		this.stamina += 2;
+    	}*/  //Bortkommenterade delen vill jag implementera men kan sabba andras tester där karaktärer levlar upp. //Christian
     	this.nextLevelCap = this.nextLevelCap*2;
     }
     public int getNextLevelCap() {return this.nextLevelCap;}
