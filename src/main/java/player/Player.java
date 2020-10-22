@@ -171,7 +171,6 @@ public class Player extends Unit{
     	}
     }
     public void equipWeapon(Weapon weapon) throws Exception {
-    	playerInventory.isInInventory(weapon);
     	isPlayerLeveledHighlyEnoughToEquip(weapon);
     	checkIfWeaponToBeEquippedIsAllowedType(weapon);
     	updateAttributes();
