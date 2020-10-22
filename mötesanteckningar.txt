@@ -7,11 +7,24 @@ Adam
 Christian
 
 Fråga till Henrik: Testa alla underklasser trots att testerna blir likadana?
-Fråga til Hendrik: Hur definerar vi 100 procent coverage.
+Fråga till Henrik: Hur definerar vi 100 procent coverage.
+Fråga till Henrik: Fråga kring maven.
 
 
 datum: 2020-10-22
 
+medverkande:
+Jennifer
+Christoffer
+Adam
+Christian
+
+Vi bestämde att boka in slutmötet den 30:de oktober 15:00.
+
 Christian undrar i sin frånvaro om kraven på testdesign (beslutstabell, ekvivalens, tillståndsmaskin).
-Och när ska vi försöka hitta en grupp att granskas med? Kanske är dags att göra ett foruminlägg, 
-granskningen bör va nästa vecka men om vi inte kommunicerar med några snart har dom väl gjort sina planer redan.
+Två utav testdesignerna ska göras i grupp. Vi kollar på att göra en ekvivalens för player-klassen.
+
+Vi bestämde oss för att mötas i skolan på söndag 25/10 kl 11-17 för kodgranskning inom gruppen, använda testdesigntekniker och samt användning mätverktyg.
+
+
+datum: 2020-10-23
