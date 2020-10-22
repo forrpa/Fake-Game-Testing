@@ -254,8 +254,8 @@ public class Player extends Unit{
         return playerInventory.getCount(item);
     }
 
-    @Override
-    public boolean attack(Combatant enemy) {
+
+    public boolean attack(Combatant enemy, Attack attack) {
         if(!isAlive()){
             throw new IllegalStateException("The player is dead");
         }else if(!enemy.isAlive()){
@@ -263,13 +263,17 @@ public class Player extends Unit{
         }else if(isGrounded() && !enemy.isGrounded()){
             return false;
         }else {
-            enemy.takeDamage(new Attack(getAttackPower()));
+            enemy.takeDamage(attack);
             if(!enemy.isAlive() && enemy instanceof NPC){
                 NPC npcenemy = (NPC)enemy;
                 increaseExperiencePoint(npcenemy.getExperiencePoints());
             }
             return true;
         }
+    }
+    @Override
+    public boolean attack(Combatant enemy){
+        return attack(enemy, new Attack(getAttackPower()));
     }
 
     public void takeDamage(Attack attack){

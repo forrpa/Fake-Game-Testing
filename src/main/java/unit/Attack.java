@@ -2,19 +2,27 @@ package unit;
 
 public class Attack {
     public static final int RESISTANCE_AND_WEAKNESS_MODIFIER = 2;
-    int attackPower;
-    AttackType attackType;
+    private int attackPower;
+    private boolean isRanged;
+    private AttackType attackType;
 
     public Attack(int attackPower){
-        this(attackPower,AttackType.PHYSICAL);
+        this(attackPower, false, AttackType.PHYSICAL);
+    }
+    public Attack(int attackPower, boolean isRanged){
+        this(attackPower, isRanged, AttackType.PHYSICAL);
     }
     public Attack(int attackPower, AttackType attackType){
+        this(attackPower, false, attackType);
+    }
+    public Attack(int attackPower, boolean isRanged, AttackType attackType){
         if(attackPower <= 0){
             this.attackPower = 0;
         }else{
             this.attackPower = attackPower;
         }
         this.attackType = attackType;
+        this.isRanged = isRanged;
     }
 
     public int getAttackPower(AttackType enemyResistance, AttackType enemyWeakness) {
@@ -26,6 +34,11 @@ public class Attack {
             return attackPower;
         }
     }
+
+    public boolean isRanged() {
+        return isRanged;
+    }
+
     private int getAttackPower(){
         return getAttackPower(null, null);
     }

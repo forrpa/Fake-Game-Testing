@@ -191,4 +191,6 @@ class MonsterTest {
         assertEquals(0, wolf.getHealthPoint());
         assertEquals(150, player.getExperiencePoint());
     }
+
+    //Need tests for ranged attacks and update player looting
 }

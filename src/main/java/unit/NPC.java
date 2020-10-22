@@ -10,7 +10,11 @@ public abstract class NPC extends Unit {
         super(maxHealth, attackPower, isGrounded);
         this.resistance = resistance;
         this.weakness = weakness;
-        this.experiencePoints = experiencePoints;
+        if(experiencePoints <= 0){
+            this.experiencePoints = 0;
+        }else {
+            this.experiencePoints = experiencePoints;
+        }
         if(name.matches(".*\\d.*")){
             throw new IllegalArgumentException(("No numbers allowed in name"));
         }else {
@@ -20,6 +24,7 @@ public abstract class NPC extends Unit {
     public String getName() {
         return name;
     }
+
 
     public boolean attack(Combatant enemy){
         if(!isAlive()){
