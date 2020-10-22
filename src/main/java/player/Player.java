@@ -20,12 +20,12 @@ public class Player extends Unit{
     private int level = 1;
     private int nextLevelCap = 100;
     private int armor;
-    private int strength = 2;
-    private int usedStrength;
-    private int stamina =2;
+    private int strength;
+    private int usedStrength = 0;
+    private int stamina;
     private int usedStamina = 0;
-    private int intelligence = 2;
-    private int agility = 2;
+    private int intelligence;
+    private int agility;
     private Map<ArmorType, Boolean> allowedArmorTypes = new HashMap<ArmorType, Boolean>();
     private Map<String, Boolean> allowedWeaponTypes = new HashMap<String,Boolean>();
     private Map<String, Gear> gear = new HashMap<String, Gear>();
