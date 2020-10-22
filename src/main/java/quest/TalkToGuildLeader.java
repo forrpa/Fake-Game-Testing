@@ -15,9 +15,8 @@ public class TalkToGuildLeader extends Quest {
     private boolean talkedToGuildLeader = false;
     Player player = new Player("Tank", "Human", 200,200, 1000);
 
-    public TalkToGuildLeader(boolean talkedToGuildLeader){
+    public TalkToGuildLeader(){
         super("Talk to Guild Leader", "You have to talk to the guild leader west of town.", "pending", true);
-        this.talkedToGuildLeader = talkedToGuildLeader;
     }
 
     public boolean hasTalkedToGuildLeader(){

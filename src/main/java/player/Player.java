@@ -43,13 +43,13 @@ public class Player extends Unit{
 
     //Ny Player-konstruktor så jag inte förstör allas tester med en ny variabel
     public Player(String playerClass, String race, int healthPoint, int maxHealthPoint, int experiencePoint){
-        super(healthPoint, 1, true);
+        super(maxHealthPoint, 1, true);
         this.playerClass = playerClass;
         this.race = race;
         setExperiencePoint(experiencePoint);
         setArmorTypeHashMap();
         setWeaponTypeHashMap();
-        updateAttributes();
+        //updateAttributes();
     }
     private void updateAttributes() {
     	updateHealthBasedOnStamina();
@@ -121,9 +121,6 @@ public class Player extends Unit{
     	this.nextLevelCap = this.nextLevelCap*2;
     }
     public int getNextLevelCap() {return this.nextLevelCap;}
-    public void fillHealthBar(){
-        setHealthPoint(getMaxHealthPoint());
-    }
 
     public void setHealthPoint(int healthPoint){
         if(healthPoint <= 0){
@@ -135,10 +132,6 @@ public class Player extends Unit{
 
     public void increaseExperiencePoint(int experiencePoint){
         this.experiencePoint += experiencePoint;
-    }
-
-    public void increaseMaxHealthPoint(int healthPoint){
-        this.maxHealthPoint += healthPoint;
     }
     
     private void setArmorTypeHashMap() {

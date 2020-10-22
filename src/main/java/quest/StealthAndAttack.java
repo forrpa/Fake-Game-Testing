@@ -18,6 +18,10 @@ public class StealthAndAttack extends Quest {
     private final GuildMap guildMap = new GuildMap();
     private Player player = new Player("Tank", "Human", 200,200, 1500);
 
+    public StealthAndAttack(){
+        super("Stealth and Attack", "You have to follow your enemy without being seen and then attack him", "pending", true);
+    }
+
     public StealthAndAttack(boolean discovered, boolean attacked, boolean talkedToEnemy, String talkedTo){
         super("Stealth and Attack", "You have to follow your enemy without being seen and then attack him", "pending", true);
         this.discovered = discovered;
@@ -147,16 +151,22 @@ public class StealthAndAttack extends Quest {
         }
     }
 
-    public void talkToQuestGiver(Player player, Enemy enemy, QuestGiver questGiver){
+    public boolean talkToQuestGiver(Player player, Enemy enemy, QuestGiver questGiver){
         if (attack(player, enemy) && player.isInInventory(guildMap)){
             questGiver.talkToPlayer();
             talkedTo = "questgiver"; //Ska vara till QuestGiver
+            return true;
+        } else {
+            return false;
         }
     }
 
-    public void talkToTownsman(Player player, Enemy enemy){
+    public boolean talkToTownsman(Player player, Enemy enemy){
         if (negotiateWithEnemy(player, enemy)){
             talkedTo = "townsman"; //Ska vara till TownsMan
+            return true;
+        } else {
+            return false;
         }
     }
 

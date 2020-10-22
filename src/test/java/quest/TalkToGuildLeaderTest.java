@@ -18,8 +18,7 @@ class TalkToGuildLeaderTest {
 
     Player player;
     Player standardPlayer = new Player("Tank", "Human", 100, 1000);
-    TalkToGuildLeader quest = new TalkToGuildLeader(false);
-    TalkToGuildLeader completedQuest;
+    TalkToGuildLeader quest = new TalkToGuildLeader();
 
 
     @Test
@@ -28,7 +27,6 @@ class TalkToGuildLeaderTest {
         assertEquals(questDescription, quest.getDescription());
         assertEquals(defaultState, quest.getState());
         assertTrue(quest.isMandatory());
-        assertFalse(quest.hasTalkedToGuildLeader());
     }
 
     @Test
@@ -57,17 +55,17 @@ class TalkToGuildLeaderTest {
 
     @Test
     void playerMeetsEndRequirementsForTalkToGuildLeaderQuest() {
-        completedQuest = new TalkToGuildLeader(true);
-        completedQuest.endRequirementsFulfilled(standardPlayer);
-        assertEquals("completed", completedQuest.getState());
+        //Kolla att questet är completat
+        quest.endRequirementsFulfilled(standardPlayer);
+        assertEquals("completed", quest.getState());
     }
 
     @Test
     void canPlayerCompleteTalkToGuildLeaderQuest() {
         GuildMap guildMap = new GuildMap();
-        completedQuest = new TalkToGuildLeader(true);
-        completedQuest.questCompleted(standardPlayer);
-        assertEquals("done", completedQuest.getState());
+        //Setup
+        quest.questCompleted(standardPlayer);
+        assertEquals("done", quest.getState());
         assertEquals(1500, standardPlayer.getExperiencePoint());
         assertEquals(1, standardPlayer.getInventoryCount(guildMap));
     }

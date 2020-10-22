@@ -2,7 +2,7 @@ package unit;
 
 public abstract class Unit implements Combatant {
     private boolean isGrounded;
-    private int healthPoint;
+    protected int healthPoint;
     protected int maxHealthPoint;
     protected int attackPower; //ändrade från priv till prot, hoppas det är okej. //Christian
 
@@ -44,11 +44,19 @@ public abstract class Unit implements Combatant {
         maxHealthPoint += healthPoint;
     }
 
+    public void increaseMaxHealthPoint(int healthPoint){
+        this.maxHealthPoint += healthPoint;
+    }
+
     public boolean isAlive(){
         return (healthPoint > 0);
 
     }
     public int getMaxHealth(){
         return maxHealthPoint;
+    }
+
+    public void fillHealthBar(){
+        setHealthPoint(maxHealthPoint);
     }
 }

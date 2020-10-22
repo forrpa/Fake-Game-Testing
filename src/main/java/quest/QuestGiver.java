@@ -4,8 +4,8 @@ public class QuestGiver {
 
     private String name;
 
-    public void talkToPlayer(){
-
+    public boolean talkToPlayer(){
+        return true;
     }
 
 }
