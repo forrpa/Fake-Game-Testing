@@ -3,22 +3,17 @@ package magic;
 
 import player.Player;
 import unit.Unit;
-
 import java.util.HashMap;
 import java.util.Map;
 
-// would be good if all units including player inherit from same "entity" or "unit"class.
 public class MagicPlayer extends Player {
     final protected Map<String, Spell> spellBook = new HashMap<> ();
     final protected Map<String, Spell> learntSpells = new HashMap<> ();
     private int manaPoint = 1;
     private int MaxManaPoint = 5;
 
-    // create magicLevel = MagicExp /10000 and NN,?
-
-    // override levelup mechanics  from super?
     private int manaRegenSpeed = 1;
-    private int magicSkill = 1; // remove
+    private int magicSkill = 1; // remove if not to messy in const. test.
     private int maximumLearnableSpells = 1;
 
     // TODO: 2020-10-21 Ta bort MagicLevel och byt ut det till level. mindre komplext.
@@ -68,19 +63,19 @@ public class MagicPlayer extends Player {
     public boolean castSpell(Spell spell, Unit target) {
         String spellName = spell.getName ();
         int manaCost = spell.getManaCost ();
-        if (manaPoint < manaCost || learntSpells.get (spellName)!=spell) {
+        if (manaPoint < manaCost || learntSpells.get (spellName) != spell) {
             return false;
         }
         manaPoint -= manaCost;
         return spell.castSpell (this, target);
     }
 
-    // what happens when leveling up     .
+    // what happens when leveling up   // override player mec.  .
     private void levelUp() {
         // max mana level
     }
 
-    // what happens when leveling down.
+    // what happens when leveling down. // override player mec.
     private void levelDown() {
     }
 

@@ -1,8 +1,6 @@
 // @author Christoffer Öhman
 package magic;
 
-import player.Player;
-import unit.Combatant;
 import unit.Unit;
 
 class Spell {
@@ -11,6 +9,8 @@ class Spell {
     private int manaCost = 50;
     private int requiredMagicLevel = 5;
     private int cooldownDuration = 0;
+    private boolean isOnCooldown = false;
+    // implement isOnCooldown in castSpell.
 
     // TODO: 2020-10-20 implement "damage interface"
 
@@ -78,10 +78,18 @@ class Spell {
     }
 
 
-    public boolean castSpell(Unit caster ,Unit target) {
-        return false;
+    public boolean castSpell(Unit caster, Unit target) {
+
+        // if enough time:
+        // if isOnCooldown return
+        // if cooldownDuration !=0 set isOncooldown
+
+        return magicEffect (caster, target);
     }
 
+    boolean magicEffect(Unit caster, Unit target) {
+        return false;
+    }
 }
 
 

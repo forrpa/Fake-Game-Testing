@@ -14,7 +14,7 @@ public class FireballSpell extends  Spell {
     }
 
     @Override
-    public boolean castSpell(Unit caster , Unit target) {
+    public boolean magicEffect(Unit caster , Unit target) {
 
         int attackPower = 3;
         target.takeDamage (new Attack (attackPower,AttackType.FIRE));

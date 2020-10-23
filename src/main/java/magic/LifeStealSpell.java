@@ -12,7 +12,7 @@ public class LifeStealSpell extends Spell {
     }
 
     @Override
-    public boolean castSpell(Unit caster, Unit target) {
+    public boolean magicEffect(Unit caster, Unit target) {
         // changed. not sending mana
 
         int targetHealthBefore = target.getHealthPoint ();

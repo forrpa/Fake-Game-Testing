@@ -15,7 +15,7 @@ public class HealSpell extends Spell {
     }
 
     @Override
-    public boolean castSpell(Unit caster,Unit target) {
+    public boolean magicEffect(Unit caster, Unit target) {
         // check if dead?
         int HP = target.getHealthPoint () + healthPointsToHeal;
         target.setHealthPoint (HP);
