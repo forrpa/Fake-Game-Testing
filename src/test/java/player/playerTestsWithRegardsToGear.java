@@ -12,9 +12,10 @@ import weapon.*;
 
 class playerTestsWithRegardsToGear {
 	Player magePlayer = new Player("Mage","Human",100,0);
-	
+	Player warriorPlayer = new Player("Warrior","Human",100,0);
 	@BeforeEach
 	void resetPlayer() {
+		warriorPlayer = new Player("Warrior","Human",100,0);
 		magePlayer = new Player("Mage","Human",100,0);
 	}
 	@ParameterizedTest
@@ -39,7 +40,6 @@ class playerTestsWithRegardsToGear {
 		assertTrue(magePlayer.getAgility()==(agiBeforeRobe));
 		assertTrue(magePlayer.getStamina()==(staBeforeRobe+20));
 		assertTrue(magePlayer.getArmor()==(armorBeforeRobe+30));
-
 	}
 	@ParameterizedTest
 	@ValueSource(ints = {0, 5, 24, 37, 40, 48})
@@ -143,5 +143,16 @@ class playerTestsWithRegardsToGear {
 		assertTrue(magePlayer.getStamina()==(staAfterWW-10));
 		assertTrue(magePlayer.getAttackPower()==(dmgAfterWW-87-(5*17)));
 		assertTrue(magePlayer.getInventoryCount(ww)==1);
+	}
+	@ParameterizedTest
+	@ValueSource(ints = {34, 39, 53, 67, 78, 100})
+	void testToMakeSureMageCannotEquipTwoHandedSwords(int value) {
+		Gear hb = new Heartsbane();
+		magePlayer.addToInventory(hb);
+		for(int i=0;i<value;i++) {magePlayer.increaseLevel();}
+		assertThrows(IllegalArgumentException.class, () -> {
+			magePlayer.equipWeapon((Weapon) hb);;
+		});
+		assertTrue(magePlayer.getGearFromGear("weapon")==null);
 	}
 }
