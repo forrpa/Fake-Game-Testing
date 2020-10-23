@@ -42,6 +42,29 @@ class playerTestsWithRegardsToGear {
 		assertTrue(magePlayer.getArmor()==(armorBeforeRobe+30));
 	}
 	@ParameterizedTest
+	@ValueSource(ints = {49, 50, 100, 200, 140, 87})
+	void testIfWarriorCanEquipRobesAndIfAttributesAreUpdated(int value){
+		Gear roim = new RobesOfImmenseMagic();
+		warriorPlayer.addToInventory(roim);
+		for(int i=0;i<value;i++) {warriorPlayer.increaseLevel();}
+		int intBeforeRobe = warriorPlayer.getIntelligence();
+		int strBeforeRobe = warriorPlayer.getStrength();
+		int agiBeforeRobe = warriorPlayer.getAgility();
+		int staBeforeRobe = warriorPlayer.getStamina();
+		int armorBeforeRobe = warriorPlayer.getArmor();
+		try {
+			warriorPlayer.equipArmor((Equipment) roim);
+		} catch (Exception e) {
+			fail();
+		}
+		assertTrue(warriorPlayer.getGearFromGear("chest").equals(roim));
+		assertTrue(warriorPlayer.getIntelligence()==(intBeforeRobe+100));
+		assertTrue(warriorPlayer.getStrength()==(strBeforeRobe));
+		assertTrue(warriorPlayer.getAgility()==(agiBeforeRobe));
+		assertTrue(warriorPlayer.getStamina()==(staBeforeRobe+20));
+		assertTrue(warriorPlayer.getArmor()==(armorBeforeRobe+30));
+	}
+	@ParameterizedTest
 	@ValueSource(ints = {0, 5, 24, 37, 40, 48})
 	void testIfLevelCriteriaForRobesWorkInEquipArmorMethod(int value) {
 		Gear roim = new RobesOfImmenseMagic();
@@ -62,6 +85,29 @@ class playerTestsWithRegardsToGear {
 			magePlayer.equipArmor((Equipment) bpt);;
 		});
 		assertTrue(magePlayer.getGearFromGear("chest")==null);
+	}
+	@ParameterizedTest
+	@ValueSource(ints = {6, 14, 47, 103, 68, 87})
+	void testIfWarriorCanEquipPlateAndIfAttributesAreUpdated(int value){
+		Gear bpt = new BreastplateOfTesting();
+		warriorPlayer.addToInventory(bpt);
+		for(int i=0;i<value;i++) {warriorPlayer.increaseLevel();}
+		int intBeforeRobe = warriorPlayer.getIntelligence();
+		int strBeforeRobe = warriorPlayer.getStrength();
+		int agiBeforeRobe = warriorPlayer.getAgility();
+		int staBeforeRobe = warriorPlayer.getStamina();
+		int armorBeforeRobe = warriorPlayer.getArmor();
+		try {
+			warriorPlayer.equipArmor((Equipment) bpt);
+		} catch (Exception e) {
+			fail();
+		}
+		assertTrue(warriorPlayer.getGearFromGear("chest").equals(bpt));
+		assertTrue(warriorPlayer.getIntelligence()==(intBeforeRobe+5));
+		assertTrue(warriorPlayer.getStrength()==(strBeforeRobe));
+		assertTrue(warriorPlayer.getAgility()==(agiBeforeRobe+2));
+		assertTrue(warriorPlayer.getStamina()==(staBeforeRobe+3));
+		assertTrue(warriorPlayer.getArmor()==(armorBeforeRobe+150));
 	}
 	@Test
 	void testToMakeSureMageCannotWearShield() {
