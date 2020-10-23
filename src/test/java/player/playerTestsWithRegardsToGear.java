@@ -570,4 +570,14 @@ class playerTestsWithRegardsToGear {
 		assertEquals(value,magePlayer.getExperiencePoint());
 		assertTrue(magePlayer.getNextLevelCap() > magePlayer.getExperiencePoint());
 	}
+	@ParameterizedTest
+	@ValueSource(ints = {970070024, 556070024, 500074024, 900070024, Integer.MAX_VALUE, 501070024, 500070024, 500076022, 600070024})
+	void testToMakeSureExperienceMaxAndLevelMaxWork(int value) {
+		magePlayer.increaseExperiencePoint(value);
+		warriorPlayer.setExperiencePoint(value);
+		assertEquals(40,magePlayer.getLevel());
+		assertEquals(40,warriorPlayer.getLevel());
+		assertTrue(value > magePlayer.getExperiencePoint());
+		assertTrue(value > warriorPlayer.getExperiencePoint());
+	}
 }
