@@ -1,5 +1,7 @@
 package edible;
 
+import java.util.ArrayList;
+
 import item.Inventory;
 import item.Item;
 import magic.MagicPlayer;
@@ -14,6 +16,7 @@ public class Cupboard {
 	private final Inventory ingredients = new Inventory();
 	private final Inventory recipies = new Inventory();
 	private final Inventory forbiddenFruits = new Inventory();
+	private final ArrayList<ForbiddenFruit> poisonedForbiddenFruits = new ArrayList<>();
 
 	public Cupboard(Player player) {
 		this.setPlayer(player);
@@ -25,6 +28,18 @@ public class Cupboard {
 	
 	public void setPlayer(Player player) {
 		this.player = player;
+	}
+	
+	public Item getOutItem(Item item) {
+		Inventory inventory = getInventoryOfClassififedItem(item);
+		Item returnItem = inventory.getOutItem(item);
+		if(item instanceof ForbiddenFruit) {
+			for(ForbiddenFruit f : poisonedForbiddenFruits) {
+				if(f.equals(item)) returnItem = f;
+			}
+			poisonedForbiddenFruits.remove(item);
+		}
+		return returnItem;
 	}
 
 	private void utilStoreMaxOneItem(Inventory inventory, Item item) {
@@ -82,8 +97,7 @@ public class Cupboard {
 	}
 	
 	public Quest consume(Edible edible) {
-		Inventory inventory = getInventoryOfClassififedItem(edible);
-		inventory.getOutItem(edible);
+		getOutItem(edible);
 		int manaPoint = 0;
 		if(player instanceof MagicPlayer) {
 			MagicPlayer magicPlayer = (MagicPlayer) player;
@@ -105,6 +119,7 @@ public class Cupboard {
 		forbiddenFruits.getOutItem(fruit);
 		fruit.setPoison(potion);
 		store(fruit);
+		poisonedForbiddenFruits.add(fruit);
 	}
 	
 	public boolean haveAllIngredients(Recipe recipe) {
