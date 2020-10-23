@@ -21,15 +21,15 @@ public abstract class Item {
 		this.requiredLevel = requiredLevel;
 	}
 
-	public String getName() {
+	public final String getName() {
 		return name;
 	}
 
-	public String getDescription() {
+	public final String getDescription() {
 		return description;
 	}
 	
-	public int getRequiredLevel() {
+	public final int getRequiredLevel() {
 		return requiredLevel;
 	}
 	

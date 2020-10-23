@@ -2,14 +2,14 @@ package edible;
 
 import item.Item;
 
-public class Recipie extends Item {
+public class Recipe extends Item {
 	
 	private final Potion potion;
 	private final Ingredient[] ingredients;
 	private final int manaPointToCook;
 	private final int experiencePointToCook;
 
-	public Recipie(String name, String description, Potion potion, Ingredient[] ingredients, int manaPointToCook, int experiencePointToCook) {
+	public Recipe(String name, String description, Potion potion, Ingredient[] ingredients, int manaPointToCook, int experiencePointToCook) {
 		super(name, description);
 		this.potion = potion;
 		this.ingredients = ingredients;
