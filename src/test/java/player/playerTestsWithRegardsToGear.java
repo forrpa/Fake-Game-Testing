@@ -114,7 +114,7 @@ class playerTestsWithRegardsToGear {
 		magePlayer.addToInventory(ww);
 		for(int i=0;i<value;i++) {magePlayer.increaseLevel();}
 		assertThrows(ArithmeticException.class, () -> {
-			magePlayer.equipWeapon((Weapon) ww);;
+			magePlayer.equipWeapon((Weapon) ww);
 		});
 		assertTrue(magePlayer.getGearFromGear("weapon")==null);
 	}

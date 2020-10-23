@@ -170,6 +170,15 @@ public class Player extends Unit{
     		break;
     	}
     }
+    public void unEquipGear(Gear gear) {
+    	Gear wornGear = null;
+    	String slot = null;
+    	if(gear instanceof Weapon) {slot = "weapon";
+    	wornGear = this.gear.get("weapon");}
+    	else if(gear instanceof Equipment){slot = ((Equipment) gear).getSlot();wornGear = this.gear.get(slot);}
+    	if(gear.equals(wornGear)) {this.gear.remove(slot);}else {return;}
+    	this.playerInventory.addItem(wornGear);
+    }
     public void equipWeapon(Weapon weapon) throws Exception {
     	isPlayerLeveledHighlyEnoughToEquip(weapon);
     	checkIfWeaponToBeEquippedIsAllowedType(weapon);
