@@ -96,8 +96,8 @@ public class Cupboard {
 		}
 	}
 	
-	public Quest consume(Edible edible) {
-		getOutItem(edible);
+	public Quest consume(Edible edibleToConsume) {
+		Edible edible = (Edible) getOutItem(edibleToConsume);
 		int manaPoint = 0;
 		if(player instanceof MagicPlayer) {
 			MagicPlayer magicPlayer = (MagicPlayer) player;
