@@ -2,6 +2,7 @@ package edible;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -188,11 +189,11 @@ class CupboardTest {
 	@Test
 	void poisonRestoresForbiddenFruitWithPotionSetDisguisedAsNormalForbiddenFruit() {
 		assertEquals(1, CUPBOARD.getCount(LUCKY_CHERRY));
-		assertEquals(null, LUCKY_CHERRY.getPoison());
+		assertNull(LUCKY_CHERRY.getPoison());
 		CUPBOARD.poison(LUCKY_CHERRY, LOVE_BREW);
 		assertEquals(1, CUPBOARD.getCount(LUCKY_CHERRY));
 		final ForbiddenFruit luckyCherry = new ForbiddenFruit(LUCKY_CHERRY.getName(), LUCKY_CHERRY.getDescription(), LUCKY_CHERRY.getQuestUnlocked());
-		assertEquals(null, luckyCherry.getPoison());
+		assertNull(luckyCherry.getPoison());
 		assertEquals(LOVE_BREW, ((ForbiddenFruit) CUPBOARD.getOutItem(luckyCherry)).getPoison());
 	}
 	

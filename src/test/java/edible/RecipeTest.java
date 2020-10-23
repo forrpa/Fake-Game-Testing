@@ -24,24 +24,19 @@ class RecipeTest {
 
 	@Test
 	void constructorSetsAttributes() {
-		//final Potion potion = new Potion("Green Venom", "Sabbotages health on entering bloodstream", 0, -10, 0);
-		//final Ingredient ingredient = new Ingredient("Fire Root", "Increases power of potions");
-		final Ingredient ingredient1 = new Ingredient("Claw of Hipogriff", "Rare poisonous ingredient");
-		final Ingredient ingredient2 = new Ingredient("Morning Star", "Flower used in potions effecting health");
 		assertEquals("Green Venom Recipie", GREEN_VENOM_RECIPIE.getName());
 		assertEquals("Recipie for potion sabbotaging health on entering bloodstream", GREEN_VENOM_RECIPIE.getDescription());
 		assertEquals(GREEN_VENOM, GREEN_VENOM_RECIPIE.getPotion());
 		assertEquals(FIRE_ROOT, GREEN_VENOM_RECIPIE.getIngredients()[0]);
-		assertEquals(ingredient1, GREEN_VENOM_RECIPIE.getIngredients()[1]);
-		assertEquals(ingredient2, GREEN_VENOM_RECIPIE.getIngredients()[2]);
-		assertEquals(50, GREEN_VENOM_RECIPIE.getManaPointToCook());
-		assertEquals(20, GREEN_VENOM_RECIPIE.getExperiencePointToCook());
+		assertEquals(CLAW_OF_HIPOGRIFF, GREEN_VENOM_RECIPIE.getIngredients()[1]);
+		assertEquals(MORNING_STAR, GREEN_VENOM_RECIPIE.getIngredients()[2]);
+		assertEquals(MANA_POINT_TO_COOK, GREEN_VENOM_RECIPIE.getManaPointToCook());
+		assertEquals(EXPERIENCE_POINT_TO_COOK, GREEN_VENOM_RECIPIE.getExperiencePointToCook());
 	}
 	
 	@ParameterizedTest
 	@CsvSource({"50, 20", "51, 21", "1000, 1000"})
 	void enoughManaOrExperiencePointToCookReturnsPotion(int manaPoint, int experiencePoint) {
-		//Potion potion = new Potion("Green Venom", "Sabbotages health on entering bloodstream", 0, -10, 0);
 		assertTrue(MANA_POINT_TO_COOK <= manaPoint || EXPERIENCE_POINT_TO_COOK <= experiencePoint);
 		assertEquals(GREEN_VENOM, GREEN_VENOM_RECIPIE.cook(manaPoint, experiencePoint));
 	}
