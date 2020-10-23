@@ -580,4 +580,9 @@ class playerTestsWithRegardsToGear {
 		assertTrue(value > magePlayer.getExperiencePoint());
 		assertTrue(value > warriorPlayer.getExperiencePoint());
 	}
+	@ParameterizedTest
+	@ValueSource(ints = {970070024, 556070024, 500074024, 900070024, Integer.MAX_VALUE, 501070024, 500070024, 500076022, 600070024})
+	void testToMakeSureArmorMaxWorksAsIntended(int value) {
+		Gear testGear = new TestChestArmor(value);
+	}
 }
