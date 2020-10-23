@@ -105,7 +105,7 @@ class playerTestsWithRegardsToGear {
 		assertTrue(magePlayer.getStrength()==(strBeforeWW+17));
 		assertTrue(magePlayer.getAgility()==(agiBeforeWW+14));
 		assertTrue(magePlayer.getStamina()==(staBeforeWW+10));
-		assertTrue(magePlayer.getAttackPower()==(dmgBeforeWW+87));
+		assertTrue(magePlayer.getAttackPower()==(dmgBeforeWW+87+(5*17)));
 	}
 	@ParameterizedTest
 	@ValueSource(ints = {0, 3, 6, 17, 18, 18})
