@@ -297,4 +297,91 @@ class playerTestsWithRegardsToGear {
 		assertTrue(warriorPlayer.getAttackPower()==(dmgBeforeHB+189+(5*46)));
 		assertFalse(warriorPlayer.isInInventory(hb));
 	}
+	@Test
+	void testToMakeSureEquippingANewWeaponRemovesOldWeaponAndUpdatesAttributes() {
+		Gear ww = new WidowsWail();
+		Gear hb = new Heartsbane();
+		warriorPlayer.addToInventory(ww);
+		warriorPlayer.addToInventory(hb);
+		for(int i=0;i<54;i++) {warriorPlayer.increaseLevel();}
+		int intBeforeWW = warriorPlayer.getIntelligence();
+		int strBeforeWW = warriorPlayer.getStrength();
+		int agiBeforeWW = warriorPlayer.getAgility();
+		int staBeforeWW = warriorPlayer.getStamina();
+		int dmgBeforeWW = warriorPlayer.getAttackPower();
+		try {
+			warriorPlayer.equipWeapon((Weapon) ww);
+		} catch (Exception e) {
+			fail();
+		}
+		int intAfterWW = warriorPlayer.getIntelligence();
+		int strAfterWW = warriorPlayer.getStrength();
+		int agiAfterWW = warriorPlayer.getAgility();
+		int staAfterWW = warriorPlayer.getStamina();
+		int dmgAfterWW = warriorPlayer.getAttackPower();
+		try {
+			warriorPlayer.equipWeapon((Weapon) hb);
+		} catch (Exception e) {
+			fail();
+		}
+		int intAfterHB = warriorPlayer.getIntelligence();
+		int strAfterHB = warriorPlayer.getStrength();
+		int agiAfterHB = warriorPlayer.getAgility();
+		int staAfterHB = warriorPlayer.getStamina();
+		int dmgAfterHB = warriorPlayer.getAttackPower();
+		assertTrue(warriorPlayer.getGearFromGear("weapon").equals(hb));
+		assertFalse(warriorPlayer.isInInventory(hb));
+		assertTrue(warriorPlayer.isInInventory(ww));
+		assertEquals(intBeforeWW,intAfterWW);
+		assertEquals(strBeforeWW+17,strAfterWW);
+		assertEquals(agiBeforeWW+14,agiAfterWW);
+		assertEquals(staBeforeWW+10,staAfterWW);
+		assertEquals(dmgBeforeWW+(87+5*17),dmgAfterWW);
+		assertEquals(intAfterWW,intAfterHB);
+		assertEquals(strAfterWW+(46-17),strAfterHB);
+		assertEquals(agiAfterWW+(28-14),agiAfterHB);
+		assertEquals(staAfterWW+(18-10),staAfterHB);
+		assertEquals(dmgAfterWW+247,dmgAfterHB);
+	}
+	@Test
+	void testToMakeSureWarriorCanEquipMultipleThings() {
+		Gear ww = new WidowsWail();
+		Gear bpt = new BreastplateOfTesting();
+		Gear bou = new BucklerOfUselessness();
+		warriorPlayer.addToInventory(ww);
+		warriorPlayer.addToInventory(bpt);
+		warriorPlayer.addToInventory(bou);
+		for(int i=0;i<30;i++) {warriorPlayer.increaseLevel();}
+		int intBeforeEquip = warriorPlayer.getIntelligence();
+		int strBeforeEquip = warriorPlayer.getStrength();
+		int agiBeforeEquip = warriorPlayer.getAgility();
+		int staBeforeEquip = warriorPlayer.getStamina();
+		int dmgBeforeEquip = warriorPlayer.getAttackPower();
+		int armorBeforeEquip = warriorPlayer.getArmor();
+		try {
+			warriorPlayer.equipWeapon((Weapon) ww);
+			warriorPlayer.equipArmor((Equipment) bpt);
+			warriorPlayer.equipArmor((Equipment) bou);
+		} catch (Exception e) {
+			fail();
+		}
+		int intAfterEquip = warriorPlayer.getIntelligence();
+		int strAfterEquip = warriorPlayer.getStrength();
+		int agiAfterEquip = warriorPlayer.getAgility();
+		int staAfterEquip = warriorPlayer.getStamina();
+		int dmgAfterEquip = warriorPlayer.getAttackPower();
+		int armorAfterEquip = warriorPlayer.getArmor();
+		assertTrue(warriorPlayer.getGearFromGear("weapon").equals(ww));
+		assertTrue(warriorPlayer.getGearFromGear("chest").equals(bpt));
+		assertTrue(warriorPlayer.getGearFromGear("shield").equals(bou));
+		assertFalse(warriorPlayer.isInInventory(ww));
+		assertFalse(warriorPlayer.isInInventory(bpt));
+		assertFalse(warriorPlayer.isInInventory(bou));
+		assertEquals(intBeforeEquip+5,intAfterEquip);
+		assertEquals(strBeforeEquip+17,strAfterEquip);
+		assertEquals(agiBeforeEquip+16,agiAfterEquip);
+		assertEquals(staBeforeEquip+13,staAfterEquip);
+		assertEquals(dmgBeforeEquip+(87+5*17),dmgAfterEquip);
+		assertEquals(armorBeforeEquip+160,armorAfterEquip);
+	}
 }
