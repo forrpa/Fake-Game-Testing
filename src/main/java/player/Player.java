@@ -17,7 +17,9 @@ public class Player extends Unit{
     //private Race race; //Beror på om vi vill göra klasserna Class och Race, jag kör med String sålänge
     private final String playerClass;
     private final String race;
-    private static final int MAX_EXPERIENCE = 500070023;
+    private static final int MAX_ALLOWED_EXPERIENCE = 500070023;
+    private static final int MAX_ALLOWED_STR_AGI_INT_STA = 5000;
+    private static final int MAX_ALLOWED_ARMOR = 50000;
     private int experiencePoint;
     private int level = 1;
     private int nextLevelCap = 100;
@@ -79,14 +81,24 @@ public class Player extends Unit{
     }
     private void addAttributesFromNewGear(Gear piece) {
     	if(piece instanceof Equipment) {
-    		this.armor = this.armor + ((Equipment) piece).getArmor();
+    		if(this.armor+((Equipment) piece).getArmor()>Player.MAX_ALLOWED_ARMOR) {this.armor=Player.MAX_ALLOWED_ARMOR;}else {
+    			this.armor = this.armor + ((Equipment) piece).getArmor();
+    		}
     	}else if(piece instanceof Weapon){
     		this.attackPower = this.attackPower + ((Weapon) piece).getDamage();
     	}
-    	this.strength += piece.getAttributes()[0];
-    	this.agility += piece.getAttributes()[1];
-    	this.intelligence += piece.getAttributes()[2];
-    	this.stamina += piece.getAttributes()[3];
+    	if(this.strength+piece.getAttributes()[0]>Player.MAX_ALLOWED_STR_AGI_INT_STA) {this.strength = Player.MAX_ALLOWED_STR_AGI_INT_STA;}else {
+    		this.strength += piece.getAttributes()[0];
+    	}
+    	if(this.agility+piece.getAttributes()[1]>Player.MAX_ALLOWED_STR_AGI_INT_STA) {this.agility = Player.MAX_ALLOWED_STR_AGI_INT_STA;}else {
+        	this.agility += piece.getAttributes()[1];
+    	}
+    	if(this.intelligence+piece.getAttributes()[2]>Player.MAX_ALLOWED_STR_AGI_INT_STA) {this.intelligence = Player.MAX_ALLOWED_STR_AGI_INT_STA;}else {
+    		this.intelligence += piece.getAttributes()[2];
+    	}
+    	if(this.stamina+piece.getAttributes()[3]>Player.MAX_ALLOWED_STR_AGI_INT_STA) {this.stamina = Player.MAX_ALLOWED_STR_AGI_INT_STA;}else {
+    		this.stamina += piece.getAttributes()[3];
+    	}
     }
     public int getArmor() {return this.armor;}
     public int getStrength() {return this.strength;}
@@ -106,7 +118,7 @@ public class Player extends Unit{
     }
 
     public void setExperiencePoint(int experiencePoint) {
-    	if(experiencePoint > Player.MAX_EXPERIENCE) {this.experiencePoint = Player.MAX_EXPERIENCE;}else {
+    	if(experiencePoint > Player.MAX_ALLOWED_EXPERIENCE) {this.experiencePoint = Player.MAX_ALLOWED_EXPERIENCE;}else {
     		this.experiencePoint = experiencePoint;
     	}
         controlIfExperienceIsEnoughForLevelUp();
@@ -141,7 +153,7 @@ public class Player extends Unit{
     public int getNextLevelCap() {return this.nextLevelCap;}
 
     public void increaseExperiencePoint(int experiencePoint){
-    	if(this.experiencePoint+experiencePoint > Player.MAX_EXPERIENCE) {this.experiencePoint=Player.MAX_EXPERIENCE;}else {
+    	if(this.experiencePoint+experiencePoint > Player.MAX_ALLOWED_EXPERIENCE) {this.experiencePoint=Player.MAX_ALLOWED_EXPERIENCE;}else {
     		this.experiencePoint += experiencePoint;
     	}
         controlIfExperienceIsEnoughForLevelUp();

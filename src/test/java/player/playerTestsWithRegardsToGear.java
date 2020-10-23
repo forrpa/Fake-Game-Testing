@@ -553,7 +553,7 @@ class playerTestsWithRegardsToGear {
 		assertEquals(hpBeforeLevelUpMage+(value*10),hpAfterLevelUpMage);
 	}
 	@ParameterizedTest
-	@ValueSource(ints = {1000, 100, 500, 250, 3678, 798})
+	@ValueSource(ints = {1000, 100, 500, 250, 3678, 798, 500070023, 500070022, 0})
 	void testToMakeCertainincreaseExperienceWorksAsIntended(int value) {
 		magePlayer.increaseExperiencePoint(value);
 		boolean loop = true;
