@@ -68,11 +68,11 @@ public class MagicPlayer extends Player {
     public boolean castSpell(Spell spell, Unit target) {
         String spellName = spell.getName ();
         int manaCost = spell.getManaCost ();
-        if (manaPoint < manaCost) {
+        if (manaPoint < manaCost || learntSpells.get (spellName)!=spell) {
             return false;
         }
         manaPoint -= manaCost;
-       return spell.castSpell (this, target);
+        return spell.castSpell (this, target);
     }
 
     // what happens when leveling up     .

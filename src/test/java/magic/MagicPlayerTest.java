@@ -137,7 +137,6 @@ class MagicPlayerTest {
     }
 
 
-
     @Test
     public void unLearnSpellTest() {
         final String spellName = "name";
@@ -163,8 +162,7 @@ class MagicPlayerTest {
         final Spell spell = new HealSpell (spellName, "description", positiveNr, positiveNr, positiveNr, positiveNr);
 
         // spell is not learnt:
-        assertFalse (mp.castSpell (spell,mp));
-
+        assertFalse (mp.castSpell (spell, mp));
 
 
         //  if lernt
