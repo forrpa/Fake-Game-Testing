@@ -136,12 +136,7 @@ class MagicPlayerTest {
         assertTrue (mp.learntSpells.containsKey (spellNameTwo));
     }
 
-    @Test
-    public void learnSpellNotHighEnoughMagicLevel() {
-        fail ();
 
-        // implement test for MagicLevel
-    }
 
     @Test
     public void unLearnSpellTest() {
@@ -160,7 +155,7 @@ class MagicPlayerTest {
     }
 
     @Test
-    public void CastGenericSpellTest() {
+    public void CastGenericHealSpellTest() {
         // Good case for TDD.
         // create this test and then commit changes.
         final String spellName = "spn";
@@ -168,9 +163,9 @@ class MagicPlayerTest {
         final Spell spell = new HealSpell (spellName, "description", positiveNr, positiveNr, positiveNr, positiveNr);
 
         // spell is not learnt:
-        assertTrue (mp.castSpell (spell));
+        assertTrue (mp.castSpell (spell,mp));
 
-        //  if learnt
+        //  if lernt
         // if  enough mana
         // if isCastable false // rename to isOnCoolDown.
 
@@ -181,20 +176,20 @@ class MagicPlayerTest {
         // should also test for every spell.
 
         // if added magicXP.
-        fail ();
+
     }
 
     @Test
-    void SetNegativeMagicLevelTest() {
+    void SetNegativeMagicSkillTest() {
         MagicPlayer mp = new MagicPlayer ("playerClass", "race", 50, 1);
-        Assertions.assertThrows (IllegalArgumentException.class, () -> mp.setMagicLevel (negativeNr));
+        Assertions.assertThrows (IllegalArgumentException.class, () -> mp.setMagicSkill (negativeNr));
     }
 
     @Test
-    void SetMagicLevelAboveMaximumTest() {
+    void SetMagicSkillAboveMaximumTest() {
         MagicPlayer mp = new MagicPlayer ("playerClass", "race", 50, 1);
         int maxPlusOne = 11;
-        Assertions.assertThrows (IllegalArgumentException.class, () -> mp.setMagicLevel (maxPlusOne));
+        Assertions.assertThrows (IllegalArgumentException.class, () -> mp.setMagicSkill (maxPlusOne));
     }
 
 

@@ -3,6 +3,7 @@ package magic;
 
 
 import player.Player;
+import unit.Unit;
 
 public class HealSpell extends Spell {
     int healthPointsToHeal;
@@ -14,12 +15,12 @@ public class HealSpell extends Spell {
     }
 
     @Override
-    public boolean castSpell(Player target) {
+    public boolean castSpell(Unit caster,Unit target) {
+        // check if dead?
         int HP = target.getHealthPoint () + healthPointsToHeal;
         target.setHealthPoint (HP);
 
-        // todo implement castSpell interface in spell?  or move spellcasting to own Class/handler.
-        return false;
+        return true;
 
     }
 

@@ -2,6 +2,7 @@
 package magic;
 
 import player.Player;
+import unit.Unit;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +18,7 @@ public class MagicPlayer extends Player {
 
     // override levelup mechanics  from super?
     private int manaRegenSpeed = 1;
-    private int magicLevel = 1; // remove 
+    private int magicSkill = 1; // remove
     private int maximumLearnableSpells = 1;
 
     // TODO: 2020-10-21 Ta bort MagicLevel och byt ut det till level. mindre komplext.
@@ -64,9 +65,14 @@ public class MagicPlayer extends Player {
     }
 
 
-    public boolean castSpell(Spell spell) {
-        // maybe make this an interface, different for every class?
-        return false;
+    public boolean castSpell(Spell spell, Unit target) {
+        String spellName = spell.getName ();
+        int manaCost = spell.getManaCost ();
+        if (manaPoint < manaCost || spellBook.get (spellName)==spell) {
+            return false;
+        }
+        manaPoint -= manaCost;
+       return spell.castSpell (this, target);
     }
 
     // what happens when leveling up     .
@@ -94,14 +100,14 @@ public class MagicPlayer extends Player {
         this.manaRegenSpeed = manaRegenSpeed;
     }
 
-    public int getMagicLevel() {
-        return magicLevel;
+    public int getMagicSkill() {
+        return magicSkill;
     }
 
-    public void setMagicLevel(int magicLevel) {
+    public void setMagicSkill(int magicSkill) {
         final int maximumMagicLevel = 10;
-        if (magicLevel <= maximumMagicLevel) {
-            this.magicLevel = positiveNrCheck (magicLevel);
+        if (magicSkill <= maximumMagicLevel) {
+            this.magicSkill = positiveNrCheck (magicSkill);
         } else {
             throw new IllegalArgumentException ("Error: negative numbers are not allowed here");
         }
@@ -125,4 +131,6 @@ public class MagicPlayer extends Player {
     }
     // increaseMagicLevel // required level to learn and use spells and to wield magic equipment.
     //IncreaseMaxLearntSpells // different classes can learn different spells and memorize different amount of spells.
+
 }
+

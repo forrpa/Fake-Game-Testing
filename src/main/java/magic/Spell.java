@@ -3,6 +3,7 @@ package magic;
 
 import player.Player;
 import unit.Combatant;
+import unit.Unit;
 
 class Spell {
     private final String description;
@@ -76,11 +77,8 @@ class Spell {
         }
     }
 
-    public boolean castSpell(Player target) {
-        return false;
-    }
 
-    public boolean castSpell(Combatant target, int mana) {
+    public boolean castSpell(Unit caster ,Unit target) {
         return false;
     }
 
