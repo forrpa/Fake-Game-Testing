@@ -54,6 +54,7 @@ public class Player extends Unit{
     	if(this.stamina==this.usedStamina) {return;}else {
     		int stamDiff = this.stamina-this.usedStamina;
     		this.maxHealthPoint = this.maxHealthPoint + stamDiff*10;
+    		this.healthPoint = this.healthPoint + stamDiff*10;
     		this.usedStamina = this.stamina;
     	}
     }
@@ -123,7 +124,7 @@ public class Player extends Unit{
     		this.agility += 1;
     		this.intelligence += 1;
     		this.stamina += 2;
-    	}*/  //Bortkommenterade delen vill jag implementera men kan sabba andras tester där karaktärer levlar upp. //Christian
+    	} */ //Bortkommenterade delen vill jag implementera men kan sabba andras tester där karaktärer levlar upp. //Christian
     	this.nextLevelCap = this.nextLevelCap*2;
     }
     public int getNextLevelCap() {return this.nextLevelCap;}
