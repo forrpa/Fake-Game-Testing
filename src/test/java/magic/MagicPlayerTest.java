@@ -163,7 +163,9 @@ class MagicPlayerTest {
         final Spell spell = new HealSpell (spellName, "description", positiveNr, positiveNr, positiveNr, positiveNr);
 
         // spell is not learnt:
-        assertTrue (mp.castSpell (spell,mp));
+        assertFalse (mp.castSpell (spell,mp));
+
+
 
         //  if lernt
         // if  enough mana

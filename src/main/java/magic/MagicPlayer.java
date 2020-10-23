@@ -68,7 +68,7 @@ public class MagicPlayer extends Player {
     public boolean castSpell(Spell spell, Unit target) {
         String spellName = spell.getName ();
         int manaCost = spell.getManaCost ();
-        if (manaPoint < manaCost || spellBook.get (spellName)==spell) {
+        if (manaPoint < manaCost) {
             return false;
         }
         manaPoint -= manaCost;
