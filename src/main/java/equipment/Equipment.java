@@ -1,7 +1,7 @@
 package equipment;
 
 public abstract class Equipment extends Gear {
-    private int armor;
+    private final int armor;
     
 	public Equipment(String name, String desc, int recLevel, int armor, int dur, int str, int agi, int intell, int sta) {
 		super(name, desc, recLevel, dur,str,agi,intell,sta);

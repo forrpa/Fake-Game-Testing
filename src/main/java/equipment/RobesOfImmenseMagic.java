@@ -1,7 +1,7 @@
 package equipment;
 
 public class RobesOfImmenseMagic extends Chest{
-	private ArmorType armorType = ArmorType.CLOTH;
+	private static final ArmorType ARMOR_TYPE = ArmorType.CLOTH;
 	
 	public RobesOfImmenseMagic() {
 		super("Robes of Immense Magic", "A beautiful piece of silken robes that imbue the wearer with immense magical power!", 50, 30, 85, 0, 0, 100, 20);
@@ -9,7 +9,7 @@ public class RobesOfImmenseMagic extends Chest{
 
 	@Override
 	public ArmorType getArmorType() {
-		return this.armorType;
+		return RobesOfImmenseMagic.ARMOR_TYPE;
 	}
 
 }

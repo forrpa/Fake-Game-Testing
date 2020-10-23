@@ -3,10 +3,10 @@ package equipment;
 import item.Item;
 
 public abstract class Gear extends Item{
-	private int strength;
-    private int agility;
-    private int intelligence;
-    private int stamina;
+	private final int strength;
+    private final int agility;
+    private final int intelligence;
+    private final int stamina;
 	private final int MAX_DURABILITY;
     private int durability;
 	

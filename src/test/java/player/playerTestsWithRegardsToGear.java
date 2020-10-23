@@ -106,6 +106,7 @@ class playerTestsWithRegardsToGear {
 		assertTrue(magePlayer.getAgility()==(agiBeforeWW+14));
 		assertTrue(magePlayer.getStamina()==(staBeforeWW+10));
 		assertTrue(magePlayer.getAttackPower()==(dmgBeforeWW+87+(5*17)));
+		assertFalse(magePlayer.isInInventory(ww));
 	}
 	@ParameterizedTest
 	@ValueSource(ints = {0, 3, 6, 17, 18, 18})
@@ -141,5 +142,6 @@ class playerTestsWithRegardsToGear {
 		assertTrue(magePlayer.getAgility()==(agiAfterWW-14));
 		assertTrue(magePlayer.getStamina()==(staAfterWW-10));
 		assertTrue(magePlayer.getAttackPower()==(dmgAfterWW-87-(5*17)));
+		assertTrue(magePlayer.getInventoryCount(ww)==1);
 	}
 }
