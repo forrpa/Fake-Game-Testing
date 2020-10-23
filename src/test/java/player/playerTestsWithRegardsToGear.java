@@ -384,4 +384,49 @@ class playerTestsWithRegardsToGear {
 		assertEquals(dmgBeforeEquip+(87+5*17),dmgAfterEquip);
 		assertEquals(armorBeforeEquip+160,armorAfterEquip);
 	}
+	@Test
+	void testToMakeSureEquippingTwoHandedRemovesShield() {
+		Gear ww = new WidowsWail();
+		Gear hb = new Heartsbane();
+		Gear bou = new BucklerOfUselessness();
+		warriorPlayer.addToInventory(ww);
+		warriorPlayer.addToInventory(hb);
+		warriorPlayer.addToInventory(bou);
+		for(int i=0;i<57;i++) {warriorPlayer.increaseLevel();}
+		try {
+			warriorPlayer.equipWeapon((Weapon) ww);
+			warriorPlayer.equipArmor((Equipment) bou);
+		} catch (Exception e) {
+			fail();
+		}
+		int intBeforeHB = warriorPlayer.getIntelligence();
+		int strBeforeHB = warriorPlayer.getStrength();
+		int agiBeforeHB = warriorPlayer.getAgility();
+		int staBeforeHB = warriorPlayer.getStamina();
+		int dmgBeforeHB = warriorPlayer.getAttackPower();
+		int armorBeforeHB = warriorPlayer.getArmor();
+		try {
+			warriorPlayer.equipWeapon((Weapon) hb);
+		} catch (Exception e) {
+			fail();
+		}
+		int intAfterHB = warriorPlayer.getIntelligence();
+		int strAfterHB = warriorPlayer.getStrength();
+		int agiAfterHB = warriorPlayer.getAgility();
+		int staAfterHB = warriorPlayer.getStamina();
+		int dmgAfterHB = warriorPlayer.getAttackPower();
+		int armorAfterHB = warriorPlayer.getArmor();
+		assertTrue(warriorPlayer.getGearFromGear("weapon").equals(hb));
+		assertFalse(warriorPlayer.getGearFromGear("weapon").equals(ww));
+		assertTrue(warriorPlayer.getGearFromGear("shield")==null);
+		assertFalse(warriorPlayer.isInInventory(hb));
+		assertTrue(warriorPlayer.isInInventory(ww));
+		assertTrue(warriorPlayer.isInInventory(bou));
+		assertEquals(intBeforeHB,intAfterHB);
+		assertEquals(strBeforeHB+(46-17),strAfterHB);
+		assertEquals(agiBeforeHB+(28-14),agiAfterHB);
+		assertEquals(staBeforeHB+(18-10),staAfterHB);
+		assertEquals(dmgBeforeHB+(247),dmgAfterHB);
+		assertEquals(armorBeforeHB-10,armorAfterHB);
+	}
 }
