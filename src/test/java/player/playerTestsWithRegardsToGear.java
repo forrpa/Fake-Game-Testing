@@ -19,7 +19,7 @@ class playerTestsWithRegardsToGear {
 		magePlayer = new Player("Mage","Human",100,0);
 	}
 	@ParameterizedTest
-	@ValueSource(ints = {49, 50, 100, 200, 140, 87})
+	@ValueSource(ints = {36, 37, 39, 40, 67, 87})
 	void testIfMageCanEquipRobesAndIfAttributesAreUpdated(int value){
 		Gear roim = new RobesOfImmenseMagic();
 		magePlayer.addToInventory(roim);
@@ -47,7 +47,7 @@ class playerTestsWithRegardsToGear {
 
 	}
 	@ParameterizedTest
-	@ValueSource(ints = {49, 50, 100, 200, 140, 87})
+	@ValueSource(ints = {36, 37, 39, 40, 67, 87})
 	void testIfWarriorCanEquipRobesAndIfAttributesAreUpdated(int value){
 		Gear roim = new RobesOfImmenseMagic();
 		warriorPlayer.addToInventory(roim);
@@ -74,7 +74,7 @@ class playerTestsWithRegardsToGear {
 		assertTrue(warriorPlayer.getHealthPoint()==(hpBeforeRobe+200));
 	}
 	@ParameterizedTest
-	@ValueSource(ints = {0, 5, 24, 37, 40, 48})
+	@ValueSource(ints = {0, 5, 24, 35, 13, 31})
 	void testIfLevelCriteriaForRobesWorkInEquipArmorMethod(int value) {
 		Gear roim = new RobesOfImmenseMagic();
 		magePlayer.addToInventory(roim);
@@ -86,7 +86,7 @@ class playerTestsWithRegardsToGear {
 		assertTrue(magePlayer.isInInventory(roim));
 	}
 	@ParameterizedTest
-	@ValueSource(ints = {6, 15, 20, 37, 40, 48})
+	@ValueSource(ints = {6, 14, 39, 42, 26, 34})
 	void testToMakeSureMageCannotWearPlate(int value) {
 		Gear bpt = new BreastplateOfTesting();
 		magePlayer.addToInventory(bpt);
@@ -98,7 +98,7 @@ class playerTestsWithRegardsToGear {
 		assertTrue(magePlayer.isInInventory(bpt));
 	}
 	@ParameterizedTest
-	@ValueSource(ints = {6, 14, 47, 103, 68, 87})
+	@ValueSource(ints = {6, 14, 39, 42, 26, 34})
 	void testIfWarriorCanEquipPlateAndIfAttributesAreUpdated(int value){
 		Gear bpt = new BreastplateOfTesting();
 		warriorPlayer.addToInventory(bpt);
@@ -136,7 +136,7 @@ class playerTestsWithRegardsToGear {
 		assertTrue(magePlayer.isInInventory(bou));
 	}
 	@ParameterizedTest
-	@ValueSource(ints = {6, 14, 47, 103, 68, 87})
+	@ValueSource(ints = {6, 14, 39, 42, 26, 0})
 	void testIfWarriorCanEquipShieldAndIfAttributesAreUpdated(int value){
 		Gear bou = new BucklerOfUselessness();
 		warriorPlayer.addToInventory(bou);
@@ -174,7 +174,7 @@ class playerTestsWithRegardsToGear {
 		assertTrue(magePlayer.getGearFromGear("chest")==null);
 	}
 	@ParameterizedTest
-	@ValueSource(ints = {20, 19, 68, 37, 40, 48})
+	@ValueSource(ints = {20, 19, 39, 37, 25, 34})
 	void testIfMageCanEquipOneHandedSwordsAndAttributesAreUpdated(int value) {
 		Gear ww = new WidowsWail();
 		magePlayer.addToInventory(ww);
@@ -202,7 +202,7 @@ class playerTestsWithRegardsToGear {
 		assertFalse(magePlayer.isInInventory(ww));
 	}
 	@ParameterizedTest
-	@ValueSource(ints = {20, 19, 68, 37, 40, 48})
+	@ValueSource(ints = {20, 19, 39, 37, 25, 34})
 	void testIfWarriorCanEquipOneHandedSwordsAndAttributesAreUpdated(int value) {
 		Gear ww = new WidowsWail();
 		warriorPlayer.addToInventory(ww);
@@ -230,7 +230,7 @@ class playerTestsWithRegardsToGear {
 		assertFalse(warriorPlayer.isInInventory(ww));
 	}
 	@ParameterizedTest
-	@ValueSource(ints = {0, 3, 6, 17, 18, 18})
+	@ValueSource(ints = {0, 3, 6, 17, 11, 18})
 	void testIfLevelCriteriaForWidowsWailWorkInEquipWeaponMethod(int value) {
 		Gear ww = new WidowsWail();
 		magePlayer.addToInventory(ww);
@@ -242,7 +242,7 @@ class playerTestsWithRegardsToGear {
 		assertTrue(magePlayer.isInInventory(ww));
 	}
 	@ParameterizedTest
-	@ValueSource(ints = {20, 19, 68, 37, 40, 48})
+	@ValueSource(ints = {20, 19, 28, 37, 33, 36})
 	void testIfMageCanUnEquipOneHandedSwordsAndAttributesAreUpdated(int value) {
 		Gear ww = new WidowsWail();
 		magePlayer.addToInventory(ww);
@@ -271,7 +271,7 @@ class playerTestsWithRegardsToGear {
 		assertTrue(magePlayer.getInventoryCount(ww)==1);
 	}
 	@ParameterizedTest
-	@ValueSource(ints = {20, 19, 68, 37, 40, 48})
+	@ValueSource(ints = {20, 19, 28, 37, 33, 36})
 	void testIfWarriorCanUnEquipOneHandedSwordsAndAttributesAreUpdated(int value) {
 		Gear ww = new WidowsWail();
 		warriorPlayer.addToInventory(ww);
@@ -300,7 +300,7 @@ class playerTestsWithRegardsToGear {
 		assertTrue(warriorPlayer.getInventoryCount(ww)==1);
 	}
 	@ParameterizedTest
-	@ValueSource(ints = {34, 39, 53, 67, 78, 100})
+	@ValueSource(ints = {34, 39, 36, 37, 38, 60})
 	void testToMakeSureMageCannotEquipTwoHandedSwords(int value) {
 		Gear hb = new Heartsbane();
 		magePlayer.addToInventory(hb);
@@ -311,7 +311,7 @@ class playerTestsWithRegardsToGear {
 		assertTrue(magePlayer.getGearFromGear("weapon")==null);
 	}
 	@ParameterizedTest
-	@ValueSource(ints = {34, 39, 53, 67, 78, 100})
+	@ValueSource(ints = {34, 39, 36, 37, 38, 60})
 	void testIfWarriorCanEquipTwoHandedSwordsAndAttributesAreUpdated(int value) {
 		Gear hb = new Heartsbane();
 		warriorPlayer.addToInventory(hb);
@@ -503,5 +503,71 @@ class playerTestsWithRegardsToGear {
 		assertEquals(0,magePlayer.getExperiencePoint());
 		assertEquals("Human",magePlayer.getRace());
 		assertEquals("Mage",magePlayer.getPlayerClass());
+	}
+	@ParameterizedTest
+	@ValueSource(ints = {1, 5, 14, 32, 27, 0})
+	void testToMakeSureIncreaseLevelMethodUpdatesAttributesCorrectlyForBothWarriorAndMage(int value) {
+		int intBeforeLevelUpWarr = warriorPlayer.getIntelligence();
+		int strBeforeLevelUpWarr = warriorPlayer.getStrength();
+		int agiBeforeLevelUpWarr = warriorPlayer.getAgility();
+		int staBeforeLevelUpWarr = warriorPlayer.getStamina();
+		int dmgBeforeLevelUpWarr = warriorPlayer.getAttackPower();
+		int maxHpBeforeLevelUpWarr = warriorPlayer.getMaxHealth();
+		int hpBeforeLevelUpWarr = warriorPlayer.getHealthPoint();
+		int intBeforeLevelUpMage = magePlayer.getIntelligence();
+		int strBeforeLevelUpMage = magePlayer.getStrength();
+		int agiBeforeLevelUpMage = magePlayer.getAgility();
+		int staBeforeLevelUpMage = magePlayer.getStamina();
+		int dmgBeforeLevelUpMage = magePlayer.getAttackPower();
+		int maxHpBeforeLevelUpMage = magePlayer.getMaxHealth();
+		int hpBeforeLevelUpMage = magePlayer.getHealthPoint();
+		for(int i=0;i<value;i++) {warriorPlayer.increaseLevel();}
+		for(int i=0;i<value;i++) {magePlayer.increaseLevel();}
+		int intAfterLevelUpWarr = warriorPlayer.getIntelligence();
+		int strAfterLevelUpWarr = warriorPlayer.getStrength();
+		int agiAfterLevelUpWarr = warriorPlayer.getAgility();
+		int staAfterLevelUpWarr = warriorPlayer.getStamina();
+		int dmgAfterLevelUpWarr = warriorPlayer.getAttackPower();
+		int maxHpAfterLevelUpWarr = warriorPlayer.getMaxHealth();
+		int hpAfterLevelUpWarr = warriorPlayer.getHealthPoint();
+		int intAfterLevelUpMage = magePlayer.getIntelligence();
+		int strAfterLevelUpMage = magePlayer.getStrength();
+		int agiAfterLevelUpMage = magePlayer.getAgility();
+		int staAfterLevelUpMage = magePlayer.getStamina();
+		int dmgAfterLevelUpMage = magePlayer.getAttackPower();
+		int maxHpAfterLevelUpMage = magePlayer.getMaxHealth();
+		int hpAfterLevelUpMage = magePlayer.getHealthPoint();
+		assertEquals(intBeforeLevelUpWarr+value,intAfterLevelUpWarr);
+		assertEquals(strBeforeLevelUpWarr+(value*2),strAfterLevelUpWarr);
+		assertEquals(agiBeforeLevelUpWarr+value,agiAfterLevelUpWarr);
+		assertEquals(staBeforeLevelUpWarr+(value*2),staAfterLevelUpWarr);
+		assertEquals(dmgBeforeLevelUpWarr+(value*10),dmgAfterLevelUpWarr);
+		assertEquals(maxHpBeforeLevelUpWarr+(value*20),maxHpAfterLevelUpWarr);
+		assertEquals(hpBeforeLevelUpWarr+(value*20),hpAfterLevelUpWarr);
+		assertEquals(intBeforeLevelUpMage+(value*2),intAfterLevelUpMage);
+		assertEquals(strBeforeLevelUpMage+(value),strAfterLevelUpMage);
+		assertEquals(agiBeforeLevelUpMage+value,agiAfterLevelUpMage);
+		assertEquals(staBeforeLevelUpMage+(value),staAfterLevelUpMage);
+		assertEquals(dmgBeforeLevelUpMage+(value*5),dmgAfterLevelUpMage);
+		assertEquals(maxHpBeforeLevelUpMage+(value*10),maxHpAfterLevelUpMage);
+		assertEquals(hpBeforeLevelUpMage+(value*10),hpAfterLevelUpMage);
+	}
+	@ParameterizedTest
+	@ValueSource(ints = {1000, 100, 500, 250, 3678, 798})
+	void testToMakeCertainincreaseExperienceWorksAsIntended(int value) {
+		magePlayer.increaseExperiencePoint(value);
+		boolean loop = true;
+		int i = 0;
+		int j = 100;
+		if(value>=j) {
+			do {
+				i+=1;
+				j=j+(j/2);
+				if(j>value) {loop = false;}
+			}while(loop);
+		}
+		assertEquals(i+1,magePlayer.getLevel());
+		assertEquals(value,magePlayer.getExperiencePoint());
+		assertTrue(magePlayer.getNextLevelCap() > magePlayer.getExperiencePoint());
 	}
 }

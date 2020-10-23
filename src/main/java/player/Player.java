@@ -17,6 +17,7 @@ public class Player extends Unit{
     //private Race race; //Beror på om vi vill göra klasserna Class och Race, jag kör med String sålänge
     private final String playerClass;
     private final String race;
+    private static final int MAX_EXPERIENCE = 500070023;
     private int experiencePoint;
     private int level = 1;
     private int nextLevelCap = 100;
@@ -105,16 +106,25 @@ public class Player extends Unit{
     }
 
     public void setExperiencePoint(int experiencePoint) {
-        this.experiencePoint = experiencePoint;
-        if(this.experiencePoint > this.nextLevelCap) {
+    	if(experiencePoint > Player.MAX_EXPERIENCE) {this.experiencePoint = Player.MAX_EXPERIENCE;}else {
+    		this.experiencePoint = experiencePoint;
+    	}
+        controlIfExperienceIsEnoughForLevelUp();
+    }
+    private void controlIfExperienceIsEnoughForLevelUp() {
+    	if(this.experiencePoint >= this.nextLevelCap) {
         	do{
         		increaseLevel();
-        	}while(this.experiencePoint > this.nextLevelCap);
+        	}while(this.experiencePoint >= this.nextLevelCap);
         }
     }
+    public int getLevel() {
+    	return this.level;
+    }
     public void increaseLevel() {
+    	if(this.level==40) {return;}
     	this.level++;
-    	/*if(this.playerClass == "Mage") {
+    	if(this.playerClass == "Mage") {
     		this.strength += 1;
     		this.agility += 1;
     		this.intelligence += 2;
@@ -124,13 +134,17 @@ public class Player extends Unit{
     		this.agility += 1;
     		this.intelligence += 1;
     		this.stamina += 2;
-    	} */ //Bortkommenterade delen vill jag implementera men kan sabba andras tester där karaktärer levlar upp. //Christian
-    	this.nextLevelCap = this.nextLevelCap*2;
+    	}  //Bortkommenterade delen vill jag implementera men kan sabba andras tester där karaktärer levlar upp. //Christian
+    	updateAttributes();
+    	this.nextLevelCap = this.nextLevelCap+(this.nextLevelCap/2);
     }
     public int getNextLevelCap() {return this.nextLevelCap;}
 
     public void increaseExperiencePoint(int experiencePoint){
-        this.experiencePoint += experiencePoint;
+    	if(this.experiencePoint+experiencePoint > Player.MAX_EXPERIENCE) {this.experiencePoint=Player.MAX_EXPERIENCE;}else {
+    		this.experiencePoint += experiencePoint;
+    	}
+        controlIfExperienceIsEnoughForLevelUp();
     }
     
     private void setArmorTypeHashMap() {
