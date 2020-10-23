@@ -28,7 +28,7 @@ public abstract class Unit implements Combatant {
     public int getHealthPoint() {
         return healthPoint;
     }
-    protected void setHealthPoint(int healthPoint){
+    public void setHealthPoint(int healthPoint){
         if(healthPoint <= 0){
             this.healthPoint = 0;
         }else {

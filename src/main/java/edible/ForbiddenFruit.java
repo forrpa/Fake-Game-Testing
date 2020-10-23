@@ -19,15 +19,15 @@ public class ForbiddenFruit extends Edible {
 		return String.format("\"%s: %s\", Mana: %d, Health: %d, Experience: %d, Quest Unlocked: %s", getName(), getDescription(), getManaPoint(), getHealthPoint(), getExperiencePoint(), questUnlocked.getName());
 	}
 
-	public Quest getQuestUnlocked() {
+	public final Quest getQuestUnlocked() {
 		return questUnlocked;
 	}
 
-	public Potion getPoison() {
+	public final Potion getPoison() {
 		return poison;
 	}
 
-	public void setPoison(Potion potion) {
+	public final void setPoison(Potion potion) {
 		if(poison != null && potion == poison) throw new IllegalArgumentException("Forbidden Fruit is already poisoned with this Potion. Cannot apply twice, only replace.");
 		this.poison = potion;
 	}
@@ -35,7 +35,7 @@ public class ForbiddenFruit extends Edible {
 	// only one of each type of forbidden fruit can be stored at a time, so no need to overrides equals with poison
 	
 	@Override
-	public int[] consume(int playerManaPoint, int playerHealthPoint, int playerExperiencePoint) {
+	public final int[] consume(int playerManaPoint, int playerHealthPoint, int playerExperiencePoint) {
 		int manaPoint = FULL_POINT_BOOST;
 		int healthPoint = FULL_POINT_BOOST;
 		int experiencePoint = FULL_POINT_BOOST;

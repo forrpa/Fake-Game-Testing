@@ -33,7 +33,7 @@ class EdibleTest {
 	}
 	
 	@Test
-	void consumeCalculatesNewPlayerPoint() {
+	void consumeReturnsNewPlayerPoint() {
 		// equivalence classes build-out test: 0, negative, positive in range....so far only one test per edible to test class checking
 		// then min and max limits should be set in Player class and MagicPlayer class method setXPoint
 		// new test for assertThrow Illegal state "Game over" or "roof reached for X point reached for type of player"

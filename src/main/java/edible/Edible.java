@@ -15,19 +15,19 @@ public class Edible extends Item {
 		this.experiencePoint = checkPointValueRange(experiencePoint);
 	}
 
-	public int getManaPoint() {
+	public final int getManaPoint() {
 		return manaPoint;
 	}
 
-	public int getHealthPoint() {
+	public final int getHealthPoint() {
 		return healthPoint;
 	}
 
-	public int getExperiencePoint() {
+	public final int getExperiencePoint() {
 		return experiencePoint;
 	}
 	
-	private int checkPointValueRange(int pointValue) {
+	private final int checkPointValueRange(int pointValue) {
 		if(pointValue < -10 || 10 < pointValue) throw new IllegalArgumentException("Value must be in range -10 to 10");
 		return pointValue;
 	}

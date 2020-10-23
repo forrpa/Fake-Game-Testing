@@ -9,7 +9,7 @@ import quest.TalkToGuildLeader;
 
 class ForbiddenFruitTest {
 
-	final static Quest QUEST = new TalkToGuildLeader(true);
+	final static Quest QUEST = new TalkToGuildLeader();
 	final static ForbiddenFruit RED_APPLE = new ForbiddenFruit("Red Apple", "Eating apple starts quest Talk to Guild Leader", QUEST);
 	
 	@Test

@@ -128,14 +128,6 @@ public class Player extends Unit{
     }
     public int getNextLevelCap() {return this.nextLevelCap;}
 
-    public void setHealthPoint(int healthPoint){
-        if(healthPoint <= 0){
-            super.setHealthPoint(0);
-        }else {
-            super.setHealthPoint(healthPoint);
-        }
-    }
-
     public void increaseExperiencePoint(int experiencePoint){
         this.experiencePoint += experiencePoint;
     }

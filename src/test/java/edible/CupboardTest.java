@@ -33,7 +33,7 @@ class CupboardTest {
 	final static Ingredient[] GREEN_VENOM_INGREDIENTS = {FIRE_ROOT, CLAW_OF_HIPOGRIFF, MORNING_STAR};
 	final static Recipie GREEN_VENOM_RECIPIE = new Recipie("Green Venom Recipie", 
 			"Recipie for potion sabbotaging health on entering bloodstream", GREEN_VENOM, GREEN_VENOM_INGREDIENTS, 50, 20);
-	final static Quest QUEST = new TalkToGuildLeader(true);
+	final static Quest QUEST = new TalkToGuildLeader();
 	final static ForbiddenFruit RED_APPLE = new ForbiddenFruit("Red Apple", "Eating apple starts quest Talk to Guild Leader", QUEST);
 	final static ForbiddenFruit LUCKY_CHERRY = new ForbiddenFruit("Lucky Cherry", "Eating cherry starts quest Talk to Guild leader", QUEST);
 	final static int FIVE_BEFOREALL_COUNT_FORTUNE_COOKIE = 5;
