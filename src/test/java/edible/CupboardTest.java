@@ -2,6 +2,7 @@ package edible;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -98,7 +99,8 @@ class CupboardTest {
 		assertEquals(VAMP_WITCH, CUPBOARD.getPlayer());
 	}
 	
-	// getCount is already tested in InventoryTest to throw NullPointerException
+	// getCount() is already tested in InventoryTest to throw NullPointerException, as is getOutItem()
+	// that poisonedForbiddenFruits ArrayList is emptied gets indirectly tested by consume() using getOutItem() method
 	
 	@Test
 	void storeNotCupboardItemThrowsIAE() {
@@ -185,21 +187,14 @@ class CupboardTest {
 	}
 	
 	@Test
-	void poisonRestoresFruitWithPotionSet() {
+	void poisonRestoresForbiddenFruitWithPotionSetDisguisedAsNormalForbiddenFruit() {
 		assertEquals(1, CUPBOARD.getCount(LUCKY_CHERRY));
-		assertEquals(null, LUCKY_CHERRY.getPoison());
+		assertNull(LUCKY_CHERRY.getPoison());
 		CUPBOARD.poison(LUCKY_CHERRY, LOVE_BREW);
 		assertEquals(1, CUPBOARD.getCount(LUCKY_CHERRY));
-		assertEquals(LOVE_BREW, LUCKY_CHERRY.getPoison());
-	}
-	
-	@Test
-	void getOutItemTypeOfForbiddenFruitReturnsPoisonedObjectWhenStoredPoisoned() {
 		final ForbiddenFruit luckyCherry = new ForbiddenFruit(LUCKY_CHERRY.getName(), LUCKY_CHERRY.getDescription(), LUCKY_CHERRY.getQuestUnlocked());
-		assertEquals(null, luckyCherry.getPoison());
-		CUPBOARD.poison(LUCKY_CHERRY, LOVE_BREW);
-		//luckyCherry = CUPBOARD.getOutItem(luckyCherry);
-		//assertEquals(LOVE_BREW, luckyCherry.getPoison());
+		assertNull(luckyCherry.getPoison());
+		assertEquals(LOVE_BREW, ((ForbiddenFruit) CUPBOARD.getOutItem(luckyCherry)).getPoison());
 	}
 	
 	@Test
