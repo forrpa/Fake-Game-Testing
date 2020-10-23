@@ -68,7 +68,7 @@ public class Player extends Unit{
     	if(piece instanceof Equipment) {
     		this.armor = this.armor - ((Equipment) piece).getArmor();
     	}else if(piece instanceof Weapon){
-    		this.attackPower = this.attackPower - ((Weapon) piece).getDamage();
+    		this.attackPower = this.attackPower - (((Weapon) piece).getDamage()+5*piece.getAttributes()[0]);
     	}
     	this.strength -= piece.getAttributes()[0];
     	this.agility -= piece.getAttributes()[1];
@@ -170,6 +170,7 @@ public class Player extends Unit{
     	else if(gear instanceof Equipment){slot = ((Equipment) gear).getSlot();wornGear = this.gear.get(slot);}
     	if(gear.equals(wornGear)) {this.gear.remove(slot);}else {return;}
     	this.playerInventory.addItem(wornGear);
+    	removeAttributesFromOldGear(wornGear);
     }
     public void equipWeapon(Weapon weapon) throws Exception {
     	isPlayerLeveledHighlyEnoughToEquip(weapon);

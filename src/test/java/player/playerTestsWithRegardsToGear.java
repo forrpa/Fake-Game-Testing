@@ -118,4 +118,28 @@ class playerTestsWithRegardsToGear {
 		});
 		assertTrue(magePlayer.getGearFromGear("weapon")==null);
 	}
+	@ParameterizedTest
+	@ValueSource(ints = {20, 19, 68, 37, 40, 48})
+	void testIfMageCanUnEquipOneHandedSwordsAndAttributesAreUpdated(int value) {
+		Gear ww = new WidowsWail();
+		magePlayer.addToInventory(ww);
+		for(int i=0;i<value;i++) {magePlayer.increaseLevel();}
+		try {
+			magePlayer.equipWeapon((Weapon) ww);
+		} catch (Exception e) {
+			fail();
+		}
+		int intAfterWW = magePlayer.getIntelligence();
+		int strAfterWW = magePlayer.getStrength();
+		int agiAfterWW = magePlayer.getAgility();
+		int staAfterWW = magePlayer.getStamina();
+		int dmgAfterWW = magePlayer.getAttackPower();
+		magePlayer.unEquipGear(ww);
+		assertTrue(magePlayer.getGearFromGear("weapon")==null);
+		assertTrue(magePlayer.getIntelligence()==(intAfterWW));
+		assertTrue(magePlayer.getStrength()==(strAfterWW-17));
+		assertTrue(magePlayer.getAgility()==(agiAfterWW-14));
+		assertTrue(magePlayer.getStamina()==(staAfterWW-10));
+		assertTrue(magePlayer.getAttackPower()==(dmgAfterWW-87-(5*17)));
+	}
 }
