@@ -37,7 +37,7 @@ public abstract class Gear extends Item{
     	return new int[]{this.strength, this.agility, this.intelligence, this.stamina};
     }
 	private void checkIfValuesAreAcceptable(int dur, int str, int agi, int intell, int sta, int recLevel){
-		if(dur <= 0||str<0||agi<0||intell<0||sta<0||recLevel<0) {
+		if(dur <= 0||str<0||agi<0||intell<0||sta<0) {
 			throw new IllegalStateException();
 		}
 	}

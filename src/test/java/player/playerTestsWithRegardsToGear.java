@@ -362,7 +362,7 @@ class playerTestsWithRegardsToGear {
 		assertFalse(warriorPlayer.isInInventory(bpt));
 	}
 	@ParameterizedTest
-	@ValueSource(ints = {34, 39, 36, 37, 38, 60})
+	@ValueSource(ints = {34, 39, 36, 37, 38, 60}) 
 	void testToMakeSureMageCannotEquipTwoHandedSwords(int value) {
 		Gear hb = new Heartsbane();
 		magePlayer.addToInventory(hb);
@@ -645,7 +645,7 @@ class playerTestsWithRegardsToGear {
 	@ParameterizedTest
 	@ValueSource(ints = {50001, 50004, 64147, Integer.MAX_VALUE, 984324, 346635, 79321, 55555})
 	void testToMakeSureArmorMaxWorksAsIntended(int value) {
-		Gear testGear = new BreastplateOfTesting(value,0,0,0,0);
+		Gear testGear = new BreastplateOfTesting(value,0,0,0,0,0);
 		Gear bou = new BucklerOfUselessness();
 		warriorPlayer.addToInventory(testGear);
 		warriorPlayer.addToInventory(bou);
@@ -665,7 +665,7 @@ class playerTestsWithRegardsToGear {
 	@ParameterizedTest
 	@ValueSource(ints = {50000, 0, 8539, 286, 98, 999, 39485, 5555})
 	void testToMakeSureArmorAddsUpCorrectlyWithoutGoingOverMax(int value) {
-		Gear testGear = new BreastplateOfTesting(value,0,0,0,0);
+		Gear testGear = new BreastplateOfTesting(value,0,0,0,0,0);
 		warriorPlayer.addToInventory(testGear);
 		int armorBefore = warriorPlayer.getArmor();
 		for(int i=0;i<10;i++) {warriorPlayer.increaseLevel();}
@@ -682,10 +682,10 @@ class playerTestsWithRegardsToGear {
 	@ParameterizedTest
 	@ValueSource(ints = {5001, 5004, 6147, Integer.MAX_VALUE, 98424, 34635, 7931, 5555})
 	void testToMakeSureAttributesMaxWorksAsIntended(int value) {
-		Gear strGear = new BreastplateOfTesting(0,value,0,0,0);
-		Gear agiGear = new BreastplateOfTesting(0,0,value,0,0);
-		Gear intellGear = new BreastplateOfTesting(0,0,0,value,0);
-		Gear staGear = new BreastplateOfTesting(0,0,0,0,value);
+		Gear strGear = new BreastplateOfTesting(0,value,0,0,0,0);
+		Gear agiGear = new BreastplateOfTesting(0,0,value,0,0,0);
+		Gear intellGear = new BreastplateOfTesting(0,0,0,value,0,0);
+		Gear staGear = new BreastplateOfTesting(0,0,0,0,value,0);
 		warriorPlayer.addToInventory(strGear);
 		warriorPlayer.addToInventory(agiGear);
 		warriorPlayer.addToInventory(intellGear);
