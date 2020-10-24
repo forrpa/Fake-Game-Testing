@@ -581,8 +581,37 @@ class playerTestsWithRegardsToGear {
 		assertTrue(value > warriorPlayer.getExperiencePoint());
 	}
 	@ParameterizedTest
-	@ValueSource(ints = {50000, 50001, 500074024, 900070024, Integer.MAX_VALUE, 501070024, 500070024, 500076022, 600070024})
+	@ValueSource(ints = {50001, 50004, 64147, Integer.MAX_VALUE, 984324, 346635, 79321, 55555})
 	void testToMakeSureArmorMaxWorksAsIntended(int value) {
 		Gear testGear = new BreastplateOfTesting(value,0,0,0,0);
+		warriorPlayer.addToInventory(testGear);
+		int armorBefore = warriorPlayer.getArmor();
+		for(int i=0;i<10;i++) {warriorPlayer.increaseLevel();}
+		try {
+			warriorPlayer.equipArmor((Equipment) testGear);
+		} catch (Exception e) {
+			fail();
+		}
+		int armorAfter = warriorPlayer.getArmor();
+		assertTrue(value > armorAfter);
+		assertEquals(50000, armorAfter);
+		assertTrue(armorAfter > armorBefore);
+	}
+	@ParameterizedTest
+	@ValueSource(ints = {50000, 0, 8539, 286, 98, 999, 39485, 5555})
+	void testToMakeSureArmorAddsUpCorrectlyWithoutGoingOverMax(int value) {
+		Gear testGear = new BreastplateOfTesting(value,0,0,0,0);
+		warriorPlayer.addToInventory(testGear);
+		int armorBefore = warriorPlayer.getArmor();
+		for(int i=0;i<10;i++) {warriorPlayer.increaseLevel();}
+		try {
+			warriorPlayer.equipArmor((Equipment) testGear);
+		} catch (Exception e) {
+			fail();
+		}
+		int armorAfter = warriorPlayer.getArmor();
+		assertTrue(value == armorAfter);
+		assertTrue(armorAfter >= armorBefore);
+		assertTrue(50000 >= armorAfter);
 	}
 }
