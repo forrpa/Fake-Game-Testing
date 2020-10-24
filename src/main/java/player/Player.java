@@ -71,7 +71,8 @@ public class Player extends Unit{
     private void removeAttributesFromOldGear(Gear piece) {
     	if(piece instanceof Equipment) {
     		this.armor = this.armor - ((Equipment) piece).getArmor();
-    	}else if(piece instanceof Weapon){
+    	}
+    	if(piece instanceof Weapon){
     		this.attackPower = this.attackPower - (((Weapon) piece).getDamage());
     	}
     	this.strength -= piece.getAttributes()[0];
@@ -84,7 +85,8 @@ public class Player extends Unit{
     		if(this.armor+((Equipment) piece).getArmor()>Player.MAX_ALLOWED_ARMOR || this.armor+((Equipment) piece).getArmor()<-10000) {this.armor=Player.MAX_ALLOWED_ARMOR;}else {
     			this.armor = this.armor + ((Equipment) piece).getArmor();
     		}
-    	}else if(piece instanceof Weapon){
+    	}
+    	if(piece instanceof Weapon){
     		this.attackPower = this.attackPower + ((Weapon) piece).getDamage();
     	}
     	if(this.strength+piece.getAttributes()[0]>Player.MAX_ALLOWED_STR_AGI_INT_STA || this.strength+piece.getAttributes()[0]<-10000) {this.strength = Player.MAX_ALLOWED_STR_AGI_INT_STA;}else {
@@ -141,7 +143,8 @@ public class Player extends Unit{
     		this.agility += 1;
     		this.intelligence += 2;
     		this.stamina += 1;
-    	}else if(this.playerClass == "Warrior") {
+    	}
+    	if(this.playerClass == "Warrior") {
     		this.strength += 2;
     		this.agility += 1;
     		this.intelligence += 1;
@@ -194,7 +197,7 @@ public class Player extends Unit{
     	String slot = null;
     	if(gear instanceof Weapon) {slot = "weapon";
     	wornGear = this.gear.get("weapon");}
-    	else if(gear instanceof Equipment){slot = ((Equipment) gear).getSlot();wornGear = this.gear.get(slot);}
+    	if(gear instanceof Equipment){slot = ((Equipment) gear).getSlot();wornGear = this.gear.get(slot);}
     	if(gear.equals(wornGear)) {this.gear.remove(slot);}else {return;}
     	this.playerInventory.addItem(wornGear);
     	removeAttributesFromOldGear(wornGear);

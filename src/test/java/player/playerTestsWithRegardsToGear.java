@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import edible.Cupboard;
 import equipment.*;
 import weapon.*;
 
@@ -300,6 +301,67 @@ class playerTestsWithRegardsToGear {
 		assertTrue(warriorPlayer.getInventoryCount(ww)==1);
 	}
 	@ParameterizedTest
+	@ValueSource(ints = {9, 6, 13, 28, 39, 21})
+	void testIfWarriorCanUnEquipBreastplateAndAttributesAreUpdated(int value) {
+		Gear bpt = new BreastplateOfTesting();
+		warriorPlayer.addToInventory(bpt);
+		for(int i=0;i<value;i++) {warriorPlayer.increaseLevel();}
+		try {
+			warriorPlayer.equipArmor((Equipment) bpt);
+		} catch (Exception e) {
+			fail();
+		}
+		int intAfterPlate = warriorPlayer.getIntelligence();
+		int strAfterPlate = warriorPlayer.getStrength();
+		int agiAfterPlate = warriorPlayer.getAgility();
+		int staAfterPlate = warriorPlayer.getStamina();
+		int dmgAfterPlate = warriorPlayer.getAttackPower();
+		int maxHpAfterPlate = warriorPlayer.getMaxHealth();
+		int hpAfterPlate = warriorPlayer.getHealthPoint();
+		warriorPlayer.unEquipGear(bpt);
+		assertTrue(warriorPlayer.getGearFromGear("chest")==null);
+		assertTrue(warriorPlayer.getIntelligence()==(intAfterPlate-5));
+		assertTrue(warriorPlayer.getStrength()==(strAfterPlate));
+		assertTrue(warriorPlayer.getAgility()==(agiAfterPlate-2));
+		assertTrue(warriorPlayer.getStamina()==(staAfterPlate-3));
+		assertTrue(warriorPlayer.getAttackPower()==(dmgAfterPlate));
+		assertTrue(warriorPlayer.getMaxHealth()==(maxHpAfterPlate-30));
+		assertTrue(warriorPlayer.getHealthPoint()==(hpAfterPlate-30));
+		assertTrue(warriorPlayer.getInventoryCount(bpt)==1); 
+	}
+	@ParameterizedTest
+	@ValueSource(ints = {9, 6, 13, 28, 39, 21})
+	void testIfTryingToUnEquipNonWornPieceChangesNothing(int value) {
+		Gear bpt = new BreastplateOfTesting();
+		Gear bou = new BucklerOfUselessness();
+		warriorPlayer.addToInventory(bpt);
+		warriorPlayer.addToInventory(bou);
+		for(int i=0;i<value;i++) {warriorPlayer.increaseLevel();}
+		try {
+			warriorPlayer.equipArmor((Equipment) bpt);
+		} catch (Exception e) {
+			fail();
+		}
+		int intAfterPlate = warriorPlayer.getIntelligence();
+		int strAfterPlate = warriorPlayer.getStrength();
+		int agiAfterPlate = warriorPlayer.getAgility();
+		int staAfterPlate = warriorPlayer.getStamina();
+		int dmgAfterPlate = warriorPlayer.getAttackPower();
+		int maxHpAfterPlate = warriorPlayer.getMaxHealth();
+		int hpAfterPlate = warriorPlayer.getHealthPoint();
+		warriorPlayer.unEquipGear(bou);
+		assertTrue(warriorPlayer.getGearFromGear("chest").equals(bpt));
+		assertTrue(warriorPlayer.getIntelligence()==(intAfterPlate));
+		assertTrue(warriorPlayer.getStrength()==(strAfterPlate));
+		assertTrue(warriorPlayer.getAgility()==(agiAfterPlate));
+		assertTrue(warriorPlayer.getStamina()==(staAfterPlate));
+		assertTrue(warriorPlayer.getAttackPower()==(dmgAfterPlate));
+		assertTrue(warriorPlayer.getMaxHealth()==(maxHpAfterPlate));
+		assertTrue(warriorPlayer.getHealthPoint()==(hpAfterPlate));
+		assertTrue(warriorPlayer.getInventoryCount(bou)==1); 
+		assertFalse(warriorPlayer.isInInventory(bpt));
+	}
+	@ParameterizedTest
 	@ValueSource(ints = {34, 39, 36, 37, 38, 60})
 	void testToMakeSureMageCannotEquipTwoHandedSwords(int value) {
 		Gear hb = new Heartsbane();
@@ -584,10 +646,13 @@ class playerTestsWithRegardsToGear {
 	@ValueSource(ints = {50001, 50004, 64147, Integer.MAX_VALUE, 984324, 346635, 79321, 55555})
 	void testToMakeSureArmorMaxWorksAsIntended(int value) {
 		Gear testGear = new BreastplateOfTesting(value,0,0,0,0);
+		Gear bou = new BucklerOfUselessness();
 		warriorPlayer.addToInventory(testGear);
+		warriorPlayer.addToInventory(bou);
 		int armorBefore = warriorPlayer.getArmor();
 		for(int i=0;i<10;i++) {warriorPlayer.increaseLevel();}
 		try {
+			warriorPlayer.equipArmor((Equipment) bou);
 			warriorPlayer.equipArmor((Equipment) testGear);
 		} catch (Exception e) {
 			fail();
@@ -666,5 +731,18 @@ class playerTestsWithRegardsToGear {
 		assertTrue(agiAfter > agiBefore);
 		assertTrue(intellAfter > intellBefore);
 		assertTrue(staAfter > staBefore);
+	} 
+	@Test
+	void testToMakeSureCupboardExists() {
+		assertTrue(magePlayer.getCupboard() instanceof Cupboard);
+	}
+	@Test
+	void testToMakeSureRemovingAnItemWorks() {
+		Gear ww = new WidowsWail();
+		magePlayer.addToInventory(ww);
+		int countBeforeRemoval = magePlayer.getInventoryCount(ww);
+		magePlayer.removeFromInventory(ww);
+		assertFalse(magePlayer.isInInventory(ww));
+		assertEquals(1,countBeforeRemoval);
 	}
 }
