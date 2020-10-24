@@ -81,22 +81,22 @@ public class Player extends Unit{
     }
     private void addAttributesFromNewGear(Gear piece) {
     	if(piece instanceof Equipment) {
-    		if(this.armor+((Equipment) piece).getArmor()>Player.MAX_ALLOWED_ARMOR) {this.armor=Player.MAX_ALLOWED_ARMOR;}else {
+    		if(this.armor+((Equipment) piece).getArmor()>Player.MAX_ALLOWED_ARMOR || this.armor+((Equipment) piece).getArmor()<-10000) {this.armor=Player.MAX_ALLOWED_ARMOR;}else {
     			this.armor = this.armor + ((Equipment) piece).getArmor();
     		}
     	}else if(piece instanceof Weapon){
     		this.attackPower = this.attackPower + ((Weapon) piece).getDamage();
     	}
-    	if(this.strength+piece.getAttributes()[0]>Player.MAX_ALLOWED_STR_AGI_INT_STA) {this.strength = Player.MAX_ALLOWED_STR_AGI_INT_STA;}else {
+    	if(this.strength+piece.getAttributes()[0]>Player.MAX_ALLOWED_STR_AGI_INT_STA || this.strength+piece.getAttributes()[0]<-10000) {this.strength = Player.MAX_ALLOWED_STR_AGI_INT_STA;}else {
     		this.strength += piece.getAttributes()[0];
     	}
-    	if(this.agility+piece.getAttributes()[1]>Player.MAX_ALLOWED_STR_AGI_INT_STA) {this.agility = Player.MAX_ALLOWED_STR_AGI_INT_STA;}else {
+    	if(this.agility+piece.getAttributes()[1]>Player.MAX_ALLOWED_STR_AGI_INT_STA || this.agility+piece.getAttributes()[1]<-10000) {this.agility = Player.MAX_ALLOWED_STR_AGI_INT_STA;}else {
         	this.agility += piece.getAttributes()[1];
     	}
-    	if(this.intelligence+piece.getAttributes()[2]>Player.MAX_ALLOWED_STR_AGI_INT_STA) {this.intelligence = Player.MAX_ALLOWED_STR_AGI_INT_STA;}else {
+    	if(this.intelligence+piece.getAttributes()[2]>Player.MAX_ALLOWED_STR_AGI_INT_STA || this.intelligence+piece.getAttributes()[2]<-10000) {this.intelligence = Player.MAX_ALLOWED_STR_AGI_INT_STA;}else {
     		this.intelligence += piece.getAttributes()[2];
     	}
-    	if(this.stamina+piece.getAttributes()[3]>Player.MAX_ALLOWED_STR_AGI_INT_STA) {this.stamina = Player.MAX_ALLOWED_STR_AGI_INT_STA;}else {
+    	if(this.stamina+piece.getAttributes()[3]>Player.MAX_ALLOWED_STR_AGI_INT_STA || this.stamina+piece.getAttributes()[3]<-10000) {this.stamina = Player.MAX_ALLOWED_STR_AGI_INT_STA;}else {
     		this.stamina += piece.getAttributes()[3];
     	}
     }

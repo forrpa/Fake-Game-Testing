@@ -614,4 +614,57 @@ class playerTestsWithRegardsToGear {
 		assertTrue(armorAfter >= armorBefore);
 		assertTrue(50000 >= armorAfter);
 	}
+	@ParameterizedTest
+	@ValueSource(ints = {5001, 5004, 6147, Integer.MAX_VALUE, 98424, 34635, 7931, 5555})
+	void testToMakeSureAttributesMaxWorksAsIntended(int value) {
+		Gear strGear = new BreastplateOfTesting(0,value,0,0,0);
+		Gear agiGear = new BreastplateOfTesting(0,0,value,0,0);
+		Gear intellGear = new BreastplateOfTesting(0,0,0,value,0);
+		Gear staGear = new BreastplateOfTesting(0,0,0,0,value);
+		warriorPlayer.addToInventory(strGear);
+		warriorPlayer.addToInventory(agiGear);
+		warriorPlayer.addToInventory(intellGear);
+		warriorPlayer.addToInventory(staGear);
+		int strBefore = warriorPlayer.getStrength();
+		int agiBefore = warriorPlayer.getAgility();
+		int intellBefore = warriorPlayer.getIntelligence();
+		int staBefore = warriorPlayer.getStamina();
+		for(int i=0;i<10;i++) {warriorPlayer.increaseLevel();}
+		try {
+			warriorPlayer.equipArmor((Equipment) strGear);
+		} catch (Exception e) {
+			fail();
+		}
+		int strAfter = warriorPlayer.getStrength();
+		try {
+			warriorPlayer.equipArmor((Equipment) agiGear);
+		} catch (Exception e) {
+			fail();
+		}
+		int agiAfter = warriorPlayer.getAgility();
+		try {
+			warriorPlayer.equipArmor((Equipment) intellGear);
+		} catch (Exception e) {
+			fail();
+		}
+		int intellAfter = warriorPlayer.getIntelligence();
+		try {
+			warriorPlayer.equipArmor((Equipment) staGear);
+		} catch (Exception e) {
+			fail();
+		}
+		int staAfter = warriorPlayer.getStamina();
+		assertTrue(value > strAfter);
+		assertTrue(value > agiAfter);
+		assertTrue(value > intellAfter);
+		assertTrue(value > staAfter);
+		assertEquals(5000, strAfter);
+		assertEquals(5000, agiAfter);
+		assertEquals(5000, intellAfter);
+		assertEquals(5000, staAfter);
+		assertTrue(strAfter > strBefore);
+		assertTrue(agiAfter > agiBefore);
+		assertTrue(intellAfter > intellBefore);
+		assertTrue(staAfter > staBefore);
+	}
 }
