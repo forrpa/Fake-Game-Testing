@@ -745,4 +745,27 @@ class playerTestsWithRegardsToGear {
 		assertFalse(magePlayer.isInInventory(ww));
 		assertEquals(1,countBeforeRemoval);
 	}
+	@Test
+	void testToMakeSureEqualsWorksAsIntendedWithTwoPlayersUnequalInRegardsToClass() {
+		assertFalse(magePlayer.equals(warriorPlayer));
+	}
+	@Test
+	void testToMakeSureEqualsWorksAsIntendedWithTwoEqualPlayers() {
+		Player magePlayer2 = new Player("Mage","Human",100,0);
+		assertTrue(magePlayer.equals(magePlayer2));
+	}
+	@Test
+	void testToMakeSureEqualsWorksAsIntendedWithTwoPlayersUnequalInRegardsToRace() {
+		Player magePlayer2 = new Player("Mage","Elf",100,0);
+		assertFalse(magePlayer.equals(magePlayer2));
+	}
+	@Test
+	void testToMakeSurePlayerEqualsItself() {
+		assertTrue(magePlayer.equals(magePlayer));
+	}
+	@Test
+	void testToMakeSurePlayerIsUnequalToNonPlayerObjects() {
+		Gear bpt = new BreastplateOfTesting();
+		assertFalse(magePlayer.equals(bpt));
+	}
 }
