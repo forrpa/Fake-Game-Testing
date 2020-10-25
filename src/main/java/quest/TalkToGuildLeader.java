@@ -28,9 +28,12 @@ public class TalkToGuildLeader extends Quest {
     }
 
     @Override
-    public void startQuest(Player player) {
+    public boolean startQuest(Player player) {
         if (startRequirementsFulfilled(player)){
             state = QuestState.IN_PROGRESS;
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -49,7 +52,7 @@ public class TalkToGuildLeader extends Quest {
     }
 
     @Override
-    public void questCompleted(Player player) {
+    public boolean completeQuest(Player player) {
         if (endRequirementsFulfilled(player)){
             state = QuestState.DONE;
             player.increaseExperiencePoint(500);
@@ -57,8 +60,9 @@ public class TalkToGuildLeader extends Quest {
             rewardBasedOnRace(player);
             GuildMap guildMap = new GuildMap();
             player.addToInventory(guildMap);
+            return true;
         } else {
-            System.out.println("You have not fulfilled quest requirements.");
+            return false;
         }
     }
 
@@ -76,17 +80,19 @@ public class TalkToGuildLeader extends Quest {
     public void rewardBasedOnRace(Player player){
         switch (player.getRace()){
             case "Human":
-                if (player.getPlayerClass() == "Tank"){
+                if (player.getPlayerClass().equals("Tank")){
                     player.addToInventory(new BreastplateOfTesting());
                 } else {
                     player.addToInventory(new BucklerOfUselessness());
                 }
             case "Orc":
-                if (player.getPlayerClass() == "Damage"){
+                if (player.getPlayerClass().equals("Damage")){
                     player.addToInventory(new WidowsWail());
                 } else {
                     player.addToInventory(new Heartsbane());
                 }
         }
     }
+
+    //toString
 }

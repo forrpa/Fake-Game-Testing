@@ -6,7 +6,7 @@ public abstract class Quest {
 
     private String name;
     protected String description;
-    protected Enum state;
+    protected Enum state; //Fixa raw use of parameterized class Enum
     private boolean mandatory;
     //Quest log - available quests, completed quests osv
 
@@ -36,11 +36,12 @@ public abstract class Quest {
 
     public abstract boolean startRequirementsFulfilled(Player player);
 
-    public abstract void startQuest(Player player);
+    public abstract boolean startQuest(Player player);
 
     public abstract boolean endRequirementsFulfilled(Player player);
 
-    public abstract void questCompleted(Player player);
+    public abstract boolean completeQuest(Player player);
 
+    //public abstract String toString();
 
 }
