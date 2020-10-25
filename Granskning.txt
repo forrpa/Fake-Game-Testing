@@ -1,6 +1,6 @@
 Granskning 2020-10-25
 
-Granskningsförslag: Item, Edible, Potion.
+Granskningsförslag: Item, Edible, Potion, ForbiddenFruit.
 
 Author: Emilia Hane.
 
