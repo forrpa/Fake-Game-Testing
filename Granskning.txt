@@ -5,3 +5,5 @@ Granskningsförslag: Item, Edible, Potion.
 Author: Emilia Hane.
 
 Granskare: Adam, Christoffer, Jennifer & Christian.
+
+Moderator: Christian.
