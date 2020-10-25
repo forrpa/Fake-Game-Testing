@@ -7,18 +7,18 @@ class Spell {
     private final String description;
     private final String name;
     private int manaCost = 50;
-    private int requiredMagicLevel = 5;
+    private int requiredMagicSkill = 5;
     private int cooldownDuration = 0;
-    private boolean isOnCooldown = false;
+    private final boolean isOnCooldown = false;
     // implement isOnCooldown in castSpell.
 
     // TODO: 2020-10-20 implement "damage interface"
 
-    public Spell(String name, String description, int manaCost, int requiredMagicLevel, int cooldownDuration) {
+    public Spell(String name, String description, int manaCost, int requiredMagicSkill, int cooldownDuration) {
         this.name = name;
         this.description = description;
         setManaCost (manaCost);
-        setRequiredMagicLevel (requiredMagicLevel);
+        setRequiredMagicSkill (requiredMagicSkill);
         setCooldownDuration (cooldownDuration);
     }
 
@@ -28,7 +28,6 @@ class Spell {
         name = "Unnamed spell";
         description = "Your ninny brain can not comprehend what this spell does.";
     }
-    // TODO: 2020-10-16 add isCastable and coolDown Method.
 
 
     public String getName() {
@@ -46,8 +45,8 @@ class Spell {
     }
 
 
-    public int getRequiredMagicLevel() {
-        return requiredMagicLevel;
+    public int getRequiredMagicSkill() {
+        return requiredMagicSkill;
     }
 
 
@@ -60,21 +59,12 @@ class Spell {
         this.manaCost = positiveNrCheck (manaCost);
     }
 
-    public void setRequiredMagicLevel(int requiredMagicLevel) {
-        this.requiredMagicLevel = positiveNrCheck (requiredMagicLevel);
+    public void setRequiredMagicSkill(int requiredMagicSkill) {
+        this.requiredMagicSkill = positiveNrCheck (requiredMagicSkill);
     }
 
     public void setCooldownDuration(int cooldownDuration) {
         this.cooldownDuration = positiveNrCheck (cooldownDuration);
-    }
-
-    // Check that numbers are >=0
-    private int positiveNrCheck(int nr) {
-        if (nr >= 0) {
-            return nr;
-        } else {
-            throw new IllegalArgumentException ("Error: negative numbers are not allowed here");
-        }
     }
 
 
@@ -90,6 +80,29 @@ class Spell {
     boolean magicEffect(Unit caster, Unit target) {
         return false;
     }
-}
 
+
+    // Check if  numbers are >=0
+    private int positiveNrCheck(int nr) {
+        if (nr >= 0) {
+            return nr;
+        } else {
+            throw new IllegalArgumentException ("Error: negative numbers are not allowed here");
+        }
+    }
+
+    // Check if Strings are not blank, empty or null.
+    private void stringCheck(String string) {
+      if (string == null || string.trim ().isEmpty ()){
+          throw new IllegalArgumentException ("Error: a blank string is not allowed here");
+      }
+
+      // use param test?
+
+
+
+    }
+
+
+}
 

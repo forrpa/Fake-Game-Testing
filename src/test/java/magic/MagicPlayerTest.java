@@ -5,6 +5,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,6 +14,7 @@ class MagicPlayerTest {
     private final int negativeNr = -1;
     private final int positiveNr = 1;
     private final int maxIntValue = Integer.MAX_VALUE; // use?
+    private final int numberTooBig = maxIntValue + 1;
     MagicPlayer mp;
     Spell spell;
     String spellName;
@@ -71,11 +74,13 @@ class MagicPlayerTest {
 
     @Test
     void removeLearntSpellTest() {
-        final String name = "funName";
+
         mp.addSpell (spell);
         mp.learnSpell (spell);
-        assertEquals (spell, mp.removeSpell (name));
-        assertEquals (spell, mp.unLearnSpell (name));
+        assertEquals (spell, mp.removeSpell (spellName));
+        assertEquals (spell, mp.unLearnSpell (spellName));
+        assertFalse (mp.spellBook.containsKey (spellName));
+        assertFalse (mp.learntSpells.containsKey (spellName));
     }
 
     @Test
@@ -96,17 +101,29 @@ class MagicPlayerTest {
     @Test
     void learnSpellTest() {
         final int maxLearnableSpells = 1;
-        int requiredMagicLevel = 0;
+
 
         //spell should be added to learntSpell AND spellBook.
         mp.setMaximumLearnableSpells (maxLearnableSpells);
-        mp.learnSpell (spell);
 
+        assertTrue (mp.learnSpell (spell));
         assertEquals (spell, mp.learntSpells.get (spellName));
         assertEquals (spell, mp.spellBook.get (spellName));
 
-        // needs to add tests for  if MinMagicLevel
+    }
 
+    @Test
+    void LearnSpellWithInadequateMagicSkillLevelTest() {
+        // Testing learning spells with less than required magicSkill.
+
+        mp.setMagicSkill (0);
+        assertFalse (mp.learnSpell (spell));
+        assertFalse (mp.learntSpells.containsValue (spell));
+
+        // check that a spell with 0 magicSkill is learnt with 0 skill.
+        HealSpell spellZero = new HealSpell ("Name","Description",1,0,1,50);
+        assertTrue (mp.learnSpell (spellZero));
+        assertTrue (mp.learntSpells.containsValue (spellZero));
     }
 
 
@@ -115,23 +132,25 @@ class MagicPlayerTest {
         final String spellNameOne = "name";
         final String spellNameTwo = "secondName";
         final int maxLearnableSpells = 1;
-        int requiredMagicLevel = 0;
-        final int maxLearnablespellsPlusOne = maxLearnableSpells + 1;
-        final MagicPlayer mp = new MagicPlayer ("playerClass", "race", 50, 1);
-        final Spell spellOne = new HealSpell (spellNameOne, "description", positiveNr, requiredMagicLevel, positiveNr, positiveNr);
-        final Spell spellTwo = new HealSpell (spellNameTwo, "description", positiveNr, requiredMagicLevel, positiveNr, positiveNr);
+        int requiredMagicSkill = 0;
+        final int maxLearnableSpellsPlusOne = maxLearnableSpells + 1;
+        final Spell spellOne = new HealSpell (spellNameOne, "description", positiveNr, requiredMagicSkill, positiveNr, positiveNr);
+        final Spell spellTwo = new HealSpell (spellNameTwo, "description", positiveNr, requiredMagicSkill, positiveNr, positiveNr);
 
         mp.setMaximumLearnableSpells (maxLearnableSpells);
         mp.learnSpell (spellOne);
         mp.learnSpell (spellTwo);
 
+        // spellNameOne should be learnt
         assertTrue (mp.learntSpells.containsKey (spellNameOne));
         assertTrue (mp.spellBook.containsKey (spellNameOne));
-        assertFalse (mp.learntSpells.containsKey (spellNameTwo));
+
+        //spellNameTwo should not be learnt. (out of memory).
+        assertFalse (mp.spellBook.containsKey (spellNameTwo));
         assertFalse (mp.learntSpells.containsKey (spellNameTwo));
 
-        // increasing MaxLearnableSpells and testing again.
-        mp.setMaximumLearnableSpells (maxLearnablespellsPlusOne);
+        // increasing MaxLearnableSpells and testing again. spells should be learnt now.
+        mp.setMaximumLearnableSpells (maxLearnableSpellsPlusOne);
         mp.learnSpell (spellTwo);
 
         assertTrue (mp.learntSpells.containsKey (spellNameTwo));
@@ -141,13 +160,14 @@ class MagicPlayerTest {
 
     @Test
     public void unLearnSpellTest() {
-        final int maxLearnableSpells = 1;
 
         mp.learnSpell (spell);
+
+        // assert that the spell is learnt
         assertEquals (spell, mp.learntSpells.get (spellName));
         assertEquals (spell, mp.getSpell (spellName));
 
-        // should only remove from learntSpells.
+        // assert that spell is only remove from learntSpells.
         mp.unLearnSpell (spellName);
         assertNull (mp.learntSpells.get (spellName));
         assertEquals (spell, mp.getSpell (spellName));
@@ -169,6 +189,65 @@ class MagicPlayerTest {
 
     }
 
+
+    @Test
+    void getManaPointTest() {
+        assertEquals (positiveNr, mp.getManaPoint ());
+
+    }
+
+
+    // Trying out  @ParameterizedTest.  I understand that only  testing one  and ten would suffice.
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10,})
+    void setAcceptableManaPointTest(int number) {
+
+        mp.setMaxManaPoint (10);
+        mp.setManaPoint (number);
+        assertEquals (number, mp.manaPoint);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, Integer.MAX_VALUE})
+    void setManaPointHigherThanMaxManaTest(int number) {
+
+        int maxManaPoint = 0;
+        mp.setMaxManaPoint (maxManaPoint);
+        mp.setManaPoint (number);
+        assertEquals (maxManaPoint, mp.manaPoint);
+    }
+
+    @Test
+    void setNegativeManaPointTest() {
+        mp.setMaxManaPoint (10);
+        Assertions.assertThrows (IllegalArgumentException.class, () -> mp.setManaPoint (-1));
+    }
+
+
+    @Test
+    void getMaxManaPointTest() {
+        assertEquals (mp.maxManaPoint,mp.getMaxManaPoint ());
+    }
+
+    @Test
+    void setMaxManaTest() {
+       mp.setMaxManaPoint (positiveNr);
+       assertEquals (positiveNr,mp.maxManaPoint);
+
+       mp.setMaxManaPoint (maxIntValue);
+       assertEquals (maxIntValue,mp.maxManaPoint);
+    }
+
+    @Test
+    void setNegativeManaTest(){
+        Assertions.assertThrows (IllegalArgumentException.class, () -> mp.setMaxManaPoint (negativeNr));
+
+    }
+    @Test
+    void getMagicSkillTest(){
+        assertEquals (mp.magicSkill,mp.getMagicSkill ());
+    }
+
     @Test
     void SetNegativeMagicSkillTest() {
         Assertions.assertThrows (IllegalArgumentException.class, () -> mp.setMagicSkill (negativeNr));
@@ -178,54 +257,5 @@ class MagicPlayerTest {
     void SetMagicSkillAboveMaximumTest() {
         int maxPlusOne = 11;
         Assertions.assertThrows (IllegalArgumentException.class, () -> mp.setMagicSkill (maxPlusOne));
-    }
-
-
-    @Test
-    void getManaPointTest() {
-        assertEquals (positiveNr, mp.getManaPoint ());
-
-    }
-
-    @Test
-    void setManaPointTest() {
-
-
-    }
-
-    @Test
-    void getManaRegenSpeed() {
-        fail ();
-
-    }
-
-    @Test
-    void setManaRegenSpeed() {
-        fail ();
-
-    }
-
-    @Test
-    void getMagicLevel() {
-        fail ();
-
-    }
-
-    @Test
-    void setMagicLevel() {
-        fail ();
-
-    }
-
-    @Test
-    void getMaxMana() {
-        fail ();
-
-    }
-
-    @Test
-    void setMaxMana() {
-        fail ();
-
     }
 }
