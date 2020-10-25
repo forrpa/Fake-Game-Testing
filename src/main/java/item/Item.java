@@ -21,20 +21,20 @@ public abstract class Item {
 		this.requiredLevel = requiredLevel;
 	}
 
-	public String getName() {
+	public final String getName() {
 		return name;
 	}
 
-	public String getDescription() {
+	public final String getDescription() {
 		return description;
 	}
 	
-	public int getRequiredLevel() {
+	public final int getRequiredLevel() {
 		return requiredLevel;
 	}
 	
 	@Override
-    public final boolean equals(Object obj) {
+    public boolean equals(Object obj) {
         if (obj instanceof Item) {
             Item item = (Item) obj;
             return name == item.name && description == item.description && requiredLevel == item.requiredLevel;
@@ -44,7 +44,7 @@ public abstract class Item {
     }
     
     @Override
-    public final int hashCode() {
+    public int hashCode() {
         int result = 17;
         final int prime = 31;
         result = prime * result + name.hashCode();

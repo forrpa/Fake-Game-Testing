@@ -2,9 +2,10 @@ package edible;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class EdibleTest {
 	
@@ -32,12 +33,14 @@ class EdibleTest {
 		});
 	}
 	
-	@Test
-	void consumeReturnsNewPlayerPoint() {
-		// equivalence classes build-out test: 0, negative, positive in range....so far only one test per edible to test class checking
-		// then min and max limits should be set in Player class and MagicPlayer class method setXPoint
-		// new test for assertThrow Illegal state "Game over" or "roof reached for X point reached for type of player"
-		fail("Not yet implemented");
+	@ParameterizedTest
+	@ValueSource(ints = {-10, -2, -1, 0, 1, 4, 9, 10})
+	void consumeReturnsPointPlusEdiblePoint(int point) {
+		Edible edible = new Edible("Lucky Or Unlucky Popsicle", "Surprise health, experience and mana point!", point, point, point);
+		int[] returnPoints = edible.consume(100, -1, 26);
+		assertEquals(100 + point, returnPoints[0]);
+		assertEquals(-1 + point, returnPoints[1]);
+		assertEquals(26 + point, returnPoints[2]);
 	}
 	
 	@Test

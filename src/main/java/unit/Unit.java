@@ -2,6 +2,7 @@ package unit;
 
 public abstract class Unit implements Combatant {
     protected boolean isGrounded;
+    protected static final int MAX_ALLOWED_HEALTH = 50000;
     protected int healthPoint;
     protected int maxHealthPoint;
     protected int attackPower;

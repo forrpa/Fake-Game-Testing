@@ -4,7 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import equipment.Gear;
 import item.Item;
@@ -53,10 +54,17 @@ class WidowsWailSimpleAttributeAndMethodTests {
     void testForCorrectMaxDurabilityOfWidowsWail() {
     	assertEquals(102, WIDOWS_WAIL.getMaxDurability());
     }
-    @Test
-    void testForCorrectDurabilityValueOfDamagedWidowsWail() {
-    	WIDOWS_WAIL.damageDurability(19);
-    	assertEquals(83, WIDOWS_WAIL.getDurability());
+    @ParameterizedTest
+	@ValueSource(ints = {102, 100, 0, 55, 1, 78})
+    void testForCorrectDurabilityValueOfDamagedWidowsWail(int value) {
+    	WIDOWS_WAIL.damageDurability(value);
+    	assertEquals(102-value, WIDOWS_WAIL.getDurability()); 
+    } 
+	@ParameterizedTest
+	@ValueSource(ints = {103, 114, Integer.MAX_VALUE, 214, 1000, 666})
+    void testForCorrectDurabilityZeroSettingOfDamagedWidowsWail(int value) {
+		WIDOWS_WAIL.damageDurability(value);
+    	assertEquals(0, WIDOWS_WAIL.getDurability());
     }
     @Test
     void testRepair() {

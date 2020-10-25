@@ -2,6 +2,7 @@ package edible;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -31,7 +32,7 @@ class CupboardTest {
 	final static Ingredient CLAW_OF_HIPOGRIFF = new Ingredient("Claw of Hipogriff", "Rare poisonous ingredient");
 	final static Ingredient MORNING_STAR = new Ingredient("Morning Star", "Flower used in potions effecting health");
 	final static Ingredient[] GREEN_VENOM_INGREDIENTS = {FIRE_ROOT, CLAW_OF_HIPOGRIFF, MORNING_STAR};
-	final static Recipie GREEN_VENOM_RECIPIE = new Recipie("Green Venom Recipie", 
+	final static Recipe GREEN_VENOM_RECIPIE = new Recipe("Green Venom Recipie", 
 			"Recipie for potion sabbotaging health on entering bloodstream", GREEN_VENOM, GREEN_VENOM_INGREDIENTS, 50, 20);
 	final static Quest QUEST = new TalkToGuildLeader();
 	final static ForbiddenFruit RED_APPLE = new ForbiddenFruit("Red Apple", "Eating apple starts quest Talk to Guild Leader", QUEST);
@@ -98,7 +99,8 @@ class CupboardTest {
 		assertEquals(VAMP_WITCH, CUPBOARD.getPlayer());
 	}
 	
-	// getCount is already tested in InventoryTest to throw NullPointerException
+	// getCount() is already tested in InventoryTest to throw NullPointerException, as is getOutItem()
+	// that poisonedForbiddenFruits ArrayList is emptied gets indirectly tested by consume() using getOutItem() method
 	
 	@Test
 	void storeNotCupboardItemThrowsIAE() {
@@ -156,7 +158,7 @@ class CupboardTest {
 			assertEquals(manaPointMagicPlayer, VAMP_WITCH.getManaPoint());
 		}
 	}
-
+	
 	@Test
 	void consumeForbiddenFruitReturnsQuestUnlockedAttribute() {
 		Quest quest = CUPBOARD.consume(LUCKY_CHERRY);
@@ -185,12 +187,14 @@ class CupboardTest {
 	}
 	
 	@Test
-	void poisonRestoresFruitWithPotionSet() {
+	void poisonRestoresForbiddenFruitWithPotionSetDisguisedAsNormalForbiddenFruit() {
 		assertEquals(1, CUPBOARD.getCount(LUCKY_CHERRY));
-		assertEquals(null, LUCKY_CHERRY.getPoison());
+		assertNull(LUCKY_CHERRY.getPoison());
 		CUPBOARD.poison(LUCKY_CHERRY, LOVE_BREW);
 		assertEquals(1, CUPBOARD.getCount(LUCKY_CHERRY));
-		assertEquals(LOVE_BREW, LUCKY_CHERRY.getPoison());
+		final ForbiddenFruit luckyCherry = new ForbiddenFruit(LUCKY_CHERRY.getName(), LUCKY_CHERRY.getDescription(), LUCKY_CHERRY.getQuestUnlocked());
+		assertNull(luckyCherry.getPoison());
+		assertEquals(LOVE_BREW, ((ForbiddenFruit) CUPBOARD.getOutItem(luckyCherry)).getPoison());
 	}
 	
 	@Test

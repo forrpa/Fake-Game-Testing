@@ -1,18 +1,19 @@
 package weapon;
 
 public class TwoHandedSword extends Weapon{
-	private WeaponSize weaponSize = WeaponSize.TwoHanded;
+	private static final WeaponSize WEAPON_SIZE = WeaponSize.TwoHanded;
+	private static final String TYPE = "TwoHandedSword";
 	
 	public TwoHandedSword(String name, String desc, int recLevel, int dmg, int dur, int str, int agi, int intell, int sta) {
 		super(name, desc, recLevel, dmg, dur, str, agi, intell, sta);
 	}
 	@Override
 	public String getType() {
-		return "TwoHandedSword";
+		return TwoHandedSword.TYPE;
 	}
 	@Override
 	public WeaponSize getSize() {
-		return this.weaponSize;
+		return TwoHandedSword.WEAPON_SIZE;
 	}
 	
 }

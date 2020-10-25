@@ -1,6 +1,8 @@
 package equipment;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import item.Item;
 
@@ -19,8 +21,48 @@ public class BreastplateOfTestingSimpleAttributeAndMethodTests {
         assertTrue(BREASTPLATE_OF_TESTING.getName().equals("Breastplate of Testing"));
     }
     @Test
-    void testToMakeSureBreastplateHasCorrectAttributValues(){
+    void testToMakeSureBreastplateHasCorrectAttributeValues(){
         assertArrayEquals(new int[]{0, 2, 5, 3},((Equipment) BREASTPLATE_OF_TESTING).getAttributes());
+    }
+    @Test
+    void testToMakeSureBreastplateHasCorrectCustomAttributeValues(){
+    	BreastplateOfTesting bpt = new BreastplateOfTesting(300,6,43,7,100,9);
+    	BreastplateOfTesting bpt2 = new BreastplateOfTesting(60);
+        assertArrayEquals(new int[]{6, 43, 7, 100},((Equipment) bpt).getAttributes());
+        assertEquals(300,bpt.getArmor());
+        assertEquals(9,bpt.getRequiredLevel());
+        assertEquals(60,bpt2.getMaxDurability());
+    }
+    @ParameterizedTest
+	@ValueSource(ints = {-1, -10, -1030, Integer.MIN_VALUE, -25647, -28})
+    void testToMakeSureNegativeAttributesAndDurabilityAndArmorAreNotAcceptable(int value){
+    	assertThrows(IllegalStateException.class, () -> {
+        	BreastplateOfTesting bpt = new BreastplateOfTesting(value,4,6,4,2,4);
+		});
+    	assertThrows(IllegalStateException.class, () -> {
+        	BreastplateOfTesting bpt = new BreastplateOfTesting(6,value,6,4,2,4);
+		});
+    	assertThrows(IllegalStateException.class, () -> {
+        	BreastplateOfTesting bpt = new BreastplateOfTesting(6,4,value,4,2,4);
+		});
+    	assertThrows(IllegalStateException.class, () -> {
+        	BreastplateOfTesting bpt = new BreastplateOfTesting(9,4,6,value,2,4);  
+		});
+    	assertThrows(IllegalStateException.class, () -> {
+        	BreastplateOfTesting bpt = new BreastplateOfTesting(3,4,6,4,value,4);
+		});
+    	assertThrows(IllegalArgumentException.class, () -> {
+        	BreastplateOfTesting bpt = new BreastplateOfTesting(3,4,6,4,5,value);
+		});
+    	assertThrows(IllegalStateException.class, () -> { 
+        	BreastplateOfTesting bpt = new BreastplateOfTesting(value);
+		});
+    }
+    @Test
+    void testToMakeSureZeroIsNotAcceptableAsDurability() {
+    	assertThrows(IllegalStateException.class, () -> {
+        	BreastplateOfTesting bpt = new BreastplateOfTesting(0);
+		});
     }
     @Test
     void testToMakeSureBreastplateIsSubclassOfChest() {
@@ -48,12 +90,19 @@ public class BreastplateOfTestingSimpleAttributeAndMethodTests {
     }
     @Test
     void testForCorrectMaxDurabilityOfBreastplate() {
-    	assertEquals(100, BREASTPLATE_OF_TESTING.getMaxDurability());
+    	assertEquals(100, BREASTPLATE_OF_TESTING.getMaxDurability()); 
     }
-    @Test
-    void testForCorrectDurabilityValueOfDamagedBreastplate() {
-    	BREASTPLATE_OF_TESTING.damageDurability(13);
-    	assertEquals(87, BREASTPLATE_OF_TESTING.getDurability());
+    @ParameterizedTest
+	@ValueSource(ints = {100, 95, 0, 21, 1, 19})
+    void testForCorrectDurabilityValueOfDamagedBreastplate(int value) {
+    	BREASTPLATE_OF_TESTING.damageDurability(value);
+    	assertEquals(100-value, BREASTPLATE_OF_TESTING.getDurability());
+    }
+    @ParameterizedTest
+	@ValueSource(ints = {100, 101, 1030, Integer.MAX_VALUE, 25647, 428})
+    void testToMakeSureBreastplatesDurabilityIsSetZeroByDamageGreaterThanDurability(int value) {
+    	BREASTPLATE_OF_TESTING.damageDurability(value);
+    	assertEquals(0,BREASTPLATE_OF_TESTING.getDurability());
     }
     @Test
     void testRepair() {

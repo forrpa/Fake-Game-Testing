@@ -2,7 +2,7 @@ package weapon;
 import equipment.Gear;
 
 public abstract class Weapon extends Gear{
-    private int damage;
+    private final int damage;
 	
 	public Weapon(String name, String desc, int recLevel, int dmg, int dur, int str, int agi, int intell, int sta) {
 		super(name, desc, recLevel, dur,str,agi,intell,sta);
