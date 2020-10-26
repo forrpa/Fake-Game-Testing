@@ -26,5 +26,4 @@ public class LifeStealSpell extends Spell {
         return true;
     }
 
-
 }
