@@ -54,7 +54,7 @@ class LifeStealSpellTest {
         assertTrue (mp.learntSpells.containsKey (lifeSteal.getName ()));
 
         lifeSteal.magicEffect (mp, monster);
-        assertEquals (5, monster.getHealthPoint ());
+        assertEquals (5, monster.getHealthPoint());
         assertEquals (55, mp.getHealthPoint ());
 
         // Casting from mp

@@ -24,4 +24,45 @@ public class PlayerTest {
         assertEquals(150, player.getMaxHealthPoint());
         assertEquals(100, player.getHealthPoint());
     }
+    @Test
+    void playerWith100HealthGetsDamagedThreeHealthAndGetsHealthIncreasedByEightBackTo100(){
+        Player player = new Player("Warrior", "Orc", 100, 0);
+        Monster wolf = new Wolf();
+        assertTrue(wolf.attack(player));
+        assertEquals(97, player.getHealthPoint());
+        player.increaseHealth(8);
+        assertEquals(player.getMaxHealthPoint(),player.getHealthPoint());
+    }
+    @Test
+    void playerWith100HealthGetsDamagedThreeHealthThreeTimesAndGetsHealthRestoredToMax(){
+        Player player = new Player("Warrior", "Orc", 100, 0);
+        Monster wolf = new Wolf();
+        assertTrue(wolf.attack(player));
+        assertEquals(97, player.getHealthPoint());
+        player.increaseHealth(8);
+        assertEquals(player.getMaxHealthPoint(),player.getHealthPoint());
+    }
+    @Test
+    void playerAttacksBatAndMisses(){
+        Player player = new Player("Warrior", "Orc", 100, 0);
+        Monster bat = new Bat();
+        assertFalse(player.attack(bat));
+    }
+    @Test
+    void playerAttacksDeadBatThrowsIllegalStateException(){
+        Player player = new Player("Warrior", "Orc", 100, 0);
+        Monster bat = new Bat();
+        bat.setHealthPoint(0);
+        assertFalse(bat.isAlive());
+        assertThrows(IllegalStateException.class, () -> player.attack(bat));
+    }
+    @Test
+    void deadPlayerAttacksBatThrowsIllegalStateException(){
+        Player player = new Player("Warrior", "Orc", 100, 0);
+        Monster bat = new Bat();
+        player.setHealthPoint(0);
+        assertTrue(bat.isAlive());
+        assertFalse(player.isAlive());
+        assertThrows(IllegalStateException.class, () -> player.attack(bat));
+    }
 }
