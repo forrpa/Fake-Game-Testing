@@ -48,10 +48,14 @@ class CupboardTest {
 	} 
 	
 	@BeforeAll
-	static void setManaPointMagicPlayerEoughToCookGreenVenomRecipie() throws Exception {
+	static void setHealthPointPlayerGnome() throws Exception {
+		GNOME.setHealthPoint(10);
+	}
+	
+	@BeforeAll
+	static void setManaPointMagicPlayerVampWitchEoughToCookGreenVenomRecipie() throws Exception {
 		VAMP_WITCH.setMaxManaPoint(100);
 		VAMP_WITCH.setManaPoint(50);
-		GNOME.setHealthPoint(10);
 	}
 	
 	@BeforeAll
