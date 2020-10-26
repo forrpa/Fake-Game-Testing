@@ -10,4 +10,13 @@ public class Check {
             throw new IllegalArgumentException ("Error: negative numbers are not allowed here");
         }
     }
+
+    // If i decide to not allow empty strings. add. else remove.
+    // Check if Strings are not blank, empty or null.
+    private static void stringCheck(String string) {
+        if (string == null || string.trim ().isEmpty ()) {
+            throw new IllegalArgumentException ("Error: a blank string is not allowed here");
+        }
+
+    }
 }

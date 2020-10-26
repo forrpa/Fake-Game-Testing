@@ -16,7 +16,6 @@ public class MagicPlayer extends Player {
     protected int magicSkill = 1; // remove? or factor with player.level
     private int maximumLearnableSpells = 1;
 
-    // TODO: 2020-10-21 Ta bort MagicLevel och byt ut det till level. mindre komplext.
 
     public MagicPlayer(String playerClass, String race, int healthPoint, int experiencePoint) {
 
@@ -31,11 +30,12 @@ public class MagicPlayer extends Player {
         this.maximumLearnableSpells = Check.numberCheck (maximumLearnableSpells);
     }
 
+    //Add spell to spellBook.
     public void addSpell(Spell spell) {
 
         spellBook.put (spell.getName (), spell);
     }
-
+//Remove spell from spellBook
     public Spell removeSpell(String name) {
         return spellBook.remove (name);
     }
@@ -44,7 +44,7 @@ public class MagicPlayer extends Player {
         return spellBook.get (name);
     }
 
-
+    // Adds spell to learntSpells and SpellBook
     public boolean learnSpell(Spell spell) {
         String name = spell.getName ();
         int requiredMagicSkill = spell.getRequiredMagicSkill ();
@@ -56,7 +56,7 @@ public class MagicPlayer extends Player {
         addSpell (spell);
         return true;
     }
-
+// Removes spell from learntSpells
     public Spell unLearnSpell(String name) {
         return learntSpells.remove (name);
     }
