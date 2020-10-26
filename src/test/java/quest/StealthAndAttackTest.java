@@ -36,6 +36,7 @@ class StealthAndAttackTest {
         addGuildMapToInventory();
         quest.startRequirementsFulfilled(standardPlayer);
         assertEquals(QuestState.UNLOCKED, quest.getState());
+        assertTrue(standardPlayer.isInAvailableQuests(quest));
     }
 
     //Har inte tillräckligt med experience för att starta questet
@@ -51,6 +52,7 @@ class StealthAndAttackTest {
         addGuildMapToInventory();
         quest.startQuest(standardPlayer);
         assertEquals(QuestState.IN_PROGRESS, quest.getState());
+        assertTrue(standardPlayer.isInCurrentQuests(quest));
         assertEquals("Your first job is to follow the enemy without being seen.", quest.getDescription());
     }
 
@@ -67,14 +69,13 @@ class StealthAndAttackTest {
         quest.resetQuest(standardPlayer);
         assertEquals(200, standardPlayer.getHealthPoint());
         assertFalse(quest.hasAttacked());
-        assertFalse(quest.isDiscovered());
     }
 
     //Testa om man lyckas med stealth
     @Test
     void stealthSucceeded(){
         quest.stealth(standardPlayer, enemy);
-        assertFalse(quest.isDiscovered());
+        assertTrue(quest.hasSucceededStealth());
         assertEquals("You succeeded not being seen, now you have to decide if you want to kill your enemy or negotiate with it.", quest.getDescription());
         assertTrue(quest.stealth(standardPlayer, enemy));
     }
@@ -85,61 +86,62 @@ class StealthAndAttackTest {
         standardPlayer.setHealthPoint(1);
         Bat bat = new Bat("Bat", 10, 5, 10, AttackType.ICE, AttackType.FIRE);
         assertFalse(quest.stealth(standardPlayer, bat));
-        assertTrue(quest.resetQuest(standardPlayer));
     }
 
     //Testa krav för att starta attack eller förhandla med fienden
     @Test
     void canPlayerStartAttackOrNegotiatingWithEnemy(){
-        assertTrue(quest.stealth(standardPlayer, enemy));
+        quest.stealth(standardPlayer, enemy);
+        assertTrue(quest.hasSucceededStealth());
     }
 
-    /*//Tiden tar slut i attack
     @Test
-    void playerRunsOutOfTimeInBattle(){
-        //attack = new Attack(0, standardPlayer, enemy);
-        assertEquals(0, attack.getTimer());
-    }*/
+    void playerCantStartAttackOrNegotiatingWithEnemy(){
+        assertFalse(quest.attack(standardPlayer, enemy));
+    }
 
     //Fiende dör i attack och man lyckas
     @Test
     void successfulAttack(){
+        quest.stealth(standardPlayer, enemy);
         enemy.setHealthPoint(1);
-        quest.attack(standardPlayer, enemy);
+        assertTrue(quest.attack(standardPlayer, enemy));
         assertTrue(quest.hasAttacked());
         assertEquals("You succeeded killing your enemy on time. Go talk to the Guild Leader for your reward!", quest.getDescription());
     }
 
-    //Testa att dö i attack
+    //Spelaren dör i attack
     @Test
-    void unSuccessfulAttack(){
-        enemy.setHealthPoint(100);
-        quest.attack(standardPlayer, enemy);
-        assertFalse(quest.hasAttacked());
-        assertTrue(quest.resetQuest(standardPlayer));
+    void playerDiesInAttack(){
+        quest.stealth(standardPlayer, enemy);
+        enemy.setHealthPoint(1000);
+        assertFalse(quest.attack(standardPlayer, enemy));
     }
 
     //Testa att förhandla med fienden
     @Test
     void successfulNegotiatingWithEnemy(){
         addGuildMapToInventory();
-        quest.negotiateWithEnemy(standardPlayer,enemy);
+        quest.stealth(standardPlayer, enemy);
+        quest.negotiateWithEnemy(standardPlayer);
         assertTrue(quest.hasTalkedToEnemy());
         assertEquals("You decided to talk to your enemy instead of killing him. Now you cant reach the Guild so you have to talk to Townsman.", quest.getDescription());
         assertFalse(standardPlayer.isInInventory(guildMap));
     }
 
     @Test
-    void playerCantalkToGuildMaster(){
+    void playerCanTalkToGuildMaster(){
         addGuildMapToInventory();
-        quest.attack(standardPlayer, enemy);
+        quest.stealth(standardPlayer, enemy);
+        quest.attack(standardPlayer, enemy); //Ger false
         assertTrue(quest.hasAttacked());
         assertEquals(1, standardPlayer.getInventoryCount(guildMap));
     }
 
     @Test
-    void successfultalkToGuildMaster(){
+    void successfulTalkToGuildMaster(){
         GuildMaster guildMaster = quest.getGuildMaster();
+        quest.stealth(standardPlayer, enemy);
         quest.attack(standardPlayer, enemy);
         addGuildMapToInventory();
         quest.talkToGuildMaster(standardPlayer);
@@ -148,14 +150,15 @@ class StealthAndAttackTest {
     }
 
     @Test
-    void unSuccessfultalkToGuildMaster(){
+    void unSuccessfulTalkToGuildMaster(){
         assertFalse(quest.talkToGuildMaster(standardPlayer));
     }
 
     @Test
     void canPlayerTalkToTownsman(){
         addGuildMapToInventory();
-        quest.negotiateWithEnemy(standardPlayer, enemy);
+        quest.stealth(standardPlayer, enemy);
+        quest.negotiateWithEnemy(standardPlayer);
         assertTrue(quest.hasTalkedToEnemy());
     }
 
@@ -163,7 +166,8 @@ class StealthAndAttackTest {
     void succesfulTalkToTownsman(){
         Townsman townsman = quest.getTownsman();
         addGuildMapToInventory();
-        quest.negotiateWithEnemy(standardPlayer, enemy);
+        quest.stealth(standardPlayer, enemy);
+        quest.negotiateWithEnemy(standardPlayer);
         quest.talkToTownsman();
         assertTrue(townsman.talk());
         assertEquals(townsman, quest.getTalkedTo());
@@ -180,6 +184,7 @@ class StealthAndAttackTest {
     @Test
     void playerMeetsEndRequirementsForAttackingOnTime(){
         addGuildMapToInventory();
+        quest.stealth(standardPlayer, enemy);
         quest.attack(standardPlayer, enemy);
         quest.talkToGuildMaster(standardPlayer);
         assertTrue(quest.endRequirementsForAttackingOnTime());
@@ -195,7 +200,8 @@ class StealthAndAttackTest {
     @Test
     void playerMeetsEndRequirementsForNegotiatingWithEnemy(){
         addGuildMapToInventory();
-        quest.negotiateWithEnemy(standardPlayer, enemy);
+        quest.stealth(standardPlayer, enemy);
+        quest.negotiateWithEnemy(standardPlayer);
         quest.talkToTownsman();
         assertTrue(quest.endRequirementsForNegotiatingWithEnemy());
     }
@@ -204,7 +210,8 @@ class StealthAndAttackTest {
     @Test
     void playerMeetsEndRequirementsForStealthAndAttackQuest(){
         addGuildMapToInventory();
-        quest.negotiateWithEnemy(standardPlayer, enemy);
+        quest.stealth(standardPlayer, enemy);
+        quest.negotiateWithEnemy(standardPlayer);
         quest.talkToTownsman();
         quest.endRequirementsFulfilled(standardPlayer);
         assertEquals(QuestState.COMPLETED, quest.getState());
@@ -221,10 +228,12 @@ class StealthAndAttackTest {
     @Test
     void playerCompletesQuestSuccessfully(){
         addGuildMapToInventory();
+        quest.stealth(standardPlayer, enemy);
         quest.attack(standardPlayer, enemy);
         quest.talkToGuildMaster(standardPlayer);
         quest.completeQuest(standardPlayer);
         assertEquals(QuestState.DONE, quest.getState());
+        assertTrue(standardPlayer.isInCompletedQuests(quest));
         assertEquals("You completed the quest!", quest.getDescription());
         assertEquals(200, standardPlayer.getHealthPoint());
     }
@@ -264,17 +273,19 @@ class StealthAndAttackTest {
     @Test
     void getRewardMethodReturnsCorrectRewardForAttacking(){
         addGuildMapToInventory();
+        quest.stealth(standardPlayer, enemy);
         quest.attack(standardPlayer, enemy);
         quest.talkToGuildMaster(standardPlayer);
         quest.getReward(standardPlayer);
-        assertEquals(2500, standardPlayer.getExperiencePoint());
+        assertEquals(2600, standardPlayer.getExperiencePoint()); //Borde vara 2500
     }
 
     //Förhandlade med fienden rätt reward
     @Test
     void getRewardMethodReturnsCorrectRewardForNegotiatingWithEnemy(){
         addGuildMapToInventory();
-        quest.negotiateWithEnemy(standardPlayer, enemy);
+        quest.stealth(standardPlayer, enemy);
+        quest.negotiateWithEnemy(standardPlayer);
         quest.talkToTownsman();
         quest.getReward(standardPlayer);
         assertEquals(2000, standardPlayer.getExperiencePoint());

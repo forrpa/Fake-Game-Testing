@@ -31,6 +31,7 @@ class TalkToGuildLeaderTest {
     void playerMeetsStartRequirementsForTalkToGuildLeaderQuest() {
         quest.startRequirementsFulfilled(standardPlayer);
         assertEquals(QuestState.UNLOCKED, quest.getState());
+        assertTrue(standardPlayer.isInAvailableQuests(quest));
     }
 
     //Spelaren har inte startkrav för att starta quest
@@ -47,7 +48,6 @@ class TalkToGuildLeaderTest {
         quest.startQuest(standardPlayer);
         assertTrue(questgiver.talk());
         assertEquals(QuestState.IN_PROGRESS, quest.getState());
-        assertTrue(standardPlayer.isInAvailableQuests(quest));
         assertTrue(standardPlayer.isInCurrentQuests(quest));
     }
 
