@@ -10,6 +10,7 @@ import weapon.*;
 import edible.Cupboard;
 import item.*;
 import unit.Unit;
+import magic.Check;
 
 public class Player extends Unit{
 	
@@ -38,12 +39,17 @@ public class Player extends Unit{
     
     public Player(String playerClass, String race, int maxHealthPoint, int experiencePoint){
         super(maxHealthPoint, 1, true);
+        makeSureClassAndRaceAreNotNull(playerClass,race);
         this.playerClass = playerClass;
         this.race = race;
         setExperiencePoint(experiencePoint);
         setArmorTypeHashMap();
         setWeaponTypeHashMap();
         updateAttributes();
+    }
+    private void makeSureClassAndRaceAreNotNull(String playerClass, String race) {
+    	Check.stringCheck(playerClass);
+    	Check.stringCheck(race);
     }
     public Gear getGearFromGear(String slot) {
     	Gear gearPiece = this.gear.get(slot);

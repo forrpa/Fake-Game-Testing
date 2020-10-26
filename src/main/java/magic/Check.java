@@ -13,7 +13,7 @@ public class Check {
 
     // If i decide to not allow empty strings. add. else remove.
     // Check if Strings are not blank, empty or null.
-    private static void stringCheck(String string) {
+    public static void stringCheck(String string) {
         if (string == null || string.trim ().isEmpty ()) {
             throw new IllegalArgumentException ("Error: a blank string is not allowed here");
         }
