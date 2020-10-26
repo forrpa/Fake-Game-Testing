@@ -6,13 +6,13 @@ public class Inventory {
 
 	private final HashMap<Item, Integer> inventory = new HashMap<>();
 
-	public void addItem(Item item) {
+	public final void addItem(Item item) {
 		int count = 1;
 		if(inventory.containsKey(item)) count += inventory.get(item);
 		inventory.put(item, count);
 	}
 	
-	public Item getOutItem(Item item) {
+	public final Item getOutItem(Item item) {
 		if(inventory.isEmpty()) throw new NullPointerException("Inventory is empty.");
 		if(!isInInventory(item)) throw new NullPointerException("Item not in Inventory.");
 		int count = inventory.get(item);
@@ -21,18 +21,18 @@ public class Inventory {
 		return item;
 	}
 	
-	public boolean isInInventory(Item item) {
+	public final boolean isInInventory(Item item) {
 		if(inventory.containsKey(item)) return true;
 		else return false;
 	}
 	
-	public int getCount(Item item) {
+	public final int getCount(Item item) {
 		if(!isInInventory(item)) throw new NullPointerException("Item \'" + item.getName() + "\' not in Inventory.");
 		return inventory.get(item);
 	}
 	
 	@Override
-	public String toString() {
+	public final String toString() {
 		if(inventory.isEmpty()) return "Inventory is empty!";
 		String dict = "";
 		for(Item i : inventory.keySet()) {

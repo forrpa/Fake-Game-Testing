@@ -1,4 +1,4 @@
- package edible;
+package edible;
 
 import java.util.ArrayList;
 
@@ -44,12 +44,12 @@ public class Cupboard {
 		return returnItem;
 	}
 
-	private final void utilStoreMaxOneItem(Inventory inventory, Item item) {
+	private void utilStoreMaxOneItem(Inventory inventory, Item item) {
 		if(isInInventory(item)) throw new IllegalStateException("One of this Item is already stored in the Cupboard! Limit of one at a time for this type.");
 		inventory.addItem(item);
 	}
 	
-	private final Inventory classifyCupboardItem(Item item) {
+	private Inventory classifyCupboardItem(Item item) {
 		if(item instanceof Ingredient) return ingredients;
 		if(item instanceof Recipe) return recipies;
 		if(item instanceof ForbiddenFruit) return forbiddenFruits;
@@ -64,7 +64,7 @@ public class Cupboard {
 		return false;
 	}
 	
-	private final Inventory getInventoryOfClassififedItem(Item item) {
+	private Inventory getInventoryOfClassififedItem(Item item) {
 		Inventory inventory = classifyCupboardItem(item);
 		if(inventory == null) throw new IllegalArgumentException("Item is not of type that stores in the Cupboard.");
 		return inventory;
@@ -88,7 +88,7 @@ public class Cupboard {
 		inventory.addItem(item);
 	}
 	
-	private final void utilConsumeSetPlayerPoint(int manaPoint, int healthPoint, int experiencePoint) {
+	private void utilConsumeSetPlayerPoint(int manaPoint, int healthPoint, int experiencePoint) {
 		player.setHealthPoint(healthPoint);
 		player.setExperiencePoint(experiencePoint);
 		if(player instanceof MagicPlayer) {

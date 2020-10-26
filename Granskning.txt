@@ -27,18 +27,16 @@ Konstruktor bör ha nullkoll. (4)
 
 Konstruktorn bör ha nullkoll. (4)
 zeroDefaultRequiredLevel kan vara statisk (1)
-    public bololean quails():
-    , skulle kunna sätta this.name där för tydlighet  (1)
-    två strängarna ska jämföras med .equals() ej == (5)
+[-] equals(): skulle kunna sätta this.name där för tydlighet  (1)
+equals(): två strängarna ska jämföras med .equals() ej == (5)
 
 
 Hashcode()
 magic numbers, 17 och 31. (1)
-det enda resultat är den sista som returneras är det sista resultatet, += (4)
-eventuellt använda paranteser för lästydlighet vid (1)
+[-]eventuellt använda paranteser för lästydlighet vid (1) 
 
 Edible.class
-varför har alla Edible manaPoints, healthpoints och experiencePoints. (1)
+[-]varför har alla Edible manaPoints, healthpoints och experiencePoints. (1)
 
 kommentera vad klassen gör och vad variablerna manaPoint, healtPoint och experiencePoint gär. (2)
 tydligare namn? (1)

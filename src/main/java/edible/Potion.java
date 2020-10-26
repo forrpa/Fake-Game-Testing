@@ -1,4 +1,4 @@
- package edible;
+package edible;
 
 public class Potion extends Edible {
 

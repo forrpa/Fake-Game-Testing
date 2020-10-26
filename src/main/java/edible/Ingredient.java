@@ -9,7 +9,7 @@ public class Ingredient extends Item {
 	}
 
 	@Override
-	public String toString() {
+	public final String toString() {
 		return String.format("\"%s: %s\"", getName(), getDescription());
 	}
 

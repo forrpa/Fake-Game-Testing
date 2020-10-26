@@ -19,6 +19,8 @@ import quest.TalkToGuildLeader;
 
 class CupboardTest {
 
+	final static int FIVE_BEFOREALL_COUNT_FORTUNE_COOKIE = 5;
+	final static int FIVE_BEFOREALL_COUNT_HEARTBREAK_POTION = 5;
 	final static Player GNOME = new Player("Gnome", "Good companion appreciated by other players", 70, 25);
 	final static MagicPlayer VAMP_WITCH = new MagicPlayer("Vamp Witch", "Very badass witch from Rumania", 500, 100);
 	final static Cupboard CUPBOARD = new Cupboard(VAMP_WITCH); 
@@ -37,8 +39,6 @@ class CupboardTest {
 	final static Quest QUEST = new TalkToGuildLeader();
 	final static ForbiddenFruit RED_APPLE = new ForbiddenFruit("Red Apple", "Eating apple starts quest Talk to Guild Leader", QUEST);
 	final static ForbiddenFruit LUCKY_CHERRY = new ForbiddenFruit("Lucky Cherry", "Eating cherry starts quest Talk to Guild leader", QUEST);
-	final static int FIVE_BEFOREALL_COUNT_FORTUNE_COOKIE = 5;
-	final static int FIVE_BEFOREALL_COUNT_HEARTBREAK_POTION = 5;
 	static int COUNT_FORTUNE_COOKIE = 0;
 	static int COUNT_HEARTBREAK_POTION = 0;
 	

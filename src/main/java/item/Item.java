@@ -18,7 +18,7 @@ public abstract class Item {
 	public Item(String name, String description, int requiredUnitLevel) {
 		this.name = verifyStringNotNull(name, "Name");
 		this.description = verifyStringNotNull(description, "Description");
-		this.requiredUnitLevel = verifyRequiredUnitLevelInRange(requiredUnitLevel);
+		this.requiredUnitLevel = verifyRequiredUnitLevelInRange(requiredUnitLevel); 
 	}
 
 	private String verifyStringNotNull(String stringAttribute, String attributeLabel) {

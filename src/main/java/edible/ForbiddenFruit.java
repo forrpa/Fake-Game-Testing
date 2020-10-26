@@ -1,4 +1,4 @@
- package edible;
+package edible;
 
 import quest.Quest;
 
@@ -28,7 +28,7 @@ public class ForbiddenFruit extends Edible {
 	}
 	
 	@Override
-	public int[] consume(int playerManaPoint, int playerHealthPoint, int playerExperiencePoint) {
+	protected final int[] consume(int playerManaPoint, int playerHealthPoint, int playerExperiencePoint) {
 		int[] points = {playerManaPoint + getManaPoint(), playerHealthPoint + getHealthPoint(), playerExperiencePoint + getExperiencePoint()};
 		if(poison != null) {
 			points[0] = playerManaPoint + poison.getManaPoint(); 
@@ -40,7 +40,7 @@ public class ForbiddenFruit extends Edible {
 	}
 	
 	@Override
-	public String toString() {
+	public final String toString() {
 		return String.format("\"%s: %s\", Mana: %d, Health: %d, Experience: %d, Quest Unlocked: %s", getName(), getDescription(), getManaPoint(), getHealthPoint(), getExperiencePoint(), questUnlocked.getName());
 	}
 	

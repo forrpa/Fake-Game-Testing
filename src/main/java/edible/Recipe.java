@@ -1,4 +1,4 @@
- package edible;
+package edible;
 
 import item.Item;
 
@@ -17,30 +17,30 @@ public class Recipe extends Item {
 		this.experiencePointToCook = experiencePointToCook;
 	}
 	
-	public Potion cook(int manaPoint, int experiencePoint) {
+	protected final Potion cook(int manaPoint, int experiencePoint) {
 		if(manaPoint < manaPointToCook || experiencePoint < experiencePointToCook) 
 			throw new IllegalStateException("Player doesn't have enough mana and/or experience to cook this potion yet.");
 		return potion;
 	}
 
-	public Potion getPotion() {
+	public final Potion getPotion() { 
 		return potion;
 	}
 	
-	public Ingredient[] getIngredients() {
+	public final Ingredient[] getIngredients() {
 		return ingredients.clone();
 	}
 
-	public int getManaPointToCook() {
+	public final int getManaPointToCook() {
 		return manaPointToCook;
 	}
 
-	public int getExperiencePointToCook() {
+	public final int getExperiencePointToCook() {
 		return experiencePointToCook;
 	}
 	
 	@Override
-	public String toString() {
+	public final String toString() {
 		String ingredientList = "[";
 		for(Ingredient e : ingredients) ingredientList += e.getName() + ", ";
 		ingredientList = ingredientList.substring(0, ingredientList.length()-2) + "]";

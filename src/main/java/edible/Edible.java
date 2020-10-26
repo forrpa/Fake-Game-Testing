@@ -22,7 +22,7 @@ public class Edible extends Item {
 	}
  
 	public final int getHealthPoint() {
-		return healthPoint;
+		return healthPoint; 
 	}
 
 	public final int getExperiencePoint() {
@@ -35,7 +35,7 @@ public class Edible extends Item {
 		return pointValue;
 	}
 	
-	public int[] consume(int playerManaPoint, int playerHealthPoint, int playerExperiencePoint) {
+	protected int[] consume(int playerManaPoint, int playerHealthPoint, int playerExperiencePoint) {
 		int[] points = {playerManaPoint + manaPoint, playerHealthPoint + healthPoint, playerExperiencePoint + experiencePoint};
 		return points.clone();
 	}

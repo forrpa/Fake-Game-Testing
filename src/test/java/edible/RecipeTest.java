@@ -1,4 +1,4 @@
- package edible;
+package edible;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -12,13 +12,13 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 class RecipeTest {
 	
+	final static int MANA_POINT_TO_COOK = 50;
+	final static int EXPERIENCE_POINT_TO_COOK = 20;
 	final static Ingredient FIRE_ROOT = new Ingredient("Fire Root", "Increases power of potions");
 	final static Ingredient CLAW_OF_HIPOGRIFF = new Ingredient("Claw of Hipogriff", "Rare poisonous ingredient");
 	final static Ingredient MORNING_STAR = new Ingredient("Morning Star", "Flower used in potions effecting health");
 	final static Potion GREEN_VENOM = new Potion("Green Venom", "Sabbotages health on entering bloodstream", 0, -10, 0);
 	final static Ingredient[] GREEN_VENOM_INGREDIENTS = {FIRE_ROOT, CLAW_OF_HIPOGRIFF, MORNING_STAR};
-	final static int MANA_POINT_TO_COOK = 50;
-	final static int EXPERIENCE_POINT_TO_COOK = 20;
 	final static Recipe GREEN_VENOM_RECIPIE = new Recipe("Green Venom Recipie", 
 			"Recipie for potion sabbotaging health on entering bloodstream", GREEN_VENOM, GREEN_VENOM_INGREDIENTS, MANA_POINT_TO_COOK, EXPERIENCE_POINT_TO_COOK);
 
