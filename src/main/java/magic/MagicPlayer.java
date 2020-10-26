@@ -31,11 +31,12 @@ public class MagicPlayer extends Player {
         this.maximumLearnableSpells = Check.numberCheck (maximumLearnableSpells);
     }
 
+    //Add spell to spellBook.
     public void addSpell(Spell spell) {
 
         spellBook.put (spell.getName (), spell);
     }
-
+//Remove spell from spellBook
     public Spell removeSpell(String name) {
         return spellBook.remove (name);
     }
@@ -44,7 +45,7 @@ public class MagicPlayer extends Player {
         return spellBook.get (name);
     }
 
-
+    // Adds spell to learntSpells and SpellBook
     public boolean learnSpell(Spell spell) {
         String name = spell.getName ();
         int requiredMagicSkill = spell.getRequiredMagicSkill ();
@@ -56,7 +57,7 @@ public class MagicPlayer extends Player {
         addSpell (spell);
         return true;
     }
-
+// Removes spell from learntSpells
     public Spell unLearnSpell(String name) {
         return learntSpells.remove (name);
     }

@@ -10,11 +10,11 @@ public class FireballSpell extends  Spell {
 
 
     public FireballSpell() {
-        super ("FireBall","Deal 3 fire-damage", 3, 1, 2);
+        super ("Fireball","Deal 3 fire-damage", 3, 1, 2);
     }
 
     @Override
-    public boolean magicEffect(Unit caster , Unit target) {
+    protected boolean magicEffect(Unit caster , Unit target) {
 
         int attackPower = 3;
         target.takeDamage (new Attack (attackPower,AttackType.FIRE));

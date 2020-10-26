@@ -3,6 +3,7 @@ package magic;
 
 import unit.Unit;
 
+//SuperClass representing a castable spell.
 class Spell {
     private final String description;
     private final String name;
@@ -24,7 +25,6 @@ class Spell {
 
     public Spell() {
 
-        // might randomize names and descriptions.
         name = "Unnamed spell";
         description = "Your ninny brain can not comprehend what this spell does.";
     }
@@ -67,15 +67,15 @@ class Spell {
         this.cooldownDuration = positiveNrCheck (cooldownDuration);
     }
 
-
     public boolean castSpell(Unit caster, Unit target) {
 
-        // if enough time:
+        // if enough time do:
         // if isOnCooldown return
         // if cooldownDuration !=0 set isOncooldown
 
         return magicEffect (caster, target);
     }
+// should be overrun in subClass
 
     boolean magicEffect(Unit caster, Unit target) {
         return false;
@@ -93,14 +93,10 @@ class Spell {
 
     // Check if Strings are not blank, empty or null.
     private void stringCheck(String string) {
-      if (string == null || string.trim ().isEmpty ()){
-          throw new IllegalArgumentException ("Error: a blank string is not allowed here");
-      }
-
-      // use param test?
-
-
-
+        if (string == null || string.trim ().isEmpty ()) {
+            throw new IllegalArgumentException ("Error: a blank string is not allowed here");
+        }
+        // use param test?
     }
 
 
