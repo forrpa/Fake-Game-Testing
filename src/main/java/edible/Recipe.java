@@ -1,4 +1,4 @@
-package edible;
+ package edible;
 
 import item.Item;
 
