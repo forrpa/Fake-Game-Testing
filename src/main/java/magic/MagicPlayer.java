@@ -15,8 +15,8 @@ public class MagicPlayer extends Player {
     protected int manaPoint = 1;
     protected int maxManaPoint = 5;
 
-    protected int magicSkill = 1; // remove? or factor with player.level
-    private int maximumLearnableSpells = 1;
+    protected int magicSkill = 1 + (getIntelligence () / 5);
+    private int maximumLearnableSpells = 1 + (getIntelligence ()/2);
 
 
     public MagicPlayer(String playerClass, String race, int healthPoint, int experiencePoint) {
@@ -109,7 +109,7 @@ public class MagicPlayer extends Player {
     public void setMagicSkill(int magicSkill) {
         final int maximumMagicSkill = 10;
         if (numberCheck (magicSkill) > maximumMagicSkill) {
-            throw new IllegalArgumentException("Error: value is too high");
+            throw new IllegalArgumentException ("Error: value is too high");
         } else {
             this.magicSkill = magicSkill;
         }
