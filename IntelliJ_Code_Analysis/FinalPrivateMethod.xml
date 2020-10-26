@@ -1,0 +1,11 @@
+<problems>
+  <problem>
+  <file>file://$PROJECT_DIR$/src/main/java/edible/Edible.java</file>
+  <line>30</line>
+  <module>inte_projektarbete_final</module>
+  <package>edible</package>
+  <entry_point TYPE="method" FQNAME="edible.Edible int checkPointValueRange(int pointValue)" />
+  <problem_class severity="WARNING" attribute_key="WARNING_ATTRIBUTES">'private' method declared 'final'</problem_class>
+  <description>'private' method declared &lt;code&gt;final&lt;/code&gt; #loc</description>
+</problem>
+</problems>
