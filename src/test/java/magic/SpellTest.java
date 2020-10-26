@@ -3,10 +3,10 @@ package magic;
 
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class SpellTest {
     private final String standardName = "Heal";
@@ -14,7 +14,6 @@ class SpellTest {
     private final int standardPosValue = 1;
     private final int standardNegativeNr = -1;
     Spell spell;
-
 
 
     @Test
@@ -85,11 +84,11 @@ class SpellTest {
     }
 
     @Test
-    void magicEffectTest(){
+    void magicEffectTest() {
         // should be overrun by subclass, set to return false in super.
         Spell spell = new Spell ();
 
-        assertFalse (spell.magicEffect(null,null));
+        assertFalse (spell.magicEffect (null, null));
 
     }
 }

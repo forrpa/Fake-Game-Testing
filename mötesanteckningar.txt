@@ -67,6 +67,14 @@ Förslag till punkter att ta upp: // Christoffer
             *profiler, har vi tid?
 
 
+Bestämmer att vi ska mötas kl 10:00 på torsdag och sammanställa sista delarna inför slutredovisningen
+Detta blir bryttiden för att vara färdig med egen kod och tester.
+
+Christoffer och Jennifer ansvarar för Profilern.
+
+
+
+
 
 
 

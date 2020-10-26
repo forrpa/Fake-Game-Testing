@@ -16,7 +16,6 @@ public class MagicPlayer extends Player {
     protected int magicSkill = 1; // remove? or factor with player.level
     private int maximumLearnableSpells = 1;
 
-    // TODO: 2020-10-21 Ta bort MagicLevel och byt ut det till level. mindre komplext.
 
     public MagicPlayer(String playerClass, String race, int healthPoint, int experiencePoint) {
 

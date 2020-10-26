@@ -91,14 +91,4 @@ class Spell {
         }
     }
 
-    // Check if Strings are not blank, empty or null.
-    private void stringCheck(String string) {
-        if (string == null || string.trim ().isEmpty ()) {
-            throw new IllegalArgumentException ("Error: a blank string is not allowed here");
-        }
-        // use param test?
-    }
-
-
 }
-
