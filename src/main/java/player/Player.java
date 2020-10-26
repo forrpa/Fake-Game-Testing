@@ -10,7 +10,7 @@ import unit.*;
 import weapon.*;
 import edible.Cupboard;
 import item.*;
-import magic.Check;
+import magic.ValueCheck;
 
 public class Player extends Unit{
 	
@@ -49,8 +49,8 @@ public class Player extends Unit{
         updateAttributes();
     }
     private void makeSureClassAndRaceAreNotNull(String playerClass, String race) {
-    	Check.stringCheck(playerClass);
-    	Check.stringCheck(race);
+    	ValueCheck.stringCheck(playerClass);
+    	ValueCheck.stringCheck(race);
     }
     public Gear getGearFromGear(String slot) {
     	Gear gearPiece = this.gear.get(slot);

@@ -281,7 +281,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="32" language="java" name="magic.Check" project="inte_projektarbete" 
+  <class id="32" language="java" name="magic.ValueCheck" project="inte_projektarbete"
     file="/inte_projektarbete/src/main/java/magic/Check.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="99" width="125" x="200" y="-48"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

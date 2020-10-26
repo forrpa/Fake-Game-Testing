@@ -2,16 +2,17 @@
 package magic;
 
 
-public class Check {
+public class ValueCheck {
     // Assure that a number is: >=0 <= Integer.max
     protected static int numberCheck(int nr) {
         if (nr < 0) {
             throw new IllegalArgumentException ("Error: negative numbers are not allowed here");
         }
-        if (nr < Integer.MAX_VALUE) {
+        if (nr >= Integer.MAX_VALUE) {
+            throw new IllegalThreadStateException ("Error: Buffer Overflow, the number is too big.");
+        } else {
             return (nr);
         }
-        throw new IllegalThreadStateException ("Error: Buffer Overflow, the number is too big.");
     }
 
 

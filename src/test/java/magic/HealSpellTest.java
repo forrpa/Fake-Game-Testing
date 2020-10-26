@@ -14,27 +14,21 @@ class HealSpellTest {
 
     @Test
     void castHealSpellTest() {
-        int manaCost = standardValue;
-        int requiredMagicLevel = standardValue;
-        int cooldownDuration = standardValue;
         int healthPoints = 5;
-        int experiencePoints = standardValue;
         int healthPointsToHeal = 50;
         int manaPoint = 5;
-        HealSpell spell = new HealSpell (name, description, manaCost, requiredMagicLevel, cooldownDuration, healthPointsToHeal);
+        HealSpell spell = new HealSpell (name, description, standardValue, standardValue, standardValue, healthPointsToHeal);
 
 
         // create player with 5 health
-        Player player = new Player ("playerclass", "race", healthPoints, experiencePoints);
-
+        Player player = new Player ("playerclass", "race", healthPoints, standardValue);
+        player.setMaxHealthPoint (100);
         // assert that health = 5
-        assertEquals(healthPoints,player.getHealthPoint ());
+        assertEquals (healthPoints, player.getHealthPoint ());
 
         spell.magicEffect (player, player);
 
-        assertEquals (healthPoints + 50  ,player.getHealthPoint ());
-
-
+        assertEquals (healthPoints + 50, player.getHealthPoint ());
 
 
         //assert new value
