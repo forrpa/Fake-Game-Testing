@@ -7,7 +7,7 @@ public class Villager extends NPC implements Talkable{
     }
 
     @Override
-    public String talk() {
-        return null;
+    public boolean talk() {
+        return true;
     }
 }

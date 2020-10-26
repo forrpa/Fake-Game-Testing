@@ -1,5 +1,5 @@
 package unit;
 
 public interface Talkable {
-    public String talk();
+    public boolean talk();
 }
