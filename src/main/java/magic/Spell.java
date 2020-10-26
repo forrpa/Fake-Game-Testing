@@ -3,8 +3,8 @@ package magic;
 
 import unit.Unit;
 
-import static magic.Check.numberCheck;
-import static magic.Check.stringCheck;
+import static magic.ValueCheck.numberCheck;
+import static magic.ValueCheck.stringCheck;
 
 //SuperClass representing a castable spell.
 @SuppressWarnings("ALL")

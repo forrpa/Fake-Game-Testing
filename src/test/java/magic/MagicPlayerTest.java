@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class MagicPlayerTest {
     private final int negativeNr = -1;
     private final int positiveNr = 1;
-    private final int maxIntValue = Integer.MAX_VALUE -1; // use?
+    private final int maxIntValue = Integer.MAX_VALUE - 1; // use?
     MagicPlayer mp;
     Spell spell;
     String spellName;
@@ -120,7 +120,7 @@ class MagicPlayerTest {
         assertFalse (mp.learntSpells.containsValue (spell));
 
         // check that a spell with 0 magicSkill is learnt with 0 skill.
-        HealSpell spellZero = new HealSpell ("Name","Description",1,0,1,50);
+        HealSpell spellZero = new HealSpell ("Name", "Description", 1, 0, 1, 50);
         assertTrue (mp.learnSpell (spellZero));
         assertTrue (mp.learntSpells.containsValue (spellZero));
     }
@@ -225,26 +225,27 @@ class MagicPlayerTest {
 
     @Test
     void getMaxManaPointTest() {
-        assertEquals (mp.maxManaPoint,mp.getMaxManaPoint ());
+        assertEquals (mp.maxManaPoint, mp.getMaxManaPoint ());
     }
 
     @Test
     void setMaxManaTest() {
-       mp.setMaxManaPoint (positiveNr);
-       assertEquals (positiveNr,mp.maxManaPoint);
+        mp.setMaxManaPoint (positiveNr);
+        assertEquals (positiveNr, mp.maxManaPoint);
 
-       mp.setMaxManaPoint (maxIntValue);
-       assertEquals (maxIntValue,mp.maxManaPoint);
+        mp.setMaxManaPoint (maxIntValue);
+        assertEquals (maxIntValue, mp.maxManaPoint);
     }
 
     @Test
-    void setNegativeManaTest(){
+    void setNegativeManaTest() {
         Assertions.assertThrows (IllegalArgumentException.class, () -> mp.setMaxManaPoint (negativeNr));
 
     }
+
     @Test
-    void getMagicSkillTest(){
-        assertEquals (mp.magicSkill,mp.getMagicSkill ());
+    void getMagicSkillTest() {
+        assertEquals (mp.magicSkill, mp.getMagicSkill ());
     }
 
     @Test

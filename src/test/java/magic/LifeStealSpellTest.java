@@ -43,6 +43,8 @@ class LifeStealSpellTest {
         mp.setManaPoint (10);
         mp.setMagicSkill (10);
         Monster monster = new Bat ();
+        monster.setMaxHealthPoint (100);
+        mp.setMaxHealthPoint (100);
         monster.setHealthPoint (10);
         mp.setMaximumLearnableSpells (5);
 
