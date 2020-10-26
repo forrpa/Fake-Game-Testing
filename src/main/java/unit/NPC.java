@@ -44,8 +44,9 @@ public abstract class NPC extends Unit {
             int tempExperience = experiencePoints;
             experiencePoints = 0;
             return tempExperience;
+        }else {
+            return 0;
         }
-        return 0;
     }
 
     public void takeDamage(Attack attack){

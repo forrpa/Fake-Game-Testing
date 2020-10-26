@@ -13,8 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class MagicPlayerTest {
     private final int negativeNr = -1;
     private final int positiveNr = 1;
-    private final int maxIntValue = Integer.MAX_VALUE; // use?
-    private final int numberTooBig = maxIntValue + 1;
+    private final int maxIntValue = Integer.MAX_VALUE -1; // use?
     MagicPlayer mp;
     Spell spell;
     String spellName;
@@ -199,7 +198,7 @@ class MagicPlayerTest {
 
     // Trying out  @ParameterizedTest.  I understand that only  testing one  and ten would suffice.
     @ParameterizedTest
-    @ValueSource(ints = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10,})
+    @ValueSource(ints = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10})
     void setAcceptableManaPointTest(int number) {
 
         mp.setMaxManaPoint (10);
@@ -208,7 +207,7 @@ class MagicPlayerTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, Integer.MAX_VALUE})
+    @ValueSource(ints = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, maxIntValue})
     void setManaPointHigherThanMaxManaTest(int number) {
 
         int maxManaPoint = 0;

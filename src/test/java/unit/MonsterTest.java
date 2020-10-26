@@ -19,6 +19,10 @@ class MonsterTest {
     private final static int STANDARD_WOLF_EXPERIENCEPOINTS = 100;
 
 
+    private Player createPlayer(){
+        return new Player("Paladin", "Orc", 10, 50);
+    }
+
     @Test
     void batNameAndHealthSetByConstructor(){
         //Set-up
@@ -126,10 +130,10 @@ class MonsterTest {
     void batHasItemsPotionAndSwordLootedSuccessfully(){
         //Set-up
         Item potion = new Potion("Potion", "A test potion", 0, 5, 0);
-        Item sword = new WidowsWail();
+        Item batWing = new Ingredient("Bat wing", "A wing from a bat.");
         ArrayList<Item> batItems = new ArrayList<>();
         batItems.add(potion);
-        batItems.add(sword);
+        batItems.add(batWing);
         ArrayList<Item> lootedItems = new ArrayList<>();
         Monster bat = new Bat("Bat", 0, 0,0, batItems, null, null);
 
@@ -139,23 +143,23 @@ class MonsterTest {
 
         //Asserts that the items gets put in inventory
         lootedItems.addAll(bat.getLooted());
-        assertTrue(lootedItems.contains(potion)&& lootedItems.contains(sword));
+        assertTrue(lootedItems.contains(potion)&& lootedItems.contains(batWing));
         assertEquals(2, lootedItems.size());
     }
     @Test
-    void batGetsKilledAndHasItemsPotionAndSwordLootedSuccessfullyAndLootedAgainUnsuccessfullyIllegalStateException(){
+    void batGetsKilledByOtherBatAndHasItemsPotionAndSwordLootedSuccessfullyByPlayerAndLootedAgainUnsuccessfullyIllegalStateException(){
         //Set-up
-        Item potion = new Ingredient("Bat wing", "A wing from a bat.");
-        Item sword = new WidowsWail();
+        Player player = createPlayer();
+        Item batEye = new Ingredient("Bat eye", "An eye from a bat.");
+        Item batWing = new Ingredient("Bat wing", "A wing from a bat.");
         ArrayList<Item> batItems = new ArrayList<>();
-        batItems.add(potion);
-        batItems.add(sword);
-        ArrayList<Item> lootedItems = new ArrayList<>();
+        batItems.add(batWing);
+        batItems.add(batEye);
+
         Monster bat = new Bat(batItems);
         Monster otherBat = new Bat();
 
         //Check that *inventory* is empty and bat is alive at start
-        assertTrue(lootedItems.isEmpty());
         assertTrue(bat.isAlive());
 
         //Kill the bat with the items
@@ -167,30 +171,63 @@ class MonsterTest {
         assertFalse(bat.isAlive());
 
         //Loot the items
-        lootedItems.addAll(bat.getLooted());
+        player.loot(bat);
 
         //Check that *inventory* contains the looted items
-        assertTrue(lootedItems.contains(potion)&& lootedItems.contains(sword));
-        assertEquals(2, lootedItems.size());
+        assertEquals(1,player.getCupboard().getCount(batEye));
+        assertEquals(1,player.getCupboard().getCount(batWing));
+
+
 
         //Get IllegalStateException when trying to loot again due to no items left
         assertThrows(IllegalStateException.class, () -> bat.getLooted());
     }
     @Test
     void PlayerAttacksWolfAndGains100ExperiencePoints(){
-        Player player = new Player("Paladin", "Orc", 10, 50);
+        Player player = createPlayer();
         Monster wolf = new Wolf();
-        assertTrue(player.attack(wolf));
-        assertTrue(player.attack(wolf));
-        assertTrue(player.attack(wolf));
-        assertTrue(player.attack(wolf));
-        assertTrue(player.attack(wolf));
-        assertTrue(player.attack(wolf));
-        assertTrue(player.attack(wolf));
-        assertTrue(player.attack(wolf));
+        for(int i = 0; i < 8; i++){
+            assertTrue(player.attack(wolf));
+        }
         assertEquals(0, wolf.getHealthPoint());
         assertEquals(150, player.getExperiencePoint());
     }
 
+    @Test
+    void PlayerAttacksBatWithRangedAttackAndReturnsTrue(){
+        Player player = createPlayer();
+        Monster bat = new Bat();
+        Attack rangedAttack = new Attack(player.getAttackPower(), true);
+        assertTrue(player.attack(bat, rangedAttack));
+        assertEquals(4, bat.getHealthPoint());
+    }
     //Need tests for ranged attacks and update player looting
+    @Test
+    void PlayerKillsTwoWolvesWithDifferentItemsAndLootsThemItemsAreInInventory(){
+        Player player = createPlayer();
+        Ingredient wolfHair = new Ingredient("Wolf Hair", "Hair from a wolf");
+        ArrayList wolfOneLoot = new ArrayList();
+        wolfOneLoot.add(wolfHair);
+        Ingredient wolfEye = new Ingredient("Wolf Eye", "An eye from a wolf");
+        ArrayList wolfTwoLoot = new ArrayList();
+        wolfTwoLoot.add(wolfEye);
+        Monster wolf = new Wolf(wolfOneLoot);
+        Monster wolf2 = new Wolf("One-eyed Wolf", STANDARD_WOLF_HEALTH, STANDARD_WOLF_ATTACKPOWER, STANDARD_WOLF_EXPERIENCEPOINTS, wolfTwoLoot, null, null);
+
+        player.setAttackPower(10);
+        assertTrue(player.attack(wolf));
+        assertTrue(player.attack(wolf2));
+
+        player.loot(wolf);
+        player.loot(wolf2);
+        assertEquals(1, player.getCupboard().getCount(wolfHair));
+        assertEquals(1, player.getCupboard().getCount(wolfEye));
+    }
+
+    @Test
+    void PlayerGetExperiencePointsZeroBecauseEnemyIsAlive(){
+        Player player = createPlayer();
+        Monster bat = new Bat();
+        player.increaseExperiencePoint(bat.getExperiencePoints());
+    }
 }

@@ -7,6 +7,8 @@ import unit.Unit;
 import java.util.HashMap;
 import java.util.Map;
 
+import static magic.Check.numberCheck;
+
 public class MagicPlayer extends Player {
     final protected Map<String, Spell> spellBook = new HashMap<> ();
     final protected Map<String, Spell> learntSpells = new HashMap<> ();
@@ -18,7 +20,6 @@ public class MagicPlayer extends Player {
 
 
     public MagicPlayer(String playerClass, String race, int healthPoint, int experiencePoint) {
-
         super (playerClass, race, healthPoint, experiencePoint);
     }
 
@@ -27,7 +28,7 @@ public class MagicPlayer extends Player {
     }
 
     public void setMaximumLearnableSpells(int maximumLearnableSpells) {
-        this.maximumLearnableSpells = Check.numberCheck (maximumLearnableSpells);
+        this.maximumLearnableSpells = numberCheck (maximumLearnableSpells);
     }
 
     //Add spell to spellBook.
@@ -35,7 +36,8 @@ public class MagicPlayer extends Player {
 
         spellBook.put (spell.getName (), spell);
     }
-//Remove spell from spellBook
+
+    //Remove spell from spellBook
     public Spell removeSpell(String name) {
         return spellBook.remove (name);
     }
@@ -49,14 +51,18 @@ public class MagicPlayer extends Player {
         String name = spell.getName ();
         int requiredMagicSkill = spell.getRequiredMagicSkill ();
 
-        if (learntSpells.size () >= maximumLearnableSpells || magicSkill < requiredMagicSkill) {
+
+        if ((learntSpells.size () < maximumLearnableSpells) && (magicSkill >= requiredMagicSkill)) {
+
+            learntSpells.put (name, spell);
+            addSpell (spell);
+            return true;
+        } else {
             return false;
         }
-        learntSpells.put (name, spell);
-        addSpell (spell);
-        return true;
     }
-// Removes spell from learntSpells
+
+    // Removes spell from learntSpells
     public Spell unLearnSpell(String name) {
         return learntSpells.remove (name);
     }
@@ -65,11 +71,14 @@ public class MagicPlayer extends Player {
     public boolean castSpell(Spell spell, Unit target) {
         String spellName = spell.getName ();
         int manaCost = spell.getManaCost ();
-        if (manaPoint < manaCost || learntSpells.get (spellName) != spell) {
+
+
+        if (manaPoint >= manaCost && learntSpells.get (spellName) == spell) {
+            manaPoint -= manaCost;
+            return spell.castSpell (this, target);
+        } else {
             return false;
         }
-        manaPoint -= manaCost;
-        return spell.castSpell (this, target);
     }
 
 
@@ -79,7 +88,7 @@ public class MagicPlayer extends Player {
 
     public void setManaPoint(int manaPoint) {
 
-        if (Check.numberCheck (manaPoint) > maxManaPoint) {
+        if (numberCheck (manaPoint) > maxManaPoint) {
             manaPoint = maxManaPoint;
         }
         this.manaPoint = manaPoint;
@@ -90,7 +99,7 @@ public class MagicPlayer extends Player {
     }
 
     public void setMaxManaPoint(int maxManaPoint) {
-        this.maxManaPoint = Check.numberCheck (maxManaPoint);
+        this.maxManaPoint = numberCheck (maxManaPoint);
     }
 
     public int getMagicSkill() {
@@ -99,14 +108,12 @@ public class MagicPlayer extends Player {
 
     public void setMagicSkill(int magicSkill) {
         final int maximumMagicSkill = 10;
-        if (magicSkill <= maximumMagicSkill) {
-            this.magicSkill = Check.numberCheck (magicSkill);
+        if (numberCheck (magicSkill) > maximumMagicSkill) {
+            throw new IllegalArgumentException("Error: value is too high");
         } else {
-            throw new IllegalArgumentException ("Error: negative numbers are not allowed here");
+            this.magicSkill = magicSkill;
         }
     }
-
-
 
 
     // what happens when leveling up   // override player mec.  .

@@ -1,17 +1,16 @@
 package player;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import equipment.*;
 import quest.Quest;
 import quest.QuestLog;
-import unit.Attack;
-import unit.Combatant;
-import unit.NPC;
+import unit.*;
 import weapon.*;
 import edible.Cupboard;
 import item.*;
-import unit.Unit;
+import magic.Check;
 
 public class Player extends Unit{
 	
@@ -41,12 +40,17 @@ public class Player extends Unit{
     
     public Player(String playerClass, String race, int maxHealthPoint, int experiencePoint){
         super(maxHealthPoint, 1, true);
+        makeSureClassAndRaceAreNotNull(playerClass,race);
         this.playerClass = playerClass;
         this.race = race;
         setExperiencePoint(experiencePoint);
         setArmorTypeHashMap();
         setWeaponTypeHashMap();
         updateAttributes();
+    }
+    private void makeSureClassAndRaceAreNotNull(String playerClass, String race) {
+    	Check.stringCheck(playerClass);
+    	Check.stringCheck(race);
     }
     public Gear getGearFromGear(String slot) {
     	Gear gearPiece = this.gear.get(slot);
@@ -316,7 +320,7 @@ public class Player extends Unit{
             throw new IllegalStateException("The player is dead");
         }else if(!enemy.isAlive()){
             throw new IllegalStateException("The unit receiving damage is already dead");
-        }else if(isGrounded() && !enemy.isGrounded()){
+        }else if(!attack.isRanged() && isGrounded() && !enemy.isGrounded()){
             return false;
         }else {
             enemy.takeDamage(attack);
@@ -337,6 +341,14 @@ public class Player extends Unit{
         int tempHealth = getHealthPoint() - damage;
         setHealthPoint(tempHealth);
     }
+
+    public void loot(Monster monster){
+    	ArrayList<Item> lootedItems = new ArrayList();
+    	lootedItems.addAll(monster.getLooted());
+    	for(Item i:lootedItems){
+    		getCupboard().store(i);
+		}
+	}
 
     @Override
     public boolean equals(Object obj) {

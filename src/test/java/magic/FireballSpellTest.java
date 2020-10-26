@@ -24,6 +24,7 @@ class FireballSpellTest {
         assertEquals (description, f.getDescription ());
         assertEquals (requiredMagicSKill, f.getRequiredMagicSkill ());
         assertEquals (cooldownDuration, f.getCooldownDuration ());
+        assertEquals (manaCost, f.getManaCost ());
 
     }
 

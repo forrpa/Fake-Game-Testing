@@ -1,9 +1,8 @@
 package magic;
 
-import unit.Attack;
-import unit.AttackType;
 import unit.Unit;
 
+// Spell that deals damage to a target, while the caster gains the same amount of health
 public class LifeStealSpell extends Spell {
 
 
@@ -12,17 +11,12 @@ public class LifeStealSpell extends Spell {
     }
 
     @Override
-    public boolean magicEffect(Unit caster, Unit target) {
+    boolean magicEffect(Unit caster, Unit target) {
         // changed. not sending mana
 
-        int targetHealthBefore = target.getHealthPoint ();
-        int attackPower = 5;
-        target.takeDamage (new Attack (attackPower, AttackType.PHYSICAL));
-        int targetHealthAfter = target.getHealthPoint ();
-
-        int targetDamage = targetHealthBefore - targetHealthAfter;
-
-        caster.setHealthPoint (caster.getHealthPoint () + targetDamage);
+        int power = 5;
+        target.setHealthPoint (target.getHealthPoint () - power);
+        caster.setHealthPoint (caster.getHealthPoint () + power);
         return true;
     }
 

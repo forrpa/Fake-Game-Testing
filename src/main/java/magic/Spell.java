@@ -3,24 +3,28 @@ package magic;
 
 import unit.Unit;
 
+import static magic.Check.numberCheck;
+import static magic.Check.stringCheck;
+
 //SuperClass representing a castable spell.
+@SuppressWarnings("ALL")
 class Spell {
     private final String description;
     private final String name;
+    private final boolean isOnCooldown = false;
     private int manaCost = 50;
     private int requiredMagicSkill = 5;
     private int cooldownDuration = 0;
-    private final boolean isOnCooldown = false;
     // implement isOnCooldown in castSpell.
 
     // TODO: 2020-10-20 implement "damage interface"
 
     public Spell(String name, String description, int manaCost, int requiredMagicSkill, int cooldownDuration) {
-        this.name = name;
-        this.description = description;
-        setManaCost (manaCost);
-        setRequiredMagicSkill (requiredMagicSkill);
-        setCooldownDuration (cooldownDuration);
+        this.name = stringCheck (name);
+        this.description = stringCheck (description);
+        setManaCost (numberCheck (manaCost));
+        setRequiredMagicSkill (numberCheck (requiredMagicSkill));
+        setCooldownDuration (numberCheck (cooldownDuration));
     }
 
     public Spell() {
@@ -44,27 +48,24 @@ class Spell {
         return manaCost;
     }
 
+    public void setManaCost(int manaCost) {
+        this.manaCost = numberCheck (manaCost);
+    }
 
     public int getRequiredMagicSkill() {
         return requiredMagicSkill;
     }
 
+    public void setRequiredMagicSkill(int requiredMagicSkill) {
+        this.requiredMagicSkill = numberCheck (requiredMagicSkill);
+    }
 
     public int getCooldownDuration() {
         return cooldownDuration;
     }
 
-
-    public void setManaCost(int manaCost) {
-        this.manaCost = positiveNrCheck (manaCost);
-    }
-
-    public void setRequiredMagicSkill(int requiredMagicSkill) {
-        this.requiredMagicSkill = positiveNrCheck (requiredMagicSkill);
-    }
-
     public void setCooldownDuration(int cooldownDuration) {
-        this.cooldownDuration = positiveNrCheck (cooldownDuration);
+        this.cooldownDuration = numberCheck (cooldownDuration);
     }
 
     public boolean castSpell(Unit caster, Unit target) {
@@ -82,13 +83,6 @@ class Spell {
     }
 
 
-    // Check if  numbers are >=0
-    private int positiveNrCheck(int nr) {
-        if (nr >= 0) {
-            return nr;
-        } else {
-            throw new IllegalArgumentException ("Error: negative numbers are not allowed here");
-        }
-    }
+
 
 }
