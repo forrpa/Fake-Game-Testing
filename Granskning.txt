@@ -12,63 +12,65 @@ Moderator: Christian.
 
 Sammanställning:
 
+Allvarlighet: 1-5, 1 inte allvarlig, 2 inte särskilt allvarlig, 3 medelallvarlig, 4 ganska allvarligt, 5 allvarligt.
+
 Items:
 
 
-protected final på namn och description;
-RequiredLevel  borde heta REquiredUnitLevel och bör testas så den inte sätts högre än max tillåtet för playerklassen.
+protected final på namn och description; (2)
+RequiredLevel  borde heta REquiredUnitLevel och bör testas så den inte sätts högre än max tillåtet för playerklassen. (3)
 
 
 
-Konstruktor bör ha nullkoll.
+Konstruktor bör ha nullkoll. (4)
 
-samma med zeroDeffaultREquiredLevel.
+samma med zeroDefaultRequiredLevel. (2)
 
-Konstruktorn bör ha nullkoll.
-zeroDefaultRequiredLevel kan vara statisk
+Konstruktorn bör ha nullkoll. (4)
+zeroDefaultRequiredLevel kan vara statisk (1)
     public bololean quails():
-    , skulle kunna sätta this.name där för tydlighet
-    två strängarna ska jämföras med .equals() ej ==
+    , skulle kunna sätta this.name där för tydlighet  (1)
+    två strängarna ska jämföras med .equals() ej == (5)
 
 
 Hashcode()
-magic numbers, 17 och 31.
-det enda resultat är den sista som returneras är det sista resultatet, +=
-eventuellt använda paranteser för lästydlighet vid
+magic numbers, 17 och 31. (1)
+det enda resultat är den sista som returneras är det sista resultatet, += (4)
+eventuellt använda paranteser för lästydlighet vid (1)
 
 Edible.class
-varför har alla Edible manaPoints, healthpoints och experiencePoints.
+varför har alla Edible manaPoints, healthpoints och experiencePoints. (1)
 
-kommentera vad klassen gör och vad variablerna manaPoint, healtPoint och experiencePoint gär.
-tydligare namn?
+kommentera vad klassen gör och vad variablerna manaPoint, healtPoint och experiencePoint gär. (2)
+tydligare namn? (1)
 
 private final int checkPointValueRange()
-finall är överflödigt då private för att den inte går att överskugga.
+finall är överflödigt då private för att den inte går att överskugga. (1)
 
 Varförr -10 || 10.
-magic numers 10 -10;
+magic numers 10 -10; (1)
 
 
 consume()
-bör vara packet protected.
-bör ha en kommentar vad den gör.
+bör vara packet protected. (3)
+bör ha en kommentar vad den gör. (1)
 
 
 Potion.class.
-requiredLevel bör heta experiencePoint.
-svårt att öka med nya spells om det är def i konstruktor vad de påverkar.
+requiredLevel bör heta experiencePoint. (3)
+svårt att öka med nya spells om det är def i konstruktor vad de påverkar. (?)
 
 ForbiddenFruit.class
-bör ha en klassbeskrivning. vad är forbidden fruit.
-vad är syftet med Potion poison i forbiden fruit? beskrivning.
+bör ha en klassbeskrivning. vad är forbidden fruit. (1)
+vad är syftet med Potion poison i forbiden fruit? beskrivning. (1)
 
 konstruktorn:
-setPosion(null) är redundant då den är null är null utan att instansieras.
+setPosion(null) är redundant då den är null är null utan att instansieras. (1)
 
 consume()
-FULL_POINT_BOOST bör döpas om till t.ex maxValue.
-ManaPoint, healthPoint och experiencePoint är lokala variabler som inte behövs.
+FULL_POINT_BOOST bör döpas om till t.ex maxValue. (2)
+ManaPoint, healthPoint och experiencePoint är lokala variabler som inte behövs. (2)
 
-arrayen kan defineras innan iffsatsen. och sättas olika, i if / else. sedan returneras.
+arrayen kan defineras innan iffsatsen. och sättas olika, i if / else. sedan returneras. (2)
 
 

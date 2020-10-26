@@ -1,0 +1,883 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" automaticImage="JPEG" always-add-relationships="false" 
+  generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true" 
+  router="FAN">  
+  <interface id="1" language="java" name="unit.Talkable" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/unit/Talkable.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="103" x="67" y="891"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="2" language="java" name="unit.Attack" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/unit/Attack.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="194" y="483"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="magic.LifeStealSpell" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/magic/LifeStealSpell.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="171" x="72" y="4793"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="equipment.RobesOfImmenseMagic" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/equipment/RobesOfImmenseMagic.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="160" x="549" y="4968"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="unit.Unit" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/unit/Unit.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="351" width="183" x="830" y="-48"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="weapon.OneHandedSword" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/weapon/OneHandedSword.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="281" x="1246" y="4793"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="unit.Villager" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/unit/Villager.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="281" x="460" y="644"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="weapon.TwoHandedSword" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/weapon/TwoHandedSword.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="282" x="1567" y="4793"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="edible.Recipe" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/edible/Recipe.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="997" y="1320"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="magic.MagicPlayer" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/magic/MagicPlayer.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="405" width="204" x="494" y="3885"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="weapon.WidowsWail" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/weapon/WidowsWail.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="95" x="1246" y="4968"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="unit.Bat" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/unit/Bat.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="313" x="428" y="891"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="edible.Ingredient" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/edible/Ingredient.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="730" y="1324"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="quest.GuildMap" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/quest/GuildMap.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="923" y="2209"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="equipment.BucklerOfUselessness" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/equipment/BucklerOfUselessness.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1139" y="5008"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="magic.FireballSpell" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/magic/FireballSpell.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="171" x="283" y="4793"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="edible.Potion" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/edible/Potion.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="990" y="1686"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="edible.Edible" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/edible/Edible.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="512" y="1297"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="equipment.Chest" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/equipment/Chest.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="219" x="727" y="4793"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="weapon.Heartsbane" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/weapon/Heartsbane.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1718" y="5010"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="edible.Cupboard" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/edible/Cupboard.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="272" y="1385"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="quest.StealthAndAttack" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/quest/StealthAndAttack.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="531" width="281" x="529" y="2167"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="unit.Wolf" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/unit/Wolf.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="319" x="781" y="891"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="24" language="java" name="weapon.WeaponSize" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/weapon/WeaponSize.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="151" x="1381" y="4968"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <enumeration id="25" language="java" name="equipment.ArmorType" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/equipment/ArmorType.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="129" x="818" y="5143"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="26" language="java" name="item.Inventory" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/item/Inventory.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="235" y="2925"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="magic.Spell" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/magic/Spell.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="423" width="172" x="494" y="4330"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="28" language="java" name="unit.AttackType" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/unit/AttackType.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="194" y="731"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="29" language="java" name="edible.ForbiddenFruit" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/edible/ForbiddenFruit.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="194" x="569" y="1601"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="unit.NPC" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/unit/NPC.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="279" x="573" y="343"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="equipment.Equipment" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/equipment/Equipment.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="240" x="986" y="4330"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="magic.Check" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/magic/Check.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="125" x="200" y="-48"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="unit.Monster" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/unit/Monster.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="377" x="781" y="644"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="unit.Questgiver" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/unit/Questgiver.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="101" y="1098"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="equipment.Gear" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/equipment/Gear.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="297" width="279" x="1127" y="3885"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="36" language="java" name="item.Item" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/item/Item.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="279" width="168" x="1140" y="891"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="37" language="java" name="magic.HealSpell" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/magic/HealSpell.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="193" x="494" y="4793"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="38" language="java" name="quest.Quest" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/quest/Quest.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="297" width="239" x="529" y="1830"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="39" language="java" name="quest.QuestItem" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/quest/QuestItem.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="141" x="1167" y="1210"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="40" language="java" name="unit.Combatant" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/unit/Combatant.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="156" y="243"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="41" language="java" name="weapon.Weapon" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/weapon/Weapon.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="231" x="1266" y="4330"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="42" language="java" name="equipment.Shield" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/equipment/Shield.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="220" x="986" y="4793"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="43" language="java" name="quest.QuestState" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/quest/QuestState.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="157" x="499" y="-48"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="44" language="java" name="equipment.BreastplateOfTesting" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/equipment/BreastplateOfTesting.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="216" x="749" y="4968"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="45" language="java" name="player.Player" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/player/Player.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="1107" width="311" x="494" y="2738"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="46" language="java" name="quest.TalkToGuildLeader" project="inte_projektarbete" 
+    file="/inte_projektarbete/src/main/java/quest/TalkToGuildLeader.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="962" y="1987"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <generalization id="47">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="30"/>  
+  </generalization>  
+  <association id="48">    
+    <end type="SOURCE" refId="45" navigable="false">      
+      <attribute id="49" name="playerInventory"/>      
+      <multiplicity id="50" minimum="0" maximum="1">        
+        <position height="16" width="23" x="356" y="3016"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="51">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <association id="52">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="53" name="WEAPON_SIZE">        
+        <position height="18" width="81" x="1341" y="4941"/>      
+      </attribute>      
+      <multiplicity id="54" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="55">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="41"/>  
+  </generalization>  
+  <generalization id="56">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="41"/>  
+  </generalization>  
+  <generalization id="57">    
+    <end type="SOURCE" refId="34"/>    
+    <end type="TARGET" refId="7"/>  
+  </generalization>  
+  <generalization id="58">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="36"/>  
+  </generalization>  
+  <generalization id="59">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="33"/>  
+  </generalization>  
+  <association id="60">    
+    <bendpoint x="102" y="1672"/>    
+    <bendpoint x="450" y="1672"/>    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="61" name="quests"/>      
+      <multiplicity id="62" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="63">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="35"/>  
+  </generalization>  
+  <association id="64">    
+    <bendpoint x="316" y="1601"/>    
+    <bendpoint x="316" y="1830"/>    
+    <bendpoint x="316" y="2167"/>    
+    <bendpoint x="316" y="2738"/>    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="65" name="edibles">        
+        <position height="18" width="42" x="152" y="2698"/>      
+      </attribute>      
+      <multiplicity id="66" minimum="0" maximum="1">        
+        <position height="16" width="23" x="201" y="2699"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="67">    
+    <bendpoint x="793" y="1601"/>    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="18"/>  
+  </generalization>  
+  <generalization id="68">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="27"/>  
+  </generalization>  
+  <generalization id="69">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="36"/>  
+  </generalization>  
+  <association id="70">    
+    <bendpoint x="399" y="2167"/>    
+    <bendpoint x="399" y="1830"/>    
+    <bendpoint x="399" y="1601"/>    
+    <end type="SOURCE" refId="45" navigable="false">      
+      <attribute id="71" name="cupboard"/>      
+      <multiplicity id="72" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="73">    
+    <end type="SOURCE" refId="45" navigable="false">      
+      <attribute id="74" name="gear">        
+        <position height="18" width="30" x="1118" y="3842"/>      
+      </attribute>      
+      <multiplicity id="75" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="35" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="76">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="77" name="ingredients"/>      
+      <multiplicity id="78" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="79">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="80" name="attackType"/>      
+      <multiplicity id="81" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="82">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="83" name="itemsOnNPC">        
+        <position height="18" width="67" x="1103" y="864"/>      
+      </attribute>      
+      <multiplicity id="84" minimum="0" maximum="2147483647">        
+        <position height="16" width="21" x="1117" y="887"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="36" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="85">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="31"/>  
+  </generalization>  
+  <realization id="86">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="40"/>  
+  </realization>  
+  <association id="87">    
+    <bendpoint x="253" y="1601"/>    
+    <bendpoint x="253" y="1830"/>    
+    <bendpoint x="253" y="2167"/>    
+    <bendpoint x="253" y="2738"/>    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="88" name="recipies">        
+        <position height="18" width="46" x="151" y="2764"/>      
+      </attribute>      
+      <multiplicity id="89" minimum="0" maximum="1">        
+        <position height="16" width="23" x="200" y="2768"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="90">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="33"/>  
+  </generalization>  
+  <generalization id="91">    
+    <bendpoint x="1136" y="2738"/>    
+    <bendpoint x="1136" y="2167"/>    
+    <bendpoint x="1136" y="1830"/>    
+    <bendpoint x="1136" y="1601"/>    
+    <bendpoint x="1136" y="1210"/>    
+    <end type="SOURCE" refId="35"/>    
+    <end type="TARGET" refId="36"/>  
+  </generalization>  
+  <association id="92">    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="93" name="questUnlocked"/>      
+      <multiplicity id="94" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="95">    
+    <end type="SOURCE" refId="41"/>    
+    <end type="TARGET" refId="35"/>  
+  </generalization>  
+  <generalization id="96">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <generalization id="97">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="27"/>  
+  </generalization>  
+  <association id="98">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="99" name="WEAPON_SIZE">        
+        <position height="18" width="81" x="1552" y="4957"/>      
+      </attribute>      
+      <multiplicity id="100" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="101">    
+    <bendpoint x="274" y="1601"/>    
+    <bendpoint x="274" y="1830"/>    
+    <bendpoint x="274" y="2167"/>    
+    <bendpoint x="274" y="2738"/>    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="102" name="potions">        
+        <position height="18" width="43" x="158" y="2790"/>      
+      </attribute>      
+      <multiplicity id="103" minimum="0" maximum="1">        
+        <position height="16" width="23" x="202" y="2794"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="104">    
+    <bendpoint x="295" y="1601"/>    
+    <bendpoint x="295" y="1830"/>    
+    <bendpoint x="295" y="2167"/>    
+    <bendpoint x="295" y="2738"/>    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="105" name="forbiddenFruits">        
+        <position height="18" width="81" x="117" y="2742"/>      
+      </attribute>      
+      <multiplicity id="106" minimum="0" maximum="1">        
+        <position height="16" width="23" x="200" y="2720"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="107">    
+    <bendpoint x="994" y="1601"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="108" name="potion"/>      
+      <multiplicity id="109" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="110">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="18"/>  
+  </generalization>  
+  <association id="111">    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="112" name="weakness">        
+        <position height="18" width="59" x="294" y="689"/>      
+      </attribute>      
+      <multiplicity id="113" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="114">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="19"/>  
+  </generalization>  
+  <association id="115">    
+    <end type="SOURCE" refId="44" navigable="false">      
+      <attribute id="116" name="ARMOR_TYPE"/>      
+      <multiplicity id="117" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="118">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <association id="119">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="120" name="player"/>      
+      <multiplicity id="121" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="45" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="122">    
+    <bendpoint x="232" y="1601"/>    
+    <bendpoint x="232" y="1830"/>    
+    <bendpoint x="232" y="2167"/>    
+    <bendpoint x="232" y="2738"/>    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="123" name="ingredients">        
+        <position height="18" width="61" x="134" y="2719"/>      
+      </attribute>      
+      <multiplicity id="124" minimum="0" maximum="1">        
+        <position height="16" width="23" x="200" y="2743"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="125">    
+    <bendpoint x="1234" y="2214"/>    
+    <bendpoint x="1235" y="1914"/>    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="39"/>  
+  </generalization>  
+  <generalization id="126">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="42"/>  
+  </generalization>  
+  <association id="127">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="128" name="ARMOR_TYPE">        
+        <position height="18" width="78" x="703" y="5165"/>      
+      </attribute>      
+      <multiplicity id="129" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="130">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="131" name="poisonedForbiddenFruits"/>      
+      <multiplicity id="132" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="133">    
+    <end type="SOURCE" refId="46"/>    
+    <end type="TARGET" refId="38"/>  
+  </generalization>  
+  <generalization id="134">    
+    <end type="SOURCE" refId="42"/>    
+    <end type="TARGET" refId="31"/>  
+  </generalization>  
+  <generalization id="135">    
+    <bendpoint x="833" y="1210"/>    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="36"/>  
+  </generalization>  
+  <generalization id="136">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="45"/>  
+  </generalization>  
+  <association id="137">    
+    <bendpoint x="967" y="5184"/>    
+    <end type="SOURCE" refId="42" navigable="false">      
+      <attribute id="138" name="ARMOR_TYPE">        
+        <position height="18" width="78" x="978" y="5173"/>      
+      </attribute>      
+      <multiplicity id="139" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="140">    
+    <end type="SOURCE" refId="37"/>    
+    <end type="TARGET" refId="27"/>  
+  </generalization>  
+  <generalization id="141">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <association id="142">    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="143" name="resistance">        
+        <position height="18" width="59" x="269" y="644"/>      
+      </attribute>      
+      <multiplicity id="144" minimum="0" maximum="1">        
+        <position height="16" width="23" x="264" y="662"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="145">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="146" name="spellBook">        
+        <position height="18" width="56" x="616" y="4301"/>      
+      </attribute>      
+      <multiplicity id="147" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="148">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="149" name="guildMap"/>      
+      <multiplicity id="150" minimum="0" maximum="1">        
+        <position height="16" width="23" x="833" y="2253"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="151">    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="152" name="poison"/>      
+      <multiplicity id="153" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="154">    
+    <end type="SOURCE" refId="44"/>    
+    <end type="TARGET" refId="19"/>  
+  </generalization>  
+  <association id="155">    
+    <bendpoint x="378" y="1601"/>    
+    <bendpoint x="378" y="1830"/>    
+    <bendpoint x="378" y="2167"/>    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="156" name="player">        
+        <position height="18" width="38" x="440" y="2715"/>      
+      </attribute>      
+      <multiplicity id="157" minimum="0" maximum="1">        
+        <position height="16" width="23" x="479" y="2717"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="45" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="158">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="30"/>  
+  </generalization>  
+  <generalization id="159">    
+    <bendpoint x="1348" y="3290"/>    
+    <bendpoint x="1342" y="2800"/>    
+    <bendpoint x="1336" y="1652"/>    
+    <bendpoint x="1338" y="1210"/>    
+    <bendpoint x="1338" y="891"/>    
+    <bendpoint x="1338" y="644"/>    
+    <bendpoint x="1338" y="343"/>    
+    <end type="SOURCE" refId="45"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <generalization id="160">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="38"/>  
+  </generalization>  
+  <generalization id="161">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="36"/>  
+  </generalization>  
+  <association id="162">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="163" name="learntSpells">        
+        <position height="18" width="66" x="482" y="4303"/>      
+      </attribute>      
+      <multiplicity id="164" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
