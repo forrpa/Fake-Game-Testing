@@ -30,7 +30,7 @@ class playerTestsWithRegardsToGear {
 		int agiBeforeRobe = magePlayer.getAgility();
 		int staBeforeRobe = magePlayer.getStamina();
 		int armorBeforeRobe = magePlayer.getArmor();
-		int maxHpBeforeRobe = magePlayer.getMaxHealth();
+		int maxHpBeforeRobe = magePlayer.getMaxHealthPoint();
 		int hpBeforeRobe = magePlayer.getHealthPoint();
 		try {
 			magePlayer.equipArmor((Equipment) roim);
@@ -43,7 +43,7 @@ class playerTestsWithRegardsToGear {
 		assertTrue(magePlayer.getAgility()==(agiBeforeRobe));
 		assertTrue(magePlayer.getStamina()==(staBeforeRobe+20));
 		assertTrue(magePlayer.getArmor()==(armorBeforeRobe+30));
-		assertTrue(magePlayer.getMaxHealth()==(maxHpBeforeRobe+200));
+		assertTrue(magePlayer.getMaxHealthPoint()==(maxHpBeforeRobe+200));
 		assertTrue(magePlayer.getHealthPoint()==(hpBeforeRobe+200));
 
 	}
@@ -58,7 +58,7 @@ class playerTestsWithRegardsToGear {
 		int agiBeforeRobe = warriorPlayer.getAgility();
 		int staBeforeRobe = warriorPlayer.getStamina();
 		int armorBeforeRobe = warriorPlayer.getArmor();
-		int maxHpBeforeRobe = warriorPlayer.getMaxHealth();
+		int maxHpBeforeRobe = warriorPlayer.getMaxHealthPoint();
 		int hpBeforeRobe = warriorPlayer.getHealthPoint();
 		try {
 			warriorPlayer.equipArmor((Equipment) roim);
@@ -71,7 +71,7 @@ class playerTestsWithRegardsToGear {
 		assertTrue(warriorPlayer.getAgility()==(agiBeforeRobe));
 		assertTrue(warriorPlayer.getStamina()==(staBeforeRobe+20));
 		assertTrue(warriorPlayer.getArmor()==(armorBeforeRobe+30));
-		assertTrue(warriorPlayer.getMaxHealth()==(maxHpBeforeRobe+200));
+		assertTrue(warriorPlayer.getMaxHealthPoint()==(maxHpBeforeRobe+200));
 		assertTrue(warriorPlayer.getHealthPoint()==(hpBeforeRobe+200));
 	}
 	@ParameterizedTest
@@ -109,7 +109,7 @@ class playerTestsWithRegardsToGear {
 		int agiBeforePlate = warriorPlayer.getAgility();
 		int staBeforePlate = warriorPlayer.getStamina();
 		int armorBeforePlate = warriorPlayer.getArmor();
-		int maxHpBeforePlate = warriorPlayer.getMaxHealth();
+		int maxHpBeforePlate = warriorPlayer.getMaxHealthPoint();
 		int hpBeforePlate = warriorPlayer.getHealthPoint();
 		try {
 			warriorPlayer.equipArmor((Equipment) bpt);
@@ -122,7 +122,7 @@ class playerTestsWithRegardsToGear {
 		assertTrue(warriorPlayer.getAgility()==(agiBeforePlate+2));
 		assertTrue(warriorPlayer.getStamina()==(staBeforePlate+3));
 		assertTrue(warriorPlayer.getArmor()==(armorBeforePlate+150));
-		assertTrue(warriorPlayer.getMaxHealth()==(maxHpBeforePlate+30));
+		assertTrue(warriorPlayer.getMaxHealthPoint()==(maxHpBeforePlate+30));
 		assertTrue(warriorPlayer.getHealthPoint()==(hpBeforePlate+30));
 	}
 	@Test
@@ -147,7 +147,7 @@ class playerTestsWithRegardsToGear {
 		int agiBeforeShield = warriorPlayer.getAgility();
 		int staBeforeShield = warriorPlayer.getStamina();
 		int armorBeforeShield = warriorPlayer.getArmor();
-		int maxHpBeforeShield = warriorPlayer.getMaxHealth();
+		int maxHpBeforeShield = warriorPlayer.getMaxHealthPoint();
 		int hpBeforeShield = warriorPlayer.getHealthPoint();
 		try {
 			warriorPlayer.equipArmor((Equipment) bou);
@@ -160,7 +160,7 @@ class playerTestsWithRegardsToGear {
 		assertTrue(warriorPlayer.getAgility()==(agiBeforeShield));
 		assertTrue(warriorPlayer.getStamina()==(staBeforeShield));
 		assertTrue(warriorPlayer.getArmor()==(armorBeforeShield+10));
-		assertTrue(warriorPlayer.getMaxHealth()==(maxHpBeforeShield));
+		assertTrue(warriorPlayer.getMaxHealthPoint()==(maxHpBeforeShield));
 		assertTrue(warriorPlayer.getHealthPoint()==(hpBeforeShield));
 	}
 	@Test
@@ -185,7 +185,7 @@ class playerTestsWithRegardsToGear {
 		int agiBeforeWW = magePlayer.getAgility();
 		int staBeforeWW = magePlayer.getStamina();
 		int dmgBeforeWW = magePlayer.getAttackPower();
-		int maxHpBeforeWW = magePlayer.getMaxHealth();
+		int maxHpBeforeWW = magePlayer.getMaxHealthPoint();
 		int hpBeforeWW = magePlayer.getHealthPoint();
 		try {
 			magePlayer.equipWeapon((Weapon) ww);
@@ -198,7 +198,7 @@ class playerTestsWithRegardsToGear {
 		assertTrue(magePlayer.getAgility()==(agiBeforeWW+14));
 		assertTrue(magePlayer.getStamina()==(staBeforeWW+10));
 		assertTrue(magePlayer.getAttackPower()==(dmgBeforeWW+87+(5*17)));
-		assertTrue(magePlayer.getMaxHealth()==(maxHpBeforeWW+100));
+		assertTrue(magePlayer.getMaxHealthPoint()==(maxHpBeforeWW+100));
 		assertTrue(magePlayer.getHealthPoint()==(hpBeforeWW+100));
 		assertFalse(magePlayer.isInInventory(ww));
 	}
@@ -213,7 +213,7 @@ class playerTestsWithRegardsToGear {
 		int agiBeforeWW = warriorPlayer.getAgility();
 		int staBeforeWW = warriorPlayer.getStamina();
 		int dmgBeforeWW = warriorPlayer.getAttackPower();
-		int maxHpBeforeWW = warriorPlayer.getMaxHealth();
+		int maxHpBeforeWW = warriorPlayer.getMaxHealthPoint();
 		int hpBeforeWW = warriorPlayer.getHealthPoint();
 		try {
 			warriorPlayer.equipWeapon((Weapon) ww);
@@ -226,7 +226,7 @@ class playerTestsWithRegardsToGear {
 		assertTrue(warriorPlayer.getAgility()==(agiBeforeWW+14));
 		assertTrue(warriorPlayer.getStamina()==(staBeforeWW+10));
 		assertTrue(warriorPlayer.getAttackPower()==(dmgBeforeWW+87+(5*17)));
-		assertTrue(warriorPlayer.getMaxHealth()==(maxHpBeforeWW+100));
+		assertTrue(warriorPlayer.getMaxHealthPoint()==(maxHpBeforeWW+100));
 		assertTrue(warriorPlayer.getHealthPoint()==(hpBeforeWW+100));
 		assertFalse(warriorPlayer.isInInventory(ww));
 	}
@@ -258,7 +258,7 @@ class playerTestsWithRegardsToGear {
 		int agiAfterWW = magePlayer.getAgility();
 		int staAfterWW = magePlayer.getStamina();
 		int dmgAfterWW = magePlayer.getAttackPower();
-		int maxHpAfterWW = magePlayer.getMaxHealth();
+		int maxHpAfterWW = magePlayer.getMaxHealthPoint();
 		int hpAfterWW = magePlayer.getHealthPoint();
 		magePlayer.unEquipGear(ww);
 		assertTrue(magePlayer.getGearFromGear("weapon")==null);
@@ -267,7 +267,7 @@ class playerTestsWithRegardsToGear {
 		assertTrue(magePlayer.getAgility()==(agiAfterWW-14));
 		assertTrue(magePlayer.getStamina()==(staAfterWW-10));
 		assertTrue(magePlayer.getAttackPower()==(dmgAfterWW-87-(5*17)));
-		assertTrue(magePlayer.getMaxHealth()==(maxHpAfterWW-100));
+		assertTrue(magePlayer.getMaxHealthPoint()==(maxHpAfterWW-100));
 		assertTrue(magePlayer.getHealthPoint()==(hpAfterWW-100));
 		assertTrue(magePlayer.getInventoryCount(ww)==1);
 	}
@@ -287,7 +287,7 @@ class playerTestsWithRegardsToGear {
 		int agiAfterWW = warriorPlayer.getAgility();
 		int staAfterWW = warriorPlayer.getStamina();
 		int dmgAfterWW = warriorPlayer.getAttackPower();
-		int maxHpAfterWW = warriorPlayer.getMaxHealth();
+		int maxHpAfterWW = warriorPlayer.getMaxHealthPoint();
 		int hpAfterWW = warriorPlayer.getHealthPoint();
 		warriorPlayer.unEquipGear(ww);
 		assertTrue(warriorPlayer.getGearFromGear("weapon")==null);
@@ -296,7 +296,7 @@ class playerTestsWithRegardsToGear {
 		assertTrue(warriorPlayer.getAgility()==(agiAfterWW-14));
 		assertTrue(warriorPlayer.getStamina()==(staAfterWW-10));
 		assertTrue(warriorPlayer.getAttackPower()==(dmgAfterWW-87-(5*17)));
-		assertTrue(warriorPlayer.getMaxHealth()==(maxHpAfterWW-100));
+		assertTrue(warriorPlayer.getMaxHealthPoint()==(maxHpAfterWW-100));
 		assertTrue(warriorPlayer.getHealthPoint()==(hpAfterWW-100));
 		assertTrue(warriorPlayer.getInventoryCount(ww)==1);
 	}
@@ -316,7 +316,7 @@ class playerTestsWithRegardsToGear {
 		int agiAfterPlate = warriorPlayer.getAgility();
 		int staAfterPlate = warriorPlayer.getStamina();
 		int dmgAfterPlate = warriorPlayer.getAttackPower();
-		int maxHpAfterPlate = warriorPlayer.getMaxHealth();
+		int maxHpAfterPlate = warriorPlayer.getMaxHealthPoint();
 		int hpAfterPlate = warriorPlayer.getHealthPoint();
 		warriorPlayer.unEquipGear(bpt);
 		assertTrue(warriorPlayer.getGearFromGear("chest")==null);
@@ -325,7 +325,7 @@ class playerTestsWithRegardsToGear {
 		assertTrue(warriorPlayer.getAgility()==(agiAfterPlate-2));
 		assertTrue(warriorPlayer.getStamina()==(staAfterPlate-3));
 		assertTrue(warriorPlayer.getAttackPower()==(dmgAfterPlate));
-		assertTrue(warriorPlayer.getMaxHealth()==(maxHpAfterPlate-30));
+		assertTrue(warriorPlayer.getMaxHealthPoint()==(maxHpAfterPlate-30));
 		assertTrue(warriorPlayer.getHealthPoint()==(hpAfterPlate-30));
 		assertTrue(warriorPlayer.getInventoryCount(bpt)==1); 
 	}
@@ -347,7 +347,7 @@ class playerTestsWithRegardsToGear {
 		int agiAfterPlate = warriorPlayer.getAgility();
 		int staAfterPlate = warriorPlayer.getStamina();
 		int dmgAfterPlate = warriorPlayer.getAttackPower();
-		int maxHpAfterPlate = warriorPlayer.getMaxHealth();
+		int maxHpAfterPlate = warriorPlayer.getMaxHealthPoint();
 		int hpAfterPlate = warriorPlayer.getHealthPoint();
 		warriorPlayer.unEquipGear(bou);
 		assertTrue(warriorPlayer.getGearFromGear("chest").equals(bpt));
@@ -356,7 +356,7 @@ class playerTestsWithRegardsToGear {
 		assertTrue(warriorPlayer.getAgility()==(agiAfterPlate));
 		assertTrue(warriorPlayer.getStamina()==(staAfterPlate));
 		assertTrue(warriorPlayer.getAttackPower()==(dmgAfterPlate));
-		assertTrue(warriorPlayer.getMaxHealth()==(maxHpAfterPlate));
+		assertTrue(warriorPlayer.getMaxHealthPoint()==(maxHpAfterPlate));
 		assertTrue(warriorPlayer.getHealthPoint()==(hpAfterPlate));
 		assertTrue(warriorPlayer.getInventoryCount(bou)==1); 
 		assertFalse(warriorPlayer.isInInventory(bpt));
@@ -383,7 +383,7 @@ class playerTestsWithRegardsToGear {
 		int agiBeforeHB = warriorPlayer.getAgility();
 		int staBeforeHB = warriorPlayer.getStamina();
 		int dmgBeforeHB = warriorPlayer.getAttackPower();
-		int maxHpBeforeHB = warriorPlayer.getMaxHealth();
+		int maxHpBeforeHB = warriorPlayer.getMaxHealthPoint();
 		int hpBeforeHB = warriorPlayer.getHealthPoint();
 		try {
 			warriorPlayer.equipWeapon((Weapon) hb);
@@ -396,7 +396,7 @@ class playerTestsWithRegardsToGear {
 		assertTrue(warriorPlayer.getAgility()==(agiBeforeHB+28));
 		assertTrue(warriorPlayer.getStamina()==(staBeforeHB+18));
 		assertTrue(warriorPlayer.getAttackPower()==(dmgBeforeHB+189+(5*46)));
-		assertTrue(warriorPlayer.getMaxHealth()==(maxHpBeforeHB+180));
+		assertTrue(warriorPlayer.getMaxHealthPoint()==(maxHpBeforeHB+180));
 		assertTrue(warriorPlayer.getHealthPoint()==(hpBeforeHB+180));
 		assertFalse(warriorPlayer.isInInventory(hb));
 	}
@@ -412,7 +412,7 @@ class playerTestsWithRegardsToGear {
 		int agiBeforeWW = warriorPlayer.getAgility();
 		int staBeforeWW = warriorPlayer.getStamina();
 		int dmgBeforeWW = warriorPlayer.getAttackPower();
-		int maxHpBeforeWW = warriorPlayer.getMaxHealth();
+		int maxHpBeforeWW = warriorPlayer.getMaxHealthPoint();
 		int hpBeforeWW = warriorPlayer.getHealthPoint();
 		try {
 			warriorPlayer.equipWeapon((Weapon) ww);
@@ -424,7 +424,7 @@ class playerTestsWithRegardsToGear {
 		int agiAfterWW = warriorPlayer.getAgility();
 		int staAfterWW = warriorPlayer.getStamina();
 		int dmgAfterWW = warriorPlayer.getAttackPower();
-		int maxHpAfterWW = warriorPlayer.getMaxHealth();
+		int maxHpAfterWW = warriorPlayer.getMaxHealthPoint();
 		int hpAfterWW = warriorPlayer.getHealthPoint();
 		try {
 			warriorPlayer.equipWeapon((Weapon) hb);
@@ -436,7 +436,7 @@ class playerTestsWithRegardsToGear {
 		int agiAfterHB = warriorPlayer.getAgility();
 		int staAfterHB = warriorPlayer.getStamina();
 		int dmgAfterHB = warriorPlayer.getAttackPower();
-		int maxHpAfterHB = warriorPlayer.getMaxHealth();
+		int maxHpAfterHB = warriorPlayer.getMaxHealthPoint();
 		int hpAfterHB = warriorPlayer.getHealthPoint();
 		assertTrue(warriorPlayer.getGearFromGear("weapon").equals(hb));
 		assertFalse(warriorPlayer.isInInventory(hb));
@@ -471,7 +471,7 @@ class playerTestsWithRegardsToGear {
 		int staBeforeEquip = warriorPlayer.getStamina();
 		int dmgBeforeEquip = warriorPlayer.getAttackPower();
 		int armorBeforeEquip = warriorPlayer.getArmor();
-		int maxHpBeforeEquip = warriorPlayer.getMaxHealth();
+		int maxHpBeforeEquip = warriorPlayer.getMaxHealthPoint();
 		int hpBeforeEquip = warriorPlayer.getHealthPoint();
 		try {
 			warriorPlayer.equipWeapon((Weapon) ww);
@@ -486,7 +486,7 @@ class playerTestsWithRegardsToGear {
 		int staAfterEquip = warriorPlayer.getStamina();
 		int dmgAfterEquip = warriorPlayer.getAttackPower();
 		int armorAfterEquip = warriorPlayer.getArmor();
-		int maxHpAfterEquip = warriorPlayer.getMaxHealth();
+		int maxHpAfterEquip = warriorPlayer.getMaxHealthPoint();
 		int hpAfterEquip = warriorPlayer.getHealthPoint();
 		assertTrue(warriorPlayer.getGearFromGear("weapon").equals(ww));
 		assertTrue(warriorPlayer.getGearFromGear("chest").equals(bpt));
@@ -524,7 +524,7 @@ class playerTestsWithRegardsToGear {
 		int staBeforeHB = warriorPlayer.getStamina();
 		int dmgBeforeHB = warriorPlayer.getAttackPower();
 		int armorBeforeHB = warriorPlayer.getArmor();
-		int maxHpBeforeHB = warriorPlayer.getMaxHealth();
+		int maxHpBeforeHB = warriorPlayer.getMaxHealthPoint();
 		int hpBeforeHB = warriorPlayer.getHealthPoint();
 		try {
 			warriorPlayer.equipWeapon((Weapon) hb);
@@ -537,7 +537,7 @@ class playerTestsWithRegardsToGear {
 		int staAfterHB = warriorPlayer.getStamina();
 		int dmgAfterHB = warriorPlayer.getAttackPower();
 		int armorAfterHB = warriorPlayer.getArmor();
-		int maxHpAfterHB = warriorPlayer.getMaxHealth();
+		int maxHpAfterHB = warriorPlayer.getMaxHealthPoint();
 		int hpAfterHB = warriorPlayer.getHealthPoint();
 		assertTrue(warriorPlayer.getGearFromGear("weapon").equals(hb));
 		assertFalse(warriorPlayer.getGearFromGear("weapon").equals(ww));
@@ -574,14 +574,14 @@ class playerTestsWithRegardsToGear {
 		int agiBeforeLevelUpWarr = warriorPlayer.getAgility();
 		int staBeforeLevelUpWarr = warriorPlayer.getStamina();
 		int dmgBeforeLevelUpWarr = warriorPlayer.getAttackPower();
-		int maxHpBeforeLevelUpWarr = warriorPlayer.getMaxHealth();
+		int maxHpBeforeLevelUpWarr = warriorPlayer.getMaxHealthPoint();
 		int hpBeforeLevelUpWarr = warriorPlayer.getHealthPoint();
 		int intBeforeLevelUpMage = magePlayer.getIntelligence();
 		int strBeforeLevelUpMage = magePlayer.getStrength();
 		int agiBeforeLevelUpMage = magePlayer.getAgility();
 		int staBeforeLevelUpMage = magePlayer.getStamina();
 		int dmgBeforeLevelUpMage = magePlayer.getAttackPower();
-		int maxHpBeforeLevelUpMage = magePlayer.getMaxHealth();
+		int maxHpBeforeLevelUpMage = magePlayer.getMaxHealthPoint();
 		int hpBeforeLevelUpMage = magePlayer.getHealthPoint();
 		for(int i=0;i<value;i++) {warriorPlayer.increaseLevel();}
 		for(int i=0;i<value;i++) {magePlayer.increaseLevel();}
@@ -590,14 +590,14 @@ class playerTestsWithRegardsToGear {
 		int agiAfterLevelUpWarr = warriorPlayer.getAgility();
 		int staAfterLevelUpWarr = warriorPlayer.getStamina();
 		int dmgAfterLevelUpWarr = warriorPlayer.getAttackPower();
-		int maxHpAfterLevelUpWarr = warriorPlayer.getMaxHealth();
+		int maxHpAfterLevelUpWarr = warriorPlayer.getMaxHealthPoint();
 		int hpAfterLevelUpWarr = warriorPlayer.getHealthPoint();
 		int intAfterLevelUpMage = magePlayer.getIntelligence();
 		int strAfterLevelUpMage = magePlayer.getStrength();
 		int agiAfterLevelUpMage = magePlayer.getAgility();
 		int staAfterLevelUpMage = magePlayer.getStamina();
 		int dmgAfterLevelUpMage = magePlayer.getAttackPower();
-		int maxHpAfterLevelUpMage = magePlayer.getMaxHealth();
+		int maxHpAfterLevelUpMage = magePlayer.getMaxHealthPoint();
 		int hpAfterLevelUpMage = magePlayer.getHealthPoint();
 		assertEquals(intBeforeLevelUpWarr+value,intAfterLevelUpWarr);
 		assertEquals(strBeforeLevelUpWarr+(value*2),strAfterLevelUpWarr);

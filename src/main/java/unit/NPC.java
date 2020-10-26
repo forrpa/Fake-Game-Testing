@@ -51,9 +51,7 @@ public abstract class NPC extends Unit {
 
     public void takeDamage(Attack attack){
         int damage = attack.getAttackPower(getResistance(), getWeakness());
-        int tempHealth = getHealthPoint() - damage;
-
-        setHealthPoint(tempHealth);
+        decreaseHealth(damage);
     }
     public AttackType getResistance() {
         return resistance;

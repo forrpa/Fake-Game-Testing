@@ -338,8 +338,7 @@ public class Player extends Unit{
 
     public void takeDamage(Attack attack){
         int damage = attack.getAttackPower(null, null);
-        int tempHealth = getHealthPoint() - damage;
-        setHealthPoint(tempHealth);
+        decreaseHealth(damage);
     }
 
     public void loot(Monster monster){
