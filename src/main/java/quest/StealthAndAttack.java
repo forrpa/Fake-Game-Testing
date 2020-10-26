@@ -70,7 +70,7 @@ public class StealthAndAttack extends Quest {
     }
 
     public boolean resetQuest(Player player){
-        player.fillHealthBar();
+        player.restoreFullHealth();
         attacked = false;
         discovered = false;
         startQuest(player);
@@ -236,7 +236,7 @@ public class StealthAndAttack extends Quest {
             state = QuestState.DONE;
             description= "You completed the quest!";
             getReward(player);
-            player.fillHealthBar();
+            player.restoreFullHealth();
             return true;
         } else {
             return false;
