@@ -12,6 +12,8 @@ Moderator: Christian.
 
 Sammanställning:
 
+Allvarlighet: 1-5, 1 inte allvarlig, 2 inte särskilt allvarlig, 3 medelallvarlig, 4 ganska allvarligt, 5 allvarligt.
+
 Items:
 
 
