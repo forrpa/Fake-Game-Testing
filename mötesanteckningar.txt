@@ -34,12 +34,52 @@ Granska 100-200 rader kod.
 
 kan behöva testa subklasser igen om de kan påverkas, oftare så testas bara på ett ställe.
 
-rekomenderar branch coverage, men statement absolut som coverage.
+rekomenderar branch coverage, men statement absolut minimum som coverage.
 
-maven ska som absolut minimum kopilera och köra testerna.
+maven ska som absolut minimum kompilera och köra testerna.
 
 rätt version av java, junit etc.
 
 alla verktyg är krav förutom profilern.
 
 
+
+
+datum: 2020-10-26 kl 12:00
+
+**********
+Förslag till punkter att ta upp: // Christoffer
+
+
+         Bestämma tider /  arbeta på:
+
+            *diskutera våra gemensama erfarenheter av TDD.s.12.
+
+            * Tillämpa testdesignteknigerna s.13-30.
+
+            *renskriva granskningsrapporten och diskutera erfarenheter s.31-34
+
+            *Statisk analys.
+
+            *statiska mått
+                *Bryttid för kodförändringar?
+
+            *profiler, har vi tid?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*********
