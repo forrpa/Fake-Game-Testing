@@ -55,31 +55,24 @@ class ItemTest {
 	}
 	
 	@Test
-	void equalsOverridesEqualsMethod() {
+	void equalsOverridesEqualsMethodForSubclasses() {
 		final Ingredient clawOfHipogriff = (Ingredient) CLAW_OF_HIPOGRIFF;
 		final Ingredient ingredient = new Ingredient(CLAW_OF_HIPOGRIFF.getName(), CLAW_OF_HIPOGRIFF.getDescription());
 		assertTrue(ingredient.equals(clawOfHipogriff));
 	}
 	
-	@Test
-	void equalsMatchesDifferentSubclassesOfItem() {
+	@ParameterizedTest
+	@ValueSource(ints = {-10, -1, 0, 2, 6, 77})
+	void equalsMatchesObjectsOfSubclassesBasedOnNameDescriptionAndRequiredLevelAttributes(int point) {
 		final BucklerOfUselessness bOfU = (BucklerOfUselessness) BUCKLER_OF_USELESSNESS;
 		final Shield shield = new Shield(bOfU.getName(), bOfU.getDescription(), bOfU.getRequiredLevel(), 
-				bOfU.getArmor(), bOfU.getDurability(), bOfU.getAttributes()[0], bOfU.getAttributes()[1], 
-				bOfU.getAttributes()[2], bOfU.getAttributes()[3]);
+				bOfU.getArmor() + point, bOfU.getDurability() + point, bOfU.getAttributes()[0] + point, bOfU.getAttributes()[1] + point, 
+				bOfU.getAttributes()[2] + point, bOfU.getAttributes()[3] + point);
 		assertTrue(shield.equals(bOfU));
 	}
 	
-	@ParameterizedTest
-	@CsvSource({"1, 1, 1", "10, 10, 10", "1, 2, 3"})
-	void equalsMatchesOnlyNameDescriptionAndRequiredLevelAttributes(int manaPoint, int healthPoint, int experiencePoint) {
-		final Edible magicHealingMushroom = (Edible) MAGIC_HEALING_MUSHROOM;
-		final Edible edible = new Edible(magicHealingMushroom.getName(), magicHealingMushroom.getDescription(), manaPoint, healthPoint, experiencePoint);
-		assertTrue(edible.equals(magicHealingMushroom));
-	}
-	
 	@Test
-	void hashCodeOverridesEqualsMethodForSubclassesofItem() {
+	void hashCodeOverridesEqualsMethodForSubclasses() {
 		assertEquals(41238703, BUCKLER_OF_USELESSNESS.hashCode());
 	}
 	
