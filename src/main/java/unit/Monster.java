@@ -57,7 +57,7 @@ public abstract class Monster extends NPC {
 
     @Override
     public String toString(){
-        String toStringString = String.format("Name: %s, Max Health: %d, Current Health: %d, Attack Power: %d, Resistance: %s, Weakness %s.", getName(), getMaxHealth(), getHealthPoint(), getAttackPower(), getResistance(), getWeakness());
+        String toStringString = String.format("Name: %s, Max Health: %d, Current Health: %d, Attack Power: %d, Resistance: %s, Weakness %s.", getName(), getMaxHealthPoint(), getHealthPoint(), getAttackPower(), getResistance(), getWeakness());
         if(!getAllAvailableLoot().isEmpty()){
             StringBuilder sb = new StringBuilder();
             sb.append(toStringString).deleteCharAt(toStringString.length()-1);

@@ -51,6 +51,10 @@ class MonsterTest {
         assertEquals("Name: Bat, Max Health: 5, Current Health: 5, Attack Power: 2, Resistance: null, Weakness null, Loot: Bat wing.", bat.toString());
     }
     @Test
+    void setBatHealthToOverMaxAttributeThrowsIllegalArgumentException(){
+        assertThrows(IllegalArgumentException.class, () -> new Bat("556", 50001, STANDARD_BAT_ATTACKPOWER, STANDARD_BAT_EXPERIENCEPOINTS, null, null));
+    }
+    @Test
     void batMonsterAttackWolfSuccessful(){
         //Set-up
         Monster bat = new Bat();

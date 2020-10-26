@@ -45,9 +45,6 @@ public abstract class Unit implements Combatant {
         int newHealth = getHealthPoint() - validatedPointsToDecrease;
         setHealthPoint(newHealth);
     }
-    public int getMaxHealthPoint() {
-        return maxHealthPoint;
-    }
 
     public void setAttackPower(int attackPower) {
     this.attackPower = validateAttributeValue(attackPower);
@@ -65,7 +62,7 @@ public abstract class Unit implements Combatant {
         return (healthPoint > 0);
 
     }
-    public int getMaxHealth(){
+    public int getMaxHealthPoint(){
         return maxHealthPoint;
     }
 
