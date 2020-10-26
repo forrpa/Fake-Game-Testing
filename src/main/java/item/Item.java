@@ -2,25 +2,39 @@ package item;
 
 public abstract class Item {
 
-	protected final String name;
-	protected final String description;
-	private final int requiredLevel;
-	private final int zeroDefaultRequiredLevel = 0;
+	private final String name;
+	private final String description;
+	private final int requiredUnitLevel;
+	private final static int ZERO_DEFAULT_REQUIRED_UNIT_LEVEL = 0;
+	private final static int THIRTY_ONE = 31;
+	private final static int SEVENTEEN = 17;
 	
 	public Item(String name, String description) {
-		this.name = name;
-		this.description = description;
-		this.requiredLevel = zeroDefaultRequiredLevel;
+		this.name =  verifyStringNotNull(name, "Name");
+		this.description = verifyStringNotNull(description, "Description");
+		this.requiredUnitLevel = ZERO_DEFAULT_REQUIRED_UNIT_LEVEL;
 	}
 	
-	public Item(String name, String description, int requiredLevel) {
-		this.name = name;
-		this.description = description;
-		if(requiredLevel < zeroDefaultRequiredLevel) 
-			throw new IllegalArgumentException("Minimum Required Level is 0.");
-		this.requiredLevel = requiredLevel;
+	public Item(String name, String description, int requiredUnitLevel) {
+		this.name = verifyStringNotNull(name, "Name");
+		this.description = verifyStringNotNull(description, "Description");
+		this.requiredUnitLevel = verifyRequiredUnitLevelInRange(requiredUnitLevel);
 	}
 
+	private String verifyStringNotNull(String stringAttribute, String attributeLabel) {
+		if(stringAttribute == null)
+			throw new IllegalArgumentException("String attriute \'" + attributeLabel + "\' cannot be null.");
+		return stringAttribute;
+	}
+	
+	private int verifyRequiredUnitLevelInRange(int requiredUnitLevel) {
+		if(40 < requiredUnitLevel)
+			throw new IllegalArgumentException("Maximum Unit Level is 40.");
+		if(requiredUnitLevel < ZERO_DEFAULT_REQUIRED_UNIT_LEVEL)
+			throw new IllegalArgumentException("Minimum Unit Level is 0.");
+		return requiredUnitLevel;
+	}
+	
 	public final String getName() {
 		return name;
 	}
@@ -29,15 +43,15 @@ public abstract class Item {
 		return description;
 	}
 	
-	public final int getRequiredLevel() {
-		return requiredLevel;
+	public final int getRequiredUnitLevel() {
+		return requiredUnitLevel;
 	}
 	
 	@Override
     public boolean equals(Object obj) {
         if (obj instanceof Item) {
             Item item = (Item) obj;
-            return name == item.name && description == item.description && requiredLevel == item.requiredLevel;
+            return name.equals(item.name) && description.equals(item.description) && requiredUnitLevel == item.requiredUnitLevel;
         } else {
             return false;
         }
@@ -45,11 +59,10 @@ public abstract class Item {
     
     @Override
     public int hashCode() {
-        int result = 17;
-        final int prime = 31;
-        result = prime * result + name.hashCode();
-        result = prime * result + description.hashCode();
-        result = prime * result + requiredLevel;
+        int result = SEVENTEEN;
+        result = THIRTY_ONE * result + name.hashCode();
+        result = THIRTY_ONE * result + description.hashCode();
+        result = THIRTY_ONE * result + requiredUnitLevel;
         return result;
     }
 	

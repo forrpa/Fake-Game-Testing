@@ -16,7 +16,7 @@ public abstract class Equipment extends Gear {
     public abstract String getSlot();
     @Override
     public String toString() {
-    	return this.getName()+"\n"+this.getDescription()+"\n"+this.getArmorType()+" "+this.getSlot()+"\n"+"Armor: "+this.armor+"\n"+"Strength: "+this.getAttributes()[0]+"\n"+"Agility: "+this.getAttributes()[1]+"\n"+"Intelligence: "+this.getAttributes()[2]+"\n"+"Stamina: "+this.getAttributes()[3]+"\n"+"Required Level: "+this.getRequiredLevel()+"\n"+"Durability: "+this.getDurability()+"/"+this.getMaxDurability();
+    	return this.getName()+"\n"+this.getDescription()+"\n"+this.getArmorType()+" "+this.getSlot()+"\n"+"Armor: "+this.armor+"\n"+"Strength: "+this.getAttributes()[0]+"\n"+"Agility: "+this.getAttributes()[1]+"\n"+"Intelligence: "+this.getAttributes()[2]+"\n"+"Stamina: "+this.getAttributes()[3]+"\n"+"Required Level: "+this.getRequiredUnitLevel()+"\n"+"Durability: "+this.getDurability()+"/"+this.getMaxDurability();
     }
 	private void checkIfValuesAreAcceptable(int armor) {
 		if(armor<0) {throw new IllegalStateException();}

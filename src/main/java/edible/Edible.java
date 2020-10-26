@@ -39,7 +39,7 @@ public class Edible extends Item {
 	
 	@Override
 	public String toString() {
-		return String.format("\"%s: %s\", Mana: %d, Health: %d, Experience: %d", getName(), getDescription(), getManaPoint(), getHealthPoint(), getRequiredLevel());
+		return String.format("\"%s: %s\", Mana: %d, Health: %d, Experience: %d", getName(), getDescription(), getManaPoint(), getHealthPoint(), getExperiencePoint());
 	}
 
 }

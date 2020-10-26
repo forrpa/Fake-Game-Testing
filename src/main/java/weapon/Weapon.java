@@ -11,7 +11,7 @@ public abstract class Weapon extends Gear{
 	public int getDamage() {return this.damage;}
 	@Override
 	public String toString() {
-		return this.getName()+"\n"+this.getDescription()+"\n"+this.getType()+"\n"+"Damage: "+this.damage+"\n"+"Strength: "+this.getAttributes()[0]+"\n"+"Agility: "+this.getAttributes()[1]+"\n"+"Intelligence: "+this.getAttributes()[2]+"\n"+"Stamina: "+this.getAttributes()[3]+"\n"+"Required Level: "+this.getRequiredLevel()+"\n"+"Durability: "+this.getDurability()+"/"+this.getMaxDurability();
+		return this.getName()+"\n"+this.getDescription()+"\n"+this.getType()+"\n"+"Damage: "+this.damage+"\n"+"Strength: "+this.getAttributes()[0]+"\n"+"Agility: "+this.getAttributes()[1]+"\n"+"Intelligence: "+this.getAttributes()[2]+"\n"+"Stamina: "+this.getAttributes()[3]+"\n"+"Required Level: "+this.getRequiredUnitLevel()+"\n"+"Durability: "+this.getDurability()+"/"+this.getMaxDurability();
 	}
 	public abstract String getType();
 	public abstract WeaponSize getSize();

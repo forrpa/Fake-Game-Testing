@@ -212,7 +212,7 @@ public class Player extends Unit{
     	updateAttributes();
     }
     private boolean isPlayerLeveledHighlyEnoughToEquip(Item item) throws Exception {
-    	if(this.level < item.getRequiredLevel()) {throw new ArithmeticException("This item requires a higher level to use!");}else {return true;}
+    	if(this.level < item.getRequiredUnitLevel()) {throw new ArithmeticException("This item requires a higher level to use!");}else {return true;}
     }
     private void equippingArmor(Equipment armor) {
     	if(!this.gear.containsKey(armor.getSlot())) {

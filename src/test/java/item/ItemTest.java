@@ -29,36 +29,55 @@ class ItemTest {
 	void constructorAsSuperSetsAttributes() {
 		assertEquals("Royal Steel Shield", ROYAL_STEEL_SHIELD.getName());
 		assertEquals("Strong shield made of steel from The Metal Kingdom's steel", ROYAL_STEEL_SHIELD.getDescription());
-		assertEquals(2, ROYAL_STEEL_SHIELD.getRequiredLevel());
+		assertEquals(2, ROYAL_STEEL_SHIELD.getRequiredUnitLevel());
 	}
 	
 	@ParameterizedTest
-	@ValueSource(ints = {-1, -2, -100})
-	void constructorAsSuperRequiredLevelLessThanZeroTrhowsIAE(int requiredLevel) {
+	@ValueSource(ints = {-1, -2, -100, 41, 50, 1000})
+	void constructorAsSuperRequiredLevelOutOfRangeTrhowsIAE(int requiredUnitLevel) {
 		final Shield rSS = (Shield) ROYAL_STEEL_SHIELD;
-		assertTrue(requiredLevel < ZERO_DEFAULT_LEVEL);
-		assertThrows(IllegalArgumentException.class, () -> new Shield(rSS.getName(), rSS.getDescription(), requiredLevel, rSS.getArmor(), rSS.getDurability(), 
-					rSS.getAttributes()[0], rSS.getAttributes()[1], rSS.getAttributes()[2], rSS.getAttributes()[3]));
+		assertTrue(requiredUnitLevel < ZERO_DEFAULT_LEVEL || 40 < requiredUnitLevel);
+		assertThrows(IllegalArgumentException.class, () -> new Shield(rSS.getName(), rSS.getDescription(), requiredUnitLevel,
+				rSS.getArmor(), rSS.getDurability(), rSS.getAttributes()[0], rSS.getAttributes()[1], rSS.getAttributes()[2], 
+				rSS.getAttributes()[3]));
 	}
+	
+	@Test
+	void constructorAsSuperNullNameAttributeThrowsIAE() {
+		final Shield rSS = (Shield) ROYAL_STEEL_SHIELD;
+		assertThrows(IllegalArgumentException.class, () -> new Shield(rSS.getName(), null, rSS.getRequiredUnitLevel(), rSS.getArmor(), 
+				rSS.getDurability(), rSS.getAttributes()[0], rSS.getAttributes()[1], rSS.getAttributes()[2], rSS.getAttributes()[3]));
+	}
+	
+	@Test
+	void constructorAsSuperNullDescriptionAttributeThrowsIAE() {
+		final Shield rSS = (Shield) ROYAL_STEEL_SHIELD;
+		assertThrows(IllegalArgumentException.class, () -> new Shield(null, rSS.getDescription(), rSS.getRequiredUnitLevel(), rSS.getArmor(), 
+				rSS.getDurability(), rSS.getAttributes()[0], rSS.getAttributes()[1], rSS.getAttributes()[2], rSS.getAttributes()[3]));
+	}
+	
 	
 	@Test
 	void constructorMinimalAsSuperSetsAttributesAndDefaultRequiredLevelZero() {
 		assertEquals("Magic Healing Mushroom", MAGIC_HEALING_MUSHROOM.getName());
 		assertEquals("Small increases in magic capability and substantial health boost", MAGIC_HEALING_MUSHROOM.getDescription());
-		assertEquals(ZERO_DEFAULT_LEVEL, MAGIC_HEALING_MUSHROOM.getRequiredLevel());
+		assertEquals(ZERO_DEFAULT_LEVEL, MAGIC_HEALING_MUSHROOM.getRequiredUnitLevel());
 	}
 	
 	@Test
 	void constructorMinimalAsSuperSetsDefaultRequiredLevelZero() {
-		assertEquals(0, MAGIC_HEALING_MUSHROOM.getRequiredLevel());
+		assertEquals(0, MAGIC_HEALING_MUSHROOM.getRequiredUnitLevel());
 	}
 	
-//	@Test
-//	void equalsOverridesEqualsMethodForSubclasses() {
-//		final Ingredient clawOfHipogriff = (Ingredient) CLAW_OF_HIPOGRIFF;
-//		final Ingredient ingredient = new Ingredient(CLAW_OF_HIPOGRIFF.getName(), CLAW_OF_HIPOGRIFF.getDescription());
-//		assertTrue(ingredient.equals(clawOfHipogriff));
-//	}
+	@Test
+	void constructorMinimalAsSuperNullNameAttributeThrowsIAE() {
+		assertThrows(IllegalArgumentException.class, () -> new Ingredient(null, CLAW_OF_HIPOGRIFF.getDescription()));
+	}
+	
+	@Test
+	void constructorMinimalAsSuperNullDescriptionAttributeThrowsIAE() {
+		assertThrows(IllegalArgumentException.class, () -> new Ingredient(CLAW_OF_HIPOGRIFF.getName(), null));
+	}
 	
 	@Test
 	void equalsMatchesOnlyInstancesOfItemOrSubclasses() {
@@ -73,21 +92,40 @@ class ItemTest {
 				this.requiredLevel = requiredLevel;
 			}
 		}
-		final MockItem mockItem = new MockItem(CLAW_OF_HIPOGRIFF.getName(), CLAW_OF_HIPOGRIFF.getDescription(), CLAW_OF_HIPOGRIFF.getRequiredLevel());
+		final MockItem mockItem = new MockItem(CLAW_OF_HIPOGRIFF.getName(), CLAW_OF_HIPOGRIFF.getDescription(), 
+				CLAW_OF_HIPOGRIFF.getRequiredUnitLevel());
 		assertFalse(CLAW_OF_HIPOGRIFF.equals(mockItem));
 	}
 	
 	@Test
 	void equalsRequiresIdenticalNameDescriptionAndRequiredLevel() {
-		final Ingredient clawOfHipogriffLowerCaseName = new Ingredient(CLAW_OF_HIPOGRIFF.getName().toLowerCase(), CLAW_OF_HIPOGRIFF.getDescription());
-		assertFalse(clawOfHipogriffLowerCaseName.equals(CLAW_OF_HIPOGRIFF));
+		final String name = ROYAL_STEEL_SHIELD.getName();
+		final String description = ROYAL_STEEL_SHIELD.getDescription();
+		final int requiredUnitLevel = ROYAL_STEEL_SHIELD.getRequiredUnitLevel();
+		final Shield royalSteelShield = (Shield) ROYAL_STEEL_SHIELD;
+		final int armor = royalSteelShield.getArmor();
+		final int durability = royalSteelShield.getDurability();
+		final int strength = royalSteelShield.getAttributes()[0];
+		final int agility = royalSteelShield.getAttributes()[1];
+		final int intelligence = royalSteelShield.getAttributes()[2];
+		final int stamina = royalSteelShield.getAttributes()[3];
+		final Shield royalSteelShieldNameLowerCase = new Shield(name.toLowerCase(), description, requiredUnitLevel, armor, durability, strength,
+				agility, intelligence, stamina);
+		final Shield royalSteelShieldDescriptionUpperCase = new Shield(name, description.toUpperCase(), requiredUnitLevel, armor, durability, 
+				strength, agility, intelligence, stamina);
+		final Shield royalSteelShieldRequiredUnitLevelPlusOne = new Shield(name, description, requiredUnitLevel + 1, armor, 
+				durability, strength, agility, intelligence, stamina);
+		assertTrue(ROYAL_STEEL_SHIELD.equals(royalSteelShield));
+		assertFalse(ROYAL_STEEL_SHIELD.equals(royalSteelShieldNameLowerCase));
+		assertFalse(ROYAL_STEEL_SHIELD.equals(royalSteelShieldDescriptionUpperCase));
+		assertFalse(ROYAL_STEEL_SHIELD.equals(royalSteelShieldRequiredUnitLevelPlusOne));
 	}
 	
 	@ParameterizedTest
 	@ValueSource(ints = {10, 1, 0, 2, 6, 77})
 	void equalsMatchesObjectsOfSubclassesBasedOnNameDescriptionAndRequiredLevelAttributes(int point) {
 		final BucklerOfUselessness bOfU = (BucklerOfUselessness) BUCKLER_OF_USELESSNESS;
-		final Shield shield = new Shield(bOfU.getName(), bOfU.getDescription(), bOfU.getRequiredLevel(), 
+		final Shield shield = new Shield(bOfU.getName(), bOfU.getDescription(), bOfU.getRequiredUnitLevel(), 
 				bOfU.getArmor() + point, bOfU.getDurability() + point, bOfU.getAttributes()[0] + point, bOfU.getAttributes()[1] + point, 
 				bOfU.getAttributes()[2] + point, bOfU.getAttributes()[3] + point);
 		assertTrue(shield.equals(bOfU));
