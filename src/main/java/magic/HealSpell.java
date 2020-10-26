@@ -2,16 +2,17 @@
 package magic;
 
 
-import player.Player;
 import unit.Unit;
 
+import static magic.Check.numberCheck;
+
 public class HealSpell extends Spell {
-    int healthPointsToHeal;
+    final int healthPointsToHeal;
 
 
     public HealSpell(String name, String description, int manaCost, int requiredMagicLevel, int cooldownDuration, int healthPointsToHeal) {
         super (name, description, manaCost, requiredMagicLevel, cooldownDuration);
-        this.healthPointsToHeal = healthPointsToHeal;
+        this.healthPointsToHeal = numberCheck(healthPointsToHeal);
     }
 
     @Override

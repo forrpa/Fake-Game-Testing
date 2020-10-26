@@ -7,6 +7,8 @@ import unit.Unit;
 import java.util.HashMap;
 import java.util.Map;
 
+import static magic.Check.numberCheck;
+
 public class MagicPlayer extends Player {
     final protected Map<String, Spell> spellBook = new HashMap<> ();
     final protected Map<String, Spell> learntSpells = new HashMap<> ();
@@ -26,7 +28,7 @@ public class MagicPlayer extends Player {
     }
 
     public void setMaximumLearnableSpells(int maximumLearnableSpells) {
-        this.maximumLearnableSpells = Check.numberCheck (maximumLearnableSpells);
+        this.maximumLearnableSpells = numberCheck (maximumLearnableSpells);
     }
 
     //Add spell to spellBook.
@@ -58,8 +60,6 @@ public class MagicPlayer extends Player {
         } else {
             return false;
         }
-
-
     }
 
     // Removes spell from learntSpells
@@ -79,8 +79,6 @@ public class MagicPlayer extends Player {
         } else {
             return false;
         }
-
-
     }
 
 
@@ -90,7 +88,7 @@ public class MagicPlayer extends Player {
 
     public void setManaPoint(int manaPoint) {
 
-        if (Check.numberCheck (manaPoint) > maxManaPoint) {
+        if (numberCheck (manaPoint) > maxManaPoint) {
             manaPoint = maxManaPoint;
         }
         this.manaPoint = manaPoint;
@@ -101,7 +99,7 @@ public class MagicPlayer extends Player {
     }
 
     public void setMaxManaPoint(int maxManaPoint) {
-        this.maxManaPoint = Check.numberCheck (maxManaPoint);
+        this.maxManaPoint = numberCheck (maxManaPoint);
     }
 
     public int getMagicSkill() {
@@ -110,10 +108,10 @@ public class MagicPlayer extends Player {
 
     public void setMagicSkill(int magicSkill) {
         final int maximumMagicSkill = 10;
-        if (magicSkill <= maximumMagicSkill) {
-            this.magicSkill = Check.numberCheck (magicSkill);
+        if (numberCheck (magicSkill) > maximumMagicSkill) {
+            throw new IllegalArgumentException("Error: value is too high");
         } else {
-            throw new IllegalArgumentException ("Error: negative numbers are not allowed here");
+            this.magicSkill = magicSkill;
         }
     }
 
