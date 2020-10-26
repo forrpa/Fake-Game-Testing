@@ -28,19 +28,38 @@ class QuestgiverTest {
     }
 
     @Test
+    void cantCreateNewQuestgiversWithANullQuest(){
+        Quest quest = null;
+        assertThrows(IllegalArgumentException.class, () -> new Questgiver("Guild Leader", quest));
+    }
+
+    @Test
+    void cantCreateNewQuestgiversWithANullList(){
+        ArrayList<Quest> quests = null;
+        assertThrows(IllegalArgumentException.class, () -> new Questgiver("Guild Leader", quests));
+    }
+
+    @Test
+    void cantCreateNewQuestgiversWithNoQuestsInList(){
+        ArrayList<Quest> quests = new ArrayList<>();
+        assertThrows(IllegalArgumentException.class, () -> new Questgiver("Guild Leader", quests));
+    }
+
+    @Test
     void twoAvailableQuestsTalkToGuildLeaderAndStealthAndAttackTalkToGuildLeaderTakenAndStealthAndAttackLeftAtQuestgiver() {
         //Set-up
         Player player = new Player("NPC", "Orc", 5, 1500);
         ArrayList <Quest> questsForQuestgiver = new ArrayList<>();
-        questsForQuestgiver.add(new TalkToGuildLeader());
-        questsForQuestgiver.add(new StealthAndAttack());
+        Quest quest1 = new TalkToGuildLeader();
+        Quest quest2 = new StealthAndAttack();
+        questsForQuestgiver.add(quest1);
+        questsForQuestgiver.add(quest2);
         Questgiver questgiver = new Questgiver("Guild Leader", questsForQuestgiver);
         ArrayList <Quest> questsTaken = new ArrayList<>();
         //Take all available quests
-        questsTaken.addAll(questgiver.getAvailableQuests(player));
+        questgiver.takeAvailableQuests(player);
         //Check that 1 quest named Talk to Guild Leader is taken
-        assertEquals(1, questsTaken.size());
-        assertEquals("Talk to Guild Leader", questsTaken.get(0).getName());
+        assertTrue(player.isInCurrentQuests(quest1));
         //Check that questgiver has Stealth and Attack left
         assertEquals("Stealth and Attack",questgiver.getAllQuestNames());
     }
