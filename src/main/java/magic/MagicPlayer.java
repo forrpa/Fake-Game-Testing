@@ -16,7 +16,7 @@ public class MagicPlayer extends Player {
     protected int maxManaPoint = 5;
 
     protected int magicSkill = 1 + (getIntelligence () / 5);
-    private int maximumLearnableSpells = 1 + (getIntelligence ()/2);
+    private int maximumLearnableSpells = 1 + (getIntelligence () / 2);
 
 
     public MagicPlayer(String playerClass, String race, int healthPoint, int experiencePoint) {
@@ -115,12 +115,4 @@ public class MagicPlayer extends Player {
         }
     }
 
-
-    // what happens when leveling up   // override player mec.  .
-
-
-    // what happens when leveling down. // override player mec.
-
 }
-// increaseMagicLevel // required level to learn and use spells and to wield magic equipment.
-//IncreaseMaxLearntSpells // different classes can learn different spells and memorize different amount of spells.
