@@ -1,4 +1,4 @@
-package item;
+  package item;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -62,6 +62,11 @@ class InventoryTest {
 	@Test
 	void getOutItemInvetoryEmptyThrowsNPE() {
 		assertThrows(NullPointerException.class, () -> new Inventory().getOutItem(FLY_AGARIC));
+	}
+	
+	@Test
+	void getCountItemNotInInventoryThrowsNPE() {
+		assertThrows(NullPointerException.class, () -> new Inventory().getCount(FLY_AGARIC));
 	}
 	
 	@Test

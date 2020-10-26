@@ -2,12 +2,15 @@ package quest;
 import equipment.BreastplateOfTesting;
 import equipment.BucklerOfUselessness;
 import player.Player;
+import unit.Questgiver;
 import weapon.Heartsbane;
 import weapon.WidowsWail;
 
 public class TalkToGuildLeader extends Quest {
 
     private boolean talkedToGuildLeader = false;
+    GuildLeader guildLeader = new GuildLeader("Guild Leader Mar tin");
+    Questgiver questgiver = new Questgiver("Robert", this);
 
     public TalkToGuildLeader(){
         super("Talk to Guild Leader", "You have to talk to the guild leader west of town.", QuestState.PENDING, true);
@@ -21,6 +24,7 @@ public class TalkToGuildLeader extends Quest {
     public boolean startRequirementsFulfilled(Player player) {
         if (player.getExperiencePoint() >= 1000){
             state = QuestState.UNLOCKED;
+            player.addQuestToQuestLog(this);
             return true;
         } else {
             return false;
@@ -28,13 +32,19 @@ public class TalkToGuildLeader extends Quest {
     }
 
     @Override
-    public void startQuest(Player player) {
+    public boolean startQuest(Player player) {
         if (startRequirementsFulfilled(player)){
+            questgiver.talk();
             state = QuestState.IN_PROGRESS;
+            player.addQuestToQuestLog(this);
+            return true;
+        } else {
+            return false;
         }
     }
 
     public void talkToGuildLeader(){
+        guildLeader.talk();
         talkedToGuildLeader = true;
     }
 
@@ -49,16 +59,18 @@ public class TalkToGuildLeader extends Quest {
     }
 
     @Override
-    public void questCompleted(Player player) {
+    public boolean completeQuest(Player player) {
         if (endRequirementsFulfilled(player)){
             state = QuestState.DONE;
+            player.addQuestToQuestLog(this);
             player.increaseExperiencePoint(500);
             //rewardBasedOnClass(player);
             rewardBasedOnRace(player);
             GuildMap guildMap = new GuildMap();
             player.addToInventory(guildMap);
+            return true;
         } else {
-            System.out.println("You have not fulfilled quest requirements.");
+            return false;
         }
     }
 
@@ -76,17 +88,22 @@ public class TalkToGuildLeader extends Quest {
     public void rewardBasedOnRace(Player player){
         switch (player.getRace()){
             case "Human":
-                if (player.getPlayerClass() == "Tank"){
+                if (player.getPlayerClass().equals("Tank")){
                     player.addToInventory(new BreastplateOfTesting());
                 } else {
                     player.addToInventory(new BucklerOfUselessness());
                 }
             case "Orc":
-                if (player.getPlayerClass() == "Damage"){
+                if (player.getPlayerClass().equals("Damage")){
                     player.addToInventory(new WidowsWail());
                 } else {
                     player.addToInventory(new Heartsbane());
                 }
         }
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s: %s. %s, %b, %b", getName(), getDescription(), getState(), isMandatory(), hasTalkedToGuildLeader());
     }
 }

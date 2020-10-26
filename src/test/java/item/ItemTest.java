@@ -1,6 +1,7 @@
 package item;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -36,10 +37,8 @@ class ItemTest {
 	void constructorAsSuperRequiredLevelLessThanZeroTrhowsIAE(int requiredLevel) {
 		final Shield rSS = (Shield) ROYAL_STEEL_SHIELD;
 		assertTrue(requiredLevel < ZERO_DEFAULT_LEVEL);
-		assertThrows(IllegalArgumentException.class, () -> {
-			new Shield(rSS.getName(), rSS.getDescription(), requiredLevel, rSS.getArmor(), rSS.getDurability(), 
-					rSS.getAttributes()[0], rSS.getAttributes()[1], rSS.getAttributes()[2], rSS.getAttributes()[3]);
-		});
+		assertThrows(IllegalArgumentException.class, () -> new Shield(rSS.getName(), rSS.getDescription(), requiredLevel, rSS.getArmor(), rSS.getDurability(), 
+					rSS.getAttributes()[0], rSS.getAttributes()[1], rSS.getAttributes()[2], rSS.getAttributes()[3]));
 	}
 	
 	@Test
@@ -54,15 +53,38 @@ class ItemTest {
 		assertEquals(0, MAGIC_HEALING_MUSHROOM.getRequiredLevel());
 	}
 	
+//	@Test
+//	void equalsOverridesEqualsMethodForSubclasses() {
+//		final Ingredient clawOfHipogriff = (Ingredient) CLAW_OF_HIPOGRIFF;
+//		final Ingredient ingredient = new Ingredient(CLAW_OF_HIPOGRIFF.getName(), CLAW_OF_HIPOGRIFF.getDescription());
+//		assertTrue(ingredient.equals(clawOfHipogriff));
+//	}
+	
 	@Test
-	void equalsOverridesEqualsMethodForSubclasses() {
-		final Ingredient clawOfHipogriff = (Ingredient) CLAW_OF_HIPOGRIFF;
-		final Ingredient ingredient = new Ingredient(CLAW_OF_HIPOGRIFF.getName(), CLAW_OF_HIPOGRIFF.getDescription());
-		assertTrue(ingredient.equals(clawOfHipogriff));
+	void equalsMatchesOnlyInstancesOfItemOrSubclasses() {
+		class MockItem {
+			public String name;
+			public String description;
+			public int requiredLevel;
+			
+			MockItem(String name, String description, int requiredLevel) {
+				this.name = name;
+				this.description = description;
+				this.requiredLevel = requiredLevel;
+			}
+		}
+		final MockItem mockItem = new MockItem(CLAW_OF_HIPOGRIFF.getName(), CLAW_OF_HIPOGRIFF.getDescription(), CLAW_OF_HIPOGRIFF.getRequiredLevel());
+		assertFalse(CLAW_OF_HIPOGRIFF.equals(mockItem));
+	}
+	
+	@Test
+	void equalsRequiresIdenticalNameDescriptionAndRequiredLevel() {
+		final Ingredient clawOfHipogriffLowerCaseName = new Ingredient(CLAW_OF_HIPOGRIFF.getName().toLowerCase(), CLAW_OF_HIPOGRIFF.getDescription());
+		assertFalse(clawOfHipogriffLowerCaseName.equals(CLAW_OF_HIPOGRIFF));
 	}
 	
 	@ParameterizedTest
-	@ValueSource(ints = {-10, -1, 0, 2, 6, 77})
+	@ValueSource(ints = {10, 1, 0, 2, 6, 77})
 	void equalsMatchesObjectsOfSubclassesBasedOnNameDescriptionAndRequiredLevelAttributes(int point) {
 		final BucklerOfUselessness bOfU = (BucklerOfUselessness) BUCKLER_OF_USELESSNESS;
 		final Shield shield = new Shield(bOfU.getName(), bOfU.getDescription(), bOfU.getRequiredLevel(), 
