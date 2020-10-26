@@ -11,7 +11,7 @@ public class LifeStealSpell extends Spell {
     }
 
     @Override
-     boolean magicEffect(Unit caster, Unit target) {
+    boolean magicEffect(Unit caster, Unit target) {
         // changed. not sending mana
 
         int power = 5;
