@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import player.Player;
 import unit.AttackType;
 import unit.Bat;
-import unit.Questgiver;
 import unit.Wolf;
 
 import static org.junit.jupiter.api.Assertions.*;

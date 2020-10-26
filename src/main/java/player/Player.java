@@ -3,6 +3,8 @@ package player;
 import java.util.HashMap;
 import java.util.Map;
 import equipment.*;
+import quest.Quest;
+import quest.QuestLog;
 import unit.Attack;
 import unit.Combatant;
 import unit.NPC;
@@ -35,6 +37,7 @@ public class Player extends Unit{
     private Map<String, Gear> gear = new HashMap<String, Gear>();
     private Inventory playerInventory = new Inventory();
     private final Cupboard cupboard = new Cupboard(this);
+    private QuestLog questLog = new QuestLog();
     
     public Player(String playerClass, String race, int maxHealthPoint, int experiencePoint){
         super(maxHealthPoint, 1, true);
@@ -286,6 +289,26 @@ public class Player extends Unit{
     public int getInventoryCount(Item item) {
         return playerInventory.getCount(item);
     }
+
+    public void addQuestToQuestLog(Quest quest){
+    	questLog.addQuestToQuestLog(quest);
+	}
+
+	public boolean isInCurrentQuests(Quest quest){
+		return questLog.isInCurrentQuests(quest);
+	}
+
+	public boolean isInAvailableQuests(Quest quest){
+		return questLog.isInAvailableQuests(quest);
+	}
+
+	public boolean isInCompletedQuests(Quest quest){
+		return questLog.isInCompletedQuests(quest);
+	}
+
+	public int getCompletedQuestCount(Quest quest){
+    	return questLog.getCompletedQuestCount();
+	}
 
 
     public boolean attack(Combatant enemy, Attack attack) {

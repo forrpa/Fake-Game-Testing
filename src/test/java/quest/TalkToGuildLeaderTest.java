@@ -47,6 +47,8 @@ class TalkToGuildLeaderTest {
         quest.startQuest(standardPlayer);
         assertTrue(questgiver.talk());
         assertEquals(QuestState.IN_PROGRESS, quest.getState());
+        assertTrue(standardPlayer.isInAvailableQuests(quest));
+        assertTrue(standardPlayer.isInCurrentQuests(quest));
     }
 
     //Kan inte starta quest
@@ -80,6 +82,7 @@ class TalkToGuildLeaderTest {
         quest.talkToGuildLeader();
         quest.completeQuest(standardPlayer);
         assertEquals(QuestState.DONE, quest.getState());
+        assertTrue(standardPlayer.isInCompletedQuests(quest));
         assertEquals(1500, standardPlayer.getExperiencePoint());
         assertEquals(1, standardPlayer.getInventoryCount(guildMap));
     }

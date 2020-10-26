@@ -2,6 +2,7 @@ package quest;
 import equipment.BreastplateOfTesting;
 import equipment.BucklerOfUselessness;
 import player.Player;
+import unit.Questgiver;
 import weapon.Heartsbane;
 import weapon.WidowsWail;
 
@@ -9,11 +10,10 @@ public class TalkToGuildLeader extends Quest {
 
     private boolean talkedToGuildLeader = false;
     GuildLeader guildLeader = new GuildLeader("Guild Leader Mar tin");
-    //Quest quest = new TalkToGuildLeader();
-    //Questgiver questgiver = new Questgiver("Robert", quest);
+    Questgiver questgiver = new Questgiver("Robert", this);
 
     public TalkToGuildLeader(){
-        super("Talk to Guild Leader", " ", QuestState.PENDING, true);
+        super("Talk to Guild Leader", "You have to talk to the guild leader west of town.", QuestState.PENDING, true);
     }
 
     public boolean hasTalkedToGuildLeader(){
@@ -24,6 +24,7 @@ public class TalkToGuildLeader extends Quest {
     public boolean startRequirementsFulfilled(Player player) {
         if (player.getExperiencePoint() >= 1000){
             state = QuestState.UNLOCKED;
+            player.addQuestToQuestLog(this);
             return true;
         } else {
             return false;
@@ -33,8 +34,9 @@ public class TalkToGuildLeader extends Quest {
     @Override
     public boolean startQuest(Player player) {
         if (startRequirementsFulfilled(player)){
-            //questgiver.talk();
+            questgiver.talk();
             state = QuestState.IN_PROGRESS;
+            player.addQuestToQuestLog(this);
             return true;
         } else {
             return false;
@@ -60,6 +62,7 @@ public class TalkToGuildLeader extends Quest {
     public boolean completeQuest(Player player) {
         if (endRequirementsFulfilled(player)){
             state = QuestState.DONE;
+            player.addQuestToQuestLog(this);
             player.increaseExperiencePoint(500);
             //rewardBasedOnClass(player);
             rewardBasedOnRace(player);
