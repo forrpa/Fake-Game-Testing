@@ -24,7 +24,6 @@ RequiredLevel  borde heta REquiredUnitLevel och bör testas så den inte sätts 
 
 Konstruktor bör ha nullkoll. (4)
 
-samma med zeroDefaultRequiredLevel. (2)
 
 Konstruktorn bör ha nullkoll. (4)
 zeroDefaultRequiredLevel kan vara statisk (1)

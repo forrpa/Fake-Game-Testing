@@ -3,44 +3,29 @@ package magic;
 
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class SpellTest {
-    private final String name = "Heal";
-    private final String description = "Adds 50 health points. Costs: 5 mana.  Requires Magic level 5.";
-    private final int standardValue = 1;
-    private final int negativeNr = -1;
+    private final String standardName = "Heal";
+    private final String standardDescription = "Adds 50 health points. Costs: 5 mana.  Requires Magic level 5.";
+    private final int standardPosValue = 1;
+    private final int standardNegativeNr = -1;
+    Spell spell;
+
 
 
     @Test
     public void constructorParamTest() {
 
-        Spell spell = new Spell (name, description, standardValue, standardValue, standardValue);
-        assertEquals (name, spell.getName ());
-        assertEquals (description, spell.getDescription ());
-        assertEquals (standardValue, spell.getManaCost ());
-        assertEquals (standardValue, spell.getRequiredMagicSkill ());
-        assertEquals (standardValue, spell.getCooldownDuration ());
-
-
-        // check for negative numbers in constructor.
-
-
-        // check for maximum name and description char.?
-
-        // check exceptions.
-
-    }
-    public void tempName() {
-
-        Spell spell = new Spell (name, description, standardValue, standardValue, standardValue);
-        assertEquals (name, spell.getName ());
-        assertEquals (description, spell.getDescription ());
-        assertEquals (standardValue, spell.getManaCost ());
-        assertEquals (standardValue, spell.getRequiredMagicSkill ());
-        assertEquals (standardValue, spell.getCooldownDuration ());
+        Spell spell = new Spell (standardName, standardDescription, standardPosValue, standardPosValue, standardPosValue);
+        assertEquals (standardName, spell.getName ());
+        assertEquals (standardDescription, spell.getDescription ());
+        assertEquals (standardPosValue, spell.getManaCost ());
+        assertEquals (standardPosValue, spell.getRequiredMagicSkill ());
+        assertEquals (standardPosValue, spell.getCooldownDuration ());
 
 
         // check for negative numbers in constructor.
@@ -52,27 +37,61 @@ class SpellTest {
 
     }
 
+    @Test
+    public void constructorNegativeNrTest() {
+
+        Assertions.assertThrows (IllegalArgumentException.class, () -> new Spell (standardName, standardDescription, standardNegativeNr, standardPosValue, standardPosValue));
+        Assertions.assertThrows (IllegalArgumentException.class, () -> new Spell (standardName, standardDescription, standardPosValue, standardNegativeNr, standardPosValue));
+        Assertions.assertThrows (IllegalArgumentException.class, () -> new Spell (standardName, standardDescription, standardPosValue, standardPosValue, standardNegativeNr));
+
+    }
 
 
     @Test
     void setManaCostTest() {
         Spell spell = new Spell ();
+
+        // negative nr. test
         Assertions.assertThrows (IllegalArgumentException.class, () -> spell.setManaCost (-1));
+
+        //  positive nr. test
+        spell.setManaCost (standardPosValue);
+        assertEquals (standardPosValue, spell.getManaCost ());
 
     }
 
     @Test
     void setRequiredMagicLevelTest() {
         Spell spell = new Spell ();
+
+        // negative nr.test
         Assertions.assertThrows (IllegalArgumentException.class, () -> spell.setRequiredMagicSkill (-1));
+
+        //  positive nr. test
+        spell.setRequiredMagicSkill (standardPosValue);
+        assertEquals (standardPosValue, spell.getRequiredMagicSkill ());
     }
 
     @Test
     void setCooldownDurationTest() {
         Spell spell = new Spell ();
+
+        // negative nr test.
         Assertions.assertThrows (IllegalArgumentException.class, () -> spell.setCooldownDuration (-1));
+
+        //  positive nr. test
+        spell.setCooldownDuration (standardPosValue);
+        assertEquals (standardPosValue, spell.getCooldownDuration ());
     }
 
+    @Test
+    void magicEffectTest(){
+        // should be overrun by subclass, set to return false in super.
+        Spell spell = new Spell ();
+
+        assertFalse (spell.magicEffect(null,null));
+
+    }
 }
 
 
