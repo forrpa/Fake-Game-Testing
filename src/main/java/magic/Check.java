@@ -8,10 +8,11 @@ public class Check {
         if (nr < 0) {
             throw new IllegalArgumentException ("Error: negative numbers are not allowed here");
         }
-        if (nr < Integer.MAX_VALUE) {
+        if (nr >= Integer.MAX_VALUE) {
+            throw new IllegalThreadStateException ("Error: Buffer Overflow, the number is too big.");
+        } else {
             return (nr);
         }
-        throw new IllegalThreadStateException ("Error: Buffer Overflow, the number is too big.");
     }
 
 
