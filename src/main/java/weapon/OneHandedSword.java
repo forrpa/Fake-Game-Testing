@@ -8,11 +8,11 @@ public abstract class OneHandedSword extends Weapon{
 		super(name, desc, recLevel, dmg, dur, str, agi, intell, sta);
 	}
 	@Override
-	public String getType() {
+	public final String getType() {
 		return OneHandedSword.TYPE;
 	}
 	@Override
-	public WeaponSize getSize() {
+	public final WeaponSize getSize() {
 		return OneHandedSword.WEAPON_SIZE;
 	}
 }

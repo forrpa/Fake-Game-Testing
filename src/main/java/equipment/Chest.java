@@ -7,7 +7,7 @@ public abstract class Chest extends Equipment{
 		super(name, desc, recLevel, armor, dur, str, agi, intell, sta);
 	}
 	@Override
-	public String getSlot() {
+	public final String getSlot() {
 		return Chest.SLOT;
 	}
 	

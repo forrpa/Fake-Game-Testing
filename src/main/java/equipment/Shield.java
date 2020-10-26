@@ -9,11 +9,11 @@ public class Shield extends Equipment{
 	}
 	
 	@Override
-	public String getSlot() {
+	public final String getSlot() {
 		return Shield.SLOT;
 	}
 	@Override
-	public ArmorType getArmorType() {
+	public final ArmorType getArmorType() {
 		return Shield.ARMOR_TYPE;
 	}
 

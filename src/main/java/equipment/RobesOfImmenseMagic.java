@@ -8,7 +8,7 @@ public class RobesOfImmenseMagic extends Chest{
 	}
 
 	@Override
-	public ArmorType getArmorType() {
+	public final ArmorType getArmorType() {
 		return RobesOfImmenseMagic.ARMOR_TYPE;
 	}
 

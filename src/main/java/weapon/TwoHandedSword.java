@@ -8,11 +8,11 @@ public class TwoHandedSword extends Weapon{
 		super(name, desc, recLevel, dmg, dur, str, agi, intell, sta);
 	}
 	@Override
-	public String getType() {
+	public final String getType() {
 		return TwoHandedSword.TYPE;
 	}
 	@Override
-	public WeaponSize getSize() {
+	public final WeaponSize getSize() {
 		return TwoHandedSword.WEAPON_SIZE;
 	}
 	

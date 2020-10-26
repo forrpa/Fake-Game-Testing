@@ -20,20 +20,20 @@ public abstract class Gear extends Item{
 		this.intelligence = intell;
 		this.stamina = sta;
 	}
-	public int getMaxDurability() {
+	public final int getMaxDurability() {
     	return this.MAX_DURABILITY;
     }
-    public int getDurability() {
+    public final int getDurability() {
 		return this.durability;
     }
-    public void damageDurability(int amount) {
+    public final void damageDurability(int amount) {
     	if(amount > this.durability) {this.durability = 0;return;}
     	this.durability = this.durability - amount;
     }
-    public void repair() {
+    public final void repair() {
     	this.durability = this.MAX_DURABILITY;
     }
-    public int[] getAttributes() {
+    public final int[] getAttributes() {
     	return new int[]{this.strength, this.agility, this.intelligence, this.stamina};
     }
 	private void checkIfValuesAreAcceptable(int dur, int str, int agi, int intell, int sta, int recLevel){
