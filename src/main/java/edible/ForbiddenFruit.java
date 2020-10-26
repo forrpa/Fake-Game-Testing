@@ -4,14 +4,13 @@ import quest.Quest;
 
 public class ForbiddenFruit extends Edible {
 	
-	private final static int FULL_POINT_BOOST = 10;
+	private final static int TEN_MAX_EDIBLE_POINT_VALUE = 10;
 	private final Quest questUnlocked;
 	private Potion poison;
 
 	public ForbiddenFruit(String name, String description, Quest questUnlocked) {
-		super(name, description, FULL_POINT_BOOST, FULL_POINT_BOOST, FULL_POINT_BOOST);
+		super(name, description, TEN_MAX_EDIBLE_POINT_VALUE, TEN_MAX_EDIBLE_POINT_VALUE, TEN_MAX_EDIBLE_POINT_VALUE);
 		this.questUnlocked = questUnlocked;
-		setPoison(null);
 	}
 
 	public final Quest getQuestUnlocked() {
@@ -22,23 +21,21 @@ public class ForbiddenFruit extends Edible {
 		return poison;
 	}
 
-	public final void setPoison(Potion potion) {
-		if(poison != null && potion == poison) throw new IllegalArgumentException("Forbidden Fruit is already poisoned with this Potion. Cannot apply twice, only replace.");
+	public final void setPoison(Potion potion) { 
+		if(poison != null && potion == poison) 
+			throw new IllegalArgumentException("Forbidden Fruit is already poisoned with this Potion. Cannot apply twice, only replace.");
 		this.poison = potion;
 	}
 	
 	@Override
-	public final int[] consume(int playerManaPoint, int playerHealthPoint, int playerExperiencePoint) {
-		int manaPoint = FULL_POINT_BOOST;
-		int healthPoint = FULL_POINT_BOOST;
-		int experiencePoint = FULL_POINT_BOOST;
+	public int[] consume(int playerManaPoint, int playerHealthPoint, int playerExperiencePoint) {
+		int[] points = {playerManaPoint + getManaPoint(), playerHealthPoint + getHealthPoint(), playerExperiencePoint + getExperiencePoint()};
 		if(poison != null) {
-			manaPoint = poison.getManaPoint();
-			healthPoint = poison.getHealthPoint();
-			experiencePoint = poison.getExperiencePoint();
+			points[0] = playerManaPoint + poison.getManaPoint(); 
+			points[1] = playerHealthPoint + poison.getHealthPoint();
+			points[2] = playerExperiencePoint + poison.getExperiencePoint();
 			setPoison(null);
 		}
-		int[] points = {playerManaPoint + manaPoint, playerHealthPoint + healthPoint, playerExperiencePoint + experiencePoint};
 		return points.clone();
 	}
 	

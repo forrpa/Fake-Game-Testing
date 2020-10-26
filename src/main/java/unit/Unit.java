@@ -22,7 +22,7 @@ public abstract class Unit implements Combatant {
 
     public boolean isGrounded(){
         return isGrounded;
-    }
+    } 
     public int getHealthPoint() {
         return healthPoint;
     }

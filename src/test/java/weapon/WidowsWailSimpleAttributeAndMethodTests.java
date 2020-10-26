@@ -86,7 +86,7 @@ class WidowsWailSimpleAttributeAndMethodTests {
     }
     @Test
     void testForCorrectValueOfWidowsWailsRequiredLevel() {
-    	assertEquals(20, WIDOWS_WAIL.getRequiredLevel());
+    	assertEquals(20, WIDOWS_WAIL.getRequiredUnitLevel());
     }
     @Test
     void testIfTwoWidowsWailsAreConsideredTheSame() {

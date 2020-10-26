@@ -22,15 +22,9 @@ class EdibleTest {
 
 	@Test
 	void checkPointValueOutOfRangeTrhowsIAE() {
-		assertThrows(IllegalArgumentException.class, () -> {
-			new Edible("", "", -11, 0, 0);
-		});
-		assertThrows(IllegalArgumentException.class, () -> {
-			new Edible("", "", 0, 11, 0);
-		});
-		assertThrows(IllegalArgumentException.class, () -> {
-			new Edible("", "", 0, 0, Integer.MAX_VALUE);
-		});
+		assertThrows(IllegalArgumentException.class, () -> new Edible("", "", -11, 0, 0));
+		assertThrows(IllegalArgumentException.class, () -> new Edible("", "", 0, 11, 0));
+		assertThrows(IllegalArgumentException.class, () -> new Edible("", "", 0, 0, Integer.MAX_VALUE));
 	}
 	
 	@ParameterizedTest

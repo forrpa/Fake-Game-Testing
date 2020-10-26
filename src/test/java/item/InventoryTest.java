@@ -16,12 +16,12 @@ import quest.TalkToGuildLeader;
 
 class InventoryTest {
 	
+	final static int TEN_BEFOREALL_COUNT_FLY_AGARIC = 10;
 	final static Inventory INVENTORY = new Inventory();
 	final static Edible FLY_AGARIC = new Edible("Fly Agaric", "Poisonous mushroom with magic powers", 4, -3, 0);
 	final static Ingredient FIRE_ROOT = new Ingredient("Fire Root", "Increases power of potions");
 	final static ForbiddenFruit LUCKY_CHERRY = new ForbiddenFruit("Lucky Cherry", 
 			"Eating cherry starts quest Talk to Guild leader", new TalkToGuildLeader());
-	final static int TEN_BEFOREALL_COUNT_FLY_AGARIC = 10;
 	static int COUNT_FLY_AGARIC = 0;
 	
 	@BeforeAll

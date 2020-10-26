@@ -34,10 +34,12 @@ public class Cupboard {
 		Inventory inventory = getInventoryOfClassififedItem(item);
 		Item returnItem = inventory.getOutItem(item);
 		if(item instanceof ForbiddenFruit) {
-			for(ForbiddenFruit f : poisonedForbiddenFruits) {
-				if(f.equals(item)) returnItem = f;
+			if(!poisonedForbiddenFruits.isEmpty()) {
+				for(ForbiddenFruit f : poisonedForbiddenFruits) {
+					if(f.equals(item)) returnItem = f;
+				}
+				poisonedForbiddenFruits.remove(item);
 			}
-			poisonedForbiddenFruits.remove(item);
 		}
 		return returnItem;
 	}
@@ -96,7 +98,7 @@ public class Cupboard {
 	}
 	
 	public final Quest consume(Edible edibleToConsume) {
-		Edible edible = (Edible) getOutItem(edibleToConsume);
+		Edible edible = (Edible) getOutItem(edibleToConsume); 
 		int manaPoint = 0;
 		if(player instanceof MagicPlayer) {
 			MagicPlayer magicPlayer = (MagicPlayer) player;

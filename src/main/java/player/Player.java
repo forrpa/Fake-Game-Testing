@@ -56,7 +56,7 @@ public class Player extends Unit{
     	Gear gearPiece = this.gear.get(slot);
     	return gearPiece;
     }
-    private void updateAttributes() {
+    private void updateAttributes() { 
     	updateHealthBasedOnStamina();
     	updateDamageBasedOnStrength();
     }

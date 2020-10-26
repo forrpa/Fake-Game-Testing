@@ -83,7 +83,7 @@ class RobesOfImmenseMagicSimpleAttributeAndMethodTests {
     }
     @Test
     void testForCorrectValueOfRobesRequiredLevel() {
-    	assertEquals(37, ROBES_OF_IMMENSE_MAGIC.getRequiredLevel());
+    	assertEquals(37, ROBES_OF_IMMENSE_MAGIC.getRequiredUnitLevel());
     }
     @Test
     void testIfTwoRobesAreConsideredTheSame() { 

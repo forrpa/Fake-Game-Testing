@@ -2,12 +2,12 @@ package item;
 
 public abstract class Item {
 
-	private final String name;
-	private final String description;
-	private final int requiredUnitLevel;
 	private final static int ZERO_DEFAULT_REQUIRED_UNIT_LEVEL = 0;
 	private final static int THIRTY_ONE = 31;
 	private final static int SEVENTEEN = 17;
+	private final String name;
+	private final String description;
+	private final int requiredUnitLevel;
 	
 	public Item(String name, String description) {
 		this.name =  verifyStringNotNull(name, "Name");

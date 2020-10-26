@@ -14,7 +14,7 @@ class ForbiddenFruitTest {
 
 	final static Quest QUEST = new TalkToGuildLeader();
 	final static ForbiddenFruit RED_APPLE = new ForbiddenFruit("Red Apple", "Eating apple starts quest Talk to Guild Leader", QUEST);
-	final static int TEN_MAX_POINT_VALUE = 10;
+	final static int TEN_MAX_EDIBLE_POINT_VALUE = 10;
 	final static Potion POWER_POTION = new Potion("Power Potion", "Boosts mana, health and experience", 5, 5, 5);
 	final static Potion HEARTBREAK_POTION = new Potion("Heartbreak Potion", "Weakens magic powers, sabbotages health and gives life experience", -3, -10, 6);
 	
@@ -22,9 +22,9 @@ class ForbiddenFruitTest {
 	void constructorSetsAttributes() {
 		assertEquals("Red Apple", RED_APPLE.getName());
 		assertEquals("Eating apple starts quest Talk to Guild Leader", RED_APPLE.getDescription());
-		assertEquals(TEN_MAX_POINT_VALUE, RED_APPLE.getManaPoint());
-		assertEquals(TEN_MAX_POINT_VALUE, RED_APPLE.getHealthPoint());
-		assertEquals(TEN_MAX_POINT_VALUE, RED_APPLE.getExperiencePoint());
+		assertEquals(TEN_MAX_EDIBLE_POINT_VALUE, RED_APPLE.getManaPoint());
+		assertEquals(TEN_MAX_EDIBLE_POINT_VALUE, RED_APPLE.getHealthPoint());
+		assertEquals(TEN_MAX_EDIBLE_POINT_VALUE, RED_APPLE.getExperiencePoint());
 		assertEquals(QUEST, RED_APPLE.getQuestUnlocked());
 		assertNull(RED_APPLE.getPoison());
 	}
@@ -36,7 +36,7 @@ class ForbiddenFruitTest {
 	
 	@Test
 	void setPoisonDifferentTypePotionReplacesPoisonAttribute() {
-		RED_APPLE.setPoison(POWER_POTION);
+		RED_APPLE.setPoison(POWER_POTION); 
 		assertEquals(POWER_POTION, RED_APPLE.getPoison());
 		RED_APPLE.setPoison(HEARTBREAK_POTION);
 		assertEquals(HEARTBREAK_POTION, RED_APPLE.getPoison());

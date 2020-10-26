@@ -1,9 +1,11 @@
- package edible;
+package edible;
 
 import item.Item;
 
 public class Edible extends Item {
 	
+	private final static int NEGATIVE_TEN_MIN_EDIBLE_POINT_VALUE = -10;
+	private final static int TEN_MAX_EDIBLE_POINT_VALUE = 10;
 	private final int manaPoint;
 	private final int healthPoint;
 	private final int experiencePoint;
@@ -18,7 +20,7 @@ public class Edible extends Item {
 	public final int getManaPoint() {
 		return manaPoint;
 	}
-
+ 
 	public final int getHealthPoint() {
 		return healthPoint;
 	}
@@ -27,8 +29,9 @@ public class Edible extends Item {
 		return experiencePoint;
 	}
 	
-	private final int checkPointValueRange(int pointValue) {
-		if(pointValue < -10 || 10 < pointValue) throw new IllegalArgumentException("Value must be in range -10 to 10");
+	private int checkPointValueRange(int pointValue) {
+		if(pointValue < NEGATIVE_TEN_MIN_EDIBLE_POINT_VALUE || TEN_MAX_EDIBLE_POINT_VALUE < pointValue) 
+			throw new IllegalArgumentException("Value must be in range -10 to 10");
 		return pointValue;
 	}
 	

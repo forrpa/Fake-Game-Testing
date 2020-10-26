@@ -86,7 +86,7 @@ class HeartsbaneSimpleAttributeAndMethodTests {
     }
     @Test
     void testForCorrectValueOfHeartsbanesRequiredLevel() {
-    	assertEquals(35, HEARTSBANE.getRequiredLevel());
+    	assertEquals(35, HEARTSBANE.getRequiredUnitLevel());
     }
     @Test
     void testIfTwoHeartsbanesAreConsideredTheSame() {

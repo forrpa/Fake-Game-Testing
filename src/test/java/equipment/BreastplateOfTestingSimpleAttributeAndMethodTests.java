@@ -30,7 +30,7 @@ public class BreastplateOfTestingSimpleAttributeAndMethodTests {
     	BreastplateOfTesting bpt2 = new BreastplateOfTesting(60);
         assertArrayEquals(new int[]{6, 43, 7, 100},((Equipment) bpt).getAttributes());
         assertEquals(300,bpt.getArmor());
-        assertEquals(9,bpt.getRequiredLevel());
+        assertEquals(9,bpt.getRequiredUnitLevel());
         assertEquals(60,bpt2.getMaxDurability());
     }
     @ParameterizedTest
@@ -124,7 +124,7 @@ public class BreastplateOfTestingSimpleAttributeAndMethodTests {
     }
     @Test
     void testForCorrectValueOfBreastplatesRequiredLevel() {
-    	assertEquals(7, BREASTPLATE_OF_TESTING.getRequiredLevel());
+    	assertEquals(7, BREASTPLATE_OF_TESTING.getRequiredUnitLevel());
     }
     @Test
     void testIfTwoBreastplatesAreConsideredTheSame() {

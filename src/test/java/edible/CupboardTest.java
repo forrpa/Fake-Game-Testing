@@ -51,6 +51,7 @@ class CupboardTest {
 	static void setManaPointMagicPlayerEoughToCookGreenVenomRecipie() throws Exception {
 		VAMP_WITCH.setMaxManaPoint(100);
 		VAMP_WITCH.setManaPoint(50);
+		GNOME.setHealthPoint(10);
 	}
 	
 	@BeforeAll
@@ -93,7 +94,7 @@ class CupboardTest {
 		for(Ingredient i : GREEN_VENOM_INGREDIENTS) {
 			if(!CUPBOARD.isInInventory(i)) CUPBOARD.store(i);
 		}
-	}
+	} 
 	
 	@Test
 	void constructorSetsAttributePlayer() {
@@ -101,8 +102,22 @@ class CupboardTest {
 	}
 	
 	@Test
+	void getOutItemChecksPoisonedFruitListForType() {
+		CUPBOARD.store(RED_APPLE);
+		CUPBOARD.poison(LUCKY_CHERRY, LOVE_BREW);
+		ForbiddenFruit storedRedApple = (ForbiddenFruit) CUPBOARD.getOutItem(new ForbiddenFruit(RED_APPLE.getName(), RED_APPLE.getDescription(), RED_APPLE.getQuestUnlocked()));
+		assertEquals(RED_APPLE, storedRedApple);
+	}
+	
+	
+	@Test
 	void loveBrewIsInInventory() {
 		assertTrue(CUPBOARD.isInInventory(LOVE_BREW));
+	}
+	
+	@Test
+	void bucklerOfUselesnessIsNotInInventory() {
+		assertFalse(CUPBOARD.isInInventory(new BucklerOfUselessness()));
 	}
 	
 	@Test
