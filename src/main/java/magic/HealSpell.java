@@ -4,7 +4,7 @@ package magic;
 
 import unit.Unit;
 
-import static magic.Check.numberCheck;
+import static magic.ValueCheck.numberCheck;
 
 public class HealSpell extends Spell {
     final int healthPointsToHeal;

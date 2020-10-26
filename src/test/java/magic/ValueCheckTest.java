@@ -7,11 +7,11 @@ import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static magic.Check.numberCheck;
-import static magic.Check.stringCheck;
+import static magic.ValueCheck.numberCheck;
+import static magic.ValueCheck.stringCheck;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class CheckTest {
+class ValueCheckTest {
 
     @Test
     void NumberCheckTest() {

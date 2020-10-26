@@ -7,7 +7,7 @@ import unit.Unit;
 import java.util.HashMap;
 import java.util.Map;
 
-import static magic.Check.numberCheck;
+import static magic.ValueCheck.numberCheck;
 
 public class MagicPlayer extends Player {
     final protected Map<String, Spell> spellBook = new HashMap<> ();

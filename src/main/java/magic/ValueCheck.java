@@ -2,7 +2,7 @@
 package magic;
 
 
-public class Check {
+public class ValueCheck {
     // Assure that a number is: >=0 <= Integer.max
     protected static int numberCheck(int nr) {
         if (nr < 0) {
