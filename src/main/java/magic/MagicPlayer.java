@@ -2,22 +2,18 @@
 package magic;
 
 import player.Player;
+import unit.Unit;
 
 import java.util.HashMap;
 import java.util.Map;
 
-// would be good if all units including player inherit from same "entity" or "unit"class.
 public class MagicPlayer extends Player {
     final protected Map<String, Spell> spellBook = new HashMap<> ();
     final protected Map<String, Spell> learntSpells = new HashMap<> ();
-    private int manaPoint = 1;
-    private int MaxManaPoint = 5;
+    protected int manaPoint = 1;
+    protected int maxManaPoint = 5;
 
-    // create magicLevel = MagicExp /10000 and NN,?
-
-    // override levelup mechanics  from super?
-    private int manaRegenSpeed = 1;
-    private int magicLevel = 1; // remove 
+    protected int magicSkill = 1; // remove? or factor with player.level
     private int maximumLearnableSpells = 1;
 
     // TODO: 2020-10-21 Ta bort MagicLevel och byt ut det till level. mindre komplext.
@@ -32,7 +28,7 @@ public class MagicPlayer extends Player {
     }
 
     public void setMaximumLearnableSpells(int maximumLearnableSpells) {
-        this.maximumLearnableSpells = positiveNrCheck (maximumLearnableSpells);
+        this.maximumLearnableSpells = Check.numberCheck (maximumLearnableSpells);
     }
 
     public void addSpell(Spell spell) {
@@ -49,14 +45,16 @@ public class MagicPlayer extends Player {
     }
 
 
-    public void learnSpell(Spell spell) {
+    public boolean learnSpell(Spell spell) {
         String name = spell.getName ();
+        int requiredMagicSkill = spell.getRequiredMagicSkill ();
 
-        if (learntSpells.size () >= maximumLearnableSpells) {
-            return;
+        if (learntSpells.size () >= maximumLearnableSpells || magicSkill < requiredMagicSkill) {
+            return false;
         }
         learntSpells.put (name, spell);
         addSpell (spell);
+        return true;
     }
 
     public Spell unLearnSpell(String name) {
@@ -64,65 +62,61 @@ public class MagicPlayer extends Player {
     }
 
 
-    public boolean castSpell(Spell spell) {
-        // maybe make this an interface, different for every class?
-        return false;
+    public boolean castSpell(Spell spell, Unit target) {
+        String spellName = spell.getName ();
+        int manaCost = spell.getManaCost ();
+        if (manaPoint < manaCost || learntSpells.get (spellName) != spell) {
+            return false;
+        }
+        manaPoint -= manaCost;
+        return spell.castSpell (this, target);
     }
 
-    // what happens when leveling up     .
-    private void levelUp() {
-        // max mana level
-    }
-
-    // what happens when leveling down.
-    private void levelDown() {
-    }
 
     public int getManaPoint() {
         return manaPoint;
     }
 
     public void setManaPoint(int manaPoint) {
+
+        if (Check.numberCheck (manaPoint) > maxManaPoint) {
+            manaPoint = maxManaPoint;
+        }
         this.manaPoint = manaPoint;
     }
 
-    public int getManaRegenSpeed() {
-        return manaRegenSpeed;
-    }
-
-    public void setManaRegenSpeed(int manaRegenSpeed) {
-        this.manaRegenSpeed = manaRegenSpeed;
-    }
-
-    public int getMagicLevel() {
-        return magicLevel;
-    }
-
-    public void setMagicLevel(int magicLevel) {
-        final int maximumMagicLevel = 10;
-        if (magicLevel <= maximumMagicLevel) {
-            this.magicLevel = positiveNrCheck (magicLevel);
-        } else {
-            throw new IllegalArgumentException ("Error: negative numbers are not allowed here");
-        }
-    }
-
     public int getMaxManaPoint() {
-        return MaxManaPoint;
+        return maxManaPoint;
     }
 
     public void setMaxManaPoint(int maxManaPoint) {
-        this.MaxManaPoint = maxManaPoint;
+        this.maxManaPoint = Check.numberCheck (maxManaPoint);
     }
 
-    // Check that numbers are >=0
-    private int positiveNrCheck(int nr) {
-        if (nr >= 0) {
-            return nr;
+    public int getMagicSkill() {
+        return magicSkill;
+    }
+
+    public void setMagicSkill(int magicSkill) {
+        final int maximumMagicSkill = 10;
+        if (magicSkill <= maximumMagicSkill) {
+            this.magicSkill = Check.numberCheck (magicSkill);
         } else {
             throw new IllegalArgumentException ("Error: negative numbers are not allowed here");
         }
     }
-    // increaseMagicLevel // required level to learn and use spells and to wield magic equipment.
-    //IncreaseMaxLearntSpells // different classes can learn different spells and memorize different amount of spells.
+
+
+
+
+    // what happens when leveling up   // override player mec.  .
+
+
+    // what happens when leveling down. // override player mec.
+
 }
+// increaseMagicLevel // required level to learn and use spells and to wield magic equipment.
+//IncreaseMaxLearntSpells // different classes can learn different spells and memorize different amount of spells.
+
+
+

@@ -4,21 +4,19 @@ package magic;
 import unit.Attack;
 import unit.AttackType;
 import unit.Combatant;
+import unit.Unit;
 
 public class FireballSpell extends  Spell {
 
 
     public FireballSpell() {
-        super ("FireBall","Deal 5 fire-damage", 3, 1, 2);
+        super ("FireBall","Deal 3 fire-damage", 3, 1, 2);
     }
 
     @Override
-    public boolean castSpell(Combatant target, int mana) {
+    public boolean magicEffect(Unit caster , Unit target) {
 
-        if ( mana < getManaCost ()) {
-            return false;
-        }
-        int attackPower = 5;
+        int attackPower = 3;
         target.takeDamage (new Attack (attackPower,AttackType.FIRE));
         return true;
     }

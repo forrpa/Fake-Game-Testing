@@ -13,7 +13,7 @@ class HealSpellTest {
 
 
     @Test
-    void castSpellTest() {
+    void castHealSpellTest() {
         int manaCost = standardValue;
         int requiredMagicLevel = standardValue;
         int cooldownDuration = standardValue;
@@ -30,7 +30,7 @@ class HealSpellTest {
         // assert that health = 5
         assertEquals(healthPoints,player.getHealthPoint ());
 
-        spell.castSpell(player);
+        spell.magicEffect (player, player);
 
         assertEquals (healthPoints + 50  ,player.getHealthPoint ());
 

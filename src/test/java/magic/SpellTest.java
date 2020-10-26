@@ -21,7 +21,7 @@ class SpellTest {
         assertEquals (name, spell.getName ());
         assertEquals (description, spell.getDescription ());
         assertEquals (standardValue, spell.getManaCost ());
-        assertEquals (standardValue, spell.getRequiredMagicLevel ());
+        assertEquals (standardValue, spell.getRequiredMagicSkill ());
         assertEquals (standardValue, spell.getCooldownDuration ());
 
 
@@ -39,7 +39,7 @@ class SpellTest {
         assertEquals (name, spell.getName ());
         assertEquals (description, spell.getDescription ());
         assertEquals (standardValue, spell.getManaCost ());
-        assertEquals (standardValue, spell.getRequiredMagicLevel ());
+        assertEquals (standardValue, spell.getRequiredMagicSkill ());
         assertEquals (standardValue, spell.getCooldownDuration ());
 
 
@@ -64,7 +64,7 @@ class SpellTest {
     @Test
     void setRequiredMagicLevelTest() {
         Spell spell = new Spell ();
-        Assertions.assertThrows (IllegalArgumentException.class, () -> spell.setRequiredMagicLevel (-1));
+        Assertions.assertThrows (IllegalArgumentException.class, () -> spell.setRequiredMagicSkill (-1));
     }
 
     @Test

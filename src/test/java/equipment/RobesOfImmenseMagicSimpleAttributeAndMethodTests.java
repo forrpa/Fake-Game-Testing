@@ -4,13 +4,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import item.Item;
 
 class RobesOfImmenseMagicSimpleAttributeAndMethodTests {
 	final static Gear ROBES_OF_IMMENSE_MAGIC = new RobesOfImmenseMagic();
 	@BeforeEach
-	void repairRobes() {
+	void repairRobes() { 
 		ROBES_OF_IMMENSE_MAGIC.repair();
 	}
     @Test
@@ -49,11 +51,18 @@ class RobesOfImmenseMagicSimpleAttributeAndMethodTests {
     void testForCorrectMaxDurabilityOfRobes() {
     	assertEquals(85, ROBES_OF_IMMENSE_MAGIC.getMaxDurability());
     }
-    @Test
-    void testForCorrectDurabilityValueOfDamagedRobes() {
-    	ROBES_OF_IMMENSE_MAGIC.damageDurability(65);
-    	assertEquals(20, ROBES_OF_IMMENSE_MAGIC.getDurability());
-    }
+    @ParameterizedTest
+	@ValueSource(ints = {85, 35, 0, 21, 1, 78})
+    void testForCorrectDurabilityValueOfDamagedRobes(int value) {
+    	ROBES_OF_IMMENSE_MAGIC.damageDurability(value);
+    	assertEquals(85-value, ROBES_OF_IMMENSE_MAGIC.getDurability()); 
+    } 
+    @ParameterizedTest
+   	@ValueSource(ints = {86, 100, Integer.MAX_VALUE, 999, 2578, 213})
+       void testForCorrectDurabilityZeroSettingOfDamagedRobes(int value) {
+       	ROBES_OF_IMMENSE_MAGIC.damageDurability(value);
+       	assertEquals(0, ROBES_OF_IMMENSE_MAGIC.getDurability()); 
+       }
     @Test
     void testRepair() {
     	ROBES_OF_IMMENSE_MAGIC.damageDurability(40);
@@ -70,14 +79,14 @@ class RobesOfImmenseMagicSimpleAttributeAndMethodTests {
     }
     @Test
     void testForCorrectValueFromToStringMethodInRobes() {
-    	assertTrue(ROBES_OF_IMMENSE_MAGIC.toString().equals("Robes of Immense Magic"+"\n"+"A beautiful piece of silken robes that imbue the wearer with immense magical power!"+"\n"+"CLOTH"+" "+"chest"+"\n"+"Armor: "+30+"\n"+"Strength: "+0+"\n"+"Agility: "+0+"\n"+"Intelligence: "+100+"\n"+"Stamina: "+20+"\n"+"Required Level: "+50+"\n"+"Durability: "+85+"/"+85));
+    	assertTrue(ROBES_OF_IMMENSE_MAGIC.toString().equals("Robes of Immense Magic"+"\n"+"A beautiful piece of silken robes that imbue the wearer with immense magical power!"+"\n"+"CLOTH"+" "+"chest"+"\n"+"Armor: "+30+"\n"+"Strength: "+0+"\n"+"Agility: "+0+"\n"+"Intelligence: "+100+"\n"+"Stamina: "+20+"\n"+"Required Level: "+37+"\n"+"Durability: "+85+"/"+85));
     }
     @Test
     void testForCorrectValueOfRobesRequiredLevel() {
-    	assertEquals(50, ROBES_OF_IMMENSE_MAGIC.getRequiredLevel());
+    	assertEquals(37, ROBES_OF_IMMENSE_MAGIC.getRequiredLevel());
     }
     @Test
-    void testIfTwoRobesAreConsideredTheSame() {
+    void testIfTwoRobesAreConsideredTheSame() { 
     	RobesOfImmenseMagic rim = new RobesOfImmenseMagic();
     	assertEquals(rim, ROBES_OF_IMMENSE_MAGIC);
     	assertTrue(rim.equals(ROBES_OF_IMMENSE_MAGIC));

@@ -1,0 +1,73 @@
+Granskning 2020-10-25 kl11:00- 16:30.
+
+Granskningsförslag: Item, Edible, Potion, ForbiddenFruit.
+
+Author: Emilia Hane.
+
+Granskare: Adam, Christoffer, Jennifer & Christian.
+
+Moderator: Christian.
+
+
+Sammanställning:
+
+Items:
+
+
+protected final på namn och description;
+RequiredLevel  borde heta REquiredUnitLevel och bör testas så den inte sätts högre än max tillåtet för playerklassen.
+
+
+
+Konstruktor bör ha nullkoll.
+
+samma med zeroDeffaultREquiredLevel.
+
+Konstruktorn bör ha nullkoll.
+zeroDefaultRequiredLevel kan vara statisk
+    public bololean quails():
+    , skulle kunna sätta this.name där för tydlighet
+    två strängarna ska jämföras med .equals() ej ==
+
+
+Hashcode()
+magic numbers, 17 och 31.
+det enda resultat är den sista som returneras är det sista resultatet, +=
+eventuellt använda paranteser för lästydlighet vid
+
+Edible.class
+varför har alla Edible manaPoints, healthpoints och experiencePoints.
+
+kommentera vad klassen gör och vad variablerna manaPoint, healtPoint och experiencePoint gär.
+tydligare namn?
+
+private final int checkPointValueRange()
+finall är överflödigt då private för att den inte går att överskugga.
+
+Varförr -10 || 10.
+magic numers 10 -10;
+
+
+consume()
+bör vara packet protected.
+bör ha en kommentar vad den gör.
+
+
+Potion.class.
+requiredLevel bör heta experiencePoint.
+svårt att öka med nya spells om det är def i konstruktor vad de påverkar.
+
+ForbiddenFruit.class
+bör ha en klassbeskrivning. vad är forbidden fruit.
+vad är syftet med Potion poison i forbiden fruit? beskrivning.
+
+konstruktorn:
+setPosion(null) är redundant då den är null är null utan att instansieras.
+
+consume()
+FULL_POINT_BOOST bör döpas om till t.ex maxValue.
+ManaPoint, healthPoint och experiencePoint är lokala variabler som inte behövs.
+
+arrayen kan defineras innan iffsatsen. och sättas olika, i if / else. sedan returneras.
+
+

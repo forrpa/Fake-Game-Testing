@@ -28,3 +28,18 @@ Vi bestämde oss för att mötas i skolan på söndag 25/10 kl 11-17 för kodgra
 
 
 datum: 2020-10-23
+
+Anteckningar från statusredovisning tre. // Christoffer
+Granska 100-200 rader kod.
+
+kan behöva testa subklasser igen om de kan påverkas, oftare så testas bara på ett ställe.
+
+rekomenderar branch coverage, men statement absolut som coverage.
+
+maven ska som absolut minimum kopilera och köra testerna.
+
+rätt version av java, junit etc.
+
+alla verktyg är krav förutom profilern.
+
+

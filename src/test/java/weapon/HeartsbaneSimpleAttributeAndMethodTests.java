@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import equipment.Gear;
 import item.Item;
@@ -52,10 +54,17 @@ class HeartsbaneSimpleAttributeAndMethodTests {
     void testForCorrectMaxDurabilityOfHeartsbane() {
     	assertEquals(117, HEARTSBANE.getMaxDurability());
     }
-    @Test
-    void testForCorrectDurabilityValueOfDamagedHeartsbane() {
-    	HEARTSBANE.damageDurability(18);
-    	assertEquals(99, HEARTSBANE.getDurability());
+    @ParameterizedTest
+	@ValueSource(ints = {117, 100, 0, 55, 1, 78})
+    void testForCorrectDurabilityValueOfDamagedHeartsbane(int value) {
+    	HEARTSBANE.damageDurability(value);
+    	assertEquals(117-value, HEARTSBANE.getDurability()); 
+    } 
+	@ParameterizedTest
+	@ValueSource(ints = {118, 134, Integer.MAX_VALUE, 214, 1000, 666})
+    void testForCorrectDurabilityZeroSettingOfDamagedHeartsbane(int value) {
+    	HEARTSBANE.damageDurability(value);
+    	assertEquals(0, HEARTSBANE.getDurability());
     }
     @Test
     void testRepair() {
