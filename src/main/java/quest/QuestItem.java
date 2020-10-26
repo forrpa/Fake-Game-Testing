@@ -10,7 +10,7 @@ public abstract class QuestItem extends Item {
 
     @Override
     public String toString() {
-        return String.format("\"%s: %s\"", getName(), getDescription());
+        return String.format("%s: %s", getName(), getDescription());
     }
 
 }

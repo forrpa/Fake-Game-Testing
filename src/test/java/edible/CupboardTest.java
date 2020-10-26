@@ -45,10 +45,11 @@ class CupboardTest {
 	@BeforeAll
 	static void setPlayerAttributeOfCupboard() throws Exception {
 		CUPBOARD.setPlayer(VAMP_WITCH);
-	}
+	} 
 	
 	@BeforeAll
 	static void setManaPointMagicPlayerEoughToCookGreenVenomRecipie() throws Exception {
+		VAMP_WITCH.setMaxManaPoint(100);
 		VAMP_WITCH.setManaPoint(50);
 	}
 	
@@ -99,8 +100,10 @@ class CupboardTest {
 		assertEquals(VAMP_WITCH, CUPBOARD.getPlayer());
 	}
 	
-	// getCount() is already tested in InventoryTest to throw NullPointerException, as is getOutItem()
-	// that poisonedForbiddenFruits ArrayList is emptied gets indirectly tested by consume() using getOutItem() method
+	@Test
+	void loveBrewIsInInventory() {
+		assertTrue(CUPBOARD.isInInventory(LOVE_BREW));
+	}
 	
 	@Test
 	void storeNotCupboardItemThrowsIAE() {
@@ -239,11 +242,17 @@ class CupboardTest {
 	}
 	
 	@Test
+	void cookNotHaveAllIngredientsThrowsNPE() {
+		CUPBOARD.getOutItem(CLAW_OF_HIPOGRIFF);
+		assertThrows(NullPointerException.class, () -> CUPBOARD.cook(GREEN_VENOM_RECIPIE));
+	}
+	
+	@Test
 	void toStringFormatsAttributesCorrect() {
 		assertEquals("Vamp Witch, Very badass witch from Rumania\nEDIBLES:\n{Fly Agaric: 1 }\n" + 
 				"FORBIDDEN FRUITS:\n{Lucky Cherry: 1 }\nPOTIONS:\n{Heartbreak Potion: 5 }\n" + 
 				"{Green Venom: 2 }\n{Love Potion: 1 }\nINGREDIENTS:\n{Morning Star: 1 }\n" + 
-				"{Fire Root: 1 }\n{Claw of Hipogriff: 1 }\nRECIPIES:\n{Green Venom Recipie: 1 }", CUPBOARD.toString());
+				"{Fire Root: 1 }\n{Claw of Hipogriff: 1 }\nRECIPES:\n{Green Venom Recipie: 1 }", CUPBOARD.toString());
 	}
 
 }
