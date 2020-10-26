@@ -1,0 +1,20 @@
+<problems>
+  <problem>
+  <file>file://$PROJECT_DIR$/src/main/java/item/Item.java</file>
+  <line>40</line>
+  <module>inte_projektarbete_final</module>
+  <package>item</package>
+  <entry_point TYPE="method" FQNAME="item.Item boolean equals(java.lang.Object obj)" />
+  <problem_class severity="WARNING" attribute_key="WARNING_ATTRIBUTES">String comparison using '==', instead of 'equals()'</problem_class>
+  <description>String values are compared using &lt;code&gt;==&lt;/code&gt;, not 'equals()' #loc</description>
+</problem>
+  <problem>
+  <file>file://$PROJECT_DIR$/src/main/java/item/Item.java</file>
+  <line>40</line>
+  <module>inte_projektarbete_final</module>
+  <package>item</package>
+  <entry_point TYPE="method" FQNAME="item.Item boolean equals(java.lang.Object obj)" />
+  <problem_class severity="WARNING" attribute_key="WARNING_ATTRIBUTES">String comparison using '==', instead of 'equals()'</problem_class>
+  <description>String values are compared using &lt;code&gt;==&lt;/code&gt;, not 'equals()' #loc</description>
+</problem>
+</problems>

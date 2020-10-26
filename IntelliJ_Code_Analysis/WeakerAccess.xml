@@ -1,0 +1,26 @@
+<problems>
+  <problem>
+  <file>file://$PROJECT_DIR$/src/main/java/item/Item.java</file>
+  <line>5</line>
+  <module>inte_projektarbete_final</module>
+  <package>item</package>
+  <entry_point TYPE="field" FQNAME="item.Item name" />
+  <problem_class severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Declaration access can be weaker</problem_class>
+  <hints>
+    <hint value="private" />
+  </hints>
+  <description>Can be private</description>
+</problem>
+  <problem>
+  <file>file://$PROJECT_DIR$/src/main/java/item/Item.java</file>
+  <line>6</line>
+  <module>inte_projektarbete_final</module>
+  <package>item</package>
+  <entry_point TYPE="field" FQNAME="item.Item description" />
+  <problem_class severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Declaration access can be weaker</problem_class>
+  <hints>
+    <hint value="private" />
+  </hints>
+  <description>Can be private</description>
+</problem>
+</problems>

@@ -1,0 +1,15 @@
+<problems>
+  <problem>
+  <file>file://$PROJECT_DIR$/src/main/java/edible/ForbiddenFruit.java</file>
+  <line>31</line>
+  <module>inte_projektarbete_final</module>
+  <package>edible</package>
+  <entry_point TYPE="method" FQNAME="edible.ForbiddenFruit int[] consume(int playerManaPoint, int playerHealthPoint, int playerExperiencePoint)" />
+  <problem_class severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Method is never used.</description>
+</problem>
+</problems>

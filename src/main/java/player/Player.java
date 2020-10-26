@@ -1,69 +1,60 @@
 package player;
 
-import edible.Cupboard;
-import equipment.ArmorType;
-import equipment.Equipment;
-import equipment.Gear;
-import item.Inventory;
-import item.Item;
-import magic.ValueCheck;
-import quest.Quest;
-import quest.QuestLog;
-import unit.Attack;
-import unit.Combatant;
-import unit.NPC;
-import unit.Unit;
-import weapon.Weapon;
-import weapon.WeaponSize;
-
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import equipment.*;
+import quest.Quest;
+import quest.QuestLog;
+import unit.*;
+import weapon.*;
+import edible.Cupboard;
+import item.*;
+import magic.Check;
 
-public class Player extends Unit {
-
-	//private PlayerClass playerClass;
-	//private Race race; //Beror på om vi vill göra klasserna Class och Race, jag kör med String sålänge
-	private final String playerClass;
-	private final String race;
-	private static final int MAX_ALLOWED_EXPERIENCE = 500070023;
-	private static final int MAX_ALLOWED_STR_AGI_INT_STA = 5000;
-	private static final int MAX_ALLOWED_ARMOR = 50000;
-	private final Map<ArmorType, Boolean> allowedArmorTypes = new HashMap<ArmorType, Boolean> ();
-	private final Map<String, Boolean> allowedWeaponTypes = new HashMap<String, Boolean> ();
-	private final Map<String, Gear> gear = new HashMap<String, Gear> ();
-	private final Inventory playerInventory = new Inventory ();
-	private final Cupboard cupboard = new Cupboard (this);
-	private final QuestLog questLog = new QuestLog ();
-	private int experiencePoint;
-	private int level = 1;
-	private int nextLevelCap = 100;
-	private int armor;
-	private int strength;
-	private int usedStrength = 0;
-	private int stamina;
-	private int usedStamina = 0;
-	private int intelligence;
-	private int agility;
-
-	public Player(String playerClass, String race, int maxHealthPoint, int experiencePoint) {
-		super (maxHealthPoint, 1, true);
-		makeSureClassAndRaceAreNotNull (playerClass, race);
-		this.playerClass = playerClass;
-		this.race = race;
-		setExperiencePoint (experiencePoint);
-		setArmorTypeHashMap ();
-		setWeaponTypeHashMap ();
-		updateAttributes ();
-	}
-
-	private void makeSureClassAndRaceAreNotNull(String playerClass, String race) {
-		ValueCheck.stringCheck (playerClass);
-		ValueCheck.stringCheck (race);
-	}
-
-	public Gear getGearFromGear(String slot) {
-		Gear gearPiece = this.gear.get (slot);
-		return gearPiece;
+public class Player extends Unit{
+	
+    //private PlayerClass playerClass;
+    //private Race race; //Beror på om vi vill göra klasserna Class och Race, jag kör med String sålänge
+    private final String playerClass;
+    private final String race;
+    private static final int MAX_ALLOWED_EXPERIENCE = 500070023;
+    private static final int MAX_ALLOWED_STR_AGI_INT_STA = 5000;
+    private static final int MAX_ALLOWED_ARMOR = 50000;
+    private int experiencePoint;
+    private int level = 1;
+    private int nextLevelCap = 100;
+    private int armor;
+    private int strength;
+    private int usedStrength = 0;
+    private int stamina;
+    private int usedStamina = 0;
+    private int intelligence;
+    private int agility;
+    private Map<ArmorType, Boolean> allowedArmorTypes = new HashMap<ArmorType, Boolean>();
+    private Map<String, Boolean> allowedWeaponTypes = new HashMap<String,Boolean>();
+    private Map<String, Gear> gear = new HashMap<String, Gear>();
+    private Inventory playerInventory = new Inventory();
+    private final Cupboard cupboard = new Cupboard(this);
+    private QuestLog questLog = new QuestLog();
+    
+    public Player(String playerClass, String race, int maxHealthPoint, int experiencePoint){
+        super(maxHealthPoint, 1, true);
+        makeSureClassAndRaceAreNotNull(playerClass,race);
+        this.playerClass = playerClass;
+        this.race = race;
+        setExperiencePoint(experiencePoint);
+        setArmorTypeHashMap();
+        setWeaponTypeHashMap();
+        updateAttributes();
+    }
+    private void makeSureClassAndRaceAreNotNull(String playerClass, String race) {
+    	Check.stringCheck(playerClass);
+    	Check.stringCheck(race);
+    }
+    public Gear getGearFromGear(String slot) {
+    	Gear gearPiece = this.gear.get(slot);
+    	return gearPiece;
     }
     private void updateAttributes() {
     	updateHealthBasedOnStamina();
@@ -231,9 +222,9 @@ public class Player extends Unit {
     	if(!this.gear.containsKey(armor.getSlot())) {
 			this.gear.put(armor.getSlot(), armor);
 		}else {
-			Gear replacedPiece = this.gear.replace (armor.getSlot (), armor);
-			removeAttributesFromOldGear (replacedPiece);
-			this.playerInventory.addItem (replacedPiece);
+			Gear replacedPiece = (Gear) this.gear.replace(armor.getSlot(), armor);
+			removeAttributesFromOldGear(replacedPiece);
+			this.playerInventory.addItem(replacedPiece);
 		}
 		addAttributesFromNewGear(armor);
     }
@@ -329,7 +320,7 @@ public class Player extends Unit {
             throw new IllegalStateException("The player is dead");
         }else if(!enemy.isAlive()){
             throw new IllegalStateException("The unit receiving damage is already dead");
-        }else if(isGrounded() && !enemy.isGrounded()){
+        }else if(!attack.isRanged() && isGrounded() && !enemy.isGrounded()){
             return false;
         }else {
             enemy.takeDamage(attack);
@@ -350,6 +341,14 @@ public class Player extends Unit {
         int tempHealth = getHealthPoint() - damage;
         setHealthPoint(tempHealth);
     }
+
+    public void loot(Monster monster){
+    	ArrayList<Item> lootedItems = new ArrayList();
+    	lootedItems.addAll(monster.getLooted());
+    	for(Item i:lootedItems){
+    		getCupboard().store(i);
+		}
+	}
 
     @Override
     public boolean equals(Object obj) {
