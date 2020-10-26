@@ -6,6 +6,7 @@ import equipment.BucklerOfUselessness;
 import org.junit.jupiter.api.Test;
 
 import player.Player;
+import unit.Questgiver;
 import weapon.Heartsbane;
 import weapon.WidowsWail;
 
@@ -42,7 +43,9 @@ class TalkToGuildLeaderTest {
     //Lyckas starta quest
     @Test
     void playerStartsTalkToGuildLeaderQuestSuccessfully(){
+        Questgiver questgiver = new Questgiver("Robert", new TalkToGuildLeader());
         quest.startQuest(standardPlayer);
+        assertTrue(questgiver.talk());
         assertEquals(QuestState.IN_PROGRESS, quest.getState());
     }
 
@@ -56,6 +59,8 @@ class TalkToGuildLeaderTest {
     //Lyckas tala med Guild Leader
     @Test
     void playerTalkToGuildLeaderSuccessfully(){
+        GuildLeader guildLeader = new GuildLeader("Guild Leader Martin");
+        assertTrue(guildLeader.talk());
         quest.talkToGuildLeader();
         assertTrue(quest.hasTalkedToGuildLeader());
     }
@@ -144,4 +149,8 @@ class TalkToGuildLeaderTest {
         assertEquals(1, player.getInventoryCount(widowsWail));
     }
 
+    @Test
+    void toStringMethodReturnsCorrectString(){
+        assertEquals("Talk to Guild Leader: You have to talk to the guild leader west of town.. PENDING, true, false", quest.toString());
+    }
 }

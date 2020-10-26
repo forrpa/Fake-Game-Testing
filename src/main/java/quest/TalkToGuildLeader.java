@@ -8,9 +8,12 @@ import weapon.WidowsWail;
 public class TalkToGuildLeader extends Quest {
 
     private boolean talkedToGuildLeader = false;
+    GuildLeader guildLeader = new GuildLeader("Guild Leader Mar tin");
+    //Quest quest = new TalkToGuildLeader();
+    //Questgiver questgiver = new Questgiver("Robert", quest);
 
     public TalkToGuildLeader(){
-        super("Talk to Guild Leader", "You have to talk to the guild leader west of town.", QuestState.PENDING, true);
+        super("Talk to Guild Leader", " ", QuestState.PENDING, true);
     }
 
     public boolean hasTalkedToGuildLeader(){
@@ -30,6 +33,7 @@ public class TalkToGuildLeader extends Quest {
     @Override
     public boolean startQuest(Player player) {
         if (startRequirementsFulfilled(player)){
+            //questgiver.talk();
             state = QuestState.IN_PROGRESS;
             return true;
         } else {
@@ -38,6 +42,7 @@ public class TalkToGuildLeader extends Quest {
     }
 
     public void talkToGuildLeader(){
+        guildLeader.talk();
         talkedToGuildLeader = true;
     }
 
@@ -94,5 +99,8 @@ public class TalkToGuildLeader extends Quest {
         }
     }
 
-    //toString
+    @Override
+    public String toString() {
+        return String.format("%s: %s. %s, %b, %b", getName(), getDescription(), getState(), isMandatory(), hasTalkedToGuildLeader());
+    }
 }

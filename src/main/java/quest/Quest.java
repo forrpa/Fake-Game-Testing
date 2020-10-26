@@ -4,14 +4,14 @@ import player.Player;
 
 public abstract class Quest {
 
-    private String name;
+    private final String name;
     protected String description;
-    protected Enum state; //Fixa raw use of parameterized class Enum
+    protected QuestState state;
     private boolean mandatory;
     //Quest log - available quests, completed quests osv
 
 
-    public Quest(String name, String description, Enum state, boolean mandatory){
+    public Quest(String name, String description, QuestState state, boolean mandatory){
         this.name = name;
         this.description = description;
         this.state = state;
@@ -26,7 +26,7 @@ public abstract class Quest {
         return description;
     }
 
-    public Enum getState(){
+    public QuestState getState(){
         return state;
     }
 
@@ -42,6 +42,6 @@ public abstract class Quest {
 
     public abstract boolean completeQuest(Player player);
 
-    //public abstract String toString();
+    public abstract String toString();
 
 }
