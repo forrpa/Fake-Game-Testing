@@ -22,7 +22,7 @@ class HealSpellTest {
 
         // create player with 5 health
         Player player = new Player ("playerclass", "race", healthPoints, standardValue);
-
+        player.setMaxHealthPoint (100);
         // assert that health = 5
         assertEquals (healthPoints, player.getHealthPoint ());
 
