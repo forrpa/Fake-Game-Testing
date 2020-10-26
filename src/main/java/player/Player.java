@@ -1,17 +1,15 @@
 package player;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import equipment.*;
 import quest.Quest;
 import quest.QuestLog;
-import unit.Attack;
-import unit.Combatant;
-import unit.NPC;
+import unit.*;
 import weapon.*;
 import edible.Cupboard;
 import item.*;
-import unit.Unit;
 
 public class Player extends Unit{
 	
@@ -337,6 +335,14 @@ public class Player extends Unit{
         int tempHealth = getHealthPoint() - damage;
         setHealthPoint(tempHealth);
     }
+
+    public void loot(Monster monster){
+    	ArrayList<Item> lootedItems = new ArrayList();
+    	lootedItems.addAll(monster.getLooted());
+    	for(Item i:lootedItems){
+    		getCupboard().store(i);
+		}
+	}
 
     @Override
     public boolean equals(Object obj) {

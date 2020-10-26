@@ -35,15 +35,12 @@ public abstract class Monster extends NPC {
     }
 
     public List<Item> getLooted(){
+        ArrayList<Item> lootedItems = new ArrayList<>();
         if(isLootable()){
-            ArrayList<Item> lootedItems = new ArrayList<>();
             lootedItems.addAll(itemsOnNPC);
             itemsOnNPC.clear();
-            return lootedItems;
-
-        }else{
-            return null;
         }
+        return lootedItems;
     }
 
     public String getAllAvailableLoot(){
