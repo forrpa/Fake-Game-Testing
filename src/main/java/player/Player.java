@@ -316,7 +316,7 @@ public class Player extends Unit{
             throw new IllegalStateException("The player is dead");
         }else if(!enemy.isAlive()){
             throw new IllegalStateException("The unit receiving damage is already dead");
-        }else if(isGrounded() && !enemy.isGrounded()){
+        }else if(!attack.isRanged() && isGrounded() && !enemy.isGrounded()){
             return false;
         }else {
             enemy.takeDamage(attack);

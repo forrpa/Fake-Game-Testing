@@ -2,21 +2,16 @@ package unit;
 
 public abstract class Unit implements Combatant {
     protected boolean isGrounded;
-    protected static final int MAX_ALLOWED_HEALTH = 50000;
     protected int healthPoint;
     protected int maxHealthPoint;
     protected int attackPower;
 
 
     public Unit(int maxHealth, int attackPower, boolean isGrounded){
+        setMaxHealthPoint(maxHealth);
         setHealthPoint(maxHealth);
-        this.maxHealthPoint = maxHealth;
         this.isGrounded = isGrounded;
-        if(attackPower < 0){
-            this.attackPower = 0;
-        }else {
-            this.attackPower = attackPower;
-        }
+        setAttackPower(attackPower);
     }
 
     public int getAttackPower() {
@@ -32,17 +27,32 @@ public abstract class Unit implements Combatant {
     public void setHealthPoint(int healthPoint){
         if(healthPoint <= 0){
             this.healthPoint = 0;
-        }else {
+        }else if(healthPoint >= getMaxHealthPoint()) {
+            this.healthPoint = getMaxHealthPoint();
+        }else{
             this.healthPoint = healthPoint;
         }
     }
-
+    public void increaseHealth(int pointsToIncrease) {
+        int validatedPointsToIncrease = validateAttributeValue(pointsToIncrease);
+        int newHealth = getHealthPoint() + validatedPointsToIncrease;
+        setHealthPoint(newHealth);
+    }
+    public void decreaseHealth(int pointsToDecrease) {
+        int validatedPointsToDecrease = validateAttributeValue(pointsToDecrease);
+        int newHealth = getHealthPoint() - validatedPointsToDecrease;
+        setHealthPoint(newHealth);
+    }
     public int getMaxHealthPoint() {
         return maxHealthPoint;
     }
 
-    protected void setMaxHealthPoint(int healthPoint){
-        maxHealthPoint += healthPoint;
+    public void setAttackPower(int attackPower) {
+    this.attackPower = validateAttributeValue(attackPower);
+    }
+
+    public void setMaxHealthPoint(int healthPoint){
+        maxHealthPoint = validateAttributeValue(healthPoint);
     }
 
     public void increaseMaxHealthPoint(int healthPoint){
@@ -57,7 +67,17 @@ public abstract class Unit implements Combatant {
         return maxHealthPoint;
     }
 
-    public void fillHealthBar(){
+    public void restoreFullHealth(){
         setHealthPoint(maxHealthPoint);
+    }
+
+    public int validateAttributeValue(int attributeValue){
+        if(attributeValue <= 0){
+            return 0;
+        }else if( attributeValue <= MAX_ALLOWED_ATTRIBUTEVALUE) {
+            return attributeValue;
+        }else{
+                throw new IllegalArgumentException("Attribute value is over max allowed");
+        }
     }
 }
