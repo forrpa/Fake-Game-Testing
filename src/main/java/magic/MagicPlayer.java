@@ -117,6 +117,3 @@ public class MagicPlayer extends Player {
 }
 // increaseMagicLevel // required level to learn and use spells and to wield magic equipment.
 //IncreaseMaxLearntSpells // different classes can learn different spells and memorize different amount of spells.
-
-
-
