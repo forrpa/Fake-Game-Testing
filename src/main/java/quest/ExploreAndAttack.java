@@ -16,7 +16,7 @@ public class ExploreAndAttack extends Quest {
     private final Townsman townsman = new Townsman("Jennie J");
 
     public ExploreAndAttack(){
-        super("Stealth and Attack", "You have to follow your enemy without being seen and then attack him", QuestState.PENDING, true);
+        super("Explore and Attack", "You have to follow your enemy without being seen and then attack him", QuestState.PENDING, true);
     }
 
     public boolean isEnemyFound(){
