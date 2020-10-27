@@ -114,6 +114,7 @@ class StealthAndAttackTest {
     @Test
     void playerDiesInAttack(){
         quest.stealth(standardPlayer, enemy);
+        enemy.setMaxHealthPoint(1000);
         enemy.setHealthPoint(1000);
         assertFalse(quest.attack(standardPlayer, enemy));
     }
