@@ -1,6 +1,7 @@
 package quest;
 import equipment.BreastplateOfTesting;
 import equipment.BucklerOfUselessness;
+import magic.MagicPlayer;
 import player.Player;
 import unit.Questgiver;
 import weapon.Heartsbane;
@@ -64,7 +65,7 @@ public class TalkToGuildLeader extends Quest {
             state = QuestState.DONE;
             player.addQuestToCompletedQuests(this);
             player.increaseExperiencePoint(500);
-            //rewardBasedOnClass(player);
+            //rewardBasedOnMagic(player);
             rewardBasedOnRace(player);
             GuildMap guildMap = new GuildMap();
             player.addToInventory(guildMap);
@@ -74,16 +75,9 @@ public class TalkToGuildLeader extends Quest {
         }
     }
 
-    /*public void rewardBasedOnClass(Player player){
-        switch (player.getPlayerClass()){
-            case "Healer":
-                player.addToInventory(new HealingPotion());
-            case "Damage":
-                player.addToInventory(new CrystalChard());
-            case "Tank":
-                player.addToInventory(new HealingPotionRecipe());
-        }
-    }*/
+    public void rewardBasedOnMagic(Player player){
+        //If Player is a magic player
+    }
 
     public void rewardBasedOnRace(Player player){
         switch (player.getRace()){

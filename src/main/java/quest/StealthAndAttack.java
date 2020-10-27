@@ -1,19 +1,16 @@
 package quest;
 
 import player.Player;
-import unit.Monster;
 import unit.Villager;
 
-public class StealthAndAttack extends Quest {
+import java.util.ArrayList;
 
-    //Belöning magic
-    //Ändra belöning från mina klasser till Christians
+public class StealthAndAttack extends Quest {
 
     private boolean succeededStealth = false;
     private boolean attacked;
     private boolean talkedToEnemy;
     private Villager talkedTo;
-    //private int timer = 120;
     private final GuildMap guildMap = new GuildMap();
     private final GuildMaster guildMaster = new GuildMaster("Robert");
     private final Townsman townsman = new Townsman("Jennie J");
@@ -46,9 +43,21 @@ public class StealthAndAttack extends Quest {
         return townsman;
     }
 
+    public Quest getRequiredQuest(Player player){
+        Quest quest;
+        ArrayList<Quest> completedPlayerQuests = player.getPlayerCompletedQuests();
+        for (Quest q : completedPlayerQuests){
+            if (q instanceof TalkToGuildLeader){
+                return q;
+            }
+        } //Inte 100% coverage
+        throw new NullPointerException("Completed Quests doesnt have a Talk To Guild Leader Quest");
+    }
+
     @Override
     public boolean startRequirementsFulfilled(Player player){
-        if (player.getExperiencePoint() >= 1500 && player.isInInventory(guildMap)){ //&& player.questlog().contains("TalkToGuildLeader")
+        Quest quest = getRequiredQuest(player);
+        if (player.getExperiencePoint() >= 1500 && player.isInInventory(guildMap) && player.isInCompletedQuests(quest) ){
             state = QuestState.UNLOCKED;
             player.addQuestToAvailableQuests(this);
             return true;
@@ -75,8 +84,8 @@ public class StealthAndAttack extends Quest {
         startQuest(player);
     }
 
-    public boolean stealth(Player player, Monster monster){
-        if (player.getHealthPoint() < monster.getHealthPoint()){
+    public boolean stealth(Player player, StealthAndAttackEnemy enemy){
+        if (player.getHealthPoint() < enemy.getHealthPoint()){
             succeededStealth = false;
             resetQuest(player);
             return false;
@@ -87,44 +96,34 @@ public class StealthAndAttack extends Quest {
         }
     }
 
-    public boolean attack(Player player, Monster monster){
-        if (succeededStealth) { //NYTT
+    public boolean attack(Player player, StealthAndAttackEnemy enemy){
+        if (succeededStealth) {
             description = "Attack before the enemy escapes!";
 
             while (player.getHealthPoint() > 0){
-                player.attack(monster);
-                if (!monster.isAlive()){
-                    description = "You succeeded killing your enemy on time. Go talk to the Guild Leader for your reward!";
+                player.attack(enemy);
+                if (!enemy.isAlive()){
+                    description = "You succeeded killing your enemy. Go talk to the Guild Leader for your reward!";
                     attacked = true;
                     break;
                 } else {
-                    monster.attack(player);
+                    enemy.attack(player);
                     if (player.getHealthPoint() == 0){
                         resetQuest(player);
                         return false;
                     }
                 }
             }
-/*
-            player.attack(monster);
-            if (!monster.isAlive()) {
-                description = "You succeeded killing your enemy on time. Go talk to the Guild Leader for your reward!";
-                attacked = true;
-            } else if (player.getHealthPoint() == 0) {
-                resetQuest(player);
-            } else {
-                attack(player, monster);
-            }*/
             return true;
         }
         return false;
     }
 
-    public void negotiateWithEnemy(Player player){
+    public void negotiateWithEnemy(Player player, StealthAndAttackEnemy enemy){
         if (succeededStealth){
-            //Talk to enemy
+            enemy.talk();
             talkedToEnemy = true;
-            description = "You decided to talk to your enemy instead of killing him. Now you cant reach the Guild so you have to talk to Townsman.";
+            description = "You decided to talk to your enemy instead of killing him. Now you cant reach the Guild so you have to talk to the Townsman.";
             player.removeFromInventory(guildMap);
         }
     }
@@ -153,19 +152,13 @@ public class StealthAndAttack extends Quest {
         return talkedTo == townsman && !attacked && talkedToEnemy;
     }
 
-    public boolean endRequirementsForAttackingOnTime(){
-        //return talkedTo == "questgiver" && attacked && timer > 0 && !talkedToEnemy;
+    public boolean endRequirementsForAttackingTheEnemy(){
         return talkedTo == guildMaster && attacked && !talkedToEnemy;
     }
 
-    /*public boolean endRequirementsForNotAttackingOnTime(){
-        return talkedTo == "questgiver" && attacked && timer == 0 && !talkedToEnemy;
-    }*/
-
     @Override
     public boolean endRequirementsFulfilled(Player player){
-        //if (endRequirementsForNegotiatingWithEnemy() || endRequirementsForAttackingOnTime() || endRequirementsForNotAttackingOnTime()){
-            if (endRequirementsForNegotiatingWithEnemy() || endRequirementsForAttackingOnTime()){
+        if (endRequirementsForNegotiatingWithEnemy() || endRequirementsForAttackingTheEnemy()){
             state = QuestState.COMPLETED;
             return true;
         } else {
@@ -176,22 +169,14 @@ public class StealthAndAttack extends Quest {
     public void getReward(Player player){
         if (endRequirementsForNegotiatingWithEnemy()){
             rewardWhenNegotiatingWithEnemy(player);
-        } /*else if (endRequirementsForNotAttackingOnTime()){
-            rewardWhenNotAttackingOnTime(player);
-        } */else if (endRequirementsForAttackingOnTime()){
-            rewardWhenAttackingOnTime(player);
+        } else if (endRequirementsForAttackingTheEnemy()){
+            rewardWhenAttackingTheEnemy(player);
         }
     }
 
-    public void rewardWhenAttackingOnTime(Player player){
+    public void rewardWhenAttackingTheEnemy(Player player){
         player.increaseExperiencePoint(1000);
     }
-
-    /*
-    public void rewardWhenNotAttackingOnTime(Player player){
-        //Relation med guild +300
-        player.increaseExperiencePoint(300);
-    }*/
 
     public void rewardWhenNegotiatingWithEnemy(Player player){
         player.increaseExperiencePoint(500);

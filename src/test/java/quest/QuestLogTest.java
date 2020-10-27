@@ -5,10 +5,6 @@ import player.Player;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-//Quest difficulty, baserar reward på level och difficulty, tre färger
-//Required level för att starta questet
-//Abandon quest leder till att den är incomplete
-
 class QuestLogTest {
 
     TalkToGuildLeader quest = new TalkToGuildLeader();

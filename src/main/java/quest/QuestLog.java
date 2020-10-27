@@ -13,6 +13,10 @@ public class QuestLog {
         return completedQuestCount;
     }
 
+    public ArrayList<Quest> getCompletedQuests() {
+        return completedQuests;
+    }
+
     public boolean isInQuestLog(Quest quest) {return availableQuests.contains(quest) || currentQuests.contains(quest) || completedQuests.contains(quest);}
 
     public boolean isInAvailableQuests(Quest quest){
@@ -38,20 +42,6 @@ public class QuestLog {
             currentQuests.remove(quest);
         }
     }
-/*
-    public void addQuestToQuestLog(Quest quest){
-        if (quest.state == QuestState.UNLOCKED && !isInAvailableQuests(quest)) {
-            addQuestToAvailableQuests(quest);
-        } else if (quest.state == QuestState.IN_PROGRESS && !isInCurrentQuests(quest)){
-            addQuestToCurrentQuests(quest);
-            removeQuestFromAvailableQuests(quest);
-        } else if (quest.state == QuestState.DONE && !isInCompletedQuests(quest)){
-            addQuestToCompletedQuests(quest);
-            removeQuestFromCurrentQuests(quest);
-        } else {
-            throw new RuntimeException("A quest can only be added one time to Quest Log");
-        }
-    }*/
 
     public void controlIfQuestIsInQuestLog(Quest quest){
         if (isInQuestLog(quest)){
@@ -77,7 +67,6 @@ public class QuestLog {
         completedQuestCount++;
     }
 
-    //toString
     @Override
     public final String toString() {
         String result = "";
@@ -103,3 +92,18 @@ public class QuestLog {
     }
 
 }
+
+/*
+    public void addQuestToQuestLog(Quest quest){
+        if (quest.state == QuestState.UNLOCKED && !isInAvailableQuests(quest)) {
+            addQuestToAvailableQuests(quest);
+        } else if (quest.state == QuestState.IN_PROGRESS && !isInCurrentQuests(quest)){
+            addQuestToCurrentQuests(quest);
+            removeQuestFromAvailableQuests(quest);
+        } else if (quest.state == QuestState.DONE && !isInCompletedQuests(quest)){
+            addQuestToCompletedQuests(quest);
+            removeQuestFromCurrentQuests(quest);
+        } else {
+            throw new RuntimeException("A quest can only be added one time to Quest Log");
+        }
+    }*/

@@ -1,10 +1,7 @@
 package quest;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import player.Player;
-import unit.AttackType;
-import unit.Bat;
-import unit.Wolf;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,7 +11,19 @@ class StealthAndAttackTest {
     Player player;
     GuildMap guildMap = new GuildMap();
     StealthAndAttack quest = new StealthAndAttack();
-    Wolf enemy = new Wolf();
+    StealthAndAttackEnemy enemy = new StealthAndAttackEnemy();
+    TalkToGuildLeader talkToGuildLeader;
+
+    //Lägger till Talk To Guild Leader-quest i spelarens lista över klarade quests så att man kan göra detta quest. Dock inte till en metod som testar att det inte ska finnas ett sådant quest.
+    @BeforeEach
+    void setUp(TestInfo info){
+        if (info.getDisplayName().equals("Required Quest is null")){
+            return;
+        } else {
+            talkToGuildLeader = new TalkToGuildLeader();
+            standardPlayer.addQuestToCompletedQuests(talkToGuildLeader);
+        }
+    }
 
     //Lägga till en Guild Map i Players inventory
     public void addGuildMapToInventory(){
@@ -43,7 +52,18 @@ class StealthAndAttackTest {
     @Test
     void playerDoesNotMeetStartRequirementsForStealthAndAttackQuest(){
         player = new Player("Human", "Damage", 200, 1499);
+        talkToGuildLeader = new TalkToGuildLeader();
+        player.addQuestToCompletedQuests(talkToGuildLeader);
         assertFalse(quest.startRequirementsFulfilled(player));
+    }
+
+    //Om man försöker hämta questet som krävs för att starta questet men questet finns inte
+    @Test
+    @DisplayName("Required Quest is null")
+    void getRequiredQuestIsNullReturnsNullPointerException(){
+        assertThrows(NullPointerException.class, () -> {
+            quest.getRequiredQuest(standardPlayer);
+        });
     }
 
     //Testa om det går att starta questet
@@ -84,8 +104,7 @@ class StealthAndAttackTest {
     @Test
     void stealthNotSucceeded(){
         standardPlayer.setHealthPoint(1);
-        Bat bat = new Bat("Bat", 10, 5, 10, AttackType.ICE, AttackType.FIRE);
-        assertFalse(quest.stealth(standardPlayer, bat));
+        assertFalse(quest.stealth(standardPlayer, enemy));
     }
 
     //Testa krav för att starta attack eller förhandla med fienden
@@ -95,6 +114,7 @@ class StealthAndAttackTest {
         assertTrue(quest.hasSucceededStealth());
     }
 
+    //Spelaren kan inte starta attack eller förhandla med fienden
     @Test
     void playerCantStartAttackOrNegotiatingWithEnemy(){
         assertFalse(quest.attack(standardPlayer, enemy));
@@ -107,7 +127,7 @@ class StealthAndAttackTest {
         enemy.setHealthPoint(1);
         assertTrue(quest.attack(standardPlayer, enemy));
         assertTrue(quest.hasAttacked());
-        assertEquals("You succeeded killing your enemy on time. Go talk to the Guild Leader for your reward!", quest.getDescription());
+        assertEquals("You succeeded killing your enemy. Go talk to the Guild Leader for your reward!", quest.getDescription());
     }
 
     //Spelaren dör i attack
@@ -124,12 +144,13 @@ class StealthAndAttackTest {
     void successfulNegotiatingWithEnemy(){
         addGuildMapToInventory();
         quest.stealth(standardPlayer, enemy);
-        quest.negotiateWithEnemy(standardPlayer);
+        quest.negotiateWithEnemy(standardPlayer, enemy); //NYTT
         assertTrue(quest.hasTalkedToEnemy());
-        assertEquals("You decided to talk to your enemy instead of killing him. Now you cant reach the Guild so you have to talk to Townsman.", quest.getDescription());
+        assertEquals("You decided to talk to your enemy instead of killing him. Now you cant reach the Guild so you have to talk to the Townsman.", quest.getDescription());
         assertFalse(standardPlayer.isInInventory(guildMap));
     }
 
+    //Spelaren har kraven för att tala med Guild Master
     @Test
     void playerCanTalkToGuildMaster(){
         addGuildMapToInventory();
@@ -139,6 +160,7 @@ class StealthAndAttackTest {
         assertEquals(1, standardPlayer.getInventoryCount(guildMap));
     }
 
+    //Spelaren lyckas tala med Guild Master
     @Test
     void successfulTalkToGuildMaster(){
         GuildMaster guildMaster = quest.getGuildMaster();
@@ -150,45 +172,50 @@ class StealthAndAttackTest {
         assertEquals(guildMaster, quest.getTalkedTo());
     }
 
+    //Spelaren lyckas inte tala med Guild Master
     @Test
     void unSuccessfulTalkToGuildMaster(){
         assertFalse(quest.talkToGuildMaster(standardPlayer));
     }
 
+    //Spelaren har kraven för att tala med Townsman
     @Test
     void canPlayerTalkToTownsman(){
         addGuildMapToInventory();
         quest.stealth(standardPlayer, enemy);
-        quest.negotiateWithEnemy(standardPlayer);
+        quest.negotiateWithEnemy(standardPlayer, enemy); //NYTT
         assertTrue(quest.hasTalkedToEnemy());
     }
 
+    //Spelaren lyckas tala med Townsman
     @Test
     void succesfulTalkToTownsman(){
         Townsman townsman = quest.getTownsman();
         addGuildMapToInventory();
         quest.stealth(standardPlayer, enemy);
-        quest.negotiateWithEnemy(standardPlayer);
+        quest.negotiateWithEnemy(standardPlayer, enemy); //NYTT
         quest.talkToTownsman();
         assertTrue(townsman.talk());
         assertEquals(townsman, quest.getTalkedTo());
     }
 
+    //Spelaren lyckas inte tala med Townsman
     @Test
     void unSuccessfulTalkToTownsman(){
         addGuildMapToInventory();
         assertFalse(quest.talkToTownsman());
     }
 
-    //Testa slutkrav
-    //Lyckas med smygande, lyckas attackera på tid samt prata med guild master
+    //SLutkrav
+
+    //Lyckas med smygande, lyckas attackera samt prata med guild master
     @Test
     void playerMeetsEndRequirementsForAttackingOnTime(){
         addGuildMapToInventory();
         quest.stealth(standardPlayer, enemy);
         quest.attack(standardPlayer, enemy);
         quest.talkToGuildMaster(standardPlayer);
-        assertTrue(quest.endRequirementsForAttackingOnTime());
+        assertTrue(quest.endRequirementsForAttackingTheEnemy());
     }
 
     //Lyckas med smygande, attackera men ej lyckas på tid, prata med guildmaster
@@ -202,7 +229,7 @@ class StealthAndAttackTest {
     void playerMeetsEndRequirementsForNegotiatingWithEnemy(){
         addGuildMapToInventory();
         quest.stealth(standardPlayer, enemy);
-        quest.negotiateWithEnemy(standardPlayer);
+        quest.negotiateWithEnemy(standardPlayer, enemy);
         quest.talkToTownsman();
         assertTrue(quest.endRequirementsForNegotiatingWithEnemy());
     }
@@ -212,7 +239,7 @@ class StealthAndAttackTest {
     void playerMeetsEndRequirementsForStealthAndAttackQuest(){
         addGuildMapToInventory();
         quest.stealth(standardPlayer, enemy);
-        quest.negotiateWithEnemy(standardPlayer);
+        quest.negotiateWithEnemy(standardPlayer, enemy);
         quest.talkToTownsman();
         quest.endRequirementsFulfilled(standardPlayer);
         assertEquals(QuestState.COMPLETED, quest.getState());
@@ -246,10 +273,11 @@ class StealthAndAttackTest {
     }
 
     //Belöning
-    //Ökad relation med guild, XP
+
+    //Rätt belöning för att attackera
     @Test
     void correctRewardsForAttackingOnTime(){
-        quest.rewardWhenAttackingOnTime(standardPlayer);
+        quest.rewardWhenAttackingTheEnemy(standardPlayer);
         assertEquals(2500, standardPlayer.getExperiencePoint());
     }
 
@@ -262,7 +290,7 @@ class StealthAndAttackTest {
         //Guildrelation
     }*/
 
-    //Eller minskad relation med guild, pengar
+    //Rätt belöning för att förhandla med fienden
     @Test
     void correctRewardsForNegotiatingWithEnemy(){
         quest.rewardWhenNegotiatingWithEnemy(standardPlayer);
@@ -270,7 +298,7 @@ class StealthAndAttackTest {
         assertEquals(300, standardPlayer.getMaxHealthPoint());
     }
 
-    //Rätt reward när attack
+    //Rätt reward när attack med getReward-metoden
     @Test
     void getRewardMethodReturnsCorrectRewardForAttacking(){
         addGuildMapToInventory();
@@ -281,18 +309,19 @@ class StealthAndAttackTest {
         assertEquals(2600, standardPlayer.getExperiencePoint()); //Borde vara 2500
     }
 
-    //Förhandlade med fienden rätt reward
+    //Förhandlade med fienden rätt reward med getReward-metoden
     @Test
     void getRewardMethodReturnsCorrectRewardForNegotiatingWithEnemy(){
         addGuildMapToInventory();
         quest.stealth(standardPlayer, enemy);
-        quest.negotiateWithEnemy(standardPlayer);
+        quest.negotiateWithEnemy(standardPlayer, enemy);
         quest.talkToTownsman();
         quest.getReward(standardPlayer);
         assertEquals(2000, standardPlayer.getExperiencePoint());
         assertEquals(300, standardPlayer.getMaxHealthPoint());
     }
 
+    //toString returnerar rätt sträng
     @Test
     void toStringMethodReturnsCorrectString(){
         assertEquals("Stealth and Attack: You have to follow your enemy without being seen and then attack him. PENDING, true, false, false, false, null", quest.toString());

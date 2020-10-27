@@ -14,8 +14,6 @@ import magic.ValueCheck;
 
 public class Player extends Unit{
 	
-    //private PlayerClass playerClass;
-    //private Race race; //Beror på om vi vill göra klasserna Class och Race, jag kör med String sålänge
     private final String playerClass;
     private final String race;
     private static final int MAX_ALLOWED_EXPERIENCE = 500070023;
@@ -318,6 +316,10 @@ public class Player extends Unit{
 
 	public int getCompletedQuestCount(Quest quest){
     	return questLog.getCompletedQuestCount();
+	}
+
+	public ArrayList<Quest> getPlayerCompletedQuests(){
+    	return questLog.getCompletedQuests();
 	}
 
     public boolean attack(Combatant enemy, Attack attack) {

@@ -152,6 +152,7 @@ class TalkToGuildLeaderTest {
         assertEquals(1, player.getInventoryCount(widowsWail));
     }
 
+    //toString returnerar rätt sträng
     @Test
     void toStringMethodReturnsCorrectString(){
         assertEquals("Talk to Guild Leader: You have to talk to the guild leader west of town.. PENDING, true, false", quest.toString());
