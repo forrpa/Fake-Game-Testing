@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import equipment.*;
+import quest.Coordinates;
 import quest.Quest;
 import quest.QuestLog;
 import unit.*;
@@ -35,6 +36,7 @@ public class Player extends Unit{
     private Inventory playerInventory = new Inventory();
     private final Cupboard cupboard = new Cupboard(this);
     private QuestLog questLog = new QuestLog();
+    private Coordinates coordinates;
     
     public Player(String playerClass, String race, int maxHealthPoint, int experiencePoint){
         super(maxHealthPoint, 1, true);
@@ -45,6 +47,7 @@ public class Player extends Unit{
         setArmorTypeHashMap();
         setWeaponTypeHashMap();
         updateAttributes();
+        setCoordinates(new Coordinates(0, 0));
     }
     private void makeSureClassAndRaceAreNotNull(String playerClass, String race) {
     	ValueCheck.stringCheck(playerClass);
@@ -322,7 +325,19 @@ public class Player extends Unit{
     	return questLog.getCompletedQuests();
 	}
 
-    public boolean attack(Combatant enemy, Attack attack) {
+	public int getXCoordinate(){
+    	return coordinates.getX();
+	}
+
+	public int getYCoordinate(){
+    	return coordinates.getY();
+	}
+
+	public void setCoordinates(Coordinates coordinates) {
+		this.coordinates = coordinates;
+	}
+
+	public boolean attack(Combatant enemy, Attack attack) {
         if(!isAlive()){
             throw new IllegalStateException("The player is dead");
         }else if(!enemy.isAlive()){

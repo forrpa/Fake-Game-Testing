@@ -1,7 +1,6 @@
 package quest;
 import equipment.BreastplateOfTesting;
 import equipment.BucklerOfUselessness;
-import magic.MagicPlayer;
 import player.Player;
 import unit.Questgiver;
 import weapon.Heartsbane;
@@ -75,9 +74,9 @@ public class TalkToGuildLeader extends Quest {
         }
     }
 
-    public void rewardBasedOnMagic(Player player){
+    //public void rewardBasedOnMagic(Player player){
         //If Player is a magic player
-    }
+    //}
 
     public void rewardBasedOnRace(Player player){
         switch (player.getRace()){

@@ -3,7 +3,7 @@ package unit;
 import org.junit.jupiter.api.Test;
 import player.Player;
 import quest.Quest;
-import quest.StealthAndAttack;
+import quest.ExploreAndAttack;
 import quest.TalkToGuildLeader;
 
 import java.util.ArrayList;
@@ -51,7 +51,7 @@ class QuestgiverTest {
         Player player = new Player("NPC", "Orc", 5, 1500);
         ArrayList <Quest> questsForQuestgiver = new ArrayList<>();
         Quest quest1 = new TalkToGuildLeader();
-        Quest quest2 = new StealthAndAttack();
+        Quest quest2 = new ExploreAndAttack();
         questsForQuestgiver.add(quest1);
         questsForQuestgiver.add(quest2);
         Questgiver questgiver = new Questgiver("Guild Leader", questsForQuestgiver);

@@ -5,12 +5,12 @@ import player.Player;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class StealthAndAttackTest {
+class ExploreAndAttackTest {
 
     Player standardPlayer = new Player("Tank", "Human", 200, 1500);
     Player player;
     GuildMap guildMap = new GuildMap();
-    StealthAndAttack quest = new StealthAndAttack();
+    ExploreAndAttack quest = new ExploreAndAttack();
     StealthAndAttackEnemy enemy = new StealthAndAttackEnemy();
     TalkToGuildLeader talkToGuildLeader;
 
@@ -61,9 +61,7 @@ class StealthAndAttackTest {
     @Test
     @DisplayName("Required Quest is null")
     void getRequiredQuestIsNullReturnsNullPointerException(){
-        assertThrows(NullPointerException.class, () -> {
-            quest.getRequiredQuest(standardPlayer);
-        });
+        assertThrows(NullPointerException.class, () -> quest.getRequiredQuest(standardPlayer));
     }
 
     //Testa om det går att starta questet
@@ -91,11 +89,34 @@ class StealthAndAttackTest {
         assertFalse(quest.hasAttacked());
     }
 
+    @Test
+    void playerFindsEnemyWhenExploring(){
+        standardPlayer.setCoordinates(new Coordinates(254, 566)); //Fiendens koordinater
+        quest.explore(standardPlayer, enemy);
+        assertTrue(quest.isEnemyFound());
+    }
+
+    @Test
+    void playerDoesNotFindEnemyWhenExploring(){
+        standardPlayer.setCoordinates(new Coordinates(255, 566));
+        quest.explore(standardPlayer, enemy);
+        assertFalse(quest.isEnemyFound());
+    }
+
+    @Test
+    void playerDiesDuringExploring(){
+        standardPlayer.setCoordinates(new Coordinates(255, 216));
+        standardPlayer.setHealthPoint(0);
+        quest.explore(standardPlayer, enemy);
+        assertEquals(200, standardPlayer.getHealthPoint());
+    }
+
     //Testa om man lyckas med stealth
+    /*
     @Test
     void stealthSucceeded(){
         quest.stealth(standardPlayer, enemy);
-        assertTrue(quest.hasSucceededStealth());
+        assertTrue(quest.isEnemyFound());
         assertEquals("You succeeded not being seen, now you have to decide if you want to kill your enemy or negotiate with it.", quest.getDescription());
         assertTrue(quest.stealth(standardPlayer, enemy));
     }
@@ -105,13 +126,14 @@ class StealthAndAttackTest {
     void stealthNotSucceeded(){
         standardPlayer.setHealthPoint(1);
         assertFalse(quest.stealth(standardPlayer, enemy));
-    }
+    }*/
 
     //Testa krav för att starta attack eller förhandla med fienden
     @Test
     void canPlayerStartAttackOrNegotiatingWithEnemy(){
-        quest.stealth(standardPlayer, enemy);
-        assertTrue(quest.hasSucceededStealth());
+        standardPlayer.setCoordinates(new Coordinates(254, 566));
+        quest.explore(standardPlayer, enemy);
+        assertTrue(quest.isEnemyFound());
     }
 
     //Spelaren kan inte starta attack eller förhandla med fienden
@@ -123,7 +145,8 @@ class StealthAndAttackTest {
     //Fiende dör i attack och man lyckas
     @Test
     void successfulAttack(){
-        quest.stealth(standardPlayer, enemy);
+        standardPlayer.setCoordinates(new Coordinates(254, 566));
+        quest.explore(standardPlayer, enemy);
         enemy.setHealthPoint(1);
         assertTrue(quest.attack(standardPlayer, enemy));
         assertTrue(quest.hasAttacked());
@@ -133,7 +156,8 @@ class StealthAndAttackTest {
     //Spelaren dör i attack
     @Test
     void playerDiesInAttack(){
-        quest.stealth(standardPlayer, enemy);
+        standardPlayer.setCoordinates(new Coordinates(254, 566));
+        quest.explore(standardPlayer, enemy);
         enemy.setMaxHealthPoint(1000);
         enemy.setHealthPoint(1000);
         assertFalse(quest.attack(standardPlayer, enemy));
@@ -143,7 +167,8 @@ class StealthAndAttackTest {
     @Test
     void successfulNegotiatingWithEnemy(){
         addGuildMapToInventory();
-        quest.stealth(standardPlayer, enemy);
+        standardPlayer.setCoordinates(new Coordinates(254, 566));
+        quest.explore(standardPlayer, enemy);
         quest.negotiateWithEnemy(standardPlayer, enemy); //NYTT
         assertTrue(quest.hasTalkedToEnemy());
         assertEquals("You decided to talk to your enemy instead of killing him. Now you cant reach the Guild so you have to talk to the Townsman.", quest.getDescription());
@@ -154,7 +179,8 @@ class StealthAndAttackTest {
     @Test
     void playerCanTalkToGuildMaster(){
         addGuildMapToInventory();
-        quest.stealth(standardPlayer, enemy);
+        standardPlayer.setCoordinates(new Coordinates(254, 566));
+        quest.explore(standardPlayer, enemy);
         quest.attack(standardPlayer, enemy); //Ger false
         assertTrue(quest.hasAttacked());
         assertEquals(1, standardPlayer.getInventoryCount(guildMap));
@@ -164,7 +190,8 @@ class StealthAndAttackTest {
     @Test
     void successfulTalkToGuildMaster(){
         GuildMaster guildMaster = quest.getGuildMaster();
-        quest.stealth(standardPlayer, enemy);
+        standardPlayer.setCoordinates(new Coordinates(254, 566));
+        quest.explore(standardPlayer, enemy);
         quest.attack(standardPlayer, enemy);
         addGuildMapToInventory();
         quest.talkToGuildMaster(standardPlayer);
@@ -182,7 +209,8 @@ class StealthAndAttackTest {
     @Test
     void canPlayerTalkToTownsman(){
         addGuildMapToInventory();
-        quest.stealth(standardPlayer, enemy);
+        standardPlayer.setCoordinates(new Coordinates(254, 566));
+        quest.explore(standardPlayer, enemy);
         quest.negotiateWithEnemy(standardPlayer, enemy); //NYTT
         assertTrue(quest.hasTalkedToEnemy());
     }
@@ -192,7 +220,8 @@ class StealthAndAttackTest {
     void succesfulTalkToTownsman(){
         Townsman townsman = quest.getTownsman();
         addGuildMapToInventory();
-        quest.stealth(standardPlayer, enemy);
+        standardPlayer.setCoordinates(new Coordinates(254, 566));
+        quest.explore(standardPlayer, enemy);
         quest.negotiateWithEnemy(standardPlayer, enemy); //NYTT
         quest.talkToTownsman();
         assertTrue(townsman.talk());
@@ -212,23 +241,19 @@ class StealthAndAttackTest {
     @Test
     void playerMeetsEndRequirementsForAttackingOnTime(){
         addGuildMapToInventory();
-        quest.stealth(standardPlayer, enemy);
+        standardPlayer.setCoordinates(new Coordinates(254, 566));
+        quest.explore(standardPlayer, enemy);
         quest.attack(standardPlayer, enemy);
         quest.talkToGuildMaster(standardPlayer);
         assertTrue(quest.endRequirementsForAttackingTheEnemy());
     }
 
-    //Lyckas med smygande, attackera men ej lyckas på tid, prata med guildmaster
-    /*@Test
-    void playerMeetsEndRequirementsForNotAttackingOnTime(){
-        assertTrue(quest.endRequirementsForNotAttackingOnTime()); //FUNKAR EJ
-    }*/
-
     //Lyckas med smygande, ej attackera och prata med Townsman
     @Test
     void playerMeetsEndRequirementsForNegotiatingWithEnemy(){
         addGuildMapToInventory();
-        quest.stealth(standardPlayer, enemy);
+        standardPlayer.setCoordinates(new Coordinates(254, 566));
+        quest.explore(standardPlayer, enemy);
         quest.negotiateWithEnemy(standardPlayer, enemy);
         quest.talkToTownsman();
         assertTrue(quest.endRequirementsForNegotiatingWithEnemy());
@@ -238,7 +263,8 @@ class StealthAndAttackTest {
     @Test
     void playerMeetsEndRequirementsForStealthAndAttackQuest(){
         addGuildMapToInventory();
-        quest.stealth(standardPlayer, enemy);
+        standardPlayer.setCoordinates(new Coordinates(254, 566));
+        quest.explore(standardPlayer, enemy);
         quest.negotiateWithEnemy(standardPlayer, enemy);
         quest.talkToTownsman();
         quest.endRequirementsFulfilled(standardPlayer);
@@ -256,7 +282,8 @@ class StealthAndAttackTest {
     @Test
     void playerCompletesQuestSuccessfully(){
         addGuildMapToInventory();
-        quest.stealth(standardPlayer, enemy);
+        standardPlayer.setCoordinates(new Coordinates(254, 566));
+        quest.explore(standardPlayer, enemy);
         quest.attack(standardPlayer, enemy);
         quest.talkToGuildMaster(standardPlayer);
         quest.completeQuest(standardPlayer);
@@ -281,15 +308,6 @@ class StealthAndAttackTest {
         assertEquals(2500, standardPlayer.getExperiencePoint());
     }
 
-    /*
-    //Eller liten ökad relation med guild, mindre XP
-    @Test
-    void correctRewardsForNotAttackingOnTime(){
-        quest.rewardWhenNotAttackingOnTime(standardPlayer);
-        assertEquals(1800, standardPlayer.getExperiencePoint());
-        //Guildrelation
-    }*/
-
     //Rätt belöning för att förhandla med fienden
     @Test
     void correctRewardsForNegotiatingWithEnemy(){
@@ -302,7 +320,8 @@ class StealthAndAttackTest {
     @Test
     void getRewardMethodReturnsCorrectRewardForAttacking(){
         addGuildMapToInventory();
-        quest.stealth(standardPlayer, enemy);
+        standardPlayer.setCoordinates(new Coordinates(254, 566));
+        quest.explore(standardPlayer, enemy);
         quest.attack(standardPlayer, enemy);
         quest.talkToGuildMaster(standardPlayer);
         quest.getReward(standardPlayer);
@@ -313,7 +332,8 @@ class StealthAndAttackTest {
     @Test
     void getRewardMethodReturnsCorrectRewardForNegotiatingWithEnemy(){
         addGuildMapToInventory();
-        quest.stealth(standardPlayer, enemy);
+        standardPlayer.setCoordinates(new Coordinates(254, 566));
+        quest.explore(standardPlayer, enemy);
         quest.negotiateWithEnemy(standardPlayer, enemy);
         quest.talkToTownsman();
         quest.getReward(standardPlayer);
@@ -326,4 +346,5 @@ class StealthAndAttackTest {
     void toStringMethodReturnsCorrectString(){
         assertEquals("Stealth and Attack: You have to follow your enemy without being seen and then attack him. PENDING, true, false, false, false, null", quest.toString());
     }
+
 }

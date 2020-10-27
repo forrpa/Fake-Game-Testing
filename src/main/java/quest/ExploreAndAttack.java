@@ -5,9 +5,9 @@ import unit.Villager;
 
 import java.util.ArrayList;
 
-public class StealthAndAttack extends Quest {
+public class ExploreAndAttack extends Quest {
 
-    private boolean succeededStealth = false;
+    private boolean enemyIsFound = false;
     private boolean attacked;
     private boolean talkedToEnemy;
     private Villager talkedTo;
@@ -15,12 +15,12 @@ public class StealthAndAttack extends Quest {
     private final GuildMaster guildMaster = new GuildMaster("Robert");
     private final Townsman townsman = new Townsman("Jennie J");
 
-    public StealthAndAttack(){
+    public ExploreAndAttack(){
         super("Stealth and Attack", "You have to follow your enemy without being seen and then attack him", QuestState.PENDING, true);
     }
 
-    public boolean hasSucceededStealth(){
-        return succeededStealth;
+    public boolean isEnemyFound(){
+        return enemyIsFound;
     }
 
     public boolean hasAttacked() {
@@ -44,13 +44,14 @@ public class StealthAndAttack extends Quest {
     }
 
     public Quest getRequiredQuest(Player player){
-        Quest quest;
         ArrayList<Quest> completedPlayerQuests = player.getPlayerCompletedQuests();
         for (Quest q : completedPlayerQuests){
             if (q instanceof TalkToGuildLeader){
                 return q;
+            } else {
+                continue;
             }
-        } //Inte 100% coverage
+        }
         throw new NullPointerException("Completed Quests doesnt have a Talk To Guild Leader Quest");
     }
 
@@ -84,20 +85,19 @@ public class StealthAndAttack extends Quest {
         startQuest(player);
     }
 
-    public boolean stealth(Player player, StealthAndAttackEnemy enemy){
-        if (player.getHealthPoint() < enemy.getHealthPoint()){
-            succeededStealth = false;
+    public void explore(Player player, StealthAndAttackEnemy enemy){
+        if (enemy.isFound(player)){
+            enemyIsFound = true;
+            description = "You found the enemy, now you have to decide if you want to kill your enemy or negotiate with it.";
+        } //else if (magicPeach.isConsumed){
+            //Nytt quest
+            else if (player.getHealthPoint() == 0){
             resetQuest(player);
-            return false;
-        } else {
-            succeededStealth = true;
-            description = "You succeeded not being seen, now you have to decide if you want to kill your enemy or negotiate with it.";
-            return true;
         }
     }
 
     public boolean attack(Player player, StealthAndAttackEnemy enemy){
-        if (succeededStealth) {
+        if (enemyIsFound) {
             description = "Attack before the enemy escapes!";
 
             while (player.getHealthPoint() > 0){
@@ -120,7 +120,7 @@ public class StealthAndAttack extends Quest {
     }
 
     public void negotiateWithEnemy(Player player, StealthAndAttackEnemy enemy){
-        if (succeededStealth){
+        if (enemyIsFound){
             enemy.talk();
             talkedToEnemy = true;
             description = "You decided to talk to your enemy instead of killing him. Now you cant reach the Guild so you have to talk to the Townsman.";
@@ -199,55 +199,19 @@ public class StealthAndAttack extends Quest {
 
     @Override
     public String toString() {
-        return String.format("%s: %s. %s, %b, %b, %b, %b, %s", getName(), getDescription(), getState(), isMandatory(), hasSucceededStealth(), hasAttacked(), hasTalkedToEnemy(), talkedTo);
+        return String.format("%s: %s. %s, %b, %b, %b, %b, %s", getName(), getDescription(), getState(), isMandatory(), isEnemyFound(), hasAttacked(), hasTalkedToEnemy(), talkedTo);
     }
 }
 
-//TEST
-    /*public boolean attack(Player player, Monster monster){
-        if (stealth(player, monster)) {
-            //Attack attack = new Attack(timer, player, enemy);
-            player.attack(monster);
-            attacked = true;
-            description = "Attack before the enemy escapes!";
-            while (attack.getTimer() > 0) {
-                attack.decreaseTimerByOne();
-                if (enemy.getHealth() == 0) {
-                    break;
-                } else if (attack.getTimer() == 0) {
-                    description = "Your enemy escaped. Go talk to the Guild Leader.";
-                    return true;
-                } else if (player.getHealthPoint() == 0) {
-                    resetQuest(player);
-                    return false;
-                }
-            }
-            description = "You succeeded killing your enemy on time. Go talk to the Guild Leader for your reward!";
-            return true; //Returnerar alltid true?? testa
-        } else {
+    /*
+    public boolean stealth(Player player, StealthAndAttackEnemy enemy){
+        if (player.getHealthPoint() < enemy.getHealthPoint()){
+            enemyIsFound = false;
+            resetQuest(player);
             return false;
+        } else {
+            enemyIsFound = true;
+            description = "You succeeded not being seen, now you have to decide if you want to kill your enemy or negotiate with it.";
+            return true;
         }
     }*/
-
-//Dela upp metod, klass
-
-
-            /*attacked = true;
-            description = "Attack before the enemy escapes!";
-            while(timer > 0){
-                timer--;
-                if (monster.getHealthPoint() == 0){
-                    description = "You succeeded killing your enemy on time. Go talk to the Guild Leader for your reward!";
-                    return true;
-                } else if (timer == 0){
-                    //attackState = ""
-                    description = "Your enemy escaped. Go talk to the Guild Leader.";
-                    return true;
-                } else if (player.getHealthPoint() == 0){
-                    resetQuest(player);
-                    return false;
-                }*/
-//return true;
-        /*} else {
-            return false;
-        }*/
