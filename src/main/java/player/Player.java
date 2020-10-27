@@ -276,8 +276,6 @@ public class Player extends Unit{
 
     // methods added by Christoffer
 
-
-    //Jennifer
     public void addToInventory(Item item) {
         playerInventory.addItem(item);
     }
@@ -294,8 +292,16 @@ public class Player extends Unit{
         return playerInventory.getCount(item);
     }
 
-    public void addQuestToQuestLog(Quest quest){
-    	questLog.addQuestToQuestLog(quest);
+    public void addQuestToAvailableQuests(Quest quest){
+    	questLog.addQuestToAvailableQuests(quest);
+	}
+
+	public void addQuestToCurrentQuests(Quest quest){
+		questLog.addQuestToCurrentQuests(quest);
+	}
+
+	public void addQuestToCompletedQuests(Quest quest){
+		questLog.addQuestToCompletedQuests(quest);
 	}
 
 	public boolean isInCurrentQuests(Quest quest){
@@ -313,7 +319,6 @@ public class Player extends Unit{
 	public int getCompletedQuestCount(Quest quest){
     	return questLog.getCompletedQuestCount();
 	}
-
 
     public boolean attack(Combatant enemy, Attack attack) {
         if(!isAlive()){

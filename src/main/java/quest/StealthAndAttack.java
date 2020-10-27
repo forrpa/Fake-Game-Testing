@@ -50,7 +50,7 @@ public class StealthAndAttack extends Quest {
     public boolean startRequirementsFulfilled(Player player){
         if (player.getExperiencePoint() >= 1500 && player.isInInventory(guildMap)){ //&& player.questlog().contains("TalkToGuildLeader")
             state = QuestState.UNLOCKED;
-            player.addQuestToQuestLog(this);
+            player.addQuestToAvailableQuests(this);
             return true;
         } else {
             return false;
@@ -61,7 +61,7 @@ public class StealthAndAttack extends Quest {
     public boolean startQuest(Player player){
         if (startRequirementsFulfilled(player)){
             state = QuestState.IN_PROGRESS;
-            player.addQuestToQuestLog(this);
+            player.addQuestToCurrentQuests(this);
             description = "Your first job is to follow the enemy without being seen.";
             return true;
         } else {
@@ -202,7 +202,7 @@ public class StealthAndAttack extends Quest {
     public boolean completeQuest(Player player){
         if (endRequirementsFulfilled(player)){
             state = QuestState.DONE;
-            player.addQuestToQuestLog(this);
+            player.addQuestToCompletedQuests(this);
             description= "You completed the quest!";
             getReward(player);
             player.restoreFullHealth();

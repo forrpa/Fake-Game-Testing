@@ -24,7 +24,7 @@ public class TalkToGuildLeader extends Quest {
     public boolean startRequirementsFulfilled(Player player) {
         if (player.getExperiencePoint() >= 1000){
             state = QuestState.UNLOCKED;
-            player.addQuestToQuestLog(this);
+            player.addQuestToAvailableQuests(this);
             return true;
         } else {
             return false;
@@ -36,7 +36,7 @@ public class TalkToGuildLeader extends Quest {
         if (startRequirementsFulfilled(player)){
             questgiver.talk();
             state = QuestState.IN_PROGRESS;
-            player.addQuestToQuestLog(this);
+            player.addQuestToCurrentQuests(this);
             return true;
         } else {
             return false;
@@ -62,7 +62,7 @@ public class TalkToGuildLeader extends Quest {
     public boolean completeQuest(Player player) {
         if (endRequirementsFulfilled(player)){
             state = QuestState.DONE;
-            player.addQuestToQuestLog(this);
+            player.addQuestToCompletedQuests(this);
             player.increaseExperiencePoint(500);
             //rewardBasedOnClass(player);
             rewardBasedOnRace(player);

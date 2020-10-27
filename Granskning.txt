@@ -18,7 +18,7 @@ Items:
 
 
 protected final på namn och description; (2)
-RequiredLevel  borde heta REquiredUnitLevel och bör testas så den inte sätts högre än max tillåtet för playerklassen. (3)
+RequiredLevel  borde heta RequiredUnitLevel och bör testas så den inte sätts högre än max tillåtet för playerklassen. (3)
 
 
 
@@ -38,11 +38,11 @@ magic numbers, 17 och 31. (1)
 Edible.class
 [-]varför har alla Edible manaPoints, healthpoints och experiencePoints. (1)
 
-kommentera vad klassen gör och vad variablerna manaPoint, healtPoint och experiencePoint gär. (2)
-tydligare namn? (1)
+[-]kommentera vad klassen gör och vad variablerna manaPoint, healtPoint och experiencePoint gär. (2)
+[-]tydligare namn? (1)
 
 private final int checkPointValueRange()
-finall är överflödigt då private för att den inte går att överskugga. (1)
+final är överflödigt då private för att den inte går att överskugga. (1)
 
 Varförr -10 || 10.
 magic numers 10 -10; (1)
@@ -50,7 +50,7 @@ magic numers 10 -10; (1)
 
 consume()
 bör vara packet protected. (3)
-bör ha en kommentar vad den gör. (1)
+[-]bör ha en kommentar vad den gör. (1)
 
 
 Potion.class.
@@ -58,8 +58,8 @@ requiredLevel bör heta experiencePoint. (3)
 svårt att öka med nya spells om det är def i konstruktor vad de påverkar. (?)
 
 ForbiddenFruit.class
-bör ha en klassbeskrivning. vad är forbidden fruit. (1)
-vad är syftet med Potion poison i forbiden fruit? beskrivning. (1)
+[-]bör ha en klassbeskrivning. vad är forbidden fruit. (1)
+[-]vad är syftet med Potion poison i forbiden fruit? beskrivning. (1)
 
 konstruktorn:
 setPosion(null) är redundant då den är null är null utan att instansieras. (1)
