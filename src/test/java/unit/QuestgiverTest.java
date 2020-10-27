@@ -46,7 +46,7 @@ class QuestgiverTest {
     }
 
     @Test
-    void twoAvailableQuestsTalkToGuildLeaderAndExploreAndAttackTalkToGuildLeaderTakenAndStealthAndAttackLeftAtQuestgiver() {
+    void twoAvailableQuestsTalkToGuildLeaderAndExploreAndAttackTalkToGuildLeaderTakenAndExploreAndAttackLeftAtQuestgiver() {
         //Set-up
         Player player = new Player("NPC", "Orc", 5, 1500);
         ArrayList <Quest> questsForQuestgiver = new ArrayList<>();
@@ -59,8 +59,8 @@ class QuestgiverTest {
         player.takeQuest(questgiver, quest1);
         //Check that 1 quest named Talk to Guild Leader is taken
         assertTrue(player.isInCurrentQuests(quest1));
-        //Check that questgiver has Stealth and Attack left
-        assertEquals("Stealth and Attack",questgiver.getAllQuestNames());
+        //Check that questgiver has Explore and Attack left
+        assertEquals("Explore and Attack",questgiver.getAllQuestNames());
     }
 }
 

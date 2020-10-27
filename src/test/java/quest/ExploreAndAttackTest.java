@@ -33,7 +33,7 @@ class ExploreAndAttackTest {
     //Konstruktor
     @Test
     void testConstructor(){
-        assertEquals("Stealth and Attack", quest.getName());
+        assertEquals("Explore and Attack", quest.getName());
         assertEquals("You have to follow your enemy without being seen and then attack him", quest.getDescription());
         assertEquals(QuestState.PENDING, quest.getState());
         assertTrue(quest.isMandatory());
@@ -50,7 +50,7 @@ class ExploreAndAttackTest {
 
     //Har inte tillräckligt med experience för att starta questet
     @Test
-    void playerDoesNotMeetStartRequirementsForStealthAndAttackQuest(){
+    void playerDoesNotMeetStartRequirementsForExploreAndAttackQuest(){
         player = new Player("Human", "Damage", 200, 1499);
         talkToGuildLeader = new TalkToGuildLeader();
         player.addQuestToCompletedQuests(talkToGuildLeader);
@@ -66,7 +66,7 @@ class ExploreAndAttackTest {
 
     //Testa om det går att starta questet
     @Test
-    void playerStartsStealthAndAttackQuestSuccessfully() {
+    void playerStartsExploreAndAttackQuestSuccessfully() {
         addGuildMapToInventory();
         quest.startQuest(standardPlayer);
         assertEquals(QuestState.IN_PROGRESS, quest.getState());
@@ -76,7 +76,7 @@ class ExploreAndAttackTest {
 
     //Kan ej starta questet
     @Test
-    void playerCantStartStealthAndAttackQuest(){
+    void playerCantStartExploreAndAttackQuest(){
         assertFalse(quest.startQuest(standardPlayer));
     }
 
@@ -111,7 +111,7 @@ class ExploreAndAttackTest {
         assertEquals(200, standardPlayer.getHealthPoint());
     }
 
-    //Testa om man lyckas med stealth
+    //Testa om man lyckas med Explore
     /*
     @Test
     void stealthSucceeded(){
@@ -261,7 +261,7 @@ class ExploreAndAttackTest {
 
     //Klarar man något krav för att klara questet, i detta fall förhandla med fienden
     @Test
-    void playerMeetsEndRequirementsForStealthAndAttackQuest(){
+    void playerMeetsEndRequirementsForExploreAndAttackQuest(){
         addGuildMapToInventory();
         standardPlayer.setCoordinates(new Coordinates(254, 566));
         quest.explore(standardPlayer, enemy);
@@ -274,7 +274,7 @@ class ExploreAndAttackTest {
 
     //Klarar inte slutkrav för questet
     @Test
-    void playerDoesNotMeetEndRequirementsForStealthAndAttackQuest(){
+    void playerDoesNotMeetEndRequirementsForExploreAndAttackQuest(){
         assertFalse(quest.endRequirementsFulfilled(standardPlayer));
     }
 
@@ -344,7 +344,7 @@ class ExploreAndAttackTest {
     //toString returnerar rätt sträng
     @Test
     void toStringMethodReturnsCorrectString(){
-        assertEquals("Stealth and Attack: You have to follow your enemy without being seen and then attack him. PENDING, true, false, false, false, null", quest.toString());
+        assertEquals("Explore and Attack: You have to follow your enemy without being seen and then attack him. PENDING, true, false, false, false, null", quest.toString());
     }
 
 }
