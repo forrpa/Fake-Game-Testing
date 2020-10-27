@@ -14,6 +14,8 @@ public class ExploreAndAttack extends Quest {
     private final GuildMap guildMap = new GuildMap();
     private final GuildMaster guildMaster = new GuildMaster("Robert");
     private final Townsman townsman = new Townsman("Jennie J");
+    private final MagicPeach magicPeach = new MagicPeach();
+    private final StealthAndAttackEnemy enemy = new StealthAndAttackEnemy();
 
     public ExploreAndAttack(){
         super("Explore and Attack", "You have to follow your enemy without being seen and then attack him", QuestState.PENDING, true);
@@ -85,13 +87,16 @@ public class ExploreAndAttack extends Quest {
         startQuest(player);
     }
 
-    public void explore(Player player, StealthAndAttackEnemy enemy){
+    public void explore(Player player){
         if (enemy.isFound(player)){
             enemyIsFound = true;
             description = "You found the enemy, now you have to decide if you want to kill your enemy or negotiate with it.";
-        } //else if (magicPeach.isConsumed){
-            //Nytt quest
-            else if (player.getHealthPoint() == 0){
+        } else if (magicPeach.isFound(player)) {
+            magicPeach.eat(player);
+            player.addQuestToAvailableQuests(new SecretCave());
+            player.setCoordinates(new Coordinates(124, 2900));
+            explore(player);
+        } else if (player.getHealthPoint() == 0){
             resetQuest(player);
         }
     }

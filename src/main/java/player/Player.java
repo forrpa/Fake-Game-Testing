@@ -321,6 +321,12 @@ public class Player extends Unit{
     	return questLog.getCompletedQuestCount();
 	}
 
+	public ArrayList<Quest> getPlayerAvailableQuests(){
+		return questLog.getAvailableQuests();
+	}
+
+	public ArrayList<Quest> getPlayerCurrentQuests() {return questLog.getCurrentQuests();}
+
 	public ArrayList<Quest> getPlayerCompletedQuests(){
     	return questLog.getCompletedQuests();
 	}
