@@ -2,6 +2,7 @@ package unit;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import quest.*;
 import player.*;
 
@@ -29,6 +30,23 @@ public class Questgiver extends Villager {
             }
         }
         quests.removeAll(attainedQuests);
+    }
+
+    public void takeQuest(Quest questToBeTaken, Player player){
+        Quest questTaken = null;
+        for(Quest quest : quests){
+            if(quest.getName().equals(questToBeTaken.getName())){
+                if(quest.startQuest(player)) {
+                    questTaken = quest;
+                }else{
+                    throw new IllegalStateException("You cant take this quest");
+                }
+            }
+        }if(questTaken != null){
+            quests.remove(questTaken);
+        }else {
+            throw new IllegalArgumentException("Questgiver doesn't have that quest");
+        }
     }
 
     public String getAllQuestNames(){

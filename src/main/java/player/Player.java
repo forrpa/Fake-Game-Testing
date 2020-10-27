@@ -371,6 +371,22 @@ public class Player extends Unit{
 		}
 	}
 
+	public void takeQuest(Questgiver questgiver, Quest quest){
+    	if(questgiver != null || quest != null){
+    		questgiver.takeQuest(quest, this);
+		}else{
+    		throw new NullPointerException("Neither quest or questgiver can't be null");
+		}
+	}
+
+	public void takeAllQuests(Questgiver questgiver){
+    	if(questgiver != null){
+    		questgiver.takeAvailableQuests(this);
+		}else{
+    		throw new NullPointerException("Questgiver cant be null");
+		}
+	}
+
     @Override
     public boolean equals(Object obj) {
     	if(obj instanceof Player) {
