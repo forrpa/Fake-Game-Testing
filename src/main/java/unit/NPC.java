@@ -1,13 +1,16 @@
 package unit;
 
 public abstract class NPC extends Unit {
-    private String name;
-    private AttackType resistance;
-    private AttackType weakness;
+    private final String name;
+    private final AttackType resistance;
+    private final AttackType weakness;
     private int experiencePoints;
 
     public NPC (String name, int maxHealth, int attackPower, int experiencePoints, boolean isGrounded, AttackType resistance, AttackType weakness){
         super(maxHealth, attackPower, isGrounded);
+        if((resistance != null && resistance.equals(weakness)) || (weakness != null && weakness.equals(resistance))){
+            throw new IllegalArgumentException("Weakness can't be the same as resistance");
+        }
         this.resistance = resistance;
         this.weakness = weakness;
         if(experiencePoints <= 0){

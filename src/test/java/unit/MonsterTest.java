@@ -38,6 +38,16 @@ class MonsterTest {
         assertThrows(IllegalArgumentException.class, () -> new Bat("556", STANDARD_BAT_HEALTH, STANDARD_BAT_ATTACKPOWER, STANDARD_BAT_EXPERIENCEPOINTS, null, null));
     }
     @Test
+    void batAttackPowerSetToNegativeFiveByConstructorThrowsIllegalArgumentException(){
+        //Constructor throws error for negative number as attackpower
+        assertThrows(IllegalArgumentException.class, () -> new Bat("Bat", STANDARD_BAT_HEALTH, -5, STANDARD_BAT_EXPERIENCEPOINTS, null, null));
+    }
+    @Test
+    void batHealthSetToNegativeFiveByConstructorThrowsIllegalArgumentException(){
+        //Constructor throws error for negative number as health
+        assertThrows(IllegalArgumentException.class, () -> new Bat("Bat", -5, STANDARD_BAT_ATTACKPOWER, STANDARD_BAT_EXPERIENCEPOINTS, null, null));
+    }
+    @Test
     void toStringReturnsCorrectString(){
         Monster bat = new Bat();
         assertEquals("Name: Bat, Max Health: 5, Current Health: 5, Attack Power: 2, Resistance: null, Weakness null.", bat.toString());
@@ -112,7 +122,8 @@ class MonsterTest {
     @Test
     void wolfWith0HealthAttacksOtherWolfThrowsIllegalStateException(){
         //Set-up
-        Monster wolf = new Wolf("Wolf", 0, 4, 0,null, null);
+        Monster wolf = new Wolf("Wolf", 1, 4, 0,null, null);
+        wolf.decreaseHealth(1);
         Monster otherWolf = new Wolf();
 
         //Asserts that a dead monster cant attack
@@ -187,7 +198,7 @@ class MonsterTest {
         assertThrows(IllegalStateException.class, () -> bat.getLooted());
     }
     @Test
-    void PlayerAttacksWolfAndGains100ExperiencePoints(){
+    void playerAttacksWolfAndGains100ExperiencePoints(){
         Player player = createPlayer();
         Monster wolf = new Wolf();
         for(int i = 0; i < 8; i++){
@@ -198,7 +209,7 @@ class MonsterTest {
     }
 
     @Test
-    void PlayerAttacksBatWithRangedAttackAndReturnsTrue(){
+    void playerAttacksBatWithRangedAttackAndReturnsTrue(){
         Player player = createPlayer();
         Monster bat = new Bat();
         Attack rangedAttack = new Attack(player.getAttackPower(), true);
@@ -207,7 +218,7 @@ class MonsterTest {
     }
     //Need tests for ranged attacks and update player looting
     @Test
-    void PlayerKillsTwoWolvesWithDifferentItemsAndLootsThemItemsAreInInventory(){
+    void playerKillsTwoWolvesWithDifferentItemsAndLootsThemItemsAreInInventory(){
         Player player = createPlayer();
         Ingredient wolfHair = new Ingredient("Wolf Hair", "Hair from a wolf");
         ArrayList wolfOneLoot = new ArrayList();
@@ -229,9 +240,13 @@ class MonsterTest {
     }
 
     @Test
-    void PlayerGetExperiencePointsZeroBecauseEnemyIsAlive(){
+    void playerGetExperiencePointsZeroBecauseEnemyIsAlive(){
         Player player = createPlayer();
         Monster bat = new Bat();
         player.increaseExperiencePoint(bat.getExperiencePoints());
+    }
+    @Test
+    void monsterWithSameResistanceAndWeaknessThrowsIllegalArgumentException(){
+        assertThrows(IllegalArgumentException.class, () -> new Bat("Bat", 5, 5, 100, AttackType.FIRE, AttackType.FIRE));
     }
 }

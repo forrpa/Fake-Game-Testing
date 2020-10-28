@@ -342,10 +342,10 @@ public class Player extends Unit{
 	}
 
 	public void takeQuest(Questgiver questgiver, Quest quest){
-    	if(questgiver != null || quest != null){
+    	if(questgiver != null && quest != null){
     		questgiver.takeQuest(quest, this);
 		}else{
-    		throw new NullPointerException("Neither quest or questgiver can't be null");
+    		throw new IllegalArgumentException("Neither quest or questgiver can't be null");
 		}
 	}
 
@@ -353,7 +353,7 @@ public class Player extends Unit{
     	if(questgiver != null){
     		questgiver.takeAvailableQuests(this);
 		}else{
-    		throw new NullPointerException("Questgiver cant be null");
+    		throw new IllegalArgumentException("Questgiver cant be null");
 		}
 	}
 

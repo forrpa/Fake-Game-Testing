@@ -2,7 +2,7 @@ package unit;
 
 public abstract class Unit implements Combatant {
     protected static final int MAX_ALLOWED_ATTRIBUTEVALUE = 50000;
-
+    protected static final int MIN_ALLOWED_ATTRIBUTEVALUE = 0;
     protected boolean isGrounded;
     protected int healthPoint;
     protected int maxHealthPoint;
@@ -48,6 +48,7 @@ public abstract class Unit implements Combatant {
 
     public void setAttackPower(int attackPower) {
     this.attackPower = validateAttributeValue(attackPower);
+
     }
 
     public void setMaxHealthPoint(int healthPoint){
@@ -71,8 +72,8 @@ public abstract class Unit implements Combatant {
     }
 
     public int validateAttributeValue(int attributeValue){
-        if(attributeValue <= 0){
-            return 0;
+        if(attributeValue < MIN_ALLOWED_ATTRIBUTEVALUE){
+            throw new IllegalArgumentException("Attributes cant be lower than minimum.");
         }else if( attributeValue <= MAX_ALLOWED_ATTRIBUTEVALUE) {
             return attributeValue;
         }else{

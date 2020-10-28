@@ -25,8 +25,12 @@ public class Questgiver extends Villager {
     public void takeAvailableQuests(Player player){
         ArrayList<Quest> attainedQuests = new ArrayList<>();
         for(Quest quest : quests){
-            if(quest.startQuest(player)){
-                attainedQuests.add(quest);
+            try {
+                if (quest.startQuest(player)) {
+                    attainedQuests.add(quest);
+                }
+            }catch (NullPointerException e){
+                break;
             }
         }
         quests.removeAll(attainedQuests);
@@ -70,11 +74,17 @@ public class Questgiver extends Villager {
             throw new IllegalArgumentException("Quest can't be null");
         }
     }
-    private void checkQuest(List<Quest> quest){
-        if(quest == null){
+    private void checkQuest(List<Quest> questList){
+        if(questList == null){
             throw new IllegalArgumentException("Quest can't be null");
-        }else if(quest.isEmpty()){
+        }else if(questList.isEmpty()){
             throw new IllegalArgumentException("Questgiver needs quests");
+        }else{
+            for(Quest quest:questList){
+                if (quest == null){
+                    throw new IllegalArgumentException("List contains null quests");
+                }
+            }
         }
     }
 }
