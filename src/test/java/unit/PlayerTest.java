@@ -2,6 +2,8 @@ package unit;
 
 import org.junit.jupiter.api.Test;
 import player.Player;
+import quest.Quest;
+import quest.TalkToGuildLeader;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -64,5 +66,25 @@ public class PlayerTest {
         assertTrue(bat.isAlive());
         assertFalse(player.isAlive());
         assertThrows(IllegalStateException.class, () -> player.attack(bat));
+    }
+    @Test
+    void playerTakesNullQuestFromQuestgiverThrowsIllegalArgumentException(){
+        Player player = new Player("Warrior", "Orc", 100, 0);
+        Quest quest = null;
+        Questgiver questgiver = new Questgiver("Quest Giver", new TalkToGuildLeader());
+        assertThrows(IllegalArgumentException.class, () -> player.takeQuest(questgiver, quest));
+    }
+    @Test
+    void playerTakesQuestFromNullQuestgiverThrowsIllegalArgumentException(){
+        Player player = new Player("Warrior", "Orc", 100, 0);
+        Quest quest = new TalkToGuildLeader();
+        Questgiver questgiver = null;
+        assertThrows(IllegalArgumentException.class, () -> player.takeQuest(questgiver, quest));
+    }
+    @Test
+    void playerTakesAllQuestsFromNullQuestgiverThrowsIllegalArgumentException(){
+        Player player = new Player("Warrior", "Orc", 100, 0);
+        Questgiver questgiver = null;
+        assertThrows(IllegalArgumentException.class, () -> player.takeAllQuests(questgiver));
     }
 }

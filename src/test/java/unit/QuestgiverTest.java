@@ -28,24 +28,6 @@ class QuestgiverTest {
     }
 
     @Test
-    void cantCreateNewQuestgiversWithANullQuest(){
-        Quest quest = null;
-        assertThrows(IllegalArgumentException.class, () -> new Questgiver("Guild Leader", quest));
-    }
-
-    @Test
-    void cantCreateNewQuestgiversWithANullList(){
-        ArrayList<Quest> quests = null;
-        assertThrows(IllegalArgumentException.class, () -> new Questgiver("Guild Leader", quests));
-    }
-
-    @Test
-    void cantCreateNewQuestgiversWithNoQuestsInList(){
-        ArrayList<Quest> quests = new ArrayList<>();
-        assertThrows(IllegalArgumentException.class, () -> new Questgiver("Guild Leader", quests));
-    }
-
-    @Test
     void twoAvailableQuestsTalkToGuildLeaderAndExploreAndAttackTalkToGuildLeaderTakenAndExploreAndAttackLeftAtQuestgiver() {
         //Set-up
         Player player = new Player("NPC", "Orc", 5, 1500);
@@ -56,11 +38,69 @@ class QuestgiverTest {
         questsForQuestgiver.add(quest2);
         Questgiver questgiver = new Questgiver("Guild Leader", questsForQuestgiver);
         //Take the TalkToGuildLeaderQuest
-        player.takeQuest(questgiver, quest1);
+        player.takeAllQuests(questgiver);
+        //player.takeQuest(questgiver, quest1);
         //Check that 1 quest named Talk to Guild Leader is taken
         assertTrue(player.isInCurrentQuests(quest1));
         //Check that questgiver has Explore and Attack left
         assertEquals("Explore and Attack",questgiver.getAllQuestNames());
+    }
+
+    @Test
+    void playerTakesQuestTalkToGuildLeaderSuccessfully(){
+        Player player = new Player("NPC", "Orc", 5, 1500);
+        Quest quest = new TalkToGuildLeader();
+        Questgiver questgiver = new Questgiver("Guild Leader", quest);
+        player.takeQuest(questgiver, quest);
+    }
+
+    @Test
+    void playerTakesQuestTalkToGuildLeaderFromQuestgiverWithoutThatQuestThrowsIllegalArgumentException(){
+        Player player = new Player("NPC", "Orc", 5, 1500);
+        Quest quest = new TalkToGuildLeader();
+        Questgiver questgiver = new Questgiver("Guild Leader", new ExploreAndAttack());
+        assertThrows(IllegalArgumentException.class, () -> player.takeQuest(questgiver, quest));
+    }
+
+    @Test
+    void playerTakesQuestTalkToGuildLeaderWithoutHavingEnoughExperienceThrowsIllegalStateException(){
+        Player player = new Player("NPC", "Orc", 5, 50);
+        Quest quest = new TalkToGuildLeader();
+        Questgiver questgiver = new Questgiver("Guild Leader", quest);
+        assertThrows(IllegalStateException.class, () -> player.takeQuest(questgiver, quest));
+    }
+
+/*    @Test
+    void playerTriesToTakeQuestTalkToGuildLeaderThrows(){
+        Player player = new Player("NPC", "Orc", 5, 1500);
+        Quest quest = new TalkToGuildLeader();
+        Questgiver questgiver = new Questgiver("Guild Leader", quest);
+        player.takeQuest(questgiver, quest);
+    }*/
+
+
+    @Test
+    void constructorGivenNullQuestThrowsIllegalArgumentException(){
+        Quest nullQuest = null;
+        assertThrows(IllegalArgumentException.class, () -> new Questgiver("Questgiver", nullQuest));
+    }
+
+    @Test
+    void constructorGivenNullQuestListThrowsIllegalArgumentException(){
+        ArrayList<Quest> nullQuestList = null;
+        assertThrows(IllegalArgumentException.class, () -> new Questgiver("Questgiver", nullQuestList));
+    }
+    @Test
+    void constructorGivenQuestListWithNullValueThrowsIllegalArgumentException(){
+        ArrayList<Quest> nullQuestList = new ArrayList<Quest>();
+        Quest nullQuest = null;
+        nullQuestList.add(nullQuest);
+        assertThrows(IllegalArgumentException.class, () -> new Questgiver("Questgiver", nullQuestList));
+    }
+    @Test
+    void constructorGivenEmptyQuestListThrowsIllegalArgumentException(){
+        ArrayList<Quest> quests = new ArrayList<>();
+        assertThrows(IllegalArgumentException.class, () -> new Questgiver("Guild Leader", quests));
     }
 }
 
