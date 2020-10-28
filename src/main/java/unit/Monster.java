@@ -26,9 +26,9 @@ public abstract class Monster extends NPC {
 
     private boolean isLootable() {
         if (isAlive()) {
-            throw new IllegalStateException("Monster can't be looted unless dead");
+            return false;
         } else if (itemsOnNPC == null || itemsOnNPC.isEmpty()) {
-            throw new IllegalStateException("No items on monster");
+            return false;
         }else{
             return true;
         }
@@ -39,6 +39,8 @@ public abstract class Monster extends NPC {
         if(isLootable()){
             lootedItems.addAll(itemsOnNPC);
             itemsOnNPC.clear();
+        }else{
+            throw new IllegalStateException("Monster is not lootable");
         }
         return lootedItems;
     }
