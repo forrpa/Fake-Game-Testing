@@ -12,6 +12,10 @@ public class MagicPeach extends Edible {
         super("Magic Peach", "What will happen if you eat this seemingly normal fruit?", 0, 5, 10);
     }
 
+    public boolean hasBeenFoundByPlayer(Player player) {
+        return hasBeenFoundByPlayer;
+    }
+
     public boolean isFound(Player player){
         if (player.getXCoordinate() == coordinates.getX() && player.getYCoordinate() == coordinates.getY() && !hasBeenFoundByPlayer){
             hasBeenFoundByPlayer = true;

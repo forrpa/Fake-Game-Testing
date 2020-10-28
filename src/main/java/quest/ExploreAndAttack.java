@@ -94,7 +94,7 @@ public class ExploreAndAttack extends Quest {
         } else if (magicPeach.isFound(player)) {
             magicPeach.eat(player);
             player.addQuestToAvailableQuests(new SecretCave());
-            player.setCoordinates(new Coordinates(124, 2900));
+            //player.setCoordinates(new Coordinates(124, 2900));
             explore(player);
         } else if (player.getHealthPoint() == 0){
             resetQuest(player);

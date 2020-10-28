@@ -59,6 +59,7 @@ class ExploreAndAttackTest {
         assertFalse(quest.startRequirementsFulfilled(player));
     }
 
+
     //Om man försöker hämta questet som krävs för att starta questet men questet finns inte
     @Test
     @DisplayName("Required Quest is null")
@@ -107,26 +108,15 @@ class ExploreAndAttackTest {
         assertFalse(quest.isEnemyFound());
     }
 
-    //Ta fram rätt Secret Cave-quest som spelaren har i Available Quests
-    public Quest getSecretCaveQuest(Player player){
-        ArrayList<Quest> availablePlayerQuests = player.getPlayerAvailableQuests();
-        for (Quest q : availablePlayerQuests){
-            if (q instanceof SecretCave){
-                return q;
-            }
-        }
-        throw new NullPointerException("Available Quests doesnt have a Secret Cave Quest");
-    }
-
     //Spelaren hittar den magiska persikan när den explorar
     @Test
     void playerFindsMagicPeachWhenExploring(){
         standardPlayer.setCoordinates(new Coordinates(123, 2899));
         quest.explore(standardPlayer);
+        Quest quest = new SecretCave().getSecretCaveQuestIfInAvailableQuests(standardPlayer);
         assertEquals(200, standardPlayer.getHealthPoint());
         assertEquals(2000, standardPlayer.getExperiencePoint());
-        Quest secretCave = getSecretCaveQuest(standardPlayer);
-        standardPlayer.isInAvailableQuests(secretCave);
+        assertTrue(standardPlayer.isInAvailableQuests(quest));
     }
 
     //Spelaren försöker hitta den magiska persikan mer än en gång

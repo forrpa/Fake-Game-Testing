@@ -66,8 +66,7 @@ public class TalkToGuildLeader extends Quest {
             player.increaseExperiencePoint(500);
             //rewardBasedOnMagic(player);
             rewardBasedOnRace(player);
-            GuildMap guildMap = new GuildMap();
-            player.addToInventory(guildMap);
+            player.addToInventory(new GuildMap());
             return true;
         } else {
             return false;
