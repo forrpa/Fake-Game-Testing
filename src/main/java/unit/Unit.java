@@ -80,4 +80,8 @@ public abstract class Unit implements Combatant {
                 throw new IllegalArgumentException("Attribute value is over max allowed");
         }
     }
+    public boolean attack(Combatant enemy){
+        return attack(enemy, new Attack(getAttackPower()));
+    }
+
 }

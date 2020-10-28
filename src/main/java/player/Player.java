@@ -307,6 +307,7 @@ public class Player extends Unit{
 		this.coordinates = coordinates;
 	}
 
+	@Override
 	public boolean attack(Combatant enemy, Attack attack) {
         if(!isAlive()){
             throw new IllegalStateException("The player is dead");
@@ -322,10 +323,6 @@ public class Player extends Unit{
             }
             return true;
         }
-    }
-    @Override
-    public boolean attack(Combatant enemy){
-        return attack(enemy, new Attack(getAttackPower()));
     }
 
     public void takeDamage(Attack attack){

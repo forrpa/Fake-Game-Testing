@@ -28,16 +28,16 @@ public abstract class NPC extends Unit {
         return name;
     }
 
-
-    public boolean attack(Combatant enemy){
+    @Override
+    public boolean attack(Combatant enemy, Attack attack) {
         if(!isAlive()){
-            throw new IllegalStateException("The attacking unit is dead");
+            throw new IllegalStateException("The player is dead");
         }else if(!enemy.isAlive()){
             throw new IllegalStateException("The unit receiving damage is already dead");
-        }else if(isGrounded() && !enemy.isGrounded()){
+        }else if(!attack.isRanged() && isGrounded() && !enemy.isGrounded()){
             return false;
         }else {
-            enemy.takeDamage(new Attack(getAttackPower()));
+            enemy.takeDamage(attack);
             return true;
         }
     }
