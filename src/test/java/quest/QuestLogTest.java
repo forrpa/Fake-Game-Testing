@@ -3,6 +3,8 @@ package quest;
 import org.junit.jupiter.api.Test;
 import player.Player;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class QuestLogTest {
@@ -31,6 +33,15 @@ class QuestLogTest {
         quest.talkToGuildLeader();
         quest.completeQuest(player);
         assertTrue(player.isInCompletedQuests(quest));
+    }
+
+    //getCurrentQuests returnerar rätt lista
+    @Test
+    void getCurrentQuestsReturnsCorrectList(){
+        questLog.addQuestToCurrentQuests(quest);
+        ArrayList<Quest> list = new ArrayList<>();
+        list.add(quest);
+        assertEquals(list, questLog.getCurrentQuests());
     }
 
     //Lägga in mer en en quest ska ge exception

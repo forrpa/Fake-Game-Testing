@@ -3,6 +3,8 @@ package quest;
 import org.junit.jupiter.api.*;
 import player.Player;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ExploreAndAttackTest {
@@ -89,50 +91,73 @@ class ExploreAndAttackTest {
         assertFalse(quest.hasAttacked());
     }
 
+    //Spelaren hittar fienden när den explorar
     @Test
     void playerFindsEnemyWhenExploring(){
         standardPlayer.setCoordinates(new Coordinates(254, 566)); //Fiendens koordinater
-        quest.explore(standardPlayer, enemy);
+        quest.explore(standardPlayer);
         assertTrue(quest.isEnemyFound());
     }
 
+    //Spelaren hittar inte fienden när den explorar
     @Test
     void playerDoesNotFindEnemyWhenExploring(){
         standardPlayer.setCoordinates(new Coordinates(255, 566));
-        quest.explore(standardPlayer, enemy);
+        quest.explore(standardPlayer);
         assertFalse(quest.isEnemyFound());
     }
 
+    //Ta fram rätt Secret Cave-quest som spelaren har i Available Quests
+    public Quest getSecretCaveQuest(Player player){
+        ArrayList<Quest> availablePlayerQuests = player.getPlayerAvailableQuests();
+        for (Quest q : availablePlayerQuests){
+            if (q instanceof SecretCave){
+                return q;
+            }
+        }
+        throw new NullPointerException("Available Quests doesnt have a Secret Cave Quest");
+    }
+
+    //Spelaren hittar den magiska persikan när den explorar
+    @Test
+    void playerFindsMagicPeachWhenExploring(){
+        standardPlayer.setCoordinates(new Coordinates(123, 2899));
+        quest.explore(standardPlayer);
+        assertEquals(200, standardPlayer.getHealthPoint());
+        assertEquals(2000, standardPlayer.getExperiencePoint());
+        Quest secretCave = getSecretCaveQuest(standardPlayer);
+        standardPlayer.isInAvailableQuests(secretCave);
+    }
+
+    //Spelaren försöker hitta den magiska persikan mer än en gång
+    @Test
+    void playerTriesButCantFindMagicPeachMoreThanOnce(){
+        standardPlayer.setCoordinates(new Coordinates(123, 2899));
+        quest.explore(standardPlayer);
+        assertEquals(200, standardPlayer.getHealthPoint());
+        assertEquals(2000, standardPlayer.getExperiencePoint());
+        standardPlayer.setCoordinates(new Coordinates(123, 2899));
+        quest.explore(standardPlayer);
+        assertEquals(200, standardPlayer.getHealthPoint());
+        assertEquals(2000, standardPlayer.getExperiencePoint());
+
+    }
+
+    //Spelaren dör under exploring
     @Test
     void playerDiesDuringExploring(){
         standardPlayer.setCoordinates(new Coordinates(255, 216));
         standardPlayer.setHealthPoint(0);
-        quest.explore(standardPlayer, enemy);
+        //Gör så att man blir attackerad istället
+        quest.explore(standardPlayer);
         assertEquals(200, standardPlayer.getHealthPoint());
     }
-
-    //Testa om man lyckas med Explore
-    /*
-    @Test
-    void stealthSucceeded(){
-        quest.stealth(standardPlayer, enemy);
-        assertTrue(quest.isEnemyFound());
-        assertEquals("You succeeded not being seen, now you have to decide if you want to kill your enemy or negotiate with it.", quest.getDescription());
-        assertTrue(quest.stealth(standardPlayer, enemy));
-    }
-
-    //Testa om man inte lyckas med stealth (blir upptäckt)
-    @Test
-    void stealthNotSucceeded(){
-        standardPlayer.setHealthPoint(1);
-        assertFalse(quest.stealth(standardPlayer, enemy));
-    }*/
 
     //Testa krav för att starta attack eller förhandla med fienden
     @Test
     void canPlayerStartAttackOrNegotiatingWithEnemy(){
         standardPlayer.setCoordinates(new Coordinates(254, 566));
-        quest.explore(standardPlayer, enemy);
+        quest.explore(standardPlayer);
         assertTrue(quest.isEnemyFound());
     }
 
@@ -146,7 +171,7 @@ class ExploreAndAttackTest {
     @Test
     void successfulAttack(){
         standardPlayer.setCoordinates(new Coordinates(254, 566));
-        quest.explore(standardPlayer, enemy);
+        quest.explore(standardPlayer);
         enemy.setHealthPoint(1);
         assertTrue(quest.attack(standardPlayer, enemy));
         assertTrue(quest.hasAttacked());
@@ -157,7 +182,7 @@ class ExploreAndAttackTest {
     @Test
     void playerDiesInAttack(){
         standardPlayer.setCoordinates(new Coordinates(254, 566));
-        quest.explore(standardPlayer, enemy);
+        quest.explore(standardPlayer);
         enemy.setMaxHealthPoint(1000);
         enemy.setHealthPoint(1000);
         assertFalse(quest.attack(standardPlayer, enemy));
@@ -168,7 +193,7 @@ class ExploreAndAttackTest {
     void successfulNegotiatingWithEnemy(){
         addGuildMapToInventory();
         standardPlayer.setCoordinates(new Coordinates(254, 566));
-        quest.explore(standardPlayer, enemy);
+        quest.explore(standardPlayer);
         quest.negotiateWithEnemy(standardPlayer, enemy); //NYTT
         assertTrue(quest.hasTalkedToEnemy());
         assertEquals("You decided to talk to your enemy instead of killing him. Now you cant reach the Guild so you have to talk to the Townsman.", quest.getDescription());
@@ -180,7 +205,7 @@ class ExploreAndAttackTest {
     void playerCanTalkToGuildMaster(){
         addGuildMapToInventory();
         standardPlayer.setCoordinates(new Coordinates(254, 566));
-        quest.explore(standardPlayer, enemy);
+        quest.explore(standardPlayer);
         quest.attack(standardPlayer, enemy); //Ger false
         assertTrue(quest.hasAttacked());
         assertEquals(1, standardPlayer.getInventoryCount(guildMap));
@@ -191,7 +216,7 @@ class ExploreAndAttackTest {
     void successfulTalkToGuildMaster(){
         GuildMaster guildMaster = quest.getGuildMaster();
         standardPlayer.setCoordinates(new Coordinates(254, 566));
-        quest.explore(standardPlayer, enemy);
+        quest.explore(standardPlayer);
         quest.attack(standardPlayer, enemy);
         addGuildMapToInventory();
         quest.talkToGuildMaster(standardPlayer);
@@ -210,7 +235,7 @@ class ExploreAndAttackTest {
     void canPlayerTalkToTownsman(){
         addGuildMapToInventory();
         standardPlayer.setCoordinates(new Coordinates(254, 566));
-        quest.explore(standardPlayer, enemy);
+        quest.explore(standardPlayer);
         quest.negotiateWithEnemy(standardPlayer, enemy); //NYTT
         assertTrue(quest.hasTalkedToEnemy());
     }
@@ -221,7 +246,7 @@ class ExploreAndAttackTest {
         Townsman townsman = quest.getTownsman();
         addGuildMapToInventory();
         standardPlayer.setCoordinates(new Coordinates(254, 566));
-        quest.explore(standardPlayer, enemy);
+        quest.explore(standardPlayer);
         quest.negotiateWithEnemy(standardPlayer, enemy); //NYTT
         quest.talkToTownsman();
         assertTrue(townsman.talk());
@@ -242,7 +267,7 @@ class ExploreAndAttackTest {
     void playerMeetsEndRequirementsForAttackingOnTime(){
         addGuildMapToInventory();
         standardPlayer.setCoordinates(new Coordinates(254, 566));
-        quest.explore(standardPlayer, enemy);
+        quest.explore(standardPlayer);
         quest.attack(standardPlayer, enemy);
         quest.talkToGuildMaster(standardPlayer);
         assertTrue(quest.endRequirementsForAttackingTheEnemy());
@@ -253,7 +278,7 @@ class ExploreAndAttackTest {
     void playerMeetsEndRequirementsForNegotiatingWithEnemy(){
         addGuildMapToInventory();
         standardPlayer.setCoordinates(new Coordinates(254, 566));
-        quest.explore(standardPlayer, enemy);
+        quest.explore(standardPlayer);
         quest.negotiateWithEnemy(standardPlayer, enemy);
         quest.talkToTownsman();
         assertTrue(quest.endRequirementsForNegotiatingWithEnemy());
@@ -264,7 +289,7 @@ class ExploreAndAttackTest {
     void playerMeetsEndRequirementsForExploreAndAttackQuest(){
         addGuildMapToInventory();
         standardPlayer.setCoordinates(new Coordinates(254, 566));
-        quest.explore(standardPlayer, enemy);
+        quest.explore(standardPlayer);
         quest.negotiateWithEnemy(standardPlayer, enemy);
         quest.talkToTownsman();
         quest.endRequirementsFulfilled(standardPlayer);
@@ -283,7 +308,7 @@ class ExploreAndAttackTest {
     void playerCompletesQuestSuccessfully(){
         addGuildMapToInventory();
         standardPlayer.setCoordinates(new Coordinates(254, 566));
-        quest.explore(standardPlayer, enemy);
+        quest.explore(standardPlayer);
         quest.attack(standardPlayer, enemy);
         quest.talkToGuildMaster(standardPlayer);
         quest.completeQuest(standardPlayer);
@@ -321,7 +346,7 @@ class ExploreAndAttackTest {
     void getRewardMethodReturnsCorrectRewardForAttacking(){
         addGuildMapToInventory();
         standardPlayer.setCoordinates(new Coordinates(254, 566));
-        quest.explore(standardPlayer, enemy);
+        quest.explore(standardPlayer);
         quest.attack(standardPlayer, enemy);
         quest.talkToGuildMaster(standardPlayer);
         quest.getReward(standardPlayer);
@@ -333,7 +358,7 @@ class ExploreAndAttackTest {
     void getRewardMethodReturnsCorrectRewardForNegotiatingWithEnemy(){
         addGuildMapToInventory();
         standardPlayer.setCoordinates(new Coordinates(254, 566));
-        quest.explore(standardPlayer, enemy);
+        quest.explore(standardPlayer);
         quest.negotiateWithEnemy(standardPlayer, enemy);
         quest.talkToTownsman();
         quest.getReward(standardPlayer);

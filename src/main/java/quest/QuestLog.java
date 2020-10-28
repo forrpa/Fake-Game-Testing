@@ -13,6 +13,14 @@ public class QuestLog {
         return completedQuestCount;
     }
 
+    public ArrayList<Quest> getAvailableQuests() {
+        return availableQuests;
+    }
+
+    public ArrayList<Quest> getCurrentQuests() {
+        return currentQuests;
+    }
+
     public ArrayList<Quest> getCompletedQuests() {
         return completedQuests;
     }
@@ -92,18 +100,3 @@ public class QuestLog {
     }
 
 }
-
-/*
-    public void addQuestToQuestLog(Quest quest){
-        if (quest.state == QuestState.UNLOCKED && !isInAvailableQuests(quest)) {
-            addQuestToAvailableQuests(quest);
-        } else if (quest.state == QuestState.IN_PROGRESS && !isInCurrentQuests(quest)){
-            addQuestToCurrentQuests(quest);
-            removeQuestFromAvailableQuests(quest);
-        } else if (quest.state == QuestState.DONE && !isInCompletedQuests(quest)){
-            addQuestToCompletedQuests(quest);
-            removeQuestFromCurrentQuests(quest);
-        } else {
-            throw new RuntimeException("A quest can only be added one time to Quest Log");
-        }
-    }*/

@@ -6,7 +6,7 @@ import unit.Talkable;
 
 public class StealthAndAttackEnemy extends Monster implements Talkable {
 
-    private Coordinates coordinates = new Coordinates(254, 566);
+    private static final Coordinates coordinates = new Coordinates(254, 566);
 
     public StealthAndAttackEnemy() {
         super("Stealth and attack enemy", 8, 3, 100, null, null);
