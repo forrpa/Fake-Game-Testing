@@ -24,4 +24,9 @@ public class StealthAndAttackEnemy extends Monster implements Talkable {
     public boolean talk() {
         return true;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Name: %s, Max Health: %d, Current Health: %d, Attack Power: %d, Resistance: %s, Weakness %s, Coordinates: %d,%d", getName(), getMaxHealthPoint(), getHealthPoint(), getAttackPower(), getResistance(), getWeakness(), coordinates.getX(), coordinates.getY());
+    }
 }

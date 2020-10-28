@@ -293,43 +293,7 @@ public class Player extends Unit{
         return playerInventory.getCount(item);
     }
 
-    public void addQuestToAvailableQuests(Quest quest){
-    	questLog.addQuestToAvailableQuests(quest);
-	}
-
-	public void addQuestToCurrentQuests(Quest quest){
-		questLog.addQuestToCurrentQuests(quest);
-	}
-
-	public void addQuestToCompletedQuests(Quest quest){
-		questLog.addQuestToCompletedQuests(quest);
-	}
-
-	public boolean isInCurrentQuests(Quest quest){
-		return questLog.isInCurrentQuests(quest);
-	}
-
-	public boolean isInAvailableQuests(Quest quest){
-		return questLog.isInAvailableQuests(quest);
-	}
-
-	public boolean isInCompletedQuests(Quest quest){
-		return questLog.isInCompletedQuests(quest);
-	}
-
-	public int getCompletedQuestCount(Quest quest){
-    	return questLog.getCompletedQuestCount();
-	}
-
-	public ArrayList<Quest> getPlayerAvailableQuests(){
-		return questLog.getAvailableQuests();
-	}
-
-	public ArrayList<Quest> getPlayerCurrentQuests() {return questLog.getCurrentQuests();}
-
-	public ArrayList<Quest> getPlayerCompletedQuests(){
-    	return questLog.getCompletedQuests();
-	}
+    public QuestLog getQuestLog() {return questLog; }
 
 	public int getXCoordinate(){
     	return coordinates.getX();

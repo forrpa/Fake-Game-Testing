@@ -2,8 +2,8 @@ package quest;
 
 public class Coordinates {
 
-    private int x;
-    private int y;
+    private final int x;
+    private final int y;
 
     public Coordinates(int x, int y){
         this.x = x;
@@ -18,4 +18,8 @@ public class Coordinates {
         return y;
     }
 
+    @Override
+    public String toString() {
+        return String.format("%d,%d", getX(), getY());
+    }
 }

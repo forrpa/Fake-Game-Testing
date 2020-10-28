@@ -41,7 +41,7 @@ class QuestgiverTest {
         player.takeAllQuests(questgiver);
         //player.takeQuest(questgiver, quest1);
         //Check that 1 quest named Talk to Guild Leader is taken
-        assertTrue(player.isInCurrentQuests(quest1));
+        assertTrue(player.getQuestLog().isInCurrentQuests(quest1));
         //Check that questgiver has Explore and Attack left
         assertEquals("Explore and Attack",questgiver.getAllQuestNames());
     }

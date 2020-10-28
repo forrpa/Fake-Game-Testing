@@ -2,7 +2,7 @@ package quest;
 
 import item.Item;
 
-public abstract class QuestItem extends Item {
+public class QuestItem extends Item {
 
     public QuestItem(String name, String description){
         super(name, description);

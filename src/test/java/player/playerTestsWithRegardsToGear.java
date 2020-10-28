@@ -3,12 +3,17 @@ package player;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import edible.Cupboard;
 import equipment.*;
+import quest.Coordinates;
+import quest.Quest;
+import quest.QuestLog;
 import weapon.*;
 
 class playerTestsWithRegardsToGear {
@@ -767,5 +772,26 @@ class playerTestsWithRegardsToGear {
 	void testToMakeSurePlayerIsUnequalToNonPlayerObjects() {
 		Gear bpt = new BreastplateOfTesting();
 		assertFalse(magePlayer.equals(bpt));
+	}
+
+	@Nested
+	@DisplayName("Jennifer's tests")
+	class testsMadeByJennifer{
+
+		@Test
+		void emptyQuestLogReturnsCorrectString(){
+			Player player = new Player("Tank", "Human", 200, 1000);
+			assertEquals("Available quests is empty!\n" + "Current quests is empty!\n" +
+					"Completed quests is empty!\n", player.getQuestLog().toString());
+		}
+
+		@Test
+		void getXAndYCoordinatesReturnsCorrectCoordinates(){
+			Player player = new Player("Tank", "Human", 200, 1000);
+			player.setCoordinates(new Coordinates(5, 10));
+			assertEquals(5, player.getXCoordinate());
+			assertEquals(10, player.getYCoordinate());
+		}
+
 	}
 }
