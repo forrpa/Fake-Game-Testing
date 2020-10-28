@@ -103,6 +103,102 @@ public class DecisionTableTest {
         assertTrue(player.attack(bat));
         assertEquals(1,bat.getHealthPoint());
     }
+    @Test
+    void R10_AliveFlyingAttackerAttacksFlyingEnemyWithPFireAttackForTwoDamage(){
+        Bat bat = new Bat("Bat", 5, 2, 0, null, null);
+        Bat otherBat = new Bat("Bat", 5, 0, 0, null, null);
+        Attack attack = new Attack(bat.getAttackPower(), AttackType.FIRE);
+        assertFalse(bat.isGrounded);
+        assertFalse(otherBat.isGrounded);
+        assertTrue(bat.attack(otherBat, attack));
+        assertEquals(3,otherBat.getHealthPoint());
+    }
+    @Test
+    void R11_AliveFlyingAttackerAttacksEnemyWithFireResistanceWithFireAttackForOneDamage(){
+        Bat bat = new Bat("Bat", 5, 2, 0, null, null);
+        Bat otherBat = new Bat("Bat", 5, 0, 0, AttackType.FIRE, null);
+        Attack attack = new Attack(bat.getAttackPower(), AttackType.FIRE);
+        otherBat.getGrounded();
+        assertFalse(bat.isGrounded);
+        assertTrue(otherBat.isGrounded);
+        assertTrue(bat.attack(otherBat, attack));
+        assertEquals(4,otherBat.getHealthPoint());
+    }
+    @Test
+    void R12_AliveFlyingAttackerAttacksEnemyWithPhysicalWeaknessWithPhysicalAttackForFourDamage(){
+        Bat bat = new Bat("Bat", 5, 2, 0, null, null);
+        Bat otherBat = new Bat("Bat", 5, 0, 0, null, AttackType.PHYSICAL);
+        Attack attack = new Attack(bat.getAttackPower());
+        otherBat.getGrounded();
+        assertFalse(bat.isGrounded);
+        assertTrue(otherBat.isGrounded);
+        assertTrue(bat.attack(otherBat, attack));
+        assertEquals(1,otherBat.getHealthPoint());
+    }
+    @Test
+    void R13_AliveAttackerAttacksFlyingEnemyWithoutResistanceOrWeaknessWithRangedIceAttackForTwoDamage(){
+        Player player = new Player("Warrior", "Orc", 5,0);
+        Bat bat = new Bat("Bat", 5, 0, 0, null, null);
+        player.setAttackPower(2);
+        Attack attack = new Attack(player.getAttackPower(), true, AttackType.ICE);
+        assertFalse(bat.isGrounded);
+        assertTrue(player.attack(bat, attack));
+        assertEquals(3,bat.getHealthPoint());
+    }
+    @Test
+    void R14_AliveAttackerAttacksEnemyWithFireResistanceWithRangedFireAttackForOneDamage(){
+        Player player = new Player("Warrior", "Orc", 5,0);
+        Bat bat = new Bat("Bat", 5, 0, 0, AttackType.FIRE, null);
+        player.setAttackPower(2);
+        Attack attack = new Attack(player.getAttackPower(),true, AttackType.FIRE);
+        bat.getGrounded();
+        assertTrue(bat.isGrounded);
+        assertTrue(player.attack(bat, attack));
+        assertEquals(4,bat.getHealthPoint());
+    }
+    @Test
+    void R15_AliveAttackerAttacksEnemyWithIceWeaknessWithRangedIceAttackForFourDamage(){
+        Player player = new Player("Warrior", "Orc", 5,0);
+        Bat bat = new Bat("Bat", 5, 0, 0, null, AttackType.ICE);
+        player.setAttackPower(2);
+        Attack attack = new Attack(player.getAttackPower(), true, AttackType.ICE);
+        bat.getGrounded();
+        assertTrue(bat.isGrounded);
+        assertTrue(player.attack(bat, attack));
+        assertEquals(1,bat.getHealthPoint());
+    }
+    @Test
+    void R16_AliveAttackerAttacksEnemyWithoutResistanceOrWeaknessWithIceAttackForTwoDamage(){
+        Player player = new Player("Warrior", "Orc", 5,0);
+        Bat bat = new Bat("Bat", 5, 0, 0, null, null);
+        player.setAttackPower(2);
+        Attack attack = new Attack(player.getAttackPower(), AttackType.ICE);
+        bat.getGrounded();
+        assertTrue(bat.isGrounded);
+        assertTrue(player.attack(bat, attack));
+        assertEquals(3,bat.getHealthPoint());
+    }
+    @Test
+    void R17_AliveAttackerAttacksEnemyWithPhysicalResistanceWithPhysicalAttackForOneDamage(){
+        Player player = new Player("Warrior", "Orc", 5,0);
+        Bat bat = new Bat("Bat", 5, 0, 0, AttackType.PHYSICAL, null);
+        player.setAttackPower(2);
+        bat.getGrounded();
+        assertTrue(bat.isGrounded);
+        assertTrue(player.attack(bat));
+        assertEquals(4,bat.getHealthPoint());
+    }
+    @Test
+    void R18_AliveAttackerAttacksEnemyWithIceWeaknessWithIceAttackForFourDamage(){
+        Player player = new Player("Warrior", "Orc", 5,0);
+        Bat bat = new Bat("Bat", 5, 0, 0, null, AttackType.ICE);
+        player.setAttackPower(2);
+        Attack attack = new Attack(player.getAttackPower(), AttackType.ICE);
+        bat.getGrounded();
+        assertTrue(bat.isGrounded);
+        assertTrue(player.attack(bat, attack));
+        assertEquals(1,bat.getHealthPoint());
+    }
 }
 
 
