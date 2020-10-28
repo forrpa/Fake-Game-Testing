@@ -8,8 +8,6 @@ public abstract class Quest {
     protected String description;
     protected QuestState state;
     private boolean mandatory;
-    //Quest log - available quests, completed quests osv
-
 
     public Quest(String name, String description, QuestState state, boolean mandatory){
         this.name = name;

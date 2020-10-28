@@ -1,25 +1,31 @@
 package quest;
 
+import item.Item;
 import player.Player;
 import unit.Bat;
-
 import java.util.ArrayList;
 
 public class SecretCave extends Quest {
 
-    private int batsKilled;
-    private static final int batsToKill = 5;
+    private boolean witchVisited = false;
+    private final Witch witch = new Witch();
+    private int batsLooted;
+    private static final int batsToLoot = 5;
 
     public SecretCave() {
         super("Secret Cave", "You have found the secret cave. What secrets lies within it?", QuestState.PENDING, false);
     }
 
-    public int getBatsKilled() {
-        return batsKilled;
+    public int getBatsLooted() {
+        return batsLooted;
+    }
+
+    public boolean isWitchVisited(){
+        return witchVisited;
     }
 
     public Quest getSecretCaveQuestIfInAvailableQuests(Player player){
-        ArrayList<Quest> availablePlayerQuests = player.getPlayerAvailableQuests();
+        ArrayList<Quest> availablePlayerQuests = player.getQuestLog().getAvailableQuests();
         for (Quest q : availablePlayerQuests){
             if (q instanceof SecretCave){
                 return q;
@@ -33,7 +39,7 @@ public class SecretCave extends Quest {
     @Override
     public boolean startRequirementsFulfilled(Player player) {
         Quest secretCave = getSecretCaveQuestIfInAvailableQuests(player);
-        if (player.isInAvailableQuests(secretCave)){
+        if (player.getQuestLog().isInAvailableQuests(secretCave)){
             state = QuestState.UNLOCKED;
             return true;
         } else {
@@ -45,7 +51,7 @@ public class SecretCave extends Quest {
     public boolean startQuest(Player player) {
         if (startRequirementsFulfilled(player)){
             state = QuestState.IN_PROGRESS;
-            player.addQuestToCurrentQuests(this);
+            player.getQuestLog().addQuestToCurrentQuests(this);
             description = "First you have to kill and loot 5 bats. They hide around the cave. Be careful.";
             return true;
         } else {
@@ -56,8 +62,13 @@ public class SecretCave extends Quest {
     public void attackBat(Player player, Bat bat){
         player.attack(bat);
         if (!bat.isAlive()){
-            batsKilled++;
-            //bat.getLooted();
+            batsLooted++;
+            for (Item i : bat.getLooted()){
+                player.addToInventory(i);
+            }
+            if (batsLooted == batsToLoot){
+                description = "You have looted five bats successfully. Now it's time to find the witch. She lurks somewhere in this cave!";
+            }
         } else {
             bat.attack(player);
             if (player.getHealthPoint() == 0) {
@@ -67,8 +78,12 @@ public class SecretCave extends Quest {
         }
     }
 
-    public boolean visitWitch(){
-        if (batsKilled == batsToKill){
+    public boolean visitWitch(Player player){
+        if (witch.isFound(player) && !witch.potionGiven){
+            witch.talk();
+            witch.givePotion(player);
+            witchVisited = true;
+            description = "You found the wicked witch and succeeded trading the bat loot for a powerful potion.";
             return true;
         } else {
             return false;
@@ -78,7 +93,7 @@ public class SecretCave extends Quest {
 
     @Override
     public boolean endRequirementsFulfilled(Player player) {
-        if (batsKilled == batsToKill){
+        if (witchVisited){
             state = QuestState.COMPLETED;
             return true;
         } else {
@@ -90,7 +105,7 @@ public class SecretCave extends Quest {
     public boolean completeQuest(Player player) {
         if (endRequirementsFulfilled(player)){
             state = QuestState.DONE;
-            player.addQuestToCompletedQuests(this);
+            player.getQuestLog().addQuestToCompletedQuests(this);
             description= "You completed the quest!";
             player.increaseExperiencePoint(5000);
             player.restoreFullHealth();
@@ -102,6 +117,6 @@ public class SecretCave extends Quest {
 
     @Override
     public String toString() {
-        return String.format("%s: %s. %s, %b", getName(), getDescription(), getState(), isMandatory());
+        return String.format("%s: %s State: %s, Mandatory: %b, Has visited witch: %b, Bats looted: %d", getName(), getDescription(), getState(), isMandatory(), isWitchVisited(), getBatsLooted());
     }
 }

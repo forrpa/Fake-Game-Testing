@@ -13,7 +13,7 @@ public class ExploreAndAttack extends Quest {
     private Villager talkedTo;
     private final GuildMap guildMap = new GuildMap();
     private final GuildMaster guildMaster = new GuildMaster("Robert");
-    private final Townsman townsman = new Townsman("Jennie J");
+    private final Townsman townsman = new Townsman("Martin jr");
     private final MagicPeach magicPeach = new MagicPeach();
     private final StealthAndAttackEnemy enemy = new StealthAndAttackEnemy();
 
@@ -46,7 +46,7 @@ public class ExploreAndAttack extends Quest {
     }
 
     public Quest getRequiredQuest(Player player){
-        ArrayList<Quest> completedPlayerQuests = player.getPlayerCompletedQuests();
+        ArrayList<Quest> completedPlayerQuests = player.getQuestLog().getCompletedQuests();
         for (Quest q : completedPlayerQuests){
             if (q instanceof TalkToGuildLeader){
                 return q;
@@ -60,9 +60,9 @@ public class ExploreAndAttack extends Quest {
     @Override
     public boolean startRequirementsFulfilled(Player player){
         Quest quest = getRequiredQuest(player);
-        if (player.getExperiencePoint() >= 1500 && player.isInInventory(guildMap) && player.isInCompletedQuests(quest) ){
+        if (player.getExperiencePoint() >= 1500 && player.isInInventory(guildMap) && player.getQuestLog().isInCompletedQuests(quest) ){
             state = QuestState.UNLOCKED;
-            player.addQuestToAvailableQuests(this);
+            player.getQuestLog().addQuestToAvailableQuests(this);
             return true;
         } else {
             return false;
@@ -73,7 +73,7 @@ public class ExploreAndAttack extends Quest {
     public boolean startQuest(Player player){
         if (startRequirementsFulfilled(player)){
             state = QuestState.IN_PROGRESS;
-            player.addQuestToCurrentQuests(this);
+            player.getQuestLog().addQuestToCurrentQuests(this);
             description = "Your first job is to follow the enemy without being seen.";
             return true;
         } else {
@@ -93,8 +93,7 @@ public class ExploreAndAttack extends Quest {
             description = "You found the enemy, now you have to decide if you want to kill your enemy or negotiate with it.";
         } else if (magicPeach.isFound(player)) {
             magicPeach.eat(player);
-            player.addQuestToAvailableQuests(new SecretCave());
-            //player.setCoordinates(new Coordinates(124, 2900));
+            player.getQuestLog().addQuestToAvailableQuests(new SecretCave());
             explore(player);
         } else if (player.getHealthPoint() == 0){
             resetQuest(player);
@@ -103,19 +102,28 @@ public class ExploreAndAttack extends Quest {
 
     public boolean attack(Player player, StealthAndAttackEnemy enemy){
         if (enemyIsFound) {
-            description = "Attack before the enemy escapes!";
 
-            while (player.getHealthPoint() > 0){
-                player.attack(enemy);
-                if (!enemy.isAlive()){
-                    description = "You succeeded killing your enemy. Go talk to the Guild Leader for your reward!";
-                    attacked = true;
-                    break;
-                } else {
-                    enemy.attack(player);
-                    if (player.getHealthPoint() == 0){
-                        resetQuest(player);
-                        return false;
+            if(player.getCupboard().isInInventory(new SuperPotion())){
+                enemy.setHealthPoint(0);
+                attacked = true;
+                description = "You succeeded killing your enemy with the help of a Super Potion. Go talk to the Guild Leader for your reward!";
+                return true;
+
+            } else {
+                description = "Attack before the enemy escapes!";
+
+                while (player.getHealthPoint() > 0) {
+                    player.attack(enemy);
+                    if (!enemy.isAlive()) {
+                        description = "You succeeded killing your enemy. Go talk to the Guild Leader for your reward!";
+                        attacked = true;
+                        break;
+                    } else {
+                        enemy.attack(player);
+                        if (player.getHealthPoint() == 0) {
+                            resetQuest(player);
+                            return false;
+                        }
                     }
                 }
             }
@@ -124,12 +132,15 @@ public class ExploreAndAttack extends Quest {
         return false;
     }
 
-    public void negotiateWithEnemy(Player player, StealthAndAttackEnemy enemy){
+    public boolean negotiateWithEnemy(Player player, StealthAndAttackEnemy enemy){
         if (enemyIsFound){
             enemy.talk();
             talkedToEnemy = true;
             description = "You decided to talk to your enemy instead of killing him. Now you cant reach the Guild so you have to talk to the Townsman.";
             player.removeFromInventory(guildMap);
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -171,6 +182,20 @@ public class ExploreAndAttack extends Quest {
         }
     }
 
+    @Override
+    public boolean completeQuest(Player player){
+        if (endRequirementsFulfilled(player)){
+            state = QuestState.DONE;
+            player.getQuestLog().addQuestToCompletedQuests(this);
+            description= "You completed the quest!";
+            getReward(player);
+            player.restoreFullHealth();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public void getReward(Player player){
         if (endRequirementsForNegotiatingWithEnemy()){
             rewardWhenNegotiatingWithEnemy(player);
@@ -189,34 +214,7 @@ public class ExploreAndAttack extends Quest {
     }
 
     @Override
-    public boolean completeQuest(Player player){
-        if (endRequirementsFulfilled(player)){
-            state = QuestState.DONE;
-            player.addQuestToCompletedQuests(this);
-            description= "You completed the quest!";
-            getReward(player);
-            player.restoreFullHealth();
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @Override
     public String toString() {
         return String.format("%s: %s. %s, %b, %b, %b, %b, %s", getName(), getDescription(), getState(), isMandatory(), isEnemyFound(), hasAttacked(), hasTalkedToEnemy(), talkedTo);
     }
 }
-
-    /*
-    public boolean stealth(Player player, StealthAndAttackEnemy enemy){
-        if (player.getHealthPoint() < enemy.getHealthPoint()){
-            enemyIsFound = false;
-            resetQuest(player);
-            return false;
-        } else {
-            enemyIsFound = true;
-            description = "You succeeded not being seen, now you have to decide if you want to kill your enemy or negotiate with it.";
-            return true;
-        }
-    }*/

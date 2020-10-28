@@ -17,14 +17,14 @@ class QuestLogTest {
     @Test
     void availableQuestShouldBeInAvailableQuestsList(){
         quest.startRequirementsFulfilled(player);
-        assertTrue(player.isInAvailableQuests(quest));
+        assertTrue(player.getQuestLog().isInAvailableQuests(quest));
     }
 
     //In progress-quest läggs i rätt lista
     @Test
     void currentQuestShouldBeInCurrentQuestsList() {
         quest.startQuest(player);
-        assertTrue(player.isInCurrentQuests(quest));
+        assertTrue(player.getQuestLog().isInCurrentQuests(quest));
     }
 
     //Completed quest läggs in i rätt lista
@@ -32,7 +32,7 @@ class QuestLogTest {
     void completedQuestShouldBeInCompletedQuestsList(){
         quest.talkToGuildLeader();
         quest.completeQuest(player);
-        assertTrue(player.isInCompletedQuests(quest));
+        assertTrue(player.getQuestLog().isInCompletedQuests(quest));
     }
 
     //getCurrentQuests returnerar rätt lista
@@ -47,15 +47,15 @@ class QuestLogTest {
     //Lägga in mer en en quest ska ge exception
     @Test
     void sameQuestIsAddedMoreThanOnceThrowsException(){
-        player.addQuestToAvailableQuests(quest);
-        assertThrows(RuntimeException.class, () -> player.addQuestToAvailableQuests(quest));
+        player.getQuestLog().addQuestToAvailableQuests(quest);
+        assertThrows(RuntimeException.class, () -> player.getQuestLog().addQuestToAvailableQuests(quest));
     }
 
     //Quest går över från available till current, ska tas bort från available list
     @Test
     void currentQuestGetsRemovedFromAvailableQuestsList(){
         quest.startQuest(player);
-        assertFalse(player.isInAvailableQuests(quest));
+        assertFalse(player.getQuestLog().isInAvailableQuests(quest));
     }
 
     //Quest går över från current till completed, ska tas bort från current list
@@ -64,7 +64,7 @@ class QuestLogTest {
         quest.startQuest(player);
         quest.talkToGuildLeader();
         quest.completeQuest(player);
-        assertFalse(player.isInCurrentQuests(quest));
+        assertFalse(player.getQuestLog().isInCurrentQuests(quest));
     }
 
     //Rätt antal klarade quests
@@ -72,7 +72,7 @@ class QuestLogTest {
     void correctNumberOfCompletedQuests(){
         quest.talkToGuildLeader();
         quest.completeQuest(player);
-        assertEquals(1, player.getCompletedQuestCount(quest));
+        assertEquals(1, player.getQuestLog().getCompletedQuestCount());
     }
 
     //toString funkar med ett quest i Availabe Quests

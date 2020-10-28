@@ -31,7 +31,7 @@ class TalkToGuildLeaderTest {
     void playerMeetsStartRequirementsForTalkToGuildLeaderQuest() {
         quest.startRequirementsFulfilled(standardPlayer);
         assertEquals(QuestState.UNLOCKED, quest.getState());
-        assertTrue(standardPlayer.isInAvailableQuests(quest));
+        assertTrue(standardPlayer.getQuestLog().isInAvailableQuests(quest));
     }
 
     //Spelaren har inte startkrav för att starta quest
@@ -48,12 +48,12 @@ class TalkToGuildLeaderTest {
         quest.startQuest(standardPlayer);
         assertTrue(questgiver.talk());
         assertEquals(QuestState.IN_PROGRESS, quest.getState());
-        assertTrue(standardPlayer.isInCurrentQuests(quest));
+        assertTrue(standardPlayer.getQuestLog().isInCurrentQuests(quest));
     }
 
     //Kan inte starta quest
     @Test
-    void playerCantStartTalkToGuildLeader(){
+    void playerCantStartTalkToGuildLeaderQuest(){
         player = new Player("Tank", "Human", 200, 999);
         assertFalse(quest.startQuest(player));
     }
@@ -75,6 +75,12 @@ class TalkToGuildLeaderTest {
         assertEquals(QuestState.COMPLETED, quest.getState());
     }
 
+    //Spelaren har inte slutkrav för quest
+    @Test
+    void playerDoesNotMeetEndRequirementsForTalkToGuildLeaderQuest(){
+        assertFalse(quest.endRequirementsFulfilled(standardPlayer));
+    }
+
     //Lyckas klara quest
     @Test
     void playerCompletesTalkToGuildLeaderQuestSuccessfully() {
@@ -82,40 +88,16 @@ class TalkToGuildLeaderTest {
         quest.talkToGuildLeader();
         quest.completeQuest(standardPlayer);
         assertEquals(QuestState.DONE, quest.getState());
-        assertTrue(standardPlayer.isInCompletedQuests(quest));
+        assertTrue(standardPlayer.getQuestLog().isInCompletedQuests(quest));
         assertEquals(1500, standardPlayer.getExperiencePoint());
         assertEquals(1, standardPlayer.getInventoryCount(guildMap));
     }
 
-    //Kan inte klara quest
+    //Lyckas inte klara questet
     @Test
-    void playerCantCompleteTalkToGuildLeaderQuest(){
+    void playerDoesNotCompleteTalkToGuildLeaderQuest(){
         assertFalse(quest.completeQuest(standardPlayer));
     }
-
-    /*
-    @Test
-    void healerGetsCorrectReward() {
-        player = new Player("Healer", "Orc", 200, 1500);
-        HealingPotion healingPotion = new HealingPotion();
-        quest.rewardBasedOnClass(player);
-        assertEquals(1, player.getInventoryCount(healingPotion));
-    }
-
-    @Test
-    void damageGetsCorrectReward() {
-        player = new Player("Damage", "Human", 200, 1500);
-        CrystalChard crystalChard = new CrystalChard();
-        quest.rewardBasedOnClass(player);
-        assertEquals(1, player.getInventoryCount(crystalChard));
-    }
-
-    @Test
-    void tankGetsCorrectReward() {
-        HealingPotionRecipe healingPotionRecipe = new HealingPotionRecipe();
-        quest.rewardBasedOnClass(standardPlayer);
-        assertEquals(1, standardPlayer.getInventoryCount(healingPotionRecipe));
-    }*/
 
     //Non human tank får rätt reward
     @Test
