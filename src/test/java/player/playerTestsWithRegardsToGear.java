@@ -773,25 +773,4 @@ class playerTestsWithRegardsToGear {
 		Gear bpt = new BreastplateOfTesting();
 		assertFalse(magePlayer.equals(bpt));
 	}
-
-	@Nested
-	@DisplayName("Jennifer's tests")
-	class testsMadeByJennifer{
-
-		@Test
-		void emptyQuestLogReturnsCorrectString(){
-			Player player = new Player("Tank", "Human", 200, 1000);
-			assertEquals("Available quests is empty!\n" + "Current quests is empty!\n" +
-					"Completed quests is empty!\n", player.getQuestLog().toString());
-		}
-
-		@Test
-		void getXAndYCoordinatesReturnsCorrectCoordinates(){
-			Player player = new Player("Tank", "Human", 200, 1000);
-			player.setCoordinates(new Coordinates(5, 10));
-			assertEquals(5, player.getXCoordinate());
-			assertEquals(10, player.getYCoordinate());
-		}
-
-	}
 }
