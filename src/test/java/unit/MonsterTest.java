@@ -82,7 +82,6 @@ class MonsterTest {
         //Set-up
         Monster bat = new Bat();
         Monster wolf = new Wolf();
-
         //Assert that attack is unsuccessful
         assertFalse(wolf.attack(bat));
     }
@@ -91,7 +90,6 @@ class MonsterTest {
         //Set-up
         Monster wolf = new Wolf();
         Monster otherWolf = new Wolf();
-
         //Assert that wolf can attack otherWolf, has right health left and is not dead
         assertTrue(wolf.attack(otherWolf));
         assertEquals(STANDARD_WOLF_HEALTH-STANDARD_WOLF_ATTACKPOWER, otherWolf.getHealthPoint());
@@ -162,7 +160,7 @@ class MonsterTest {
         assertEquals(2, lootedItems.size());
     }
     @Test
-    void batGetsKilledByOtherBatAndHasItemsPotionAndSwordLootedSuccessfullyByPlayerAndLootedAgainUnsuccessfullyIllegalStateException(){
+    void batGetsKilledByOtherBatAndHasItemsBatEyeAndWingLootedSuccessfullyByPlayerAndLootedAgainUnsuccessfullyIllegalStateException(){
         //Set-up
         Player player = createPlayer();
         Item batEye = new Ingredient("Bat eye", "An eye from a bat.");
@@ -170,35 +168,26 @@ class MonsterTest {
         ArrayList<Item> batItems = new ArrayList<>();
         batItems.add(batWing);
         batItems.add(batEye);
-
         Monster bat = new Bat(batItems);
         Monster otherBat = new Bat();
-
         //Check that *inventory* is empty and bat is alive at start
         assertTrue(bat.isAlive());
-
         //Kill the bat with the items
         for(int i = 0; i < 3; i++){
             otherBat.attack(bat);
         }
-
         //Ensure bat is dead
         assertFalse(bat.isAlive());
-
         //Loot the items
         player.loot(bat);
-
         //Check that *inventory* contains the looted items
         assertEquals(1,player.getCupboard().getCount(batEye));
         assertEquals(1,player.getCupboard().getCount(batWing));
-
-
-
         //Get IllegalStateException when trying to loot again due to no items left
         assertThrows(IllegalStateException.class, () -> bat.getLooted());
     }
     @Test
-    void playerAttacksWolfAndGains100ExperiencePoints(){
+    void playerKillsWolfAndGains100ExperiencePoints(){
         Player player = createPlayer();
         Monster wolf = new Wolf();
         for(int i = 0; i < 8; i++){

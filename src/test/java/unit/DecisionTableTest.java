@@ -140,8 +140,8 @@ public class DecisionTableTest {
         Player player = new Player("Warrior", "Orc", 5,0);
         Bat bat = new Bat("Bat", 5, 0, 0, null, null);
         player.setAttackPower(2);
-        Attack attack = new Attack(player.getAttackPower(), true, AttackType.ICE);
         assertFalse(bat.isGrounded);
+        Attack attack = new Attack(player.getAttackPower(), true, AttackType.ICE);
         assertTrue(player.attack(bat, attack));
         assertEquals(3,bat.getHealthPoint());
     }
@@ -193,9 +193,9 @@ public class DecisionTableTest {
         Player player = new Player("Warrior", "Orc", 5,0);
         Bat bat = new Bat("Bat", 5, 0, 0, null, AttackType.ICE);
         player.setAttackPower(2);
-        Attack attack = new Attack(player.getAttackPower(), AttackType.ICE);
         bat.getGrounded();
         assertTrue(bat.isGrounded);
+        Attack attack = new Attack(player.getAttackPower(), AttackType.ICE);
         assertTrue(player.attack(bat, attack));
         assertEquals(1,bat.getHealthPoint());
     }
