@@ -1,7 +1,11 @@
 package quest;
 
+import item.Item;
 import org.junit.jupiter.api.*;
 import player.Player;
+import unit.Bat;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,6 +17,7 @@ class ExploreAndAttackTest {
     ExploreAndAttack quest = new ExploreAndAttack();
     StealthAndAttackEnemy enemy = new StealthAndAttackEnemy();
     TalkToGuildLeader talkToGuildLeader;
+    SecretCave secretCave = new SecretCave();
 
     //Lägger till Talk To Guild Leader-quest i spelarens lista över klarade quests så att man kan göra detta quest. Dock inte till en metod som testar att det inte ska finnas ett sådant quest.
     @BeforeEach
@@ -181,7 +186,10 @@ class ExploreAndAttackTest {
         quest.explore(standardPlayer);
         standardPlayer.setCoordinates(new Coordinates(254, 566));
         quest.explore(standardPlayer);
-        standardPlayer.getCupboard().store(new SuperPotion());
+        attack5Bats5TimesEachUntilTheyDie();
+        standardPlayer.setCoordinates(new Coordinates(514, 112));
+        secretCave.visitWitch(standardPlayer);
+
         assertTrue(quest.attack(standardPlayer, enemy));
         assertTrue(quest.hasAttacked());
         assertEquals("You succeeded killing your enemy with the help of a Super Potion. Go talk to the Guild Leader for your reward!", quest.getDescription());
@@ -384,6 +392,55 @@ class ExploreAndAttackTest {
     @Test
     void toStringMethodReturnsCorrectString(){
         assertEquals("Explore and Attack: You have to follow your enemy without being seen and then attack him. PENDING, true, false, false, false, null", quest.toString());
+    }
+
+    void attack5Bats5TimesEachUntilTheyDie(){
+        BatFang batFang = new BatFang();
+
+        ArrayList<Item> batFangs = new ArrayList<>(){{
+            add(batFang);
+        }};
+
+        Bat bat = new Bat(batFangs);
+        Bat bat2 = new Bat(batFangs);
+        Bat bat3 = new Bat(batFangs);
+        Bat bat4 = new Bat(batFangs);
+        Bat bat5 = new Bat(batFangs);
+
+        bat.getGrounded();
+        secretCave.attackBat(standardPlayer, bat);
+        secretCave.attackBat(standardPlayer, bat);
+        secretCave.attackBat(standardPlayer, bat);
+        secretCave.attackBat(standardPlayer, bat);
+        secretCave.attackBat(standardPlayer, bat);
+
+        bat2.getGrounded();
+        secretCave.attackBat(standardPlayer, bat2);
+        secretCave.attackBat(standardPlayer, bat2);
+        secretCave.attackBat(standardPlayer, bat2);
+        secretCave.attackBat(standardPlayer, bat2);
+        secretCave.attackBat(standardPlayer, bat2);
+
+        bat3.getGrounded();
+        secretCave.attackBat(standardPlayer, bat3);
+        secretCave.attackBat(standardPlayer, bat3);
+        secretCave.attackBat(standardPlayer, bat3);
+        secretCave.attackBat(standardPlayer, bat3);
+        secretCave.attackBat(standardPlayer, bat3);
+
+        bat4.getGrounded();
+        secretCave.attackBat(standardPlayer, bat4);
+        secretCave.attackBat(standardPlayer, bat4);
+        secretCave.attackBat(standardPlayer, bat4);
+        secretCave.attackBat(standardPlayer, bat4);
+        secretCave.attackBat(standardPlayer, bat4);
+
+        bat5.getGrounded();
+        secretCave.attackBat(standardPlayer, bat5);
+        secretCave.attackBat(standardPlayer, bat5);
+        secretCave.attackBat(standardPlayer, bat5);
+        secretCave.attackBat(standardPlayer, bat5);
+        secretCave.attackBat(standardPlayer, bat5);
     }
 
 }
