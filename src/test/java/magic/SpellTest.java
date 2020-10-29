@@ -4,7 +4,12 @@ package magic;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EmptySource;
+import org.junit.jupiter.params.provider.NullSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
+import static magic.ValueCheck.stringCheck;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
@@ -27,14 +32,18 @@ class SpellTest {
         assertEquals (standardPosValue, spell.getCooldownDuration ());
 
 
-        // check for negative numbers in constructor.
-
-
-        // check for maximum name and description char.?
-
-        // check exceptions.
 
     }
+
+        @ParameterizedTest
+        @NullSource
+        @EmptySource
+        @ValueSource(strings = {" ", "   ", "\t", "\n"})
+        void constructorEmptyStringCheckTest(final String testString) {
+            Assertions.assertThrows (IllegalArgumentException.class, ()  -> new Spell (testString, standardDescription, standardNegativeNr, standardPosValue, standardPosValue));
+            Assertions.assertThrows (IllegalArgumentException.class, ()  -> new Spell (testString, testString, standardNegativeNr, standardPosValue, standardPosValue));
+
+        }
 
     @Test
     public void constructorNegativeNrTest() {
