@@ -97,6 +97,13 @@ class SecretCaveTest {
     @Test
     void playerKillsFiveBatsSuccessfully(){
         attack5Bats5TimesEachUntilTheyDie();
+        assertEquals(0, bat.getHealthPoint());
+        assertEquals(0, bat2.getHealthPoint());
+        assertEquals(0, bat3.getHealthPoint());
+        assertEquals(0, bat4.getHealthPoint());
+        assertEquals(0, bat5.getHealthPoint());
+        assertEquals(5, secretCave.getBatsLooted());
+        assertEquals(5, player.getInventoryCount(batFang));
         assertEquals("You have looted five bats successfully. Now it's time to find the witch. She lurks somewhere in this cave!", secretCave.getDescription());
     }
 

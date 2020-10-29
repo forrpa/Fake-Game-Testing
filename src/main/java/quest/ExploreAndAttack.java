@@ -102,16 +102,13 @@ public class ExploreAndAttack extends Quest {
 
     public boolean attack(Player player, StealthAndAttackEnemy enemy){
         if (enemyIsFound) {
-
             if(player.getCupboard().isInInventory(new SuperPotion())){
                 enemy.setHealthPoint(0);
                 attacked = true;
                 description = "You succeeded killing your enemy with the help of a Super Potion. Go talk to the Guild Leader for your reward!";
                 return true;
-
             } else {
                 description = "Attack before the enemy escapes!";
-
                 while (player.getHealthPoint() > 0) {
                     player.attack(enemy);
                     if (!enemy.isAlive()) {

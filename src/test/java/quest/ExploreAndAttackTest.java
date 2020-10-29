@@ -211,7 +211,7 @@ class ExploreAndAttackTest {
         addGuildMapToInventory();
         standardPlayer.setCoordinates(new Coordinates(254, 566));
         quest.explore(standardPlayer);
-        quest.negotiateWithEnemy(standardPlayer, enemy); //NYTT
+        quest.negotiateWithEnemy(standardPlayer, enemy);
         assertTrue(quest.hasTalkedToEnemy());
         assertEquals("You decided to talk to your enemy instead of killing him. Now you cant reach the Guild so you have to talk to the Townsman.", quest.getDescription());
         assertFalse(standardPlayer.isInInventory(guildMap));
@@ -228,7 +228,7 @@ class ExploreAndAttackTest {
         addGuildMapToInventory();
         standardPlayer.setCoordinates(new Coordinates(254, 566));
         quest.explore(standardPlayer);
-        quest.attack(standardPlayer, enemy); //Ger false
+        quest.attack(standardPlayer, enemy);
         assertTrue(quest.hasAttacked());
         assertEquals(1, standardPlayer.getInventoryCount(guildMap));
     }
