@@ -15,9 +15,7 @@ class Spell {
     private int manaCost = 50;
     private int requiredMagicSkill = 5;
     private int cooldownDuration = 0;
-    // implement isOnCooldown in castSpell.
 
-    // TODO: 2020-10-20 implement "damage interface"
 
     public Spell(String name, String description, int manaCost, int requiredMagicSkill, int cooldownDuration) {
         this.name = stringCheck (name);

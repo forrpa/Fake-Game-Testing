@@ -174,7 +174,7 @@ class MagicPlayerTest {
 
     @Test
     // testing the method castSpell, not the spell that is cast.
-    public void CastGenericHealSpellTest() {
+    public void castGenericHealSpellTest() {
         // spell is not learnt:
         assertFalse (mp.castSpell (spell, mp));
 
