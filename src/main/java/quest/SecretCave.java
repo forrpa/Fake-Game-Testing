@@ -82,9 +82,13 @@ public class SecretCave extends Quest {
         if (witch.isFound(player) && !witch.potionGiven){
             witch.talk();
             witch.givePotion(player);
-            witchVisited = true;
-            description = "You found the wicked witch and succeeded trading the bat loot for a powerful potion.";
-            return true;
+            if (witch.potionGiven){
+                witchVisited = true;
+                description = "You found the wicked witch and succeeded trading the bat loot for a powerful potion.";
+                return true;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }
