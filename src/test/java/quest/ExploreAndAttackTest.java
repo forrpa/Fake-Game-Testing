@@ -189,8 +189,8 @@ class ExploreAndAttackTest {
         attack5Bats5TimesEachUntilTheyDie();
         standardPlayer.setCoordinates(new Coordinates(514, 112));
         secretCave.visitWitch(standardPlayer);
-
         assertTrue(quest.attack(standardPlayer, enemy));
+        assertEquals(0, enemy.getHealthPoint());
         assertTrue(quest.hasAttacked());
         assertEquals("You succeeded killing your enemy with the help of a Super Potion. Go talk to the Guild Leader for your reward!", quest.getDescription());
     }
