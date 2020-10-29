@@ -41,7 +41,7 @@ class SpellTest {
         @ValueSource(strings = {" ", "   ", "\t", "\n"})
         void constructorEmptyStringCheckTest(final String testString) {
             Assertions.assertThrows (IllegalArgumentException.class, ()  -> new Spell (testString, standardDescription, standardNegativeNr, standardPosValue, standardPosValue));
-            Assertions.assertThrows (IllegalArgumentException.class, ()  -> new Spell (testString, testString, standardNegativeNr, standardPosValue, standardPosValue));
+            Assertions.assertThrows (IllegalArgumentException.class, ()  -> new Spell (standardName, testString, standardNegativeNr, standardPosValue, standardPosValue));
 
         }
 
