@@ -184,11 +184,11 @@ class ExploreAndAttackTest {
     void successfulAttackWithSuperPotion(){
         standardPlayer.setCoordinates(new Coordinates(123, 2899));
         quest.explore(standardPlayer);
-        standardPlayer.setCoordinates(new Coordinates(254, 566));
-        quest.explore(standardPlayer);
         attack5Bats5TimesEachUntilTheyDie();
         standardPlayer.setCoordinates(new Coordinates(514, 112));
         secretCave.visitWitch(standardPlayer);
+        standardPlayer.setCoordinates(new Coordinates(254, 566));
+        quest.explore(standardPlayer);
         assertTrue(quest.attack(standardPlayer, enemy));
         assertEquals(0, enemy.getHealthPoint());
         assertTrue(quest.hasAttacked());
