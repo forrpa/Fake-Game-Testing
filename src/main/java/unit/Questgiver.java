@@ -15,7 +15,6 @@ public class Questgiver extends Villager {
     }
     public Questgiver(String name, List<Quest> quests){
         this(name);
-        System.out.println(quests);
         checkQuest(quests);
         this.quests.addAll(quests);
     }
