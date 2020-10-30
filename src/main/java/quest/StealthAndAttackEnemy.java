@@ -9,7 +9,7 @@ public class StealthAndAttackEnemy extends Monster implements Talkable {
     private static final Coordinates coordinates = new Coordinates(254, 566);
 
     public StealthAndAttackEnemy() {
-        super("Stealth and attack enemy", 8, 3, 100, null, null);
+        super("Stealth and attack enemy", 50, 3, 100, null, null);
     }
 
     public boolean isFound(Player player){

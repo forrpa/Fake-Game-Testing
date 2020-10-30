@@ -173,7 +173,6 @@ class ExploreAndAttackTest {
     void successfulAttackWithoutSuperPotion(){
         standardPlayer.setCoordinates(new Coordinates(254, 566));
         quest.explore(standardPlayer);
-        enemy.setHealthPoint(1);
         assertTrue(quest.attack(standardPlayer, enemy));
         assertTrue(quest.hasAttacked());
         assertEquals("You succeeded killing your enemy. Go talk to the Guild Leader for your reward!", quest.getDescription());
